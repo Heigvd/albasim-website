@@ -1,0 +1,446 @@
+---
+import { Image } from 'astro:assets'
+import albasimLogo from '../assets/logos/albasim.png'
+import heigLogo from '../assets/logos/heig-vd.png'
+import Icon from './Icon.astro'
+import LanguageSwitcher from './LanguageSwitcher.astro'
+import {
+  localizedPath,
+  routeKeyFromPath,
+  useTranslations,
+  type Lang,
+  type RouteKey,
+} from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+  alternates: Record<Lang, string>
+}
+
+const { lang, alternates } = Astro.props
+const t = useTranslations(lang)
+const current = routeKeyFromPath(Astro.url.pathname)
+
+interface NavItem {
+  key: RouteKey
+  label: string
+  /** Moves into the "More" menu when the bar gets narrow. */
+  overflow?: boolean
+}
+
+const items: NavItem[] = [
+  { key: 'research', label: t('nav.research') },
+  { key: 'publications', label: t('nav.publications') },
+  { key: 'team', label: t('nav.team'), overflow: true },
+  { key: 'news', label: t('nav.news'), overflow: true },
+  { key: 'contact', label: t('nav.contact'), overflow: true },
+]
+
+const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
+---
+
+<header class="site-header" data-site-header>
+  <div class="utility">
+    <div class="container utility-inner">
+      <a href="https://heig-vd.ch" target="_blank" rel="noopener" class="heig">
+        <Image src={heigLogo} alt="HEIG-VD" width={31} densities={[1, 2]} />
+        <span class="sr-only">
+          {t('heig.website')} {t('link.newTab')}
+        </span>
+      </a>
+      <div class="utility-end">
+        <a href="https://wegas.albasim.ch/" target="_blank" rel="noopener" class="wegas">
+          <Icon name="login" strokeWidth={1.6} />
+          <span>{t('header.wegasLogin')}</span>
+          <span class="sr-only">{t('link.newTab')}</span>
+        </a>
+        <LanguageSwitcher lang={lang} alternates={alternates} />
+      </div>
+    </div>
+  </div>
+
+  <div class="container bar">
+    <a href={localizedPath('home', lang)} class="logo" aria-label={t('header.home')}>
+      <Image src={albasimLogo} alt="" width={144} densities={[1, 2]} loading="eager" />
+    </a>
+
+    <button
+      type="button"
+      class="burger"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-label-open={t('nav.openMenu')}
+      data-label-close={t('nav.closeMenu')}
+    >
+      <Icon name="menu" width={20} class="icon-open" />
+      <Icon name="close" width={20} class="icon-close" />
+      <span class="sr-only" data-burger-label>
+        {t('nav.openMenu')}
+      </span>
+    </button>
+
+    <nav id="site-nav" class="nav" aria-label={t('nav.label')}>
+      <ul class="nav-list">
+        {items.map((item) => (
+          <li class:list={{ overflow: item.overflow }}>
+            <a href={localizedPath(item.key, lang)} aria-current={ariaCurrent(item.key)}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li class="more-item">
+          <details class="more">
+            <summary>{t('nav.more')}</summary>
+            <ul class="more-panel">
+              {items
+                .filter((item) => item.overflow)
+                .map((item) => (
+                  <li>
+                    <a href={localizedPath(item.key, lang)} aria-current={ariaCurrent(item.key)}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </details>
+        </li>
+        <li class="separator" aria-hidden="true"></li>
+        <li>
+          <a href={localizedPath('games', lang)} class="games" aria-current={ariaCurrent('games')}>
+            {t('nav.games')}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]')
+
+  if (header) {
+    // Compact header once the page has scrolled. Two thresholds so it doesn't flicker.
+    const updateCompact = () => {
+      const y = window.scrollY
+      const compact = header.hasAttribute('data-compact') ? y > 8 : y > 96
+      header.toggleAttribute('data-compact', compact)
+    }
+    updateCompact()
+    window.addEventListener('scroll', updateCompact, { passive: true })
+
+    // Burger menu on small screens.
+    const burger = header.querySelector<HTMLButtonElement>('.burger')
+    const burgerLabel = header.querySelector<HTMLElement>('[data-burger-label]')
+    const setMenu = (open: boolean) => {
+      if (!burger) return
+      burger.setAttribute('aria-expanded', String(open))
+      header.toggleAttribute('data-menu-open', open)
+      if (burgerLabel) {
+        burgerLabel.textContent =
+          (open ? burger.dataset.labelClose : burger.dataset.labelOpen) ?? ''
+      }
+    }
+    burger?.addEventListener('click', () => {
+      setMenu(burger.getAttribute('aria-expanded') !== 'true')
+    })
+
+    // "More" menu: close on outside click and on Escape.
+    const more = header.querySelector<HTMLDetailsElement>('details.more')
+    document.addEventListener('click', (event) => {
+      if (more?.open && !more.contains(event.target as Node)) more.open = false
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return
+      if (more?.open) {
+        more.open = false
+        more.querySelector('summary')?.focus()
+      }
+      if (header.hasAttribute('data-menu-open')) {
+        setMenu(false)
+        burger?.focus()
+      }
+    })
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  /* Utility band: HEIG-VD, Wegas login, language */
+  .utility {
+    background: var(--color-surface-subtle);
+    border-bottom: 1px solid var(--color-line);
+    overflow: hidden;
+    max-height: 41px;
+    transition:
+      max-height 0.3s ease,
+      opacity var(--duration-fast) ease;
+  }
+
+  [data-compact] .utility {
+    max-height: 0;
+    opacity: 0;
+    border-bottom-width: 0;
+  }
+
+  .utility-inner {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .heig img {
+    height: 22px;
+    width: auto;
+  }
+
+  .utility-end {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .wegas {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ink);
+    transition: color 0.2s ease;
+  }
+
+  .wegas:hover,
+  .wegas:focus-visible {
+    color: var(--color-primary-text);
+  }
+
+  /* Main bar */
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px 28px;
+    padding-block: 18px;
+    transition: padding-block 0.3s ease;
+  }
+
+  [data-compact] .bar {
+    padding-block: 8px;
+  }
+
+  .logo img {
+    height: 28px;
+    width: auto;
+    transition: height 0.3s ease;
+  }
+
+  [data-compact] .logo img {
+    height: 22px;
+  }
+
+  .nav {
+    margin-left: auto;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .nav-list > li > a {
+    display: block;
+    padding: 10px 0 9px;
+    border-bottom: 3px solid transparent;
+  }
+
+  .nav-list a[aria-current='page'] {
+    color: var(--color-primary-text);
+    border-bottom-color: var(--color-primary);
+  }
+
+  .separator {
+    width: 1px;
+    height: 20px;
+    background: var(--color-separator);
+  }
+
+  .games {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .games::before {
+    content: '';
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+  }
+
+  /* "More" menu, shown when the bar is too narrow for every link */
+  .more-item {
+    display: none;
+  }
+
+  .more {
+    position: relative;
+  }
+
+  .more summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .more summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .more summary::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+
+  .more[open] summary::after {
+    transform: translateY(1px) rotate(-135deg);
+  }
+
+  .more-panel {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 10px);
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    min-width: 170px;
+    margin: 0;
+    padding: 8px;
+    list-style: none;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: 0 8px 24px rgb(26 28 43 / 12%);
+  }
+
+  .more-panel a {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 6px;
+  }
+
+  .more-panel a:hover {
+    background: var(--color-tint);
+  }
+
+  .more-panel a[aria-current='page'] {
+    color: var(--color-primary-text);
+  }
+
+  .burger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0;
+    border: 1px solid var(--color-ink);
+    border-radius: var(--radius-pill);
+    background: var(--color-white);
+    cursor: pointer;
+  }
+
+  .burger .icon-close,
+  [data-menu-open] .burger .icon-open {
+    display: none;
+  }
+
+  [data-menu-open] .burger .icon-close {
+    display: block;
+  }
+
+  /* Narrower bar: tighter links */
+  @media (max-width: 960px) {
+    .nav-list {
+      gap: 14px;
+      font-size: 14px;
+    }
+  }
+
+  /* Narrower still: the last links move into "More" */
+  @media (max-width: 820px) {
+    .overflow {
+      display: none;
+    }
+
+    .more-item {
+      display: block;
+    }
+  }
+
+  /* Small screens: burger menu */
+  @media (max-width: 680px) {
+    .heig img {
+      height: 18px;
+    }
+
+    .burger {
+      display: inline-flex;
+    }
+
+    .nav {
+      display: none;
+      flex-basis: 100%;
+      margin-left: 0;
+    }
+
+    [data-menu-open] .nav {
+      display: block;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .overflow {
+      display: list-item;
+    }
+
+    .more-item {
+      display: none;
+    }
+
+    .separator {
+      width: 100%;
+      height: 1px;
+      margin: 4px 0;
+    }
+  }
+</style>

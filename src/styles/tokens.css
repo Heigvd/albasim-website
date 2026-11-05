@@ -1,3 +1,64 @@
-/* Design tokens: colours, fonts, spacing, etc. as CSS custom properties. */
+/* Design tokens: colours, fonts, spacing, etc. as CSS custom properties.
+   Source: the "Design system" board of the AlbaSim design artifact. */
 :root {
+  /* Brand */
+  --color-primary: #ff251b; /* HEIG red, for fills, rules and squares */
+  --color-primary-text: #e22118; /* the red darkened to 4.5:1 on white, for red text */
+  --color-primary-soft: #ffbebb;
+  --color-tint: #fff2f1; /* light pink: flat backgrounds and row hovers */
+
+  /* Neutrals */
+  --color-ink: #1a1c2b;
+  --color-text-muted: #6b6d7a; /* venues, authors, descriptions */
+  --color-white: #ffffff;
+  --color-line: #dcdde3; /* rules and card borders */
+  --color-separator: #c9cbd6;
+  --color-surface-subtle: #f6f6f8;
+
+  /* Footer */
+  --color-footer-bg: #33353d;
+  --color-footer-text-muted: #d2d4dc;
+  --color-footer-line: rgb(255 255 255 / 16%);
+
+  /* Diagrams, publication types and the game */
+  --color-lavender: #e3d6f5; /* journal */
+  --color-lavender-strong: #c9b7ee;
+  --color-peach: #fce9bc; /* chapter */
+  --color-peach-strong: #f7cba6;
+  --color-turquoise: #c2e8ec; /* conference, game score */
+  --color-turquoise-strong: #b2d7ee;
+  --color-sage: #dcebd2; /* other, game messages */
+
+  /* Backgrounds */
+  --gradient-hero: radial-gradient(
+    ellipse 75% 95% at 90% 0%,
+    #ffeeed 0%,
+    #fefaf5 40%,
+    var(--color-white) 78%
+  );
+
+  /* Typography */
+  --font-sans: var(--font-inter-tight); /* Inter Tight and its fallbacks, see astro.config.ts */
+
+  /* Layout */
+  --container-max: 1240px;
+  --gutter: 40px;
+  --section-space: 96px;
+  --header-offset: 90px; /* room left above anchored headings by the sticky header */
+
+  /* Radii */
+  --radius-card: 10px;
+  --radius-block: 12px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-fast: 0.25s;
+  --duration-base: 0.45s;
+}
+
+@media (max-width: 680px) {
+  :root {
+    --gutter: 20px;
+  }
 }

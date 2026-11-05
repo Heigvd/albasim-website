@@ -1,0 +1,30 @@
+---
+// Section heading from the design: a red eyebrow under a thick rule, then the title.
+
+interface Props {
+  eyebrow?: string
+  title: string
+  /** Heading level, so the page keeps a correct outline. */
+  level?: 2 | 3
+  class?: string
+}
+
+const { eyebrow, title, level = 2, class: className, ...attrs } = Astro.props
+const Heading = `h${level}` as const
+---
+
+<div {...attrs} class:list={['section-heading', className]}>
+  {eyebrow && <p class="eyebrow t-eyebrow">{eyebrow}</p>}
+  <Heading class="t-h2">{title}</Heading>
+</div>
+
+<style>
+  .eyebrow {
+    width: 50%;
+    margin-bottom: 28px;
+    padding-top: 14px;
+    border-top: 3px solid var(--color-primary-text);
+    color: var(--color-primary-text);
+    text-transform: uppercase;
+  }
+</style>

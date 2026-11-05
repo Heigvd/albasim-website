@@ -1,0 +1,86 @@
+---
+// Text links from the design system (#ds-links): a label and an arrow, red on hover.
+// - page: to another page (→)
+// - anchor: to a section of the same page (↓)
+// - external: to another site, in a new tab (↗)
+import Icon from './Icon.astro'
+import { useTranslations, type Lang } from '../i18n/ui'
+
+interface Props {
+  href: string
+  kind?: 'page' | 'anchor' | 'external'
+  /** Needed for the screen reader mention of external links. */
+  lang?: Lang
+  /** White text, for dark backgrounds. */
+  inverted?: boolean
+  class?: string
+}
+
+const {
+  href,
+  kind = 'page',
+  lang = 'en',
+  inverted = false,
+  class: className,
+  ...attrs
+} = Astro.props
+const t = useTranslations(lang)
+const external = kind === 'external'
+---
+
+<a
+  {...attrs}
+  href={href}
+  class:list={['arrow-link', 't-link', kind, { inverted }, className]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  <slot />
+  {external && <span class="sr-only">{t('link.newTab')}</span>}
+  {kind === 'page' && <Icon name="arrow" width={18} height={13} class="arrow" />}
+  {kind === 'anchor' && <Icon name="arrow-down" width={12} height={16} class="arrow" />}
+  {external && <Icon name="external" width={18} strokeWidth={1.6} class="arrow" />}
+</a>
+
+<style>
+  .arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.3;
+    color: var(--color-ink);
+  }
+
+  .inverted {
+    color: var(--color-white);
+  }
+
+  .arrow-link:hover,
+  .arrow-link:focus-visible {
+    color: var(--color-primary-text);
+  }
+
+  .inverted:hover,
+  .inverted:focus-visible {
+    color: var(--color-primary-soft);
+  }
+
+  .inverted:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .arrow {
+    flex: 0 0 auto;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .page:hover .arrow,
+  .page:focus-visible .arrow {
+    transform: translateX(8px);
+  }
+
+  .external:hover .arrow,
+  .external:focus-visible .arrow {
+    transform: translate(2px, -2px);
+  }
+</style>

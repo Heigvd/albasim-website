@@ -1,0 +1,258 @@
+---
+import { Image } from 'astro:assets'
+import { getEntry, render } from 'astro:content'
+import albasimLogo from '../assets/logos/albasim-white.png'
+import heigLogo from '../assets/logos/heig-vd.png'
+import Icon from './Icon.astro'
+import { localizedPath, useTranslations, type Lang, type RouteKey } from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+
+const footer = await getEntry('footer', lang)
+if (!footer) throw new Error(`Missing footer content: content/footer/${lang}.md`)
+const { Content } = await render(footer)
+const { address, links, note, copyright } = footer.data
+// `{year}` in the content becomes the current year, computed when the site is built.
+const copyrightText = copyright.replaceAll('{year}', String(new Date().getFullYear()))
+
+const explore: { key: RouteKey; label: string }[] = [
+  { key: 'research', label: t('nav.research') },
+  { key: 'publications', label: t('nav.publications') },
+  { key: 'team', label: t('nav.team') },
+  { key: 'news', label: t('nav.news') },
+  { key: 'contact', label: t('nav.contact') },
+  { key: 'games', label: t('nav.games') },
+]
+---
+
+<footer class="site-footer">
+  <div class="container inner">
+    <div class="grid">
+      <div class="about">
+        <div class="logos">
+          <a href="https://www.heig-vd.ch" target="_blank" rel="noopener">
+            <Image src={heigLogo} alt="HEIG-VD" width={63} densities={[1, 2]} class="heig" />
+            <span class="sr-only">
+              {t('heig.website')} {t('link.newTab')}
+            </span>
+          </a>
+          <span class="logo-rule" aria-hidden="true"></span>
+          <Image src={albasimLogo} alt="AlbaSim" width={165} densities={[1, 2]} class="albasim" />
+        </div>
+        <div class="description">
+          <Content />
+        </div>
+      </div>
+
+      <nav class="column" aria-labelledby="footer-explore">
+        <h2 id="footer-explore" class="t-label heading">
+          {t('footer.explore')}
+        </h2>
+        <ul class="list">
+          {explore.map((item) => (
+            <li>
+              <a href={localizedPath(item.key, lang)}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="column">
+        <h2 class="t-label heading">{t('footer.contact')}</h2>
+        <address class="address">
+          {address.map((line, i) => (
+            <>
+              {i > 0 && <br />}
+              {line}
+            </>
+          ))}
+        </address>
+      </div>
+
+      <div class="column">
+        <h2 class="t-label heading">{t('footer.links')}</h2>
+        <ul class="list">
+          {links.map((link) => (
+            <li>
+              <a class="external" href={link.url} target="_blank" rel="noopener">
+                {link.label}
+                <span class="sr-only">{t('link.newTab')}</span>
+                <Icon name="external" width={14} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <p class="note">
+        <Icon name="leaf" width={22} strokeWidth={1.6} />
+        <span>{note}</span>
+      </p>
+      <p>{copyrightText}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-footer-bg);
+    color: var(--color-white);
+  }
+
+  .inner {
+    padding-block: 72px 40px;
+  }
+
+  .site-footer a {
+    color: var(--color-white);
+  }
+
+  .site-footer a:hover {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .site-footer :focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+    padding-bottom: 34px;
+    border-bottom: 1px solid var(--color-footer-line);
+  }
+
+  .logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px 20px;
+    margin-bottom: 24px;
+  }
+
+  /* The HEIG-VD logo is black: turn it white on the dark footer */
+  .heig {
+    height: 44px;
+    width: auto;
+    filter: grayscale(1) invert(1) contrast(1.4);
+    mix-blend-mode: screen;
+  }
+
+  .logo-rule {
+    width: 1px;
+    height: 44px;
+    background: var(--color-footer-line);
+  }
+
+  .albasim {
+    height: 32px;
+    width: auto;
+  }
+
+  .description {
+    max-width: 440px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-footer-text-muted);
+  }
+
+  .heading {
+    margin: 0 0 16px;
+    color: var(--color-white);
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 16px;
+  }
+
+  .address {
+    font-style: normal;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-footer-text-muted);
+  }
+
+  .external {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding-top: 28px;
+    font-size: 14px;
+  }
+
+  .note {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 760px;
+  }
+
+  /* Three columns, the presentation on its own row */
+  @media (min-width: 821px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .about {
+      grid-column: 1 / -1;
+    }
+
+    /* Column headings line up with the bottom of the logos */
+    .heading {
+      height: 44px;
+      display: flex;
+      align-items: flex-end;
+      line-height: 1;
+    }
+  }
+
+  /* Presentation on the left, a gap, then the three columns */
+  @media (min-width: 900px) {
+    .grid {
+      grid-template-columns:
+        minmax(280px, 400px) minmax(0, 1fr) minmax(max-content, 160px)
+        minmax(max-content, 180px) minmax(max-content, 180px);
+      column-gap: clamp(24px, calc((100vw - 900px) * 0.2 + 24px), 64px);
+    }
+
+    .about {
+      grid-column: 1;
+    }
+
+    .column:nth-child(2) {
+      grid-column: 3;
+    }
+
+    .column:nth-child(3) {
+      grid-column: 4;
+    }
+
+    .column:nth-child(4) {
+      grid-column: 5;
+    }
+  }
+</style>

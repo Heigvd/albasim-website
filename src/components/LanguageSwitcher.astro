@@ -1,0 +1,55 @@
+---
+import { languages, useTranslations, type Lang } from '../i18n/ui'
+
+interface Props {
+  lang: Lang
+  /** URL of the current page in each language. */
+  alternates: Record<Lang, string>
+  class?: string
+}
+
+const { lang, alternates, class: className, ...attrs } = Astro.props
+const t = useTranslations(lang)
+const langs = Object.keys(languages) as Lang[]
+---
+
+<nav {...attrs} class:list={['lang', className]} aria-label={t('lang.label')}>
+  {langs.map((code) =>
+    code === lang ? (
+      <span aria-current="true">{code.toUpperCase()}</span>
+    ) : (
+      <a href={alternates[code]} lang={code} hreflang={code} title={languages[code]}>
+        {code.toUpperCase()}
+      </a>
+    ),
+  )}
+</nav>
+
+<style>
+  .lang {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .lang > * {
+    padding: 6px 4px;
+    border-radius: var(--radius-pill);
+    color: var(--color-text-muted);
+  }
+
+  .lang a:hover {
+    color: var(--color-ink);
+    background: var(--color-tint);
+  }
+
+  .lang [aria-current] {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 5px;
+    text-decoration-color: var(--color-primary);
+  }
+</style>

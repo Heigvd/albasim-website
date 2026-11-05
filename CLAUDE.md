@@ -36,18 +36,19 @@ Before every commit, run `npm run format`, then `npm run check` and `npm run bui
 
 ## Where things go
 
-| Path                    | Contents                                                                     |
-| ----------------------- | ---------------------------------------------------------------------------- |
-| `content/`              | All the Markdown content. One folder per content type (e.g. `content/news/`) |
-| `src/content.config.ts` | One content collection per type, with a schema for its frontmatter           |
-| `src/pages/`            | One file per page or route                                                   |
-| `src/layouts/`          | Page templates; `BaseLayout.astro` holds the `<html>` skeleton               |
-| `src/components/`       | Reusable components                                                          |
-| `src/styles/tokens.css` | Design tokens: colours, fonts, spacing, as CSS custom properties             |
-| `src/styles/global.css` | Global styles (reset, base typography)                                       |
-| `src/assets/`           | Images used by pages and components, optimised by Astro                      |
-| `public/`               | Files served unchanged at the site root (favicon, `robots.txt`)              |
-| `design/`               | Design reference material. Never imported, built or published                |
+| Path                    | Contents                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| `content/`              | All the Markdown content. One folder per content type (e.g. `content/news/`)  |
+| `src/content.config.ts` | One content collection per type, with a schema for its frontmatter            |
+| `src/pages/`            | One file per page or route. English at the root, French under `src/pages/fr/` |
+| `src/i18n/ui.ts`        | Interface strings (navigation, labels) and the URL of each page per language  |
+| `src/layouts/`          | Page templates; `BaseLayout.astro` holds the `<html>` skeleton                |
+| `src/components/`       | Reusable components                                                           |
+| `src/styles/tokens.css` | Design tokens: colours, fonts, spacing, as CSS custom properties              |
+| `src/styles/global.css` | Global styles (reset, base typography)                                        |
+| `src/assets/`           | Images used by pages and components, optimised by Astro                       |
+| `public/`               | Files served unchanged at the site root (favicon, `robots.txt`)               |
+| `design/`               | Design reference material. Never imported, built or published                 |
 
 ## Conventions
 
