@@ -1,0 +1,125 @@
+---
+// Pill buttons from the design system (#ds-links). Each variant is meant for one background:
+// - primary: red, on white. Main call to action of the game pages.
+// - on-accent: white, on a red block.
+// - on-tint: ink, on a light pink block.
+// - secondary: outline, white on dark headers; `tone="dark"` for an ink outline on light backgrounds.
+import Icon from './Icon.astro'
+
+interface Props {
+  href: string
+  variant?: 'primary' | 'on-accent' | 'on-tint' | 'secondary'
+  tone?: 'light' | 'dark'
+  /** Shows the arrow that slides forward on hover. */
+  arrow?: boolean
+  external?: boolean
+  class?: string
+}
+
+const {
+  href,
+  variant = 'primary',
+  tone = 'light',
+  arrow = variant !== 'on-accent',
+  external = false,
+  class: className,
+  ...attrs
+} = Astro.props
+---
+
+<a
+  {...attrs}
+  href={href}
+  class:list={['button', 't-btn', variant, variant === 'secondary' && tone, className]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  <slot />
+  {arrow && <Icon name="arrow-long" width={28} height={18} class="arrow" />}
+</a>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .arrow {
+    transition: transform var(--duration-fast) ease;
+  }
+
+  .button:hover .arrow,
+  .button:focus-visible .arrow {
+    transform: translateX(6px);
+  }
+
+  .primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .on-accent {
+    background: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  .primary:hover,
+  .primary:focus-visible,
+  .on-accent:hover,
+  .on-accent:focus-visible {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .on-accent:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .on-tint {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .on-tint:hover,
+  .on-tint:focus-visible {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .secondary {
+    padding: 12.5px 26.5px;
+    border: 1.5px solid currentColor;
+    background: transparent;
+  }
+
+  .secondary.light {
+    color: var(--color-white);
+  }
+
+  .secondary.light:hover,
+  .secondary.light:focus-visible {
+    background: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  .secondary.light:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .secondary.dark {
+    color: var(--color-ink);
+  }
+
+  .secondary.dark:hover,
+  .secondary.dark:focus-visible {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-white);
+  }
+</style>
