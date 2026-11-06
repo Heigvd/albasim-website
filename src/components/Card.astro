@@ -5,13 +5,21 @@
 
 interface Props {
   href: string
+  /** Opens another site in a new tab. Add a screen reader mention inside the card. */
+  external?: boolean
   class?: string
 }
 
-const { href, class: className, ...attrs } = Astro.props
+const { href, external = false, class: className, ...attrs } = Astro.props
 ---
 
-<a {...attrs} href={href} class:list={['card', className]}>
+<a
+  {...attrs}
+  href={href}
+  class:list={['card', className]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
   {Astro.slots.has('media') && (
     <div class="media">
       <slot name="media" />

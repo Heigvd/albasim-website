@@ -1,0 +1,105 @@
+---
+// The home page, shared by both languages. Its text comes from `content/home/<lang>.md`;
+// the news, projects and publications come from their own collections.
+import { getCollection, getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import NewsCard from '../NewsCard.astro'
+import ProjectCard from '../ProjectCard.astro'
+import PublicationCard from '../PublicationCard.astro'
+import CardSection from './CardSection.astro'
+import Collaborate from './Collaborate.astro'
+import Hero from './Hero.astro'
+import KeyFigures from './KeyFigures.astro'
+import Missions from './Missions.astro'
+import WegasSection from './WegasSection.astro'
+import { localizedPath, projectPath, useTranslations, type Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+const t = useTranslations(lang)
+
+const home = await getEntry('home', lang)
+if (!home) throw new Error(`Missing home content: content/home/${lang}.md`)
+const { Content } = await render(home)
+const data = home.data
+
+// The three most recent news items in this language.
+const news = (await getCollection('news', ({ id }) => id.startsWith(`${lang}/`)))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3)
+
+const projects = await Promise.all(
+  data.projects.featured.map(async (id) => {
+    const project = await getEntry('projects', `${lang}/${id}`)
+    if (!project) throw new Error(`Missing project: content/projects/${lang}/${id}.md`)
+    return { id, ...project.data }
+  }),
+)
+
+const publications = await Promise.all(
+  data.publications.featured.map(async (id) => {
+    const publication = await getEntry('publications', id)
+    if (!publication) throw new Error(`Missing publication: content/publications/${id}.md`)
+    return publication.data
+  }),
+)
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <Hero heading={data.heading} headingLang={data.headingLang}>
+    <Content />
+  </Hero>
+
+  <Missions missions={data.missions} lang={lang} />
+
+  <CardSection
+    id="news"
+    heading={data.news.heading}
+    linkLabel={t('home.allNews')}
+    linkHref={localizedPath('news', lang)}
+    tint
+    gap={24}
+  >
+    {news.map((item) => (
+      <NewsCard
+        href={localizedPath('news', lang)}
+        title={item.data.title}
+        date={item.data.date}
+        image={item.data.image}
+        imageAlt={item.data.imageAlt}
+        lang={lang}
+      />
+    ))}
+  </CardSection>
+
+  <CardSection
+    id="projects"
+    heading={data.projects.heading}
+    linkLabel={t('home.allProjects')}
+    linkHref={`${localizedPath('research', lang)}#projects`}
+  >
+    {projects.map((project) => (
+      <ProjectCard href={projectPath(project.id, lang)} {...project} lang={lang} />
+    ))}
+  </CardSection>
+
+  <KeyFigures figures={data.figures} />
+
+  <WegasSection {...data.wegas} lang={lang} />
+
+  <CardSection
+    id="publications"
+    heading={data.publications.heading}
+    linkLabel={t('home.allPublications')}
+    linkHref={localizedPath('publications', lang)}
+  >
+    {publications.map((publication) => (
+      <PublicationCard href={publication.url} {...publication} lang={lang} />
+    ))}
+  </CardSection>
+
+  <Collaborate {...data.collaborate} lang={lang} />
+</BaseLayout>

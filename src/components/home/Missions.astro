@@ -1,0 +1,92 @@
+---
+// The two large cards under the hero: research, and the ready-to-use games.
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import Card from '../Card.astro'
+import CardAction from '../CardAction.astro'
+import { localizedPath, type Lang, type RouteKey } from '../../i18n/ui'
+
+interface Mission {
+  audience: string
+  title: string
+  text: string
+  action: string
+  page: RouteKey
+  image: ImageMetadata
+  imageAlt: string
+}
+
+interface Props {
+  missions: Mission[]
+  lang: Lang
+}
+
+const { missions, lang } = Astro.props
+---
+
+<section class="missions">
+  <div class="container grid">
+    {missions.map((mission) => (
+      <Card href={localizedPath(mission.page, lang)} class="mission">
+        <Image
+          slot="media"
+          src={mission.image}
+          alt={mission.imageAlt}
+          widths={[600, 1200]}
+          sizes="(max-width: 820px) 100vw, 600px"
+          class="image"
+        />
+        <div class="body">
+          <p class="t-tag t-muted">{mission.audience}</p>
+          <h2 class="title t-h3">{mission.title}</h2>
+          <p class="t-body">{mission.text}</p>
+        </div>
+        <CardAction size="large" class="action">
+          {mission.action}
+        </CardAction>
+      </Card>
+    ))}
+  </div>
+</section>
+
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    padding-block: 24px var(--section-space);
+  }
+
+  .mission {
+    justify-content: space-between;
+  }
+
+  .image {
+    aspect-ratio: 21 / 9;
+    object-position: 50% 30%;
+  }
+
+  .body {
+    padding: 32px 36px 28px;
+  }
+
+  .body > * {
+    margin: 0;
+  }
+
+  .title {
+    margin: 6px 0 14px;
+  }
+
+  .action {
+    margin: auto 36px 32px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid currentColor;
+  }
+
+  @media (max-width: 820px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

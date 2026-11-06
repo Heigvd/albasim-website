@@ -1,15 +1,6 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro'
+// Home page in English, the default language.
+import HomePage from '../components/home/HomePage.astro'
 ---
 
-<BaseLayout title="AlbaSim">
-  <div class="container">
-    <h1 class="t-h1-home">AlbaSim</h1>
-  </div>
-</BaseLayout>
-
-<style>
-  .container {
-    padding-block: var(--section-space);
-  }
-</style>
+<HomePage lang="en" />

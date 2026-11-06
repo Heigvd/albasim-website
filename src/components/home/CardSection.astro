@@ -1,0 +1,64 @@
+---
+// A home section that shows three cards under an eyebrow heading, with a link to the full list
+// on the right (news, projects, publications). Put the cards in the default slot.
+import ArrowLink from '../ArrowLink.astro'
+import SectionHeading from '../SectionHeading.astro'
+
+interface Props {
+  /** Used for the heading id. */
+  id: string
+  heading: string
+  linkLabel: string
+  linkHref: string
+  /** Light pink background instead of white. */
+  tint?: boolean
+  /** Space between the cards, in pixels. */
+  gap?: 20 | 24
+}
+
+const { id, heading, linkLabel, linkHref, tint = false, gap = 20 } = Astro.props
+const headingId = `${id}-heading`
+---
+
+<section class:list={['card-section', { tint }]} aria-labelledby={headingId}>
+  <div class="container inner">
+    <SectionHeading eyebrow={heading} id={headingId} class="heading">
+      <ArrowLink slot="action" href={linkHref}>
+        {linkLabel}
+      </ArrowLink>
+    </SectionHeading>
+    <div class="grid" style={`--gap: ${gap}px`}>
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .tint {
+    background: var(--color-tint);
+  }
+
+  .inner {
+    padding-block: 88px;
+  }
+
+  .tint .inner {
+    padding-block: var(--section-space) 100px;
+  }
+
+  .heading {
+    margin-bottom: 40px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--gap);
+  }
+
+  @media (max-width: 820px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

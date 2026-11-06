@@ -5,6 +5,12 @@
   --color-primary: #ff251b; /* HEIG red, for fills, rules and squares */
   --color-primary-text: #e22118; /* the red darkened to 4.5:1 on white, for red text */
   --color-primary-soft: #ffbebb;
+  --color-primary-light: #ff9d98; /* gradient stops of the hero squares */
+  --color-primary-mid: #ff665f;
+  /* Red of the coloured blocks (key figures, call to action). Slightly darker than the primary
+     red so that white text on it reaches the 4.5:1 contrast of WCAG AA. */
+  --color-accent-block: #e22118;
+  --color-on-accent-line: rgb(255 255 255 / 35%);
   --color-tint: #fff2f1; /* light pink: flat backgrounds and row hovers */
 
   /* Neutrals */
