@@ -1,0 +1,65 @@
+---
+// The action line at the bottom of a clickable card ("Read more ⟶"): an uppercase label over a
+// rule, with an arrow. It is not a link itself: the whole card is. It turns red and its arrow
+// moves when the card is hovered or focused.
+import Icon from './Icon.astro'
+
+interface Props {
+  /** Arrow for a page of the site, or ↗ for another site. */
+  kind?: 'page' | 'external'
+  /** Size of the long arrow, which differs a little between card types. */
+  size?: 'large' | 'small'
+  class?: string
+}
+
+const { kind = 'page', size = 'small', class: className, ...attrs } = Astro.props
+---
+
+<span {...attrs} class:list={['card-action', 't-mlink', 't-caps', className]}>
+  <span>
+    <slot />
+  </span>
+  {kind === 'page' ? (
+    <Icon
+      name="arrow-long"
+      width={size === 'large' ? 40 : 36}
+      height={size === 'large' ? 18 : 16}
+      strokeWidth={1.6}
+      class="arrow"
+    />
+  ) : (
+    <Icon name="external" width={16} strokeWidth={1.6} class="arrow external" />
+  )}
+</span>
+
+<style>
+  .card-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    color: var(--color-ink);
+    transition: color 0.3s ease;
+  }
+
+  .arrow {
+    flex: 0 0 auto;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  /* A rule drawn by the card with `currentColor` turns red with the text. */
+  :global(a:hover) .card-action,
+  :global(a:focus-visible) .card-action {
+    color: var(--color-primary-text);
+  }
+
+  :global(a:hover) .arrow,
+  :global(a:focus-visible) .arrow {
+    transform: translateX(8px);
+  }
+
+  :global(a:hover) .arrow.external,
+  :global(a:focus-visible) .arrow.external {
+    transform: translate(2px, -2px);
+  }
+</style>

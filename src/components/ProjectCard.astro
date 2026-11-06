@@ -1,0 +1,77 @@
+---
+// Research project card: image, funders, title, summary and "Learn more".
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import Card from './Card.astro'
+import CardAction from './CardAction.astro'
+import { useTranslations, type Lang } from '../i18n/ui'
+
+interface Props {
+  href: string
+  title: string
+  funders: string
+  summary: string
+  image: ImageMetadata
+  imageAlt: string
+  lang: Lang
+  class?: string
+}
+
+const {
+  href,
+  title,
+  funders,
+  summary,
+  image,
+  imageAlt,
+  lang,
+  class: className,
+  ...attrs
+} = Astro.props
+const t = useTranslations(lang)
+---
+
+<Card {...attrs} href={href} class:list={['project-card', className]}>
+  <Image
+    slot="media"
+    src={image}
+    alt={imageAlt}
+    widths={[400, 800]}
+    sizes="(max-width: 820px) 100vw, 400px"
+    class="image"
+  />
+  <div class="body">
+    <p class="t-tag t-muted">{funders}</p>
+    <h3 class="t-card">{title}</h3>
+    <p class="t-small t-muted">{summary}</p>
+    <CardAction class="action">{t('card.learnMore')}</CardAction>
+  </div>
+</Card>
+
+<style>
+  .project-card {
+    padding-bottom: 20px;
+  }
+
+  .image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+    padding: 18px 24px 0;
+  }
+
+  .body > * {
+    margin: 0;
+  }
+
+  .action {
+    margin-top: auto;
+    padding: 10px 0 12px;
+    border-bottom: 1px solid currentColor;
+  }
+</style>

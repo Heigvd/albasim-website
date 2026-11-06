@@ -1,0 +1,79 @@
+---
+// Top of the home page: the big title, the introduction from the Markdown body and the
+// decorative animation, on the pink halo background.
+import HeroAnimation from './HeroAnimation.astro'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  /** Lines of the main title. */
+  heading: string[]
+  headingLang?: Lang
+}
+
+const { heading, headingLang } = Astro.props
+---
+
+<section class="hero">
+  <div class="container inner">
+    <div>
+      <h1 class="t-h1-home" lang={headingLang}>
+        {heading.map((line, i) => (
+          <>
+            {i > 0 && <br />}
+            {line}
+          </>
+        ))}
+      </h1>
+      <div class="intro t-lead">
+        <slot />
+      </div>
+    </div>
+    <HeroAnimation class="animation" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: var(--gradient-hero);
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px;
+    align-items: start;
+    padding-block: 80px 48px;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .intro {
+    max-width: 30em;
+    margin-top: 48px;
+    text-wrap: pretty;
+  }
+
+  .intro :global(p) {
+    margin: 0;
+  }
+
+  .intro :global(p + p) {
+    padding-top: 16px;
+  }
+
+  .intro :global(strong) {
+    font-weight: 600;
+  }
+
+  .animation {
+    align-self: center;
+  }
+
+  @media (max-width: 820px) {
+    .inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

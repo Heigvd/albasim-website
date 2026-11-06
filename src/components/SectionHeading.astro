@@ -1,30 +1,70 @@
 ---
 // Section heading from the design: a red eyebrow under a thick rule, then the title.
+// Without a title, the eyebrow itself is the section's heading (e.g. "Latest news").
+// The `action` slot puts a link at the right of the eyebrow (e.g. "All news →").
 
 interface Props {
-  eyebrow?: string
-  title: string
+  eyebrow: string
+  title?: string
   /** Heading level, so the page keeps a correct outline. */
   level?: 2 | 3
+  /** Id of the heading, for `aria-labelledby` on the section. */
+  id?: string
   class?: string
 }
 
-const { eyebrow, title, level = 2, class: className, ...attrs } = Astro.props
+const { eyebrow, title, level = 2, id, class: className, ...attrs } = Astro.props
 const Heading = `h${level}` as const
+const hasAction = Astro.slots.has('action')
 ---
 
-<div {...attrs} class:list={['section-heading', className]}>
-  {eyebrow && <p class="eyebrow t-eyebrow">{eyebrow}</p>}
-  <Heading class="t-h2">{title}</Heading>
+<div {...attrs} class:list={['section-heading', { 'with-action': hasAction }, className]}>
+  {title ? (
+    <>
+      <p class="eyebrow t-eyebrow">{eyebrow}</p>
+      <Heading id={id} class="title t-h2">
+        {title}
+      </Heading>
+    </>
+  ) : (
+    <Heading id={id} class="eyebrow t-eyebrow">
+      {eyebrow}
+    </Heading>
+  )}
+  {hasAction && (
+    <div class="action">
+      <slot name="action" />
+    </div>
+  )}
 </div>
 
 <style>
   .eyebrow {
     width: 50%;
-    margin-bottom: 28px;
+    margin: 0;
     padding-top: 14px;
     border-top: 3px solid var(--color-primary-text);
     color: var(--color-primary-text);
     text-transform: uppercase;
+  }
+
+  .title {
+    margin: 28px 0 0;
+  }
+
+  .with-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .with-action .eyebrow {
+    flex: 0 1 50%;
+  }
+
+  .action {
+    flex: 0 0 auto;
+    padding-top: 14px;
   }
 </style>

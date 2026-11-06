@@ -1,0 +1,144 @@
+---
+// Key figures on a red band ("15 years of expertise"). The numbers count up from zero each time
+// the band scrolls into view, unless reduced motion is requested. The final value is in the
+// HTML, so it shows without JavaScript and is what screen readers read.
+
+interface Figure {
+  value: number
+  unit?: string
+  suffix?: string
+  label: string
+}
+
+interface Props {
+  figures: Figure[]
+}
+
+const { figures } = Astro.props
+// Thousands separator of the design ("30,000+"), the same in both languages.
+const format = new Intl.NumberFormat('en-US')
+---
+
+<section class="key-figures">
+  <ul class="container grid">
+    {figures.map((figure) => (
+      <li class="figure">
+        <p class="number t-stat">
+          <span class="sr-only">
+            {format.format(figure.value)}
+            {figure.suffix}
+            {figure.unit && ` ${figure.unit}`} {figure.label}
+          </span>
+          <span aria-hidden="true">
+            <span class="count" data-value={figure.value}>
+              {format.format(figure.value)}
+            </span>
+            {figure.suffix}
+            {figure.unit && <span class="t-stat-unit"> {figure.unit}</span>}
+          </span>
+        </p>
+        <p class="label t-stat-label" aria-hidden="true">
+          {figure.label}
+        </p>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .key-figures {
+    background: var(--color-accent-block);
+    color: var(--color-white);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-block: 0;
+    padding-block: 80px;
+    list-style: none;
+  }
+
+  .figure {
+    padding: 8px 20px;
+    text-align: center;
+  }
+
+  .figure + .figure {
+    border-left: 1px solid var(--color-on-accent-line);
+  }
+
+  .number {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Short white rule between the number and its label */
+  .number::after {
+    content: '';
+    display: block;
+    width: 64px;
+    height: 3px;
+    margin: 22px auto 0;
+    background: var(--color-white);
+  }
+
+  .label {
+    margin: 18px 0 0;
+  }
+
+  @media (max-width: 820px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    .figure + .figure {
+      padding-top: 40px;
+      border-left: 0;
+      border-top: 1px solid var(--color-on-accent-line);
+    }
+  }
+</style>
+
+<script>
+  const DURATION = 1600
+  const format = new Intl.NumberFormat('en-US')
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  document.querySelectorAll<HTMLElement>('.key-figures').forEach((band) => {
+    const counts = [...band.querySelectorAll<HTMLElement>('.count')]
+    const show = (progress: number) => {
+      // Ease out: fast at first, slowing down near the final value.
+      const eased = 1 - Math.pow(1 - progress, 3)
+      counts.forEach((el) => {
+        el.textContent = format.format(Math.round(Number(el.dataset.value) * eased))
+      })
+    }
+
+    let frame = 0
+    const run = () => {
+      cancelAnimationFrame(frame)
+      const start = performance.now()
+      const step = (now: number) => {
+        const progress = Math.min(1, (now - start) / DURATION)
+        show(progress)
+        if (progress < 1) frame = requestAnimationFrame(step)
+      }
+      frame = requestAnimationFrame(step)
+    }
+
+    // Count again each time the band comes back into view from below.
+    new IntersectionObserver(
+      ([entry]) => {
+        if (reduced.matches) return show(1)
+        if (entry.isIntersecting) run()
+        else if (entry.boundingClientRect.top > 0) {
+          cancelAnimationFrame(frame)
+          show(0)
+        }
+      },
+      { rootMargin: '0px 0px -15% 0px' },
+    ).observe(band)
+  })
+</script>
