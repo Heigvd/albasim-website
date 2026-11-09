@@ -58,6 +58,14 @@ Every pull request into `dev` or `main` runs the [CI](.github/workflows/ci.yml):
 
 [Dependabot](.github/dependabot.yml) opens a pull request into `dev` every month when dependencies have updates.
 
+## Deployment
+
+The site is hosted by Infomaniak. Every push to `dev` runs the [deploy workflow](.github/workflows/deploy.yml): it builds the site and uploads `dist/` over FTPS to dev.albasim.ch, which is password-protected.
+
+The workflow uses the repository variables `FTP_HOST` and `FTP_DEV_USER`, and the secret `FTP_DEV_PASSWORD`. The FTP account can only access the folder of dev.albasim.ch.
+
+The `.htaccess`, `.htdigest` and `.user.ini` files on the server are managed in the Infomaniak Manager (password protection, compression, PHP settings). The deploy never uploads or deletes them, so don't add them to `public/`.
+
 ## Copyright
 
 © AlbaSim. All rights reserved.

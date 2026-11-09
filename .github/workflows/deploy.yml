@@ -1,0 +1,56 @@
+name: Deploy
+
+on:
+  push:
+    branches: [dev]
+
+permissions:
+  contents: read
+
+# Never cancel a deploy halfway through an upload: queue the next one instead.
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: false
+
+jobs:
+  deploy-dev:
+    name: Deploy to dev.albasim.ch
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 26
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - run: sudo apt-get update && sudo apt-get install --yes lftp
+
+      # Uploads dist/ over FTPS and deletes remote files that are no longer in dist/.
+      # The excluded files are managed in the Infomaniak Manager (password protection,
+      # compression, PHP settings, maintenance page): they are never uploaded or deleted.
+      - name: Upload dist/ to the server
+        env:
+          LFTP_PASSWORD: ${{ secrets.FTP_DEV_PASSWORD }}
+          FTP_USER: ${{ vars.FTP_DEV_USER }}
+          FTP_HOST: ${{ vars.FTP_HOST }}
+        run: |
+          lftp --env-password -u "$FTP_USER" "$FTP_HOST" -e "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate true;
+            set net:max-retries 2;
+            mirror --reverse --delete --verbose --parallel=4 \
+              --exclude-glob .htaccess* \
+              --exclude-glob .htdigest \
+              --exclude-glob .user.ini \
+              --exclude-glob .infomaniak-maintenance.html \
+              dist/ ./;
+            bye
+          "
