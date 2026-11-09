@@ -36,7 +36,7 @@ The site is served at <http://localhost:4321> and reloads on every change.
 | [`src/layouts/`](src/layouts/)                   | Page templates shared by several pages                               |
 | [`src/components/`](src/components/)             | Reusable building blocks                                             |
 | [`src/styles/`](src/styles/)                     | Global CSS and design tokens ([`tokens.css`](src/styles/tokens.css)) |
-| [`src/assets/`](src/assets/)                     | Images optimised by Astro at build time                              |
+| [`src/assets/`](src/assets/)                     | Images optimized by Astro at build time                              |
 | [`src/content.config.ts`](src/content.config.ts) | Content collections: the expected fields of each type of content     |
 | [`public/`](public/)                             | Files served as-is (favicon, `robots.txt`)                           |
 | [`design/`](design/)                             | Design reference material. Not built or published                    |

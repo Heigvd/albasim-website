@@ -18,8 +18,8 @@ interface Props {
 const { eyebrow, title, text, columns, modules, link, lang } = Astro.props
 const t = useTranslations(lang)
 const label = `${t('wegas.modules')} ${modules.map((m) => m.name).join(', ')}`
-// Horizontal centre of each module window in the illustration.
-const centres = [52, 160, 268]
+// Horizontal center of each module window in the illustration.
+const centers = [52, 160, 268]
 ---
 
 <section class="wegas" aria-labelledby="wegas-heading">
@@ -40,7 +40,7 @@ const centres = [52, 160, 268]
       ))}
 
       <svg class="modules" viewBox="0 0 320 230" role="img" aria-label={label}>
-        {centres.map((cx) => (
+        {centers.map((cx) => (
           <g>
             <rect x={cx - 48} y="20" width="96" height="120" rx="8" class="window" />
             <rect x={cx - 48} y="20" width="96" height="18" rx="8" class="ink" />
@@ -73,11 +73,11 @@ const centres = [52, 160, 268]
 
         {modules.map((module, i) => (
           <g text-anchor="middle">
-            <text x={centres[i]} y="166" class="name">
+            <text x={centers[i]} y="166" class="name">
               {module.name}
             </text>
             {module.users.map((user, j) => (
-              <text x={centres[i]} y={186 + j * 16} class="user">
+              <text x={centers[i]} y={186 + j * 16} class="user">
                 {user}
               </text>
             ))}
