@@ -1,4 +1,4 @@
-/* Design tokens: colours, fonts, spacing, etc. as CSS custom properties.
+/* Design tokens: colors, fonts, spacing, etc. as CSS custom properties.
    Source: the "Design system" board of the AlbaSim design artifact. */
 :root {
   /* Brand */
@@ -7,7 +7,7 @@
   --color-primary-soft: #ffbebb;
   --color-primary-light: #ff9d98; /* gradient stops of the hero squares */
   --color-primary-mid: #ff665f;
-  /* Red of the coloured blocks (key figures, call to action). Slightly darker than the primary
+  /* Red of the colored blocks (key figures, call to action). Slightly darker than the primary
      red so that white text on it reaches the 4.5:1 contrast of WCAG AA. */
   --color-accent-block: #e22118;
   --color-on-accent-line: rgb(255 255 255 / 35%);

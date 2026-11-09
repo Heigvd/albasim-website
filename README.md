@@ -36,7 +36,7 @@ The site is served at <http://localhost:4321> and reloads on every change.
 | [`src/layouts/`](src/layouts/)                   | Page templates shared by several pages                               |
 | [`src/components/`](src/components/)             | Reusable building blocks                                             |
 | [`src/styles/`](src/styles/)                     | Global CSS and design tokens ([`tokens.css`](src/styles/tokens.css)) |
-| [`src/assets/`](src/assets/)                     | Images optimised by Astro at build time                              |
+| [`src/assets/`](src/assets/)                     | Images optimized by Astro at build time                              |
 | [`src/content.config.ts`](src/content.config.ts) | Content collections: the expected fields of each type of content     |
 | [`public/`](public/)                             | Files served as-is (favicon, `robots.txt`)                           |
 | [`design/`](design/)                             | Design reference material. Not built or published                    |
@@ -57,6 +57,14 @@ Work happens on a short-lived branch, merged by pull request:
 Every pull request into `dev` or `main` runs the [CI](.github/workflows/ci.yml): format check, type check and build. A pull request can only be merged once the CI passes.
 
 [Dependabot](.github/dependabot.yml) opens a pull request into `dev` every month when dependencies have updates.
+
+## Deployment
+
+The site is hosted by Infomaniak. Every push to `dev` runs the [deploy workflow](.github/workflows/deploy.yml): it builds the site and uploads `dist/` over FTPS to dev.albasim.ch, which is password-protected.
+
+The workflow uses the repository variables `FTP_HOST` and `FTP_DEV_USER`, and the secret `FTP_DEV_PASSWORD`. The FTP account can only access the folder of dev.albasim.ch.
+
+The `.htaccess`, `.htdigest` and `.user.ini` files on the server are managed in the Infomaniak Manager (password protection, compression, PHP settings). The deploy never uploads or deletes them, so don't add them to `public/`.
 
 ## Copyright
 
