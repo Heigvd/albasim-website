@@ -45,6 +45,17 @@ export const ui = {
     'footer.links': 'Liens',
     'heig.website': 'Site de la HEIG-VD',
     'link.newTab': '(nouvel onglet)',
+    'home.allNews': 'Toutes les actualités',
+    'home.allProjects': 'Tous les projets',
+    'home.allPublications': 'Toutes les publications',
+    'card.readMore': 'Lire la suite',
+    'card.learnMore': 'En savoir plus',
+    'card.access': 'Accès',
+    'publication.journal-article': 'Article de revue',
+    'publication.conference-paper': 'Article de conférence',
+    'publication.book-chapter': 'Chapitre de livre',
+    'publication.other': 'Autre',
+    'wegas.modules': 'Les trois modules de Wegas :',
   },
   en: {
     'nav.label': 'Main navigation',
@@ -66,6 +77,17 @@ export const ui = {
     'footer.links': 'Links',
     'heig.website': 'HEIG-VD website',
     'link.newTab': '(opens in a new tab)',
+    'home.allNews': 'All news',
+    'home.allProjects': 'All projects',
+    'home.allPublications': 'All publications',
+    'card.readMore': 'Read more',
+    'card.learnMore': 'Learn more',
+    'card.access': 'Access',
+    'publication.journal-article': 'Journal article',
+    'publication.conference-paper': 'Conference paper',
+    'publication.book-chapter': 'Book chapter',
+    'publication.other': 'Other',
+    'wegas.modules': 'The three Wegas modules:',
   },
 } as const satisfies Record<Lang, Record<string, string>>
 
@@ -83,6 +105,11 @@ export function useTranslations(lang: Lang) {
 /** Returns the URL of a page in the given language. */
 export function localizedPath(key: RouteKey, lang: Lang): string {
   return routes[key][lang]
+}
+
+/** URL of a project page. The project pages themselves are not built yet. */
+export function projectPath(id: string, lang: Lang): string {
+  return lang === 'fr' ? `/fr/projets/${id}` : `/projects/${id}`
 }
 
 function normalize(path: string): string {

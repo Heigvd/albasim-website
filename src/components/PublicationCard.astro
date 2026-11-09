@@ -1,0 +1,87 @@
+---
+// Publication card: year, venue, title and type. It links to the publication on the
+// publisher's site, in a new tab.
+import Card from './Card.astro'
+import CardAction from './CardAction.astro'
+import { useTranslations, type Lang } from '../i18n/ui'
+import type { publicationTypes } from '../content.config'
+
+interface Props {
+  href: string
+  title: string
+  year: number
+  venue: string
+  type: (typeof publicationTypes)[number]
+  lang: Lang
+  class?: string
+}
+
+const { href, title, year, venue, type, lang, class: className, ...attrs } = Astro.props
+const t = useTranslations(lang)
+---
+
+<Card {...attrs} href={href} external class:list={['publication-card', className]}>
+  <p class="year t-year t-muted">{year}</p>
+  <p class="venue t-tag t-muted">{venue}</p>
+  <h3 class="title t-list">{title}</h3>
+  <p class:list={['type', 't-meta', type]}>{t(`publication.${type}`)}</p>
+  <div class="footer">
+    <CardAction kind="external" class="access">
+      {t('card.access')}
+      <span class="sr-only"> {t('link.newTab')}</span>
+    </CardAction>
+  </div>
+</Card>
+
+<style>
+  .publication-card {
+    padding: 26px 24px 20px;
+  }
+
+  .publication-card > p,
+  .title {
+    margin: 0;
+  }
+
+  .year {
+    margin-bottom: 8px;
+  }
+
+  .venue {
+    margin-bottom: 10px;
+  }
+
+  .title {
+    margin-bottom: 10px;
+  }
+
+  /* Type of publication, in the color used for it across the site */
+  .type {
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--color-sage);
+  }
+
+  .journal-article {
+    background: var(--color-lavender);
+  }
+
+  .book-chapter {
+    background: var(--color-peach);
+  }
+
+  .conference-paper {
+    background: var(--color-turquoise);
+  }
+
+  .footer {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+
+  .access {
+    padding-top: 12px;
+    border-top: 1px solid var(--color-ink);
+  }
+</style>

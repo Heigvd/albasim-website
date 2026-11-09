@@ -199,6 +199,25 @@ a:hover {
   letter-spacing: -0.04em;
 }
 
+.t-stat-unit {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.t-stat-label {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.t-year {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
 .t-num {
   font-size: 40px;
   font-weight: 800;
@@ -209,6 +228,12 @@ a:hover {
 .t-btn {
   font-size: 16px;
   font-weight: 800;
+}
+
+/* Text of the action line at the bottom of cards, used with .t-caps */
+.t-mlink {
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .t-link {
