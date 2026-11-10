@@ -1,0 +1,96 @@
+---
+// The research page, shared by both languages. Its text comes from `content/research/<lang>.md`;
+// the projects come from their own collection, in the order listed in that file.
+import { getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Collaborate from '../Collaborate.astro'
+import ProjectCard from '../ProjectCard.astro'
+import SectionHeading from '../SectionHeading.astro'
+import Approach from './Approach.astro'
+import Domains from './Domains.astro'
+import Funders from './Funders.astro'
+import Questions from './Questions.astro'
+import ResearchHero from './ResearchHero.astro'
+import ResearchWegas from './ResearchWegas.astro'
+import { projectPath, type Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const research = await getEntry('research', lang)
+if (!research) throw new Error(`Missing research content: content/research/${lang}.md`)
+const { Content } = await render(research)
+const data = research.data
+
+const projects = await Promise.all(
+  data.projects.list.map(async (id) => {
+    const project = await getEntry('projects', `${lang}/${id}`)
+    if (!project) throw new Error(`Missing project: content/projects/${lang}/${id}.md`)
+    return { id, ...project.data }
+  }),
+)
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <ResearchHero heading={data.heading} illustrationAlt={data.illustrationAlt}>
+    <Content />
+  </ResearchHero>
+
+  <Questions {...data.questions} />
+
+  <Domains {...data.domains} />
+
+  <section class="projects" aria-labelledby="projects-heading">
+    <div class="container projects-inner">
+      <SectionHeading
+        eyebrow={data.projects.heading}
+        id="projects-heading"
+        class="projects-heading"
+      />
+      <div class="projects-grid">
+        {projects.map((project) => (
+          <ProjectCard href={projectPath(project.id, lang)} {...project} lang={lang} compact />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Approach {...data.approach} lang={lang} />
+
+  <ResearchWegas {...data.wegas} lang={lang} />
+
+  <Funders {...data.funders} lang={lang} />
+
+  <Collaborate {...data.collaborate} lang={lang} />
+</BaseLayout>
+
+<style>
+  .projects-inner {
+    padding-block: var(--section-space) 100px;
+  }
+
+  .projects-heading {
+    margin-bottom: 40px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  @media (max-width: 1100px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 820px) {
+    .projects-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

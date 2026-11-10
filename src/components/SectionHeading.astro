@@ -2,6 +2,7 @@
 // Section heading from the design: a red eyebrow under a thick rule, then the title.
 // Without a title, the eyebrow itself is the section's heading (e.g. "Latest news").
 // The `action` slot puts a link at the right of the eyebrow (e.g. "All news →").
+// `inverted` draws it in white, for dark backgrounds.
 
 interface Props {
   eyebrow: string
@@ -10,15 +11,16 @@ interface Props {
   level?: 2 | 3
   /** Id of the heading, for `aria-labelledby` on the section. */
   id?: string
+  inverted?: boolean
   class?: string
 }
 
-const { eyebrow, title, level = 2, id, class: className, ...attrs } = Astro.props
+const { eyebrow, title, level = 2, id, inverted = false, class: className, ...attrs } = Astro.props
 const Heading = `h${level}` as const
 const hasAction = Astro.slots.has('action')
 ---
 
-<div {...attrs} class:list={['section-heading', { 'with-action': hasAction }, className]}>
+<div {...attrs} class:list={['section-heading', { 'with-action': hasAction, inverted }, className]}>
   {title ? (
     <>
       <p class="eyebrow t-eyebrow">{eyebrow}</p>
@@ -50,6 +52,15 @@ const hasAction = Astro.slots.has('action')
 
   .title {
     margin: 28px 0 0;
+  }
+
+  .inverted .eyebrow {
+    border-top-color: var(--color-white);
+    color: var(--color-white);
+  }
+
+  .inverted .title {
+    color: var(--color-white);
   }
 
   .with-action {

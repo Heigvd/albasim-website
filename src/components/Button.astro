@@ -12,6 +12,7 @@ interface Props {
   tone?: 'light' | 'dark'
   /** Shows the arrow that slides forward on hover. */
   arrow?: boolean
+  /** Opens another site in a new tab, with a ↗ arrow. Add a screen reader mention in the label. */
   external?: boolean
   class?: string
 }
@@ -35,7 +36,12 @@ const {
   rel={external ? 'noopener' : undefined}
 >
   <slot />
-  {arrow && <Icon name="arrow-long" width={28} height={18} class="arrow" />}
+  {arrow &&
+    (external ? (
+      <Icon name="external" width={18} strokeWidth={1.6} class="arrow external" />
+    ) : (
+      <Icon name="arrow-long" width={28} height={18} class="arrow" />
+    ))}
 </a>
 
 <style>
@@ -57,6 +63,11 @@ const {
   .button:hover .arrow,
   .button:focus-visible .arrow {
     transform: translateX(6px);
+  }
+
+  .button:hover .external,
+  .button:focus-visible .external {
+    transform: translate(2px, -2px);
   }
 
   .primary {

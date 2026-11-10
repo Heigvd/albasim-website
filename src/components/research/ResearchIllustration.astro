@@ -1,0 +1,354 @@
+---
+// Illustration of the research page hero: a serious game on a screen, examined through a
+// magnifying glass, with co-design participants and measurement bars. When it comes into view,
+// the squares bob and the bars stretch once; squares and bars also react to the mouse pointer.
+// With reduced motion, it stays still.
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  class?: string
+}
+
+const { label, class: className, ...attrs } = Astro.props
+
+// Squares of the game on the screen: [x, y]. The small tower climbs to the right.
+const gameSquares = [
+  [60, 152],
+  [76, 152],
+  [76, 136],
+  [92, 152],
+  [92, 136],
+  [108, 152],
+  [108, 136],
+  [108, 120],
+  [124, 152],
+  [124, 136],
+  [124, 120],
+  [140, 152],
+  [140, 136],
+  [140, 120],
+  [140, 104],
+]
+// Squares under the magnifying glass: [x, y].
+const zoomedSquares = [
+  [174, 86],
+  [188, 86],
+  [188, 72],
+  [202, 72],
+  [202, 100],
+]
+---
+
+<svg
+  {...attrs}
+  class:list={['research-illustration', className]}
+  viewBox="0 0 400 250"
+  role="img"
+  aria-label={label}
+>
+  <defs>
+    <linearGradient id="research-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-light"></stop>
+      <stop offset="0.5" class="stop-mid"></stop>
+      <stop offset="1" class="stop-primary"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Hexagon in the corner -->
+  <polygon
+    points="40.7,26 26,34.5 11.3,26 11.3,9 26,0.5 40.7,9"
+    class="soft-line"
+    transform="translate(4 6)"
+  ></polygon>
+
+  <!-- Screen and its stand -->
+  <rect x="40" y="40" width="200" height="140" rx="10" class="ink-line"></rect>
+  <line x1="140" y1="180" x2="140" y2="196" class="ink-line"></line>
+  <line x1="112" y1="197" x2="168" y2="197" class="ink-line round"></line>
+
+  <!-- Game on the screen -->
+  {gameSquares.map(([x, y]) => (
+    <rect x={x} y={y} width="14" height="14" class="ink square" />
+  ))}
+  <rect
+    x="92.5"
+    y="120.5"
+    width="13"
+    height="13"
+    class="ink-line thin square wiggle"
+    style="animation-delay: 0s"
+  ></rect>
+  <rect
+    x="124"
+    y="104"
+    width="14"
+    height="14"
+    class="gradient square wiggle"
+    style="animation-delay: 0.154s"
+  ></rect>
+  <rect
+    x="140"
+    y="88"
+    width="14"
+    height="14"
+    class="gradient square wiggle"
+    style="animation-delay: 0.308s"
+  ></rect>
+
+  <!-- Magnifying glass -->
+  <circle cx="194" cy="92" r="34" class="lens"></circle>
+  {zoomedSquares.map(([x, y], i) => (
+    <rect
+      x={x}
+      y={y}
+      width="12"
+      height="12"
+      class="primary square wiggle"
+      style={`animation-delay: ${(0.46 + i * 0.15).toFixed(2)}s`}
+    />
+  ))}
+  <line x1="219" y1="117" x2="246" y2="144" class="handle"></line>
+
+  <!-- Co-design participants -->
+  <line x1="270" y1="40" x2="306" y2="30" class="ink-line thin"></line>
+  <line x1="306" y1="30" x2="342" y2="44" class="ink-line thin"></line>
+  <line x1="262" y1="44" x2="240" y2="56" class="ink-line thin dashed"></line>
+  <circle cx="270" cy="40" r="8" class="ink"></circle>
+  <circle cx="306" cy="30" r="8" class="white ink-line"></circle>
+  <circle cx="342" cy="44" r="8" class="gradient"></circle>
+
+  <!-- Measurement bars -->
+  <polyline points="276,80 276,180 376,180" class="ink-line axis"></polyline>
+  <rect x="286" y="146" width="14" height="34" class="ink bar" style="animation-delay: 0s"></rect>
+  <rect
+    x="306"
+    y="118"
+    width="14"
+    height="62"
+    class="primary bar"
+    style="animation-delay: 0.154s"
+  ></rect>
+  <rect
+    x="326.5"
+    y="132.5"
+    width="13"
+    height="47"
+    class="ink-line thin bar"
+    style="animation-delay: 0.308s"
+  ></rect>
+  <rect
+    x="346"
+    y="96"
+    width="14"
+    height="84"
+    class="gradient bar"
+    style="animation-delay: 0.462s"
+  ></rect>
+</svg>
+
+<style>
+  .research-illustration {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin-left: auto;
+  }
+
+  .stop-light {
+    stop-color: var(--color-primary-light);
+  }
+
+  .stop-mid {
+    stop-color: var(--color-primary-mid);
+  }
+
+  .stop-primary {
+    stop-color: var(--color-primary);
+  }
+
+  .ink {
+    fill: var(--color-ink);
+  }
+
+  .primary {
+    fill: var(--color-primary);
+  }
+
+  .gradient {
+    fill: url(#research-gradient);
+  }
+
+  .ink-line {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.4;
+  }
+
+  .ink-line.thin {
+    stroke-width: 1;
+  }
+
+  .ink-line.axis {
+    stroke-width: 1.2;
+  }
+
+  .round {
+    stroke-linecap: round;
+  }
+
+  .dashed {
+    stroke-dasharray: 3 3;
+  }
+
+  .white {
+    fill: var(--color-white);
+  }
+
+  .soft-line {
+    fill: none;
+    stroke: var(--color-primary-soft);
+    stroke-width: 0.9;
+  }
+
+  .lens {
+    fill: var(--color-tint);
+    fill-opacity: 0.85;
+    stroke: var(--color-ink);
+    stroke-width: 2;
+  }
+
+  .handle {
+    stroke: var(--color-ink);
+    stroke-width: 7;
+    stroke-linecap: round;
+  }
+
+  /* Animation, played once by the script when the illustration comes into view */
+  .square,
+  .bar {
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 0.25s ease-out;
+  }
+
+  .bar {
+    transform-origin: center bottom;
+  }
+
+  .playing .wiggle {
+    animation: wiggle 1s ease-in-out both;
+  }
+
+  .playing .bar {
+    animation: stretch 1.25s ease-in-out both;
+  }
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    35% {
+      transform: translateY(-6px);
+    }
+
+    70% {
+      transform: translateY(2px);
+    }
+  }
+
+  @keyframes stretch {
+    0%,
+    100% {
+      transform: scaleY(1);
+    }
+
+    40% {
+      transform: scaleY(1.14);
+    }
+
+    75% {
+      transform: scaleY(0.93);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .playing .wiggle,
+    .playing .bar {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+  /** Length of the longest animation, delay included, in milliseconds. */
+  const DURATION = 1850
+
+  for (const svg of document.querySelectorAll<SVGSVGElement>('.research-illustration')) {
+    // Play the animation once each time the illustration comes into view.
+    let visible = false
+    new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !visible && !reducedMotion.matches) {
+          svg.classList.remove('playing')
+          // Restart the CSS animations on the next frame.
+          requestAnimationFrame(() => {
+            svg.classList.add('playing')
+            setTimeout(() => svg.classList.remove('playing'), DURATION)
+          })
+        }
+        visible = entry.isIntersecting
+      },
+      { threshold: 0.4 },
+    ).observe(svg)
+
+    // Squares near the pointer rise and bars stretch a little.
+    const squares = [...svg.querySelectorAll<SVGRectElement>('.square')]
+    const bars = [...svg.querySelectorAll<SVGRectElement>('.bar')]
+    const box = (el: SVGRectElement) => {
+      const x = Number(el.getAttribute('x'))
+      const y = Number(el.getAttribute('y'))
+      const w = Number(el.getAttribute('width'))
+      const h = Number(el.getAttribute('height'))
+      return { x, y, w, h }
+    }
+    let frame = 0
+
+    const update = (point: DOMPoint | null) => {
+      frame = 0
+      for (const el of squares) {
+        const { x, y, w, h } = box(el)
+        const lift = point
+          ? Math.max(0, 1 - Math.hypot(x + w / 2 - point.x, y + h / 2 - point.y) / 42)
+          : 0
+        el.style.transform = lift > 0.01 ? `translate(${-4 * lift}px, ${-4 * lift}px)` : ''
+      }
+      for (const el of bars) {
+        const { x, y, w, h } = box(el)
+        let k = 0
+        if (point) {
+          const dy = point.y < y ? y - point.y : point.y > y + h ? point.y - y - h : 0
+          k = Math.max(0, 1 - Math.hypot(x + w / 2 - point.x, dy) / 30)
+        }
+        el.style.transform = k > 0.01 ? `scaleY(${1 + 0.1 * k})` : ''
+      }
+    }
+
+    svg.addEventListener('pointermove', (event) => {
+      if (reducedMotion.matches || frame) return
+      const matrix = svg.getScreenCTM()
+      if (!matrix) return
+      const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse())
+      frame = requestAnimationFrame(() => update(point))
+    })
+    svg.addEventListener('pointerleave', () => {
+      cancelAnimationFrame(frame)
+      update(null)
+    })
+  }
+</script>

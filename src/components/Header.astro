@@ -72,8 +72,11 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
       data-label-open={t('nav.openMenu')}
       data-label-close={t('nav.closeMenu')}
     >
-      <Icon name="menu" width={20} class="icon-open" />
-      <Icon name="close" width={20} class="icon-close" />
+      <span class="burger-lines" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
       <span class="sr-only" data-burger-label>
         {t('nav.openMenu')}
       </span>
@@ -114,54 +117,6 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     </nav>
   </div>
 </header>
-
-<script>
-  const header = document.querySelector<HTMLElement>('[data-site-header]')
-
-  if (header) {
-    // Compact header once the page has scrolled. Two thresholds so it doesn't flicker.
-    const updateCompact = () => {
-      const y = window.scrollY
-      const compact = header.hasAttribute('data-compact') ? y > 8 : y > 96
-      header.toggleAttribute('data-compact', compact)
-    }
-    updateCompact()
-    window.addEventListener('scroll', updateCompact, { passive: true })
-
-    // Burger menu on small screens.
-    const burger = header.querySelector<HTMLButtonElement>('.burger')
-    const burgerLabel = header.querySelector<HTMLElement>('[data-burger-label]')
-    const setMenu = (open: boolean) => {
-      if (!burger) return
-      burger.setAttribute('aria-expanded', String(open))
-      header.toggleAttribute('data-menu-open', open)
-      if (burgerLabel) {
-        burgerLabel.textContent =
-          (open ? burger.dataset.labelClose : burger.dataset.labelOpen) ?? ''
-      }
-    }
-    burger?.addEventListener('click', () => {
-      setMenu(burger.getAttribute('aria-expanded') !== 'true')
-    })
-
-    // "More" menu: close on outside click and on Escape.
-    const more = header.querySelector<HTMLDetailsElement>('details.more')
-    document.addEventListener('click', (event) => {
-      if (more?.open && !more.contains(event.target as Node)) more.open = false
-    })
-    document.addEventListener('keydown', (event) => {
-      if (event.key !== 'Escape') return
-      if (more?.open) {
-        more.open = false
-        more.querySelector('summary')?.focus()
-      }
-      if (header.hasAttribute('data-menu-open')) {
-        setMenu(false)
-        burger?.focus()
-      }
-    })
-  }
-</script>
 
 <style>
   .site-header {
@@ -367,19 +322,59 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     height: 44px;
     margin-left: auto;
     padding: 0;
-    border: 1px solid var(--color-ink);
-    border-radius: var(--radius-pill);
-    background: var(--color-white);
+    border: 0;
+    background: none;
+    color: var(--color-ink);
     cursor: pointer;
   }
 
-  .burger .icon-close,
-  [data-menu-open] .burger .icon-open {
-    display: none;
+  /* Three lines that turn into a cross when the menu is open */
+  .burger-lines {
+    position: relative;
+    width: 20px;
+    height: 14px;
   }
 
-  [data-menu-open] .burger .icon-close {
-    display: block;
+  .burger-lines span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    transition:
+      transform var(--duration-fast) var(--ease-out),
+      opacity var(--duration-fast) ease;
+  }
+
+  .burger-lines span:nth-child(1) {
+    top: 0;
+  }
+
+  .burger-lines span:nth-child(2) {
+    top: 6px;
+  }
+
+  .burger-lines span:nth-child(3) {
+    top: 12px;
+  }
+
+  [data-menu-open] .burger-lines span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  [data-menu-open] .burger-lines span:nth-child(2) {
+    opacity: 0;
+  }
+
+  [data-menu-open] .burger-lines span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .burger-lines span {
+      transition: none;
+    }
   }
 
   /* Narrower bar: tighter links */
@@ -444,3 +439,51 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     }
   }
 </style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]')
+
+  if (header) {
+    // Compact header once the page has scrolled. Two thresholds so it doesn't flicker.
+    const updateCompact = () => {
+      const y = window.scrollY
+      const compact = header.hasAttribute('data-compact') ? y > 8 : y > 96
+      header.toggleAttribute('data-compact', compact)
+    }
+    updateCompact()
+    window.addEventListener('scroll', updateCompact, { passive: true })
+
+    // Burger menu on small screens.
+    const burger = header.querySelector<HTMLButtonElement>('.burger')
+    const burgerLabel = header.querySelector<HTMLElement>('[data-burger-label]')
+    const setMenu = (open: boolean) => {
+      if (!burger) return
+      burger.setAttribute('aria-expanded', String(open))
+      header.toggleAttribute('data-menu-open', open)
+      if (burgerLabel) {
+        burgerLabel.textContent =
+          (open ? burger.dataset.labelClose : burger.dataset.labelOpen) ?? ''
+      }
+    }
+    burger?.addEventListener('click', () => {
+      setMenu(burger.getAttribute('aria-expanded') !== 'true')
+    })
+
+    // "More" menu: close on outside click and on Escape.
+    const more = header.querySelector<HTMLDetailsElement>('details.more')
+    document.addEventListener('click', (event) => {
+      if (more?.open && !more.contains(event.target as Node)) more.open = false
+    })
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return
+      if (more?.open) {
+        more.open = false
+        more.querySelector('summary')?.focus()
+      }
+      if (header.hasAttribute('data-menu-open')) {
+        setMenu(false)
+        burger?.focus()
+      }
+    })
+  }
+</script>

@@ -1,0 +1,62 @@
+---
+// Logos of the research funders, each linking to the funder's website in a new tab.
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import SectionHeading from '../SectionHeading.astro'
+import { useTranslations, type Lang } from '../../i18n/ui'
+
+interface Props {
+  heading: string
+  items: { name: string; url: string; logo: ImageMetadata; logoHeight: number }[]
+  lang: Lang
+}
+
+const { heading, items, lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<section aria-labelledby="funders-heading">
+  <div class="container inner">
+    <SectionHeading eyebrow={heading} id="funders-heading" class="heading" />
+    <ul class="logos">
+      {items.map((item) => (
+        <li>
+          <a href={item.url} target="_blank" rel="noopener" class="logo">
+            <Image src={item.logo} alt={item.name} height={item.logoHeight} densities={[1, 2]} />
+            <span class="sr-only">{t('link.newTab')}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .inner {
+    padding-block: 0 var(--section-space);
+  }
+
+  .heading {
+    margin-bottom: 40px;
+  }
+
+  .logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 32px 64px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .logo {
+    display: block;
+  }
+
+  .logo :global(img) {
+    display: block;
+    width: auto;
+    max-width: 100%;
+  }
+</style>
