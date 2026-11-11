@@ -75,6 +75,77 @@ const home = defineCollection({
     }),
 })
 
+/** Icons a content file can pick (see src/components/Icon.astro). */
+export const contentIcons = ['cross', 'lines', 'code', 'sprout', 'magnifier', 'bolt'] as const
+
+// The research page, one file per language (`fr.md`, `en.md`). The body is the introduction
+// under the main title.
+const research = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/research' }),
+  schema: ({ image }) =>
+    z.object({
+      /** Title of the browser tab and of search results. */
+      title: z.string(),
+      /** Text shown by search engines under the page title. */
+      description: z.string(),
+      heading: z.string(),
+      /** Description of the illustration next to the title, for screen readers. */
+      illustrationAlt: z.string(),
+      /** The three numbered questions. */
+      questions: z.object({
+        heading: z.string(),
+        items: z.array(z.object({ label: z.string(), text: z.string() })),
+      }),
+      domains: z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        text: z.string(),
+        items: z.array(z.object({ title: z.string(), icon: z.enum(contentIcons) })),
+      }),
+      /** Ids of the projects to show, in order: their file names in `content/projects/<lang>/`. */
+      projects: z.object({ heading: z.string(), list: z.array(z.string()) }),
+      approach: z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        image: image(),
+        imageAlt: z.string(),
+        items: z.array(z.object({ title: z.string(), text: z.string() })),
+        /** Label of the link to the publications page. */
+        link: z.string(),
+        process: z.object({
+          heading: z.string(),
+          steps: z.array(z.object({ title: z.string(), text: z.string() })),
+        }),
+      }),
+      wegas: z.object({
+        eyebrow: z.string(),
+        title: z.string(),
+        text: z.string(),
+        highlights: z.array(z.string()),
+        /** Label of the button to the source code on GitHub. */
+        button: z.string(),
+        image: image(),
+        imageAlt: z.string(),
+        /** The three steps drawn under the image. */
+        steps: z.array(z.string()).length(3),
+      }),
+      funders: z.object({
+        heading: z.string(),
+        items: z.array(
+          z.object({
+            /** Full name, read by screen readers instead of the logo. */
+            name: z.string(),
+            url: z.url(),
+            logo: image(),
+            /** Height of the logo in pixels, to balance logos of different shapes. */
+            logoHeight: z.number(),
+          }),
+        ),
+      }),
+      collaborate: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+    }),
+})
+
 // News items, one folder per language: `content/news/en/<id>.md`, `content/news/fr/<id>.md`.
 // The body is the full text of the item.
 const news = defineCollection({
@@ -123,4 +194,4 @@ const publications = defineCollection({
   }),
 })
 
-export const collections = { footer, home, news, projects, publications }
+export const collections = { footer, home, research, news, projects, publications }

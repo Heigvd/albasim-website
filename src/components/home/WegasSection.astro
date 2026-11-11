@@ -205,6 +205,11 @@ const centers = [52, 160, 268]
   }
 
   @media (max-width: 820px) {
+    .heading :global(.title),
+    .lead {
+      max-width: none;
+    }
+
     .grid {
       grid-template-columns: minmax(0, 1fr);
     }

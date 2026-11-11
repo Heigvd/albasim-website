@@ -56,6 +56,7 @@ export const ui = {
     'publication.book-chapter': 'Chapitre de livre',
     'publication.other': 'Autre',
     'wegas.modules': 'Les trois modules de Wegas :',
+    'wegas.researchSteps': 'La recherche avec Wegas :',
   },
   en: {
     'nav.label': 'Main navigation',
@@ -88,6 +89,7 @@ export const ui = {
     'publication.book-chapter': 'Book chapter',
     'publication.other': 'Other',
     'wegas.modules': 'The three Wegas modules:',
+    'wegas.researchSteps': 'Research with Wegas:',
   },
 } as const satisfies Record<Lang, Record<string, string>>
 

@@ -1,0 +1,184 @@
+---
+// Research approach, on a light pink band: a heading and a photo, then the three principles
+// with a link to the publications, and the four steps of the design process on a timeline.
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import ArrowLink from '../ArrowLink.astro'
+import SectionHeading from '../SectionHeading.astro'
+import { localizedPath, type Lang } from '../../i18n/ui'
+
+interface Props {
+  eyebrow: string
+  title: string
+  image: ImageMetadata
+  imageAlt: string
+  items: { title: string; text: string }[]
+  link: string
+  process: { heading: string; steps: { title: string; text: string }[] }
+  lang: Lang
+}
+
+const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.props
+---
+
+<section class="approach" aria-labelledby="approach-heading">
+  <div class="container inner">
+    <div class="columns top">
+      <SectionHeading eyebrow={eyebrow} title={title} id="approach-heading" class="heading" />
+      <Image
+        src={image}
+        alt={imageAlt}
+        widths={[600, 1200]}
+        sizes="(max-width: 820px) 100vw, 584px"
+        class="photo"
+      />
+    </div>
+
+    <div class="columns">
+      <div>
+        {items.map((item) => (
+          <div class="principle">
+            <h3 class="t-sub">{item.title}</h3>
+            <p class="t-body">{item.text}</p>
+          </div>
+        ))}
+        <ArrowLink href={localizedPath('publications', lang)} class="more">
+          {link}
+        </ArrowLink>
+      </div>
+
+      <div>
+        <h3 class="process-heading t-label">{process.heading}</h3>
+        <ol class="timeline">
+          {process.steps.map((step, i) => (
+            <li class="step">
+              <span class="number" aria-hidden="true">
+                {i + 1}
+              </span>
+              <h4 class="t-label">{step.title}</h4>
+              <p class="t-body">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .approach {
+    background: var(--color-tint);
+  }
+
+  .inner {
+    padding-block: var(--section-space) 100px;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 72px;
+    align-items: start;
+  }
+
+  .top {
+    margin-bottom: 72px;
+  }
+
+  /* The eyebrow spans its whole column here, not half of it. */
+  .heading :global(.eyebrow) {
+    width: auto;
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 0 96px;
+  }
+
+  .principle {
+    margin-bottom: 28px;
+  }
+
+  .principle h3 {
+    margin: 0 0 8px;
+  }
+
+  .principle p {
+    margin: 0;
+  }
+
+  .more {
+    margin-top: 8px;
+  }
+
+  .process-heading {
+    margin: 0 0 28px;
+  }
+
+  /* Timeline: a red rail with a numbered disc on each step */
+  .timeline {
+    position: relative;
+    margin: 0;
+    padding: 0 0 0 70px;
+    list-style: none;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    left: 21px;
+    width: 4px;
+    background: var(--color-primary);
+  }
+
+  .step {
+    position: relative;
+  }
+
+  .step + .step {
+    margin-top: 40px;
+  }
+
+  .number {
+    position: absolute;
+    top: 0;
+    left: -70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    box-shadow: 0 0 0 8px var(--color-tint);
+    color: var(--color-white);
+    font-size: 19px;
+    font-weight: 800;
+  }
+
+  .step h4 {
+    margin: 0 0 8px;
+    padding-top: 12px;
+  }
+
+  .step p {
+    margin: 0;
+  }
+
+  @media (max-width: 820px) {
+    .columns {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 56px;
+    }
+
+    .top {
+      margin-bottom: 56px;
+    }
+  }
+</style>

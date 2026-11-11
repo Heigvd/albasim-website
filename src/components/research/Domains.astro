@@ -1,0 +1,81 @@
+---
+// Application domains, on a dark band: a heading, a short text and a grid of domains with icons.
+import Icon from '../Icon.astro'
+import SectionHeading from '../SectionHeading.astro'
+import type { contentIcons } from '../../content.config'
+
+interface Props {
+  eyebrow: string
+  title: string
+  text: string
+  items: { title: string; icon: (typeof contentIcons)[number] }[]
+}
+
+const { eyebrow, title, text, items } = Astro.props
+---
+
+<section class="domains" aria-labelledby="domains-heading">
+  <div class="container inner">
+    <SectionHeading eyebrow={eyebrow} title={title} id="domains-heading" inverted class="heading" />
+    <p class="lead t-lead">{text}</p>
+    <ul class="grid">
+      {items.map((item) => (
+        <li class="domain">
+          <Icon name={item.icon} width={36} strokeWidth={1.6} class="icon" />
+          <h3 class="t-card">{item.title}</h3>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .domains {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .inner {
+    padding-block: var(--section-space) 100px;
+  }
+
+  .heading :global(.title) {
+    margin-bottom: 20px;
+  }
+
+  .lead {
+    max-width: 640px;
+    margin: 0 0 32px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .domain {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 26px 24px;
+    border-top: 1px solid var(--color-on-accent-line);
+  }
+
+  .icon {
+    flex: 0 0 36px;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
+  @media (max-width: 820px) {
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

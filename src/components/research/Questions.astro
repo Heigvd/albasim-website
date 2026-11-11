@@ -1,0 +1,141 @@
+---
+// The numbered research questions, as an ordered list of cards joined by chevrons. The cards rise into place one
+// after the other when the section comes into view.
+import Icon from '../Icon.astro'
+import SectionHeading from '../SectionHeading.astro'
+
+interface Props {
+  heading: string
+  items: { label: string; text: string }[]
+}
+
+const { heading, items } = Astro.props
+---
+
+<section aria-labelledby="questions-heading">
+  <div class="container inner">
+    <SectionHeading eyebrow={heading} id="questions-heading" class="heading" />
+    <ol class="steps" data-reveal>
+      {items.map((item, i) => (
+        <li class="step" style={`--delay: ${i * 0.4}s`}>
+          {i > 0 && <Icon name="chevron-right" width={32} class="chevron" />}
+          <span class="number" aria-hidden="true">
+            {i + 1}
+          </span>
+          <h3 class="label t-label">{item.label}</h3>
+          <p class="t-body">{item.text}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .inner {
+    padding-block: 32px var(--section-space);
+  }
+
+  .heading {
+    margin-bottom: 40px;
+  }
+
+  /* The 64 px gap leaves room for the chevron between two cards. */
+  .steps {
+    display: flex;
+    align-items: stretch;
+    gap: 64px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 32px 28px 36px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-block);
+  }
+
+  .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 24px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    color: var(--color-white);
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  .label {
+    margin: 0 0 8px;
+    color: var(--color-primary-text);
+  }
+
+  .step p {
+    margin: 0;
+  }
+
+  .chevron {
+    position: absolute;
+    top: 50%;
+    left: -48px;
+    margin-top: -16px;
+    color: var(--color-ink);
+  }
+
+  /* Reveal: the script hides the cards until the list comes into view */
+  .step {
+    transition:
+      opacity 0.6s ease var(--delay),
+      transform 0.6s ease var(--delay);
+  }
+
+  .is-hidden > .step {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: none;
+  }
+
+  @media (max-width: 680px) {
+    .steps {
+      flex-direction: column;
+    }
+
+    .chevron {
+      top: -48px;
+      left: 50%;
+      margin: 0 0 0 -16px;
+      transform: rotate(90deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  for (const list of document.querySelectorAll<HTMLElement>('[data-reveal]')) {
+    if (reducedMotion.matches) continue
+    // Hide the cards while the list is below the fold; show them once it scrolls into view.
+    // They hide again when it goes back below the fold, so the effect replays.
+    new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) list.classList.remove('is-hidden')
+        else if (entry.boundingClientRect.top > 0) list.classList.add('is-hidden')
+      },
+      { rootMargin: '0px 0px -15% 0px' },
+    ).observe(list)
+  }
+</script>
