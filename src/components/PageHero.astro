@@ -1,14 +1,13 @@
 ---
-// Top of the research page: the title, the introduction from the Markdown body and the
-// illustration, on the pink halo background.
-import ResearchIllustration from './ResearchIllustration.astro'
+// Top of an inner page (research, publications): the title, the introduction from the Markdown
+// body and an illustration, on the pink halo background. Put the introduction in the default
+// slot and the illustration in the `illustration` slot.
 
 interface Props {
   heading: string
-  illustrationAlt: string
 }
 
-const { heading, illustrationAlt } = Astro.props
+const { heading } = Astro.props
 ---
 
 <section class="hero">
@@ -19,7 +18,7 @@ const { heading, illustrationAlt } = Astro.props
         <slot />
       </div>
     </div>
-    <ResearchIllustration label={illustrationAlt} />
+    <slot name="illustration" />
   </div>
 </section>
 

@@ -4,13 +4,14 @@
 import { getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import Collaborate from '../Collaborate.astro'
+import PageHero from '../PageHero.astro'
 import ProjectCard from '../ProjectCard.astro'
 import SectionHeading from '../SectionHeading.astro'
 import Approach from './Approach.astro'
 import Domains from './Domains.astro'
 import Funders from './Funders.astro'
 import Questions from './Questions.astro'
-import ResearchHero from './ResearchHero.astro'
+import ResearchIllustration from './ResearchIllustration.astro'
 import ResearchWegas from './ResearchWegas.astro'
 import { projectPath, type Lang } from '../../i18n/ui'
 
@@ -35,9 +36,10 @@ const projects = await Promise.all(
 ---
 
 <BaseLayout title={data.title} description={data.description}>
-  <ResearchHero heading={data.heading} illustrationAlt={data.illustrationAlt}>
+  <PageHero heading={data.heading}>
     <Content />
-  </ResearchHero>
+    <ResearchIllustration slot="illustration" label={data.illustrationAlt} />
+  </PageHero>
 
   <Questions {...data.questions} />
 

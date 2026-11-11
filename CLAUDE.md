@@ -44,6 +44,8 @@ Before every commit, run `npm run format`, then `npm run check` and `npm run bui
 | `src/i18n/ui.ts`        | Interface strings (navigation, labels) and the URL of each page per language  |
 | `src/layouts/`          | Page templates; `BaseLayout.astro` holds the `<html>` skeleton                |
 | `src/components/`       | Reusable components                                                           |
+| `src/scripts/`          | Client-side scripts shared by several components                              |
+| `src/utils/`            | TypeScript helpers shared by pages and components                             |
 | `src/styles/tokens.css` | Design tokens: colors, fonts, spacing, as CSS custom properties               |
 | `src/styles/global.css` | Global styles (reset, base typography)                                        |
 | `src/assets/`           | Images used by pages and components, optimized by Astro                       |

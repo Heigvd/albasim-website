@@ -34,6 +34,7 @@
   --color-turquoise: #c2e8ec; /* conference, game score */
   --color-turquoise-strong: #b2d7ee;
   --color-sage: #dcebd2; /* other, game messages */
+  --color-sage-strong: #b9d8a8;
 
   /* Backgrounds */
   --gradient-hero: radial-gradient(
@@ -51,6 +52,7 @@
   --gutter: 40px;
   --section-space: 96px;
   --header-offset: 90px; /* room left above anchored headings by the sticky header */
+  --header-compact-height: 61px; /* height of the sticky header once the page has scrolled */
 
   /* Radii */
   --radius-card: 10px;

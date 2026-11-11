@@ -27,6 +27,15 @@ const { heading, items } = Astro.props
         </li>
       ))}
     </ol>
+    <script is:inline>
+      // Hide the cards before the first paint, so that they rise into place even when the list is
+      // already in view when the page opens. Without JavaScript, they simply stay visible.
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        for (const step of document.currentScript.previousElementSibling.children) {
+          step.classList.add('is-hidden')
+        }
+      }
+    </script>
   </div>
 </section>
 
@@ -90,14 +99,15 @@ const { heading, items } = Astro.props
     color: var(--color-ink);
   }
 
-  /* Reveal: the script hides the cards until the list comes into view */
+  /* Reveal: the script hides each card until it comes into view. Side by side, the cards come
+     into view together and rise one after the other. */
   .step {
     transition:
       opacity 0.6s ease var(--delay),
       transform 0.6s ease var(--delay);
   }
 
-  .is-hidden > .step {
+  .step.is-hidden {
     opacity: 0;
     transform: translateY(32px);
     transition: none;
@@ -114,6 +124,11 @@ const { heading, items } = Astro.props
       margin: 0 0 0 -16px;
       transform: rotate(90deg);
     }
+
+    /* Stacked, each card comes into view on its own: no need to wait for the previous one. */
+    .step {
+      --delay: 0s !important;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -126,16 +141,20 @@ const { heading, items } = Astro.props
 <script>
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-  for (const list of document.querySelectorAll<HTMLElement>('[data-reveal]')) {
-    if (reducedMotion.matches) continue
-    // Hide the cards while the list is below the fold; show them once it scrolls into view.
-    // They hide again when it goes back below the fold, so the effect replays.
-    new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) list.classList.remove('is-hidden')
-        else if (entry.boundingClientRect.top > 0) list.classList.add('is-hidden')
+  if (!reducedMotion.matches) {
+    // Each card starts hidden (see the inline script above) and shows once it comes into view,
+    // right away if it already is. It hides again when it goes back below the fold, so the effect
+    // replays. Watching each card, not the whole list, matters on small screens, where the cards
+    // are stacked and come into view one at a time.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) entry.target.classList.remove('is-hidden')
+          else if (entry.boundingClientRect.top > 0) entry.target.classList.add('is-hidden')
+        }
       },
       { rootMargin: '0px 0px -15% 0px' },
-    ).observe(list)
+    )
+    for (const step of document.querySelectorAll('[data-reveal] > .step')) observer.observe(step)
   }
 </script>

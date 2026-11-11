@@ -181,6 +181,9 @@ export const publicationTypes = [
   'other',
 ] as const
 
+/** Precise kind of a publication of type `other`, shown on its card. */
+export const publicationKinds = ['talk', 'workshop', 'interview', 'poster', 'article'] as const
+
 // Publications, one file each, shared by both languages: `content/publications/<id>.md`.
 const publications = defineCollection({
   loader: glob({ pattern: '*.md', base: './content/publications' }),
@@ -189,9 +192,42 @@ const publications = defineCollection({
     year: z.number().int(),
     /** Journal, book or conference. */
     venue: z.string(),
+    /** In citation style: "Jaccard, D., & Riboni, S." */
+    authors: z.string(),
     type: z.enum(publicationTypes),
-    url: z.url(),
+    /** For the type `other` only: talk, workshop, interview, poster or article. */
+    kind: z.enum(publicationKinds).optional(),
+    /** Language of the title and venue, so that screen readers pronounce them correctly. */
+    lang: z.enum(['en', 'fr']).default('en'),
+    /** When the title is a translation: the language the publication is written in. */
+    translatedFrom: z.enum(['no']).optional(),
+    /** Link to the publication. Leave it out when there is none. */
+    url: z.url().optional(),
   }),
 })
 
-export const collections = { footer, home, research, news, projects, publications }
+// The publications page, one file per language (`fr.md`, `en.md`). The body is the introduction
+// under the main title. The list itself comes from the `publications` collection.
+const publicationsPage = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/publications-page' }),
+  schema: z.object({
+    /** Title of the browser tab and of search results. */
+    title: z.string(),
+    /** Text shown by search engines under the page title. */
+    description: z.string(),
+    heading: z.string(),
+    /** Description of the illustration next to the title, for screen readers. */
+    illustrationAlt: z.string(),
+    collaborate: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+  }),
+})
+
+export const collections = {
+  footer,
+  home,
+  research,
+  news,
+  projects,
+  publications,
+  publicationsPage,
+}
