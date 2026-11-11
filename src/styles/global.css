@@ -12,6 +12,9 @@
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  /* No gray box over links and buttons when tapped on mobile: they have their own states, and
+     the focus outline still shows for keyboard users. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -258,5 +261,62 @@ a:hover {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Hero illustrations: shapes animated by src/scripts/illustrations.ts */
+[data-illustration] .square,
+[data-illustration] .bar {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.25s ease-out;
+}
+
+[data-illustration] .bar {
+  transform-origin: center bottom;
+}
+
+[data-illustration][data-playing] .wiggle {
+  animation: illustration-wiggle 1s ease-in-out both;
+}
+
+[data-illustration][data-playing] .bar {
+  animation: illustration-stretch 1.25s ease-in-out both;
+}
+
+@keyframes illustration-wiggle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  35% {
+    transform: translateY(-6px);
+  }
+
+  70% {
+    transform: translateY(2px);
+  }
+}
+
+@keyframes illustration-stretch {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  40% {
+    transform: scaleY(1.14);
+  }
+
+  75% {
+    transform: scaleY(0.93);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-illustration][data-playing] .wiggle,
+  [data-illustration][data-playing] .bar {
+    animation: none;
   }
 }

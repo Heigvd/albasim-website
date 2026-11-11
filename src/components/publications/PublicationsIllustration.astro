@@ -1,0 +1,115 @@
+---
+// Illustration of the publications page hero: an open book with pixel squares rising from its
+// pages. When it comes into view, the squares bob one after the other; they also rise under the
+// mouse pointer. With reduced motion, it stays still. The animation is shared: see
+// src/scripts/illustrations.ts.
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  class?: string
+}
+
+const { label, class: className, ...attrs } = Astro.props
+
+// Squares above the book, in the order they bob: [x, y, fill].
+const squares = [
+  [150, 62, 'primary'],
+  [170, 62, 'ink'],
+  [160, 42, 'outline'],
+  [182, 40, 'primary'],
+  [140, 38, 'ink'],
+  [196, 20, 'outline'],
+  [166, 18, 'primary'],
+  [214, 30, 'ink'],
+  [126, 16, 'outline'],
+] as const
+---
+
+<svg
+  {...attrs}
+  class:list={['publications-illustration', className]}
+  viewBox="0 0 320 230"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-duration="2060"
+>
+  <!-- Hexagon in the corner -->
+  <polygon
+    points="292.5,203 270,216 247.5,203 247.5,177 270,164 292.5,177"
+    class="soft-line"
+  ></polygon>
+
+  <!-- Open book: a dark page on the left, a page of text on the right -->
+  <path
+    d="M60 200 L60 110 Q60 90 85 90 L150 90 L150 200 Q150 185 125 185 L60 185 Z"
+    class="ink"
+  ></path>
+  <path
+    d="M260 185 L260 110 Q260 90 235 90 L170 90 L170 200 Q170 185 195 185 L260 185 Z"
+    class="outline page"
+  ></path>
+  <g class="text-lines">
+    <line x1="185" y1="115" x2="245" y2="115"></line>
+    <line x1="185" y1="130" x2="245" y2="130"></line>
+    <line x1="185" y1="145" x2="230" y2="145"></line>
+    <line x1="185" y1="160" x2="240" y2="160"></line>
+  </g>
+
+  <!-- Squares rising from the pages -->
+  {squares.map(([x, y, fill], i) => (
+    <rect
+      x={x}
+      y={y}
+      width="16"
+      height="16"
+      class:list={['square', 'wiggle', fill]}
+      style={`animation-delay: ${(i * 0.12).toFixed(2)}s`}
+    />
+  ))}
+</svg>
+
+<style>
+  .publications-illustration {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin-left: auto;
+  }
+
+  .soft-line {
+    fill: none;
+    stroke: var(--color-primary-soft);
+    stroke-width: 0.8;
+  }
+
+  .ink {
+    fill: var(--color-ink);
+  }
+
+  .primary {
+    fill: var(--color-primary);
+  }
+
+  .outline {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+  }
+
+  .page {
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .text-lines {
+    stroke: var(--color-primary-soft);
+    stroke-width: 3;
+  }
+</style>
+
+<script>
+  import '../../scripts/illustrations'
+</script>

@@ -1,35 +1,73 @@
 ---
-// Publication card: year, venue, title and type. It links to the publication on the
-// publisher's site, in a new tab.
+// Publication card: year, venue, title and type. When the publication has a link, the whole
+// card opens it on the publisher's site, in a new tab; otherwise the card is not clickable.
 import Card from './Card.astro'
 import CardAction from './CardAction.astro'
 import { useTranslations, type Lang } from '../i18n/ui'
-import type { publicationTypes } from '../content.config'
+import type { publicationKinds, publicationTypes } from '../content.config'
 
 interface Props {
-  href: string
+  href?: string
   title: string
   year: number
   venue: string
   type: (typeof publicationTypes)[number]
+  kind?: (typeof publicationKinds)[number]
+  /** Language of the title and venue. */
+  titleLang?: Lang
+  translatedFrom?: 'no'
+  /** Hides the year, e.g. in a list grouped by year. */
+  hideYear?: boolean
+  /** Level of the title, so that the page keeps a correct outline. */
+  level?: 3 | 4
   lang: Lang
   class?: string
 }
 
-const { href, title, year, venue, type, lang, class: className, ...attrs } = Astro.props
+const {
+  href,
+  title,
+  year,
+  venue,
+  type,
+  kind,
+  titleLang,
+  translatedFrom,
+  hideYear = false,
+  level = 3,
+  lang,
+  class: className,
+  ...attrs
+} = Astro.props
 const t = useTranslations(lang)
+const Heading = `h${level}` as const
+// The lang attribute only where it differs from the page's.
+const otherLang = titleLang && titleLang !== lang ? titleLang : undefined
 ---
 
-<Card {...attrs} href={href} external class:list={['publication-card', className]}>
-  <p class="year t-year t-muted">{year}</p>
-  <p class="venue t-tag t-muted">{venue}</p>
-  <h3 class="title t-list">{title}</h3>
-  <p class:list={['type', 't-meta', type]}>{t(`publication.${type}`)}</p>
+<Card {...attrs} href={href} external class:list={['publication-card', className]} data-type={type}>
+  {!hideYear && <p class="year t-year t-muted">{year}</p>}
+  <p class="venue t-tag t-muted" lang={otherLang}>
+    {venue}
+  </p>
+  <Heading class="title t-list">
+    <span lang={otherLang}>{title}</span>
+    {translatedFrom && (
+      <span class="note">{t(`publication.translatedFrom.${translatedFrom}`)}</span>
+    )}
+  </Heading>
+  <p class:list={['type', 't-meta', type]}>
+    {kind ? t(`publication.kind.${kind}`) : t(`publication.${type}`)}
+  </p>
   <div class="footer">
-    <CardAction kind="external" class="access">
-      {t('card.access')}
-      <span class="sr-only"> {t('link.newTab')}</span>
-    </CardAction>
+    {href ? (
+      <CardAction kind="external" class="access">
+        {t('card.access')}
+        <span class="sr-only"> {t('link.newTab')}</span>
+      </CardAction>
+    ) : (
+      <div class="access" />
+    )}
   </div>
 </Card>
 
@@ -53,6 +91,14 @@ const t = useTranslations(lang)
 
   .title {
     margin-bottom: 10px;
+  }
+
+  /* Language of the original publication, after a translated title */
+  .note {
+    font-size: 0.8em;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    white-space: nowrap;
   }
 
   /* Type of publication, in the color used for it across the site */
@@ -80,7 +126,9 @@ const t = useTranslations(lang)
     padding-top: 20px;
   }
 
+  /* The rule stays without a link, so that all cards end the same way. */
   .access {
+    min-height: 20px;
     padding-top: 12px;
     border-top: 1px solid var(--color-ink);
   }

@@ -13,6 +13,7 @@ import KeyFigures from './KeyFigures.astro'
 import Missions from './Missions.astro'
 import WegasSection from './WegasSection.astro'
 import { localizedPath, projectPath, useTranslations, type Lang } from '../../i18n/ui'
+import { publicationCardProps } from '../../utils/publications'
 
 interface Props {
   lang: Lang
@@ -43,7 +44,7 @@ const publications = await Promise.all(
   data.publications.featured.map(async (id) => {
     const publication = await getEntry('publications', id)
     if (!publication) throw new Error(`Missing publication: content/publications/${id}.md`)
-    return publication.data
+    return publication
   }),
 )
 ---
@@ -97,7 +98,7 @@ const publications = await Promise.all(
     linkHref={localizedPath('publications', lang)}
   >
     {publications.map((publication) => (
-      <PublicationCard href={publication.url} {...publication} lang={lang} />
+      <PublicationCard {...publicationCardProps(publication)} lang={lang} />
     ))}
   </CardSection>
 
