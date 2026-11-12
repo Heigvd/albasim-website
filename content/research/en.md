@@ -15,7 +15,7 @@ questions:
 domains:
   eyebrow: Application domains
   title: Fields we work in
-  text: Some examples of the fields in which we have designed and studied serious games and simulations.
+  text: Some of the fields in which we have designed and studied serious games and simulations.
   items:
     - title: Health and emergency care
       icon: cross
@@ -49,9 +49,9 @@ approach:
     - title: Design research
       text: Following Design-Based Research (DBR) and Design Science Research (DSR) approaches, we develop serious games, simulations and platforms as research artefacts, and study them in real settings.
     - title: Collaborative
-      text: From collaborative design to collaborative evaluation, trainers, subject-matter experts and learners are involved in the various stages of our projects.
+      text: From collaborative design to collaborative evaluation, trainers, subject-matter experts and learners are actively involved in our projects.
     - title: Mixed methods
-      text: We evaluate our artefacts in real settings, combining quantitative data, such as usage traces, with qualitative data from observations, interviews and focus groups.
+      text: We evaluate our artefacts in real settings, combining quantitative data, such as usage traces, with qualitative data from observations, interviews or focus groups.
   link: See our publications
   process:
     heading: Our design and development process
@@ -66,7 +66,7 @@ approach:
         text: Tests in real learning contexts to refine content, interfaces and teaching approach.
 wegas:
   eyebrow: Our research infrastructure
-  title: Wegas, our in-house platform for research
+  title: Wegas, our research and development platform
   text: Developed by our team, Wegas (Web Game Authoring System) is the open-source platform on which our serious games and simulations are built. It enables rapid prototyping, the use of developed games, and the collection of usage data that feed the quantitative part of our research.
   highlights:
     - Rapid prototyping
