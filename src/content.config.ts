@@ -76,7 +76,24 @@ const home = defineCollection({
 })
 
 /** Icons a content file can pick (see src/components/Icon.astro). */
-export const contentIcons = ['cross', 'lines', 'code', 'sprout', 'magnifier', 'bolt'] as const
+export const contentIcons = [
+  'cross',
+  'lines',
+  'code',
+  'sprout',
+  'magnifier',
+  'bolt',
+  'monitor',
+  'heart-pulse',
+  'messages',
+  'book-open',
+  'users',
+  'graduation-cap',
+  'globe',
+  'chart',
+  'search',
+  'layers',
+] as const
 
 // The research page, one file per language (`fr.md`, `en.md`). The body is the introduction
 // under the main title.
@@ -172,6 +189,49 @@ const news = defineCollection({
 })
 
 // Research projects, one folder per language: `content/projects/en/<id>.md`, `.../fr/<id>.md`.
+// A link either to the page of a ready-to-use game (its file name in `content/games/<lang>/`) or
+// to another site.
+const gameLink = z.object({ label: z.string(), game: z.string() })
+const projectLink = z.union([gameLink, z.object({ label: z.string(), url: z.url() })])
+
+// Diagrams of the "Overview" section. SVG text does not wrap by itself, so the longer texts are
+// given as lists of lines.
+const overviewDiagram = z.discriminatedUnion('type', [
+  /** Two current methods with their limits, both leading to the project and its innovations. */
+  z.object({
+    type: z.literal('methods'),
+    alt: z.string(),
+    methodsLabel: z.string(),
+    limitsLabel: z.string(),
+    methods: z.array(z.object({ title: z.string(), limits: z.array(z.array(z.string())) })),
+    projectLabel: z.string(),
+    projectTitle: z.string(),
+    innovations: z.array(z.string()),
+  }),
+  /** The current situation and its limits, then the project in three steps, then its goal. */
+  z.object({
+    type: z.literal('path'),
+    alt: z.string(),
+    currentLabel: z.string(),
+    current: z.string(),
+    limitsLabel: z.string(),
+    limits: z.array(z.string()),
+    projectLabel: z.string(),
+    projectTitle: z.string(),
+    steps: z.array(z.string()),
+    goalLabel: z.string(),
+    goal: z.string(),
+  }),
+  /** Three communities and their needs, all leading to the project and its two parts. */
+  z.object({
+    type: z.literal('communities'),
+    alt: z.string(),
+    communities: z.array(z.object({ name: z.array(z.string()), need: z.array(z.string()) })),
+    projectTitle: z.string(),
+    parts: z.array(z.array(z.string())),
+  }),
+])
+
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './content/projects' }),
   schema: ({ image }) =>
@@ -182,6 +242,142 @@ const projects = defineCollection({
       summary: z.string(),
       image: image(),
       imageAlt: z.string(),
+      /**
+       * The project's own page, at /projects/<id>. Projects without it have no page yet. The
+       * Markdown body is the text of its "Overview" section. Sections marked optional below only
+       * show when they are given.
+       */
+      page: z
+        .object({
+          heading: z.string(),
+          /** First sentence of the introduction, slightly larger. */
+          lead: z.string(),
+          intro: z.array(z.string()),
+          /** Button under the introduction, to the game born from the project. */
+          button: gameLink.optional(),
+          /** Description of the illustration and the words written in it. */
+          illustration: z.object({
+            alt: z.string(),
+            labels: z.record(z.string(), z.string()).default({}),
+          }),
+          glance: z.object({
+            eyebrow: z.string(),
+            heading: z.string(),
+            focus: z.object({ label: z.string(), items: z.array(z.string()) }),
+            period: z.object({ label: z.string(), value: z.string() }),
+            /** `detail`: a smaller line under the funder, e.g. the research programme. */
+            funding: z.object({
+              label: z.string(),
+              value: z.string(),
+              detail: z.string().optional(),
+            }),
+            /** Last card: one or more groups of people or organizations, each with its label. */
+            people: z.array(
+              z.object({
+                label: z.string(),
+                people: z.array(z.object({ name: z.string(), affiliation: z.string().optional() })),
+              }),
+            ),
+          }),
+          overview: z.object({
+            eyebrow: z.string(),
+            heading: z.string(),
+            /** Next to the text: a diagram, or else a photo. */
+            diagram: overviewDiagram.optional(),
+            image: image().optional(),
+            imageAlt: z.string().optional(),
+          }),
+          outcomes: z.object({
+            eyebrow: z.string(),
+            heading: z.string(),
+            cards: z.array(
+              z.object({
+                icon: z.enum(contentIcons),
+                title: z.string(),
+                text: z.string(),
+                links: z.array(projectLink).default([]),
+              }),
+            ),
+          }),
+          /** Research approach (optional): text next to a diagram of the research cycle. */
+          approach: z
+            .object({
+              eyebrow: z.string(),
+              heading: z.string(),
+              paragraphs: z.array(z.string()),
+              /** Two boxes above the cycle and two below, each with a label and a text. */
+              inputs: z.array(z.object({ label: z.string(), text: z.string() })),
+              cycle: z.object({
+                alt: z.string(),
+                steps: z.array(z.string()),
+                center: z.array(z.string()),
+                label: z.string(),
+                text: z.string(),
+              }),
+              outputs: z.array(z.object({ label: z.string(), text: z.string() })),
+            })
+            .optional(),
+          /** From research to practice (optional). Without a photo, the text sits on the right. */
+          practice: z
+            .object({
+              eyebrow: z.string(),
+              heading: z.string(),
+              paragraphs: z.array(z.string()),
+              links: z.array(projectLink).default([]),
+              image: image().optional(),
+              imageAlt: z.string().optional(),
+              /** CSS `object-position` of the photo, to choose what stays visible. */
+              imagePosition: z.string().optional(),
+            })
+            .optional(),
+          findings: z.object({
+            eyebrow: z.string(),
+            heading: z.string(),
+            items: z.array(
+              z.object({
+                text: z.string(),
+                /** Study and reference; *asterisks* put the journal name in italics. */
+                source: z.string(),
+                url: z.url().optional(),
+              }),
+            ),
+          }),
+          partners: z.object({
+            eyebrow: z.string(),
+            heading: z.string(),
+            /** [Label](https://…) makes a link to another site. */
+            paragraphs: z.array(z.string()),
+            logos: z.array(z.object({ name: z.string(), logo: image(), height: z.number() })),
+            acknowledgements: z.object({
+              heading: z.string(),
+              text: z.string(),
+              funders: z.array(
+                z.object({ name: z.string(), url: z.url(), logo: image(), height: z.number() }),
+              ),
+            }),
+            /** Call for participants (optional), on a pink block under the partners. */
+            getInvolved: z
+              .object({ heading: z.string(), text: z.string(), button: z.string() })
+              .optional(),
+          }),
+          resources: z.object({
+            eyebrow: z.string(),
+            heading: z.string(),
+            /** Links to other sites (optional), above the publications. */
+            links: z
+              .object({
+                heading: z.string(),
+                items: z.array(z.object({ label: z.string(), url: z.url() })),
+              })
+              .optional(),
+            /** Ids of the publications: their file names in `content/publications/`. */
+            publications: z.array(z.string()),
+            /** Small text under the publications (optional). */
+            note: z.string().optional(),
+          }),
+          collaborate: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+        })
+        .optional(),
     }),
 })
 
@@ -203,8 +399,8 @@ const publications = defineCollection({
     year: z.number().int(),
     /** Journal, book or conference. */
     venue: z.string(),
-    /** In citation style: "Jaccard, D., & Riboni, S." */
-    authors: z.string(),
+    /** In citation style: "Jaccard, D., & Riboni, S." Leave it out when unknown. */
+    authors: z.string().optional(),
     type: z.enum(publicationTypes),
     /** For the type `other` only: talk, workshop, interview, poster or article. */
     kind: z.enum(publicationKinds).optional(),

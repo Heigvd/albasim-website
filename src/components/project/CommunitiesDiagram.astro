@@ -1,0 +1,185 @@
+---
+// Diagram of the "Overview" section: three communities, each with its need, all leading to the
+// project and its two parts. SVG text does not wrap, so names, needs and parts are given as lists
+// of lines.
+import type { ProjectPage } from '../../utils/projects'
+
+type Props = Extract<NonNullable<ProjectPage['overview']['diagram']>, { type: 'communities' }>
+
+const { alt, communities, projectTitle, parts } = Astro.props
+
+const X = [92, 280, 468] // centers of the three circles
+const colors = ['peach', 'turquoise', 'lavender']
+const NEED_TOP = 214 // first line of the needs
+const NEED_LINE = 23
+
+const circles = communities.slice(0, 3).map((community, i) => {
+  const needEnd = NEED_TOP + (community.need.length - 1) * NEED_LINE + 19
+  // Arrow from under the need to the project box: straight in the middle, curved on the sides.
+  const endX = [180, 280, 380][i]
+  const arrow =
+    i === 1
+      ? `M${X[i]} ${needEnd} L${endX} 372`
+      : `M${X[i]} ${needEnd} C ${X[i]} ${needEnd + 42}, ${endX} 334, ${endX} 372`
+  return {
+    x: X[i],
+    color: colors[i],
+    name: community.name.map((line, j) => ({
+      line,
+      y: 110 - ((community.name.length - 1) * 21) / 2 + j * 21,
+    })),
+    need: community.need.map((line, j) => ({ line, y: NEED_TOP + j * NEED_LINE })),
+    arrow,
+  }
+})
+---
+
+<svg viewBox="0 33 560 565" role="img" aria-label={alt} class="diagram">
+  <defs>
+    <linearGradient id="communities-peach" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-peach"></stop>
+      <stop offset="1" class="stop-peach-strong"></stop>
+    </linearGradient>
+    <linearGradient id="communities-turquoise" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-turquoise"></stop>
+      <stop offset="1" class="stop-turquoise-strong"></stop>
+    </linearGradient>
+    <linearGradient id="communities-lavender" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" class="stop-lavender"></stop>
+      <stop offset="1" class="stop-lavender-strong"></stop>
+    </linearGradient>
+    <marker id="communities-arrow" orient="auto" markerWidth="8" markerHeight="8" refX="6" refY="4">
+      <path d="M0 0 L8 4 L0 8 Z" class="arrow-head"></path>
+    </marker>
+  </defs>
+
+  <g class="dashes">
+    <line x1="164" y1="104" x2="206" y2="104"></line>
+    <line x1="354" y1="104" x2="396" y2="104"></line>
+  </g>
+
+  {circles.map((circle) => (
+    <g>
+      <circle cx={circle.x} cy="104" r="70" fill={`url(#communities-${circle.color})`} />
+      {circle.name.map((row) => (
+        <text x={circle.x} y={row.y} text-anchor="middle" class="name">
+          {row.line}
+        </text>
+      ))}
+      {circle.need.map((row) => (
+        <text x={circle.x} y={row.y} text-anchor="middle" class="need">
+          {row.line}
+        </text>
+      ))}
+      <path d={circle.arrow} class="link" marker-end="url(#communities-arrow)" />
+    </g>
+  ))}
+
+  <rect x="20.75" y="382.75" width="518.5" height="212.5" rx="22" class="project"></rect>
+  <text x="280" y="428" text-anchor="middle" class="project-title">
+    {projectTitle}
+  </text>
+  {parts.slice(0, 2).map((lines, i) => (
+    <g>
+      <rect x={48 + i * 242} y="452" width="222" height="116" rx="14" class="part" />
+      <rect x={70 + i * 242} y="474" width="14" height="14" class="square" />
+      {lines.map((line, j) => (
+        <text x={70 + i * 242} y={518 + j * 24} class="part-text">
+          {line}
+        </text>
+      ))}
+    </g>
+  ))}
+</svg>
+
+<style>
+  .diagram {
+    display: block;
+    width: 100%;
+    max-width: 540px;
+    height: auto;
+    margin-left: auto;
+    font-family: var(--font-sans);
+  }
+
+  .stop-peach {
+    stop-color: var(--color-peach);
+  }
+
+  .stop-peach-strong {
+    stop-color: var(--color-peach-strong);
+  }
+
+  .stop-turquoise {
+    stop-color: var(--color-turquoise);
+  }
+
+  .stop-turquoise-strong {
+    stop-color: var(--color-turquoise-strong);
+  }
+
+  .stop-lavender {
+    stop-color: var(--color-lavender);
+  }
+
+  .stop-lavender-strong {
+    stop-color: var(--color-lavender-strong);
+  }
+
+  .dashes {
+    stroke: var(--color-ink);
+    stroke-width: 1.2;
+    stroke-dasharray: 4 4;
+  }
+
+  .name {
+    fill: var(--color-ink);
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .need {
+    fill: var(--color-ink);
+    font-size: 18px;
+    opacity: 0.85;
+  }
+
+  .link {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.5;
+  }
+
+  .arrow-head {
+    fill: var(--color-ink);
+  }
+
+  .project {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+    stroke-width: 1.5;
+  }
+
+  .project-title {
+    fill: var(--color-ink);
+    font-size: 30px;
+    font-weight: 800;
+  }
+
+  .part {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+    stroke-opacity: 0.45;
+    stroke-width: 1.5;
+  }
+
+  .square {
+    fill: var(--color-primary);
+  }
+
+  .part-text {
+    fill: var(--color-ink);
+    font-size: 18px;
+    font-weight: 800;
+  }
+</style>

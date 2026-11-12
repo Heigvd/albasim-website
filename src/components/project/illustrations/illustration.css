@@ -1,0 +1,95 @@
+/* Shapes and colors shared by the illustrations of the project pages. Imported by each of them,
+   so these rules are global: they all start with .project-illustration. */
+
+.project-illustration {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+}
+
+/* Stops of the red gradient */
+.project-illustration .stop-light {
+  stop-color: var(--color-primary-light);
+}
+
+.project-illustration .stop-mid {
+  stop-color: var(--color-primary-mid);
+}
+
+.project-illustration .stop-primary {
+  stop-color: var(--color-primary);
+}
+
+/* Hexagon in the corner */
+.project-illustration .soft-line {
+  fill: none;
+  stroke: var(--color-primary-soft);
+  stroke-width: 0.8;
+}
+
+/* Fills */
+.project-illustration .ink {
+  fill: var(--color-ink);
+}
+
+.project-illustration .white {
+  fill: var(--color-white);
+}
+
+.project-illustration .primary {
+  fill: var(--color-primary);
+}
+
+.project-illustration .light {
+  fill: var(--color-primary-light);
+}
+
+.project-illustration .line-fill {
+  fill: var(--color-line);
+}
+
+.project-illustration .lavender {
+  fill: var(--color-lavender);
+}
+
+.project-illustration .lavender-strong {
+  fill: var(--color-lavender-strong);
+}
+
+.project-illustration .peach-strong {
+  fill: var(--color-peach-strong);
+}
+
+.project-illustration .turquoise {
+  fill: var(--color-turquoise);
+}
+
+.project-illustration .turquoise-strong {
+  fill: var(--color-turquoise-strong);
+}
+
+/* White shape with an ink outline */
+.project-illustration .outline {
+  fill: var(--color-white);
+  stroke: var(--color-ink);
+  stroke-width: 1.4;
+}
+
+/* Lines */
+.project-illustration .stroke {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project-illustration .dashed {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+}

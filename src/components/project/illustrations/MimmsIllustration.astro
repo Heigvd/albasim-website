@@ -1,0 +1,274 @@
+---
+// Illustration of the MIMMS project: an incident site seen from above, with victims sorted into
+// three priority areas, the advanced medical post, the ambulance park, the helicopter landing
+// area and the hospital. When it comes into view, the helicopter lands and two ambulances drive
+// in; the victims, vehicles and hospital rise under the mouse pointer. With reduced motion, it
+// stays still. The animation is shared: see src/scripts/illustrations.ts.
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  /** Words written in the illustration. */
+  labels: Record<string, string>
+  class?: string
+}
+
+const { label, labels, class: className, ...attrs } = Astro.props
+
+// Victims in each priority area: [cx, cy].
+const priorityAreas = [
+  {
+    fill: 'ink',
+    victims: [
+      [45, 47],
+      [62, 47],
+      [45, 66],
+    ],
+  },
+  {
+    fill: 'light',
+    victims: [
+      [45, 117],
+      [62, 117],
+      [45, 136],
+      [62, 136],
+      [45, 155],
+    ],
+  },
+  {
+    fill: 'outline',
+    victims: [
+      [121, 81],
+      [138, 81],
+      [121, 100],
+      [138, 100],
+      [121, 119],
+      [138, 119],
+    ],
+  },
+] as const
+// Ambulances in the park: [x, delay of the drive in s, or none for the one already parked].
+const ambulances = [
+  [96, 0.75],
+  [142, 0.2],
+  [188, null],
+] as const
+---
+
+<svg
+  {...attrs}
+  class:list={['mimms-illustration', className]}
+  viewBox="0 0 420 300"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-duration="2450"
+>
+  <defs>
+    <linearGradient id="mimms-cross" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-light"></stop>
+      <stop offset="0.5" class="stop-mid"></stop>
+      <stop offset="1" class="stop-primary"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Hexagon in the corner -->
+  <polygon points="405,22 392,14.5 379,22 379,37 392,44.5 405,37" class="soft-line"></polygon>
+
+  <!-- Routes from the medical post to the hospital and to the helicopter -->
+  <path d="M243 168 L243 262 L360 262" class="route"></path>
+  <path d="M272 120 C 300 110, 310 96, 316 84" class="route"></path>
+
+  <g transform="translate(0 40)">
+    <!-- Priority areas and their victims -->
+    <rect x="28" y="30" width="62" height="54" rx="10" class="area lavender"></rect>
+    <rect x="28" y="100" width="62" height="70" rx="10" class="area peach"></rect>
+    <rect x="104" y="64" width="62" height="78" rx="10" class="area turquoise"></rect>
+    {priorityAreas.map(({ fill, victims }) => (
+      <g class={fill}>
+        {victims.map(([cx, cy]) => (
+          <circle cx={cx} cy={cy} r="6" class="lift" />
+        ))}
+      </g>
+    ))}
+
+    <!-- Routes to the advanced medical post -->
+    <path d="M90 57 C 150 30, 190 40, 214 80" class="route"></path>
+    <path d="M166 103 L 214 100" class="route"></path>
+
+    <!-- Advanced medical post -->
+    <rect x="214" y="70" width="58" height="58" rx="12" class="ink"></rect>
+    <rect x="237" y="84" width="12" height="30" rx="2" fill="url(#mimms-cross)"></rect>
+    <rect x="228" y="93" width="30" height="12" rx="2" fill="url(#mimms-cross)"></rect>
+  </g>
+
+  <!-- Helicopter landing area -->
+  <circle cx="336" cy="64" r="26" class="helipad"></circle>
+  <text x="336" y="70" text-anchor="middle" class="helipad-letter">
+    H
+  </text>
+  <g class="lift land" style="animation-delay: 1.25s">
+    <ellipse cx="336" cy="62" rx="14" ry="8" class="ink"></ellipse>
+    <path d="M347 60 L366 56" class="rotor tail"></path>
+    <path d="M366 51 L366 61" class="rotor"></path>
+    <path d="M336 54 L336 50" class="rotor"></path>
+    <path d="M312 50 L360 50" class="rotor blade"></path>
+    <ellipse cx="331" cy="61" rx="5" ry="4" class="primary"></ellipse>
+  </g>
+
+  <!-- Ambulance park -->
+  {ambulances.map(([x, delay]) => (
+    <g
+      class:list={['lift', { drive: delay !== null }]}
+      style={delay !== null ? `animation-delay: ${delay}s` : undefined}
+    >
+      <rect x={x} y="238" width="30" height="16" rx="3" class="outline body"></rect>
+      <rect x={x + 30} y="243" width="10" height="11" rx="2" class="ink"></rect>
+      <rect x={x + 10} y="244.75" width="10" height="2.5" class="primary"></rect>
+      <rect x={x + 13.75} y="241" width="2.5" height="10" class="primary"></rect>
+      <circle cx={x + 8} cy="255" r="3" class="ink"></circle>
+      <circle cx={x + 33} cy="255" r="3" class="ink"></circle>
+    </g>
+  ))}
+
+  <!-- Hospital -->
+  <g class="lift">
+    <rect x="360" y="240" width="46" height="40" class="outline body"></rect>
+    <rect x="376" y="246" width="14" height="14" class="primary"></rect>
+    <rect x="381.5" y="248.5" width="3" height="9" class="white"></rect>
+    <rect x="378.5" y="251.5" width="9" height="3" class="white"></rect>
+    <rect x="366" y="266" width="7" height="7" class="ink"></rect>
+    <rect x="379.5" y="266" width="7" height="14" class="ink"></rect>
+    <rect x="393" y="266" width="7" height="7" class="ink"></rect>
+  </g>
+
+  <g class="labels">
+    <text x="383" y="296">
+      {labels.hospital}
+    </text>
+    <text x="162" y="280">
+      {labels.ambulancePark}
+    </text>
+  </g>
+</svg>
+
+<style>
+  .mimms-illustration {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto;
+    font-family: var(--font-sans);
+  }
+
+  .stop-light {
+    stop-color: var(--color-primary-light);
+  }
+
+  .stop-mid {
+    stop-color: var(--color-primary-mid);
+  }
+
+  .stop-primary {
+    stop-color: var(--color-primary);
+  }
+
+  .soft-line {
+    fill: none;
+    stroke: var(--color-primary-soft);
+    stroke-width: 0.8;
+  }
+
+  .route {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.4;
+    stroke-dasharray: 5 4;
+  }
+
+  .area {
+    stroke: var(--color-ink);
+    stroke-width: 1;
+    stroke-dasharray: 4 3;
+  }
+
+  .lavender {
+    fill: var(--color-lavender);
+  }
+
+  .peach {
+    fill: var(--color-peach);
+  }
+
+  .turquoise {
+    fill: var(--color-turquoise);
+  }
+
+  .ink {
+    fill: var(--color-ink);
+  }
+
+  .light {
+    fill: var(--color-primary-light);
+  }
+
+  .primary {
+    fill: var(--color-primary);
+  }
+
+  .white {
+    fill: var(--color-white);
+  }
+
+  .outline {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+    stroke-width: 1.2;
+  }
+
+  .body {
+    stroke-width: 1.3;
+  }
+
+  .helipad {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.2;
+  }
+
+  .helipad-letter {
+    fill: var(--color-ink);
+    font-size: 16px;
+    font-weight: 800;
+    opacity: 0.25;
+  }
+
+  .rotor {
+    stroke: var(--color-ink);
+    stroke-width: 1.5;
+  }
+
+  .tail {
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+
+  .blade {
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .labels {
+    fill: var(--color-ink);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-anchor: middle;
+  }
+</style>
+
+<script>
+  import '../../../scripts/illustrations'
+</script>

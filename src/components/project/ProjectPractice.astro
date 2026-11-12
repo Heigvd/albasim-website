@@ -1,0 +1,125 @@
+---
+// "From research to practice": how the project's results are used today, with links (e.g. to
+// the games) and a photo. Without a photo, the title sits on the left and the text on the right.
+import { Image } from 'astro:assets'
+import ArrowLink from '../ArrowLink.astro'
+import SectionHeading from '../SectionHeading.astro'
+import type { Lang } from '../../i18n/ui'
+import { projectLinkTarget, type ProjectPage } from '../../utils/projects'
+
+type Props = NonNullable<ProjectPage['practice']> & { lang: Lang }
+
+const { eyebrow, heading, paragraphs, links, image, imageAlt, imagePosition, lang } = Astro.props
+---
+
+<section aria-labelledby="practice-heading">
+  <div class:list={['container', 'inner', { 'no-photo': !image }]}>
+    <div class="text">
+      <SectionHeading eyebrow={eyebrow} title={heading} id="practice-heading" class="heading" />
+      <div class="body">
+        {paragraphs.map((paragraph) => (
+          <p class="t-body paragraph">{paragraph}</p>
+        ))}
+        {links.length > 0 && (
+          <div class="links">
+            {links.map((link) => {
+              const { href, external } = projectLinkTarget(link, lang)
+              return (
+                <ArrowLink
+                  href={href}
+                  kind={external ? 'external' : 'page'}
+                  lang={lang}
+                  class="t-link"
+                >
+                  {link.label}
+                </ArrowLink>
+              )
+            })}
+          </div>
+        )}
+      </div>
+    </div>
+    {image && (
+      <Image
+        src={image}
+        alt={imageAlt ?? ''}
+        widths={[600, 1200]}
+        sizes="(max-width: 820px) 100vw, 584px"
+        class="photo"
+        style={imagePosition ? { objectPosition: imagePosition } : undefined}
+      />
+    )}
+  </div>
+</section>
+
+<style>
+  .inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 72px;
+    align-items: center;
+    padding-block: 96px;
+  }
+
+  .heading {
+    margin-bottom: 24px;
+  }
+
+  .heading :global(.eyebrow) {
+    width: auto;
+  }
+
+  .paragraph {
+    margin: 0 0 16px;
+  }
+
+  .paragraph:last-child {
+    margin-bottom: 0;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    margin-top: 28px;
+  }
+
+  .photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 0 96px;
+  }
+
+  /* Without a photo: the title on the left, the text on the right, level with the title. */
+  .no-photo {
+    align-items: start;
+  }
+
+  .no-photo .text {
+    display: contents;
+  }
+
+  .no-photo .heading {
+    margin-bottom: 0;
+  }
+
+  .no-photo .body {
+    padding-top: 70px;
+  }
+
+  @media (max-width: 820px) {
+    .inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .no-photo {
+      gap: 24px;
+    }
+
+    .no-photo .body {
+      padding-top: 0;
+    }
+  }
+</style>

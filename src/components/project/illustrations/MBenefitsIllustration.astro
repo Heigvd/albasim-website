@@ -1,0 +1,111 @@
+---
+// Illustration of the M-Benefits project: a company building with an energy-efficiency measure,
+// surrounded by its multiple benefits: savings, comfort, productivity and image. The benefits
+// rise under the mouse pointer. The animation is shared: see src/scripts/illustrations.ts.
+import './illustration.css'
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  /** Words written in the illustration (none here). */
+  labels?: Record<string, string>
+  class?: string
+}
+
+const { label, labels: _labels, class: className, ...attrs } = Astro.props
+
+// Windows of the building: [x, y]. One is missing, above the door.
+const windows = [
+  [160, 112],
+  [199, 112],
+  [238, 112],
+  [160, 144],
+  [199, 144],
+  [238, 144],
+  [160, 176],
+  [238, 176],
+]
+---
+
+<svg
+  {...attrs}
+  class:list={['project-illustration', className]}
+  viewBox="0 0 420 300"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-lift-radius="63"
+>
+  <defs>
+    <linearGradient id="m-benefits-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-light"></stop>
+      <stop offset="0.5" class="stop-mid"></stop>
+      <stop offset="1" class="stop-primary"></stop>
+    </linearGradient>
+  </defs>
+
+  <polygon points="405,22 392,14.5 379,22 379,37 392,44.5 405,37" class="soft-line"></polygon>
+
+  <!-- Building and ground -->
+  <rect x="140" y="92" width="140" height="160" rx="8" class="ink"></rect>
+  <g class="white" opacity="0.85">
+    {windows.map(([x, y]) => (
+      <rect x={x} y={y} width="22" height="18" rx="2" />
+    ))}
+  </g>
+  <rect x="196" y="212" width="28" height="40" rx="3" class="white"></rect>
+  <rect x="40" y="252" width="340" height="3" rx="1.5" class="ink"></rect>
+
+  <!-- Energy-efficiency measure -->
+  <g transform="translate(210,58)">
+    <circle r="26" fill="url(#m-benefits-gradient)"></circle>
+    <path d="M3 -15 L-9 3 L0 3 L-3 15 L9 -3 L0 -3 Z" class="ink"></path>
+  </g>
+
+  <!-- Benefits: savings, comfort, productivity, image -->
+  <g class="lift">
+    <rect x="40" y="96" width="70" height="44" rx="10" class="outline"></rect>
+    <rect x="54" y="122" width="8" height="10" class="ink"></rect>
+    <rect x="66" y="114" width="8" height="18" class="ink"></rect>
+    <rect x="78" y="106" width="8" height="26" class="primary"></rect>
+  </g>
+  <g class="lift">
+    <rect x="40" y="168" width="70" height="44" rx="10" class="lavender-strong"></rect>
+    <path
+      d="M75 200 C 60 190, 58 180, 66 176 C 71 174, 75 178, 75 180 C 75 178, 79 174, 84 176 C 92 180, 90 190, 75 200 Z"
+      class="ink"
+    ></path>
+  </g>
+  <g class="lift">
+    <rect x="310" y="96" width="70" height="44" rx="10" class="peach-strong"></rect>
+    <path d="M330 126 L342 114 L352 122 L364 108" class="stroke trend"></path>
+  </g>
+  <g class="lift">
+    <rect x="310" y="168" width="70" height="44" rx="10" class="outline"></rect>
+    <path
+      d="M345 178 L349 187 L358 188 L351 194 L353 203 L345 198 L337 203 L339 194 L332 188 L341 187 Z"
+      class="primary"
+    ></path>
+  </g>
+  <path
+    d="M110 118 L140 130 M110 190 L140 180 M310 118 L280 130 M310 190 L280 180"
+    class="links"
+  ></path>
+</svg>
+
+<style>
+  .trend {
+    stroke-width: 2;
+  }
+
+  .links {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.2;
+    stroke-dasharray: 4 4;
+  }
+</style>
+
+<script>
+  import '../../../scripts/illustrations'
+</script>

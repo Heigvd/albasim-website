@@ -1,12 +1,16 @@
 // Animation of the hero illustrations of the inner pages, shared through the `data-illustration`
 // attribute on their <svg>. Each plays once when it comes into view: the `.wiggle` shapes bob, a
-// wave runs along the `.wave` shapes, the `.bar` shapes stretch, the `.rise` shapes fade in and
-// the `.write` lines draw themselves (see "Hero illustrations" in global.css). The last two stay
-// hidden until the first play: `data-ready` marks an illustration that will play, `data-played`
-// one that has. Then `.square`, `.bar` and `.write` shapes react to the mouse pointer, and
-// `.person` groups near it get a `data-near` attribute, which their component styles. Nothing
-// moves with reduced motion. `data-duration` gives the length of the longest animation, delay
-// included, in milliseconds.
+// wave runs along the `.wave` shapes, the `.bar` shapes stretch, the `.rise` and `.fade` shapes
+// fade in, the `.pop` shapes grow in, the `.gather` shapes come in from the offset given by their
+// `--dx` and `--dy` and the `.write` and `.draw` lines draw themselves (see "Hero illustrations"
+// in global.css). The shapes that appear stay hidden until the first play: `data-ready` marks an
+// illustration that will play, `data-played` one that has. Then `.square`, `.lift`, `.bar` and
+// `.write` shapes react to the mouse pointer, and `.person` groups near it get a `data-near`
+// attribute, which their component styles. A `.lift` shape with a `data-node` name also lights up
+// the links whose `data-links` list that name, through a `data-active` attribute. Nothing moves
+// with reduced motion. `data-duration` gives the length of the longest animation, delay included,
+// in milliseconds; `data-lift-radius`, the distance from the pointer at which `.lift` shapes start
+// to rise, in units of the viewBox (46 by default).
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
@@ -47,6 +51,11 @@ for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustratio
   const squares = [...svg.querySelectorAll<SVGRectElement>('.square')]
   const bars = [...svg.querySelectorAll<SVGRectElement>('.bar')]
   const lines = [...svg.querySelectorAll<SVGLineElement>('line.write')]
+  // Any shape or group that rises near the pointer, measured from the center of its box.
+  const lifts = [...svg.querySelectorAll<SVGGraphicsElement>('.lift')]
+  const liftRadius = Number(svg.dataset.liftRadius ?? 46)
+  // Links between named shapes, lit while one of their shapes is close to the pointer.
+  const links = [...svg.querySelectorAll<SVGElement>('[data-links]')]
   // People: the position of their head, given by `data-x` and `data-y`.
   const people = [...svg.querySelectorAll<SVGGElement>('.person')]
   let frame = 0
@@ -68,6 +77,30 @@ for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustratio
         k = Math.max(0, 1 - Math.hypot(x + w / 2 - point.x, dy) / 30)
       }
       el.style.transform = k > 0.01 ? `scaleY(${1 + 0.1 * k})` : ''
+    }
+    const near = new Set<string>()
+    for (const el of lifts) {
+      let lift = 0
+      const parent = el.parentNode as SVGGraphicsElement
+      const toSvg = svg
+        .getScreenCTM()
+        ?.inverse()
+        .multiply(parent.getScreenCTM() ?? new DOMMatrix())
+      if (point && toSvg) {
+        // Center of the box, in the coordinates of the <svg> (the shape may sit in a moved group).
+        const b = el.getBBox()
+        const center = new DOMPoint(b.x + b.width / 2, b.y + b.height / 2).matrixTransform(toSvg)
+        lift = Math.max(0, 1 - Math.hypot(center.x - point.x, center.y - point.y) / liftRadius)
+      }
+      el.style.transform = lift > 0.01 ? `translate(${-4 * lift}px, ${-4 * lift}px)` : ''
+      if (lift > 0.35 && el.dataset.node) near.add(el.dataset.node)
+    }
+    for (const el of links) {
+      const names = (el.dataset.links ?? '').split(' ')
+      el.toggleAttribute(
+        'data-active',
+        names.some((name) => near.has(name)),
+      )
     }
     for (const el of lines) {
       const x1 = Number(el.getAttribute('x1'))

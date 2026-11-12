@@ -1,0 +1,158 @@
+---
+// Diagram of the "Overview" section: the two current methods with their limits, both leading
+// to the project and its three innovations. SVG text does not wrap, so each limit is given as a
+// list of lines.
+import type { ProjectPage } from '../../utils/projects'
+
+type Props = Extract<NonNullable<ProjectPage['overview']['diagram']>, { type: 'methods' }>
+
+const { alt, methodsLabel, limitsLabel, methods, projectLabel, projectTitle, innovations } =
+  Astro.props
+
+const LINE = 24 // between two lines of a limit
+const GAP = 38 // from the last line of a limit to the first of the next one
+
+// Vertical position of each line of each limit, and of its bullet.
+const boxes = methods.slice(0, 2).map((method, i) => {
+  let y = 140
+  const limits = method.limits.map((lines) => {
+    const first = y
+    const rows = lines.map((line, j) => ({ line, y: first + j * LINE }))
+    y = first + (lines.length - 1) * LINE + GAP
+    return { bullet: first - 6, rows }
+  })
+  return { x: i * 270, title: method.title, limits }
+})
+---
+
+<svg viewBox="0 0 520 534" role="img" aria-label={alt} class="diagram">
+  <defs>
+    <marker id="overview-arrow" orient="auto" markerWidth="8" markerHeight="8" refX="6" refY="4">
+      <path d="M0 0 L8 4 L0 8 Z" class="arrow-head"></path>
+    </marker>
+  </defs>
+
+  <text x="260" y="16" text-anchor="middle" class="label">
+    {methodsLabel}
+  </text>
+
+  {boxes.map((box) => (
+    <g>
+      <rect x={box.x} y="34" width="250" height="228" rx="12" class="box" />
+      <text x={box.x + 22} y="72" class="method">
+        {box.title}
+      </text>
+      <text x={box.x + 22} y="104" class="label">
+        {limitsLabel}
+      </text>
+      {box.limits.map((limit) => (
+        <g>
+          <circle cx={box.x + 27} cy={limit.bullet} r="3.5" class="bullet" />
+          {limit.rows.map((row) => (
+            <text x={box.x + 40} y={row.y} class="limit">
+              {row.line}
+            </text>
+          ))}
+        </g>
+      ))}
+    </g>
+  ))}
+
+  <g class="links">
+    <path d="M125 262 C 125 298, 180 282, 180 316" marker-end="url(#overview-arrow)"></path>
+    <path d="M395 262 C 395 298, 340 282, 340 316" marker-end="url(#overview-arrow)"></path>
+  </g>
+
+  <rect x="50" y="324" width="420" height="208" rx="12" class="project"></rect>
+  <text x="260" y="358" text-anchor="middle" class="label">
+    {projectLabel}
+  </text>
+  <text x="260" y="390" text-anchor="middle" class="project-title">
+    {projectTitle}
+  </text>
+  <line x1="90" y1="414" x2="430" y2="414" class="rule"></line>
+  {innovations.slice(0, 3).map((innovation, i) => (
+    <g>
+      <circle cx="112" cy={440 + i * 32} r="11" class="bullet" />
+      <text x="112" y={445 + i * 32} text-anchor="middle" class="number">
+        {i + 1}
+      </text>
+      <text x="134" y={446 + i * 32} class="innovation">
+        {innovation}
+      </text>
+    </g>
+  ))}
+</svg>
+
+<style>
+  .diagram {
+    display: block;
+    width: 100%;
+    height: auto;
+    font-family: var(--font-sans);
+  }
+
+  .label {
+    fill: var(--color-primary-text);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+  }
+
+  .box {
+    fill: var(--color-white);
+    stroke: var(--color-line);
+    stroke-width: 1.2;
+  }
+
+  .method {
+    fill: var(--color-ink);
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .limit {
+    fill: var(--color-text-muted);
+    font-size: 18px;
+  }
+
+  .bullet {
+    fill: var(--color-primary);
+  }
+
+  .links {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.5;
+  }
+
+  .arrow-head {
+    fill: var(--color-ink);
+  }
+
+  .project {
+    fill: var(--color-tint);
+  }
+
+  .project-title {
+    fill: var(--color-ink);
+    font-size: 21px;
+    font-weight: 700;
+  }
+
+  .rule {
+    stroke: var(--color-line);
+  }
+
+  .number {
+    fill: var(--color-white);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .innovation {
+    fill: var(--color-ink);
+    font-size: 18px;
+    font-weight: 600;
+  }
+</style>
