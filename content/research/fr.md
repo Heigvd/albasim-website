@@ -42,12 +42,12 @@ projects:
     - pact
 approach:
   eyebrow: Notre approche de recherche
-  title: Allier rigueur scientifique et collaboration étroite avec les personnes concernées
+  title: Allier rigueur scientifique et collaboration concrète sur le terrain
   image: ../../src/assets/research/approach.jpg
   imageAlt: Une équipe pluridisciplinaire collaborant autour d’une table
   items:
     - title: Recherche orientée conception
-      text: Selon les approches de design science research (DSR) et de design-based research (DBR), nous développons des serious games, des simulations et des plateformes en tant qu’artefacts de recherche, et nous les étudions en situation réelle.
+      text: En nous appuyant sur des approches de Design-Based Research (DBR) et de Design Science Research (DSR), nous développons des serious games, des simulations et des plateformes en tant qu’artefacts de recherche, et nous les étudions en situation réelle.
     - title: Collaborative
       text: De la conception à l’évaluation, formateurs, experts du domaine et apprenants participent aux différentes étapes de nos projets.
     - title: Méthodes mixtes
@@ -57,13 +57,13 @@ approach:
     heading: Notre processus de conception et de développement
     steps:
       - title: Compréhension
-        text: Contexte, besoins de formation, public, objectifs d’apprentissage et contraintes.
+        text: Contexte, besoins de formation, public, objectifs d’apprentissage.
       - title: Co-conception
-        text: Ateliers avec les partenaires et scénarios d’utilisation.
+        text: Ateliers avec les partenaires, maquettes des jeux et simulations, scénarios d’utilisation.
       - title: Prototypage rapide
         text: Premières versions jouables, logiciel et contenu développés en parallèle.
       - title: Tests en situation réelle
-        text: Tests dans de vrais contextes d’apprentissage pour affiner le contenu, l’interface et l’approche pédagogique.
+        text: Tests en contexte d’apprentissage réel pour affiner le contenu, les interfaces et l’approche pédagogique.
 wegas:
   eyebrow: Notre infrastructure de recherche
   title: Wegas, notre plateforme de recherche
@@ -112,4 +112,4 @@ collaborate:
   button: Contactez-nous
 ---
 
-Nous étudions comment les serious games et les simulations soutiennent l’apprentissage dans l’enseignement supérieur et la formation professionnelle, en combinant les données d’utilisation de nos plateformes avec des observations, des entretiens et les retours des enseignants et des apprenants.
+Nous étudions comment les serious games et les simulations soutiennent l’apprentissage dans l’enseignement supérieur et la formation professionnelle, en combinant les données d’utilisation avec des observations et les retours des enseignants et des apprenants.

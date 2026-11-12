@@ -42,12 +42,12 @@ projects:
     - pact
 approach:
   eyebrow: Our research approach
-  title: Combining scientific rigour and close collaboration with people
+  title: Combining scientific rigour with hands-on collaboration in the field
   image: ../../src/assets/research/approach.jpg
   imageAlt: A multidisciplinary team collaborating around a table
   items:
     - title: Design research
-      text: Following design science research (DSR) and design-based research (DBR) approaches, we develop serious games, simulations and platforms as research artefacts, and study them in real settings.
+      text: Following Design-Based Research (DBR) and Design Science Research (DSR) approaches, we develop serious games, simulations and platforms as research artefacts, and study them in real settings.
     - title: Collaborative
       text: From collaborative design to collaborative evaluation, trainers, subject-matter experts and learners are involved in the various stages of our projects.
     - title: Mixed methods
@@ -57,13 +57,13 @@ approach:
     heading: Our design and development process
     steps:
       - title: Understanding
-        text: Context, training needs, audience, learning objectives and constraints.
+        text: Context, training needs, audience, learning objectives.
       - title: Co-design
-        text: Workshops with partners and usage scenarios.
+        text: Workshops with partners, mockups of games and simulations, usage scenarios.
       - title: Rapid prototyping
         text: Early playable versions, software and content developed in parallel.
       - title: Live testing
-        text: Tests in real learning contexts to refine content, interface and teaching approach.
+        text: Tests in real learning contexts to refine content, interfaces and teaching approach.
 wegas:
   eyebrow: Our research infrastructure
   title: Wegas, our in-house platform for research
@@ -112,4 +112,4 @@ collaborate:
   button: Contact us
 ---
 
-We study how serious games and simulations support learning in higher and professional education, combining usage data from our platforms with observations, interviews and feedback from teachers and learners.
+We study how serious games and simulations support learning in higher and professional education, combining usage data with observations and feedback from teachers and learners.
