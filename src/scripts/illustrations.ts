@@ -1,7 +1,9 @@
 // Animation of the hero illustrations (research, publications and team pages), shared through the
 // `data-illustration` attribute on their <svg>. Each plays once when it comes into view: the
-// `.wiggle` shapes bob and the `.bar` shapes stretch (see "Hero illustrations" in global.css).
-// Then `.square` and `.bar` shapes react to the mouse pointer, and `.person` groups near it get a
+// `.wiggle` shapes bob, the `.bar` shapes stretch, the `.rise` shapes fade in and the `.write`
+// lines draw themselves (see "Hero illustrations" in global.css). The last two stay hidden until
+// the first play: `data-ready` marks an illustration that will play, `data-played` one that has.
+// Then `.square`, `.bar` and `.write` shapes react to the mouse pointer, and `.person` groups near it get a
 // `data-near` attribute, which their component styles. Nothing moves with reduced motion.
 // `data-duration` gives the length of the longest animation, delay included, in milliseconds.
 
@@ -18,6 +20,7 @@ function box(el: SVGGraphicsElement) {
 
 for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustration]')) {
   const duration = Number(svg.dataset.duration ?? 1500)
+  if (!reducedMotion.matches) svg.setAttribute('data-ready', '')
 
   // Play the animation once each time the illustration comes into view.
   let visible = false
@@ -28,7 +31,10 @@ for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustratio
         // Restart the CSS animations on the next frame.
         requestAnimationFrame(() => {
           svg.setAttribute('data-playing', '')
-          setTimeout(() => svg.removeAttribute('data-playing'), duration)
+          setTimeout(() => {
+            svg.removeAttribute('data-playing')
+            svg.setAttribute('data-played', '')
+          }, duration)
         })
       }
       visible = entry.isIntersecting
@@ -39,6 +45,7 @@ for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustratio
   // Squares near the pointer rise and bars stretch a little.
   const squares = [...svg.querySelectorAll<SVGRectElement>('.square')]
   const bars = [...svg.querySelectorAll<SVGRectElement>('.bar')]
+  const lines = [...svg.querySelectorAll<SVGLineElement>('line.write')]
   // People: the position of their head, given by `data-x` and `data-y`.
   const people = [...svg.querySelectorAll<SVGGElement>('.person')]
   let frame = 0
@@ -60,6 +67,17 @@ for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustratio
         k = Math.max(0, 1 - Math.hypot(x + w / 2 - point.x, dy) / 30)
       }
       el.style.transform = k > 0.01 ? `scaleY(${1 + 0.1 * k})` : ''
+    }
+    for (const el of lines) {
+      const x1 = Number(el.getAttribute('x1'))
+      const x2 = Number(el.getAttribute('x2'))
+      const y = Number(el.getAttribute('y1'))
+      let k = 0
+      if (point) {
+        const dx = point.x < x1 ? x1 - point.x : point.x > x2 ? point.x - x2 : 0
+        k = Math.max(0, 1 - Math.hypot(dx, point.y - y) / 26)
+      }
+      el.style.transform = k > 0.01 ? `scaleX(${1 + 0.12 * k})` : ''
     }
     for (const el of people) {
       const near =

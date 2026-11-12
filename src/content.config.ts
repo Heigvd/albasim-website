@@ -153,10 +153,21 @@ const news = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      /** Only the month and year are shown. */
       date: z.coerce.date(),
       image: image(),
       /** Leave empty when the image is only decorative. */
       imageAlt: z.string().default(''),
+      /** `contain` shows the whole image, e.g. a logo, instead of filling the frame. */
+      imageFit: z.enum(['cover', 'contain']).default('cover'),
+      /** Color or gradient behind an image shown whole, e.g. "#F2F2F2". */
+      imageBackground: z.string().optional(),
+      /** Part of the image kept in the frame, e.g. "center top" or "center 30%". */
+      imagePosition: z.string().optional(),
+      /** Space around an image shown whole, in pixels. */
+      imagePadding: z.number().optional(),
+      /** Links under the text, e.g. to the article or a video. */
+      links: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
     }),
 })
 
@@ -271,6 +282,21 @@ const teamPage = defineCollection({
   }),
 })
 
+// The news page, one file per language (`fr.md`, `en.md`). The body is the introduction under
+// the title. The news come from the `news` collection.
+const newsPage = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/news-page' }),
+  schema: z.object({
+    /** Title of the browser tab and of search results. */
+    title: z.string(),
+    /** Text shown by search engines under the page title. */
+    description: z.string(),
+    heading: z.string(),
+    /** Description of the illustration next to the title, for screen readers. */
+    illustrationAlt: z.string(),
+  }),
+})
+
 export const collections = {
   footer,
   home,
@@ -281,4 +307,5 @@ export const collections = {
   publicationsPage,
   people,
   teamPage,
+  newsPage,
 }

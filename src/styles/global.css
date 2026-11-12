@@ -276,12 +276,57 @@ a:hover {
   transform-origin: center bottom;
 }
 
+[data-illustration] .write {
+  transform-box: fill-box;
+  transform-origin: left center;
+  transition: transform 0.25s ease-out;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+/* Before the first play, the shapes that appear stay hidden. */
+[data-illustration][data-ready]:not([data-played]) .rise {
+  opacity: 0;
+}
+
+[data-illustration][data-ready]:not([data-played]) .write {
+  stroke-dashoffset: 1;
+}
+
 [data-illustration][data-playing] .wiggle {
   animation: illustration-wiggle 1s ease-in-out both;
 }
 
 [data-illustration][data-playing] .bar {
   animation: illustration-stretch 1.25s ease-in-out both;
+}
+
+[data-illustration][data-playing] .rise {
+  animation: illustration-rise 0.5s ease-out both;
+}
+
+[data-illustration][data-playing] .write {
+  animation: illustration-write 0.4s ease-out both;
+}
+
+@keyframes illustration-rise {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes illustration-write {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 
 @keyframes illustration-wiggle {
@@ -316,7 +361,9 @@ a:hover {
 
 @media (prefers-reduced-motion: reduce) {
   [data-illustration][data-playing] .wiggle,
-  [data-illustration][data-playing] .bar {
+  [data-illustration][data-playing] .bar,
+  [data-illustration][data-playing] .rise,
+  [data-illustration][data-playing] .write {
     animation: none;
   }
 }

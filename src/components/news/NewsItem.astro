@@ -1,0 +1,252 @@
+---
+// One news item: image, month, title, text and links. A long text is cut to the height of the
+// image, with a button to show it all; clicking anywhere on the item does the same (see the
+// script in NewsList.astro).
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import ArrowLink from '../ArrowLink.astro'
+import Icon from '../Icon.astro'
+import { useTranslations, type Lang } from '../../i18n/ui'
+import { openExternalLinksInNewTab } from '../../utils/links'
+import { newsAnchor } from '../../utils/news'
+
+interface Props {
+  entry: CollectionEntry<'news'>
+  lang: Lang
+}
+
+const { entry, lang } = Astro.props
+const t = useTranslations(lang)
+const data = entry.data
+const id = newsAnchor(entry)
+const month = new Intl.DateTimeFormat(lang, { month: 'long', year: 'numeric', timeZone: 'UTC' })
+const text = entry.rendered?.html
+  ? openExternalLinksInNewTab(entry.rendered.html, t('link.newTab'))
+  : ''
+const mediaStyle = {
+  background: data.imageBackground,
+  padding: data.imagePadding !== undefined ? `${data.imagePadding}px` : undefined,
+}
+---
+
+<article class="news-item" id={id} aria-labelledby={`${id}-title`}>
+  <div class="media" style={mediaStyle}>
+    <Image
+      src={data.image}
+      alt={data.imageAlt}
+      widths={[320, 640]}
+      sizes="(max-width: 760px) 100vw, 320px"
+      class:list={['image', data.imageFit]}
+      style={data.imagePosition ? { objectPosition: data.imagePosition } : undefined}
+    />
+  </div>
+  <div class="body">
+    <time class="date t-tag" datetime={data.date.toISOString().slice(0, 7)}>
+      {month.format(data.date)}
+    </time>
+    <h3 class="title" id={`${id}-title`}>
+      {data.title}
+    </h3>
+    {text && (
+      <>
+        <div class="text-wrap">
+          <div class="text" id={`${id}-text`} data-news-text set:html={text} />
+        </div>
+        <button
+          type="button"
+          class="toggle t-link"
+          aria-expanded="false"
+          aria-controls={`${id}-text`}
+          data-news-toggle
+          hidden
+        >
+          <span class="more">{t('card.readMore')}</span>
+          <span class="less">{t('news.readLess')}</span>
+          <Icon name="chevron" width={16} strokeWidth={2} class="chevron" />
+          <span class="sr-only">: {data.title}</span>
+        </button>
+      </>
+    )}
+    {data.links.length > 0 && (
+      <ul class="links">
+        {data.links.map((link) => (
+          <li>
+            <ArrowLink href={link.url} kind="external" lang={lang} class="t-link">
+              {link.label}
+            </ArrowLink>
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+</article>
+
+<style>
+  .news-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .media {
+    flex: 0 0 320px;
+    width: 320px;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    border-radius: var(--radius-card);
+  }
+
+  .image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .image.contain {
+    object-fit: contain;
+  }
+
+  .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .date {
+    color: var(--color-text-muted);
+  }
+
+  .title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .text :global(p) {
+    margin: 0;
+  }
+
+  .text :global(p + p) {
+    margin-top: 0.8em;
+  }
+
+  .text :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Cut text: the end of its last line fades out, followed by an ellipsis. */
+  .text.clamped:not(.open) {
+    overflow: hidden;
+    mask-image: linear-gradient(#000, #000), linear-gradient(90deg, #000 30%, transparent 68%);
+    mask-size:
+      100% calc(100% - 1.6em),
+      100% 1.6em;
+    mask-position: top, bottom;
+    mask-repeat: no-repeat;
+  }
+
+  .text-wrap {
+    position: relative;
+  }
+
+  .text-wrap:has(.clamped:not(.open))::after {
+    content: '…';
+    position: absolute;
+    bottom: 0;
+    left: 66%;
+    color: var(--color-text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+    pointer-events: none;
+    transition: color 0.2s ease;
+  }
+
+  .news-item:hover .text-wrap::after {
+    color: var(--color-primary-text);
+    font-weight: 700;
+  }
+
+  /* Clicking the item opens and closes its text, so it gets the hand cursor. */
+  .news-item:has(.clamped) {
+    cursor: pointer;
+  }
+
+  .news-item:has(.clamped) :is(a, button) {
+    cursor: pointer;
+  }
+
+  /* The button is only shown when focused with the keyboard: with a mouse or a finger, the
+     whole item opens the text, as in the design. */
+  .toggle {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-ink);
+    font: inherit;
+  }
+
+  .toggle:not(:focus-visible) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .toggle[hidden] {
+    display: none;
+  }
+
+  .toggle .less,
+  .toggle[aria-expanded='true'] .more {
+    display: none;
+  }
+
+  .toggle[aria-expanded='true'] .less {
+    display: inline;
+  }
+
+  .toggle[aria-expanded='true'] :global(.chevron) {
+    transform: rotate(180deg);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    margin: 0;
+    padding: 4px 0 0;
+    list-style: none;
+  }
+
+  @media (max-width: 760px) {
+    .news-item {
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .media {
+      flex-basis: auto;
+      width: 100%;
+    }
+  }
+</style>
