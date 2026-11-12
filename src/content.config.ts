@@ -327,6 +327,59 @@ const contact = defineCollection({
   }),
 })
 
+// The ready-to-use serious games, one folder per language (`en/`, `fr/`), one file per game.
+// The file name is the address of the game's page, e.g. `/serious-games/pm-game`.
+const games = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './content/games' }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      /** Field of the game, e.g. "Project management". */
+      domain: z.string(),
+      /** Languages the game is available in. */
+      languages: z.array(z.enum(['en', 'fr'])),
+      summary: z.string(),
+      /** The two strong points shown on the card. */
+      highlights: z.array(z.object({ title: z.string(), text: z.string() })),
+      /** How to get the game, e.g. "Available under licence." */
+      access: z.string(),
+      image: image(),
+      imageAlt: z.string(),
+      /** Position in the list: the smallest number comes first. */
+      order: z.number(),
+    }),
+})
+
+// The serious games page, one file per language (`fr.md`, `en.md`). The body is the
+// introduction under the title. The games come from the `games` collection.
+const gamesPage = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/games-page' }),
+  schema: ({ image }) =>
+    z.object({
+      /** Title of the browser tab and of search results. */
+      title: z.string(),
+      /** Text shown by search engines under the page title. */
+      description: z.string(),
+      heading: z.string(),
+      /** Illustration next to the title: its description and the words under it. */
+      illustration: z.object({ alt: z.string(), research: z.string(), practice: z.string() }),
+      gamesHeading: z.string(),
+      /** Logos of the organizations using the games. */
+      users: z.object({
+        heading: z.string(),
+        list: z.array(
+          z.object({
+            name: z.string(),
+            logo: image(),
+            /** Height of the logo on the page, in pixels. */
+            height: z.number(),
+          }),
+        ),
+      }),
+      collaborate: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+    }),
+})
+
 export const collections = {
   footer,
   home,
@@ -339,4 +392,6 @@ export const collections = {
   teamPage,
   newsPage,
   contact,
+  games,
+  gamesPage,
 }
