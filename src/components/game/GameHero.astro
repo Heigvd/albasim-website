@@ -1,0 +1,178 @@
+---
+// Top of a game page: the game's photo under a dark red gradient, a breadcrumb back to the
+// serious games, the name of the game, its introduction and its buttons: to play the game online
+// (when it can be), to the contact page, down to the trainer resources and to the research
+// project the game comes from (when there are some).
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import Button from '../Button.astro'
+import { localizedPath, projectPath, useTranslations, type Lang } from '../../i18n/ui'
+import type { GamePage } from '../../utils/games'
+
+type Props = GamePage['hero'] & {
+  play?: GamePage['play']
+  name: string
+  image: ImageMetadata
+  imageAlt: string
+  lang: Lang
+}
+
+const { name, image, imageAlt, lead, contactButton, resourcesButton, researchButton, play, lang } =
+  Astro.props
+const t = useTranslations(lang)
+---
+
+<section class="hero">
+  <Image
+    src={image}
+    alt={imageAlt}
+    widths={[800, 1400]}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    class="photo"
+  />
+  <nav class="container breadcrumb" aria-label={t('breadcrumb.label')}>
+    <ol>
+      <li>
+        <a href={localizedPath('games', lang)}>{t('nav.games')}</a>
+      </li>
+      <li>
+        <span aria-current="page">{name}</span>
+      </li>
+    </ol>
+  </nav>
+  <div class="container inner">
+    <div class="text">
+      <h1 class="t-h1 title">{name}</h1>
+      <p class="t-lead">{lead}</p>
+      <div class="buttons">
+        {play && (
+          <Button href={play.url} external>
+            {play.label}
+            <span class="sr-only">{t('link.newTab')}</span>
+          </Button>
+        )}
+        <Button href={localizedPath('contact', lang)} variant={play ? 'secondary' : 'primary'}>
+          {contactButton}
+        </Button>
+        {resourcesButton && (
+          <Button href="#trainer-resources" variant="secondary" arrow="down">
+            {resourcesButton}
+          </Button>
+        )}
+        {researchButton && (
+          <Button href={projectPath(researchButton.project, lang)} variant="secondary">
+            {researchButton.label}
+          </Button>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 520px;
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Dark red gradient over the photo, so that the text stays readable */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--color-primary-dark) 92%, transparent) 0%,
+      color-mix(in srgb, var(--color-primary-dark) 70%, transparent) 55%,
+      transparent 100%
+    );
+  }
+
+  .breadcrumb,
+  .inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .breadcrumb {
+    padding-top: 28px;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .breadcrumb li + li::before {
+    content: '/' / '';
+    margin-right: 10px;
+  }
+
+  .breadcrumb a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .breadcrumb a:hover {
+    color: inherit;
+    text-decoration-thickness: 2px;
+  }
+
+  .breadcrumb a:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .inner {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding-block: 32px 81px;
+  }
+
+  .text {
+    max-width: 620px;
+  }
+
+  .title {
+    margin: 0 0 24px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+    margin-top: 32px;
+  }
+
+  @media (max-width: 680px) {
+    .hero {
+      min-height: 0;
+    }
+
+    .inner {
+      padding-block: 40px 56px;
+    }
+  }
+</style>

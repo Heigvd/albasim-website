@@ -1,0 +1,400 @@
+---
+// "Screenshots" of a game: a row of captioned screenshots that scrolls sideways, with a thin bar
+// that shows the position and can be clicked or dragged. A screenshot opens larger in a dialog,
+// where the arrow keys or buttons go to the previous and next ones and Escape closes it.
+import { Image, getImage } from 'astro:assets'
+import SectionHeading from '../SectionHeading.astro'
+import { useTranslations, type Lang } from '../../i18n/ui'
+import type { GamePage } from '../../utils/games'
+
+type Props = NonNullable<GamePage['screenshots']> & { lang: Lang }
+
+const { eyebrow, items, lang } = Astro.props
+const t = useTranslations(lang)
+
+// Large version of each screenshot, for the dialog.
+const large = await Promise.all(
+  items.map((item) => getImage({ src: item.image, width: 1600, format: 'webp' })),
+)
+---
+
+<section aria-labelledby="screenshots-heading" data-screenshots>
+  <div class="container inner">
+    <SectionHeading eyebrow={eyebrow} id="screenshots-heading" class="heading" />
+    <div class="scroller">
+      <ul class="shots" tabindex="0" aria-labelledby="screenshots-heading" data-shots>
+        {items.map((item, i) => (
+          <li>
+            <figure>
+              <button
+                type="button"
+                class="open"
+                data-index={i}
+                data-src={large[i].src}
+                data-alt={item.alt}
+                data-title={item.title}
+              >
+                <Image
+                  src={item.image}
+                  alt=""
+                  widths={[560, 1120]}
+                  sizes="(max-width: 660px) 85vw, 560px"
+                  class="shot"
+                />
+                <span class="sr-only">{t('game.enlarge').replace('{title}', item.title)}</span>
+              </button>
+              <figcaption>
+                <span class="t-btn caption-title">{item.title}</span>
+                <span class="t-small caption-text">{item.text}</span>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+      <div class="bar" aria-hidden="true" data-bar>
+        <span class="thumb" data-thumb></span>
+      </div>
+    </div>
+  </div>
+
+  <dialog class="lightbox" data-lightbox data-position={t('game.position')}>
+    <figure class="lightbox-figure">
+      <img class="lightbox-image" src="" alt="" data-lightbox-image />
+      <figcaption class="lightbox-caption" data-lightbox-caption></figcaption>
+    </figure>
+    <button type="button" class="lightbox-button close" data-lightbox-close>
+      <span aria-hidden="true">×</span>
+      <span class="sr-only">{t('game.close')}</span>
+    </button>
+    {items.length > 1 && (
+      <>
+        <button type="button" class="lightbox-button previous" data-lightbox-step="-1">
+          <span aria-hidden="true">‹</span>
+          <span class="sr-only">{t('game.previous')}</span>
+        </button>
+        <button type="button" class="lightbox-button next" data-lightbox-step="1">
+          <span aria-hidden="true">›</span>
+          <span class="sr-only">{t('game.next')}</span>
+        </button>
+      </>
+    )}
+  </dialog>
+</section>
+
+<style>
+  .inner {
+    padding-block: 40px 56px;
+  }
+
+  .heading {
+    margin-bottom: 12px;
+  }
+
+  .shots {
+    display: flex;
+    gap: 24px;
+    margin: 0;
+    padding: 16px 0 4px;
+    overflow-x: auto;
+    list-style: none;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .shots::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Positioned, so that the hidden screen reader texts stay inside the scrolling row instead of
+     widening the page. */
+  .shots li {
+    position: relative;
+    flex: 0 0 min(560px, 85%);
+    scroll-snap-align: start;
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  .open {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-card);
+    background: none;
+    cursor: zoom-in;
+  }
+
+  .shot {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top left;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  figcaption {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 12px;
+  }
+
+  .caption-text {
+    color: var(--color-text-muted);
+  }
+
+  /* Position bar: a thin gray line with an ink thumb, red while the row is hovered. */
+  .bar {
+    position: relative;
+    height: 16px;
+    margin: 6px 0 4px;
+    cursor: pointer;
+    touch-action: none;
+  }
+
+  .bar[hidden] {
+    display: none;
+  }
+
+  .bar::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    right: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--color-line);
+  }
+
+  .thumb {
+    position: absolute;
+    top: 6.5px;
+    left: 0;
+    width: 30%;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--color-ink);
+    transition:
+      background-color 0.3s ease,
+      height 0.2s ease,
+      top 0.2s ease;
+  }
+
+  .scroller:hover .thumb {
+    background: var(--color-primary);
+  }
+
+  .bar:hover .thumb {
+    top: 5px;
+    height: 6px;
+  }
+
+  /* Dialog with a large screenshot */
+  .lightbox {
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    max-height: none;
+    margin: 0;
+    padding: 56px 80px;
+    border: 0;
+    background: rgb(14 15 22 / 92%);
+    color: var(--color-white);
+    cursor: zoom-out;
+  }
+
+  .lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox::backdrop {
+    background: transparent;
+  }
+
+  /* The page stays still behind the dialog. */
+  :global(html:has(.lightbox[open])) {
+    overflow: hidden;
+  }
+
+  .lightbox-figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .lightbox-image {
+    max-width: 100%;
+    max-height: calc(100vh - 150px);
+    object-fit: contain;
+    border-radius: 8px;
+    background: var(--color-white);
+    box-shadow: 0 20px 60px rgb(0 0 0 / 50%);
+    cursor: default;
+  }
+
+  .lightbox-caption {
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .lightbox-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 12%);
+    color: var(--color-white);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .lightbox-button:hover {
+    background: rgb(255 255 255 / 26%);
+  }
+
+  .lightbox-button:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .close {
+    top: 16px;
+    right: 16px;
+  }
+
+  .previous,
+  .next {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .previous {
+    left: 16px;
+  }
+
+  .next {
+    right: 16px;
+  }
+
+  @media (max-width: 640px) {
+    .lightbox {
+      padding: 72px 12px;
+    }
+
+    .previous,
+    .next {
+      top: auto;
+      bottom: 14px;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .thumb {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-screenshots]')) {
+    const shots = root.querySelector<HTMLElement>('[data-shots]')
+    const bar = root.querySelector<HTMLElement>('[data-bar]')
+    const thumb = root.querySelector<HTMLElement>('[data-thumb]')
+    if (!shots || !bar || !thumb) continue
+
+    // Position bar: its thumb follows the scrolling; clicking or dragging on it scrolls.
+    const update = () => {
+      const max = shots.scrollWidth - shots.clientWidth
+      bar.hidden = max <= 2
+      const ratio = Math.min(1, shots.clientWidth / Math.max(1, shots.scrollWidth))
+      thumb.style.width = `${ratio * 100}%`
+      thumb.style.left = `${max > 0 ? (shots.scrollLeft / max) * (1 - ratio) * 100 : 0}%`
+    }
+    shots.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    update()
+
+    const scrollTo = (event: PointerEvent) => {
+      const rect = bar.getBoundingClientRect()
+      const position = Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width))
+      shots.scrollLeft = position * (shots.scrollWidth - shots.clientWidth)
+    }
+    bar.addEventListener('pointerdown', (event) => {
+      event.preventDefault()
+      bar.setPointerCapture(event.pointerId)
+      // Without snapping while dragging, so that the row follows the pointer.
+      shots.style.scrollSnapType = 'none'
+      scrollTo(event)
+      const move = (moveEvent: PointerEvent) => scrollTo(moveEvent)
+      const end = () => {
+        shots.style.scrollSnapType = ''
+        bar.removeEventListener('pointermove', move)
+      }
+      bar.addEventListener('pointermove', move)
+      bar.addEventListener('pointerup', end, { once: true })
+      bar.addEventListener('pointercancel', end, { once: true })
+    })
+
+    // Dialog with the large screenshots
+    const dialog = root.querySelector<HTMLDialogElement>('[data-lightbox]')
+    const image = root.querySelector<HTMLImageElement>('[data-lightbox-image]')
+    const caption = root.querySelector<HTMLElement>('[data-lightbox-caption]')
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('button[data-index]')]
+    if (!dialog || !image || !caption) continue
+    const positionLabel = dialog.dataset.position ?? '{index} / {count}'
+    let current = 0
+    let opener: HTMLButtonElement | null = null
+
+    const show = (index: number) => {
+      current = (index + buttons.length) % buttons.length
+      const button = buttons[current]
+      image.src = button.dataset.src ?? ''
+      image.alt = button.dataset.alt ?? ''
+      const position =
+        buttons.length > 1
+          ? `  ·  ${positionLabel.replace('{index}', String(current + 1)).replace('{count}', String(buttons.length))}`
+          : ''
+      caption.textContent = `${button.dataset.title ?? ''}${position}`
+    }
+
+    for (const button of buttons) {
+      button.addEventListener('click', () => {
+        opener = button
+        show(Number(button.dataset.index))
+        dialog.showModal()
+      })
+    }
+    for (const step of dialog.querySelectorAll<HTMLButtonElement>('[data-lightbox-step]')) {
+      step.addEventListener('click', () => show(current + Number(step.dataset.lightboxStep)))
+    }
+    dialog.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close())
+    dialog.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') show(current - 1)
+      if (event.key === 'ArrowRight') show(current + 1)
+    })
+    // A click outside the image and the buttons closes the dialog.
+    dialog.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement
+      if (target !== image && !target.closest('button')) dialog.close()
+    })
+    dialog.addEventListener('close', () => opener?.focus())
+  }
+</script>

@@ -1,17 +1,21 @@
 ---
 // Call to action at the bottom of most pages, on a red band, with a button to
-// the contact page.
+// the contact page. With `play`, a white button to play a game online comes first and the
+// contact button becomes an outline one.
 import Button from './Button.astro'
-import { localizedPath, type Lang } from '../i18n/ui'
+import { localizedPath, useTranslations, type Lang } from '../i18n/ui'
 
 interface Props {
   title: string
   text: string
   button: string
+  /** Link to play a game online, opened in a new tab. */
+  play?: { label: string; url: string }
   lang: Lang
 }
 
-const { title, text, button, lang } = Astro.props
+const { title, text, button, play, lang } = Astro.props
+const t = useTranslations(lang)
 ---
 
 <section class="collaborate">
@@ -19,9 +23,21 @@ const { title, text, button, lang } = Astro.props
     <h2 class="title t-h2">{title}</h2>
     <div>
       <p class="text t-lead">{text}</p>
-      <Button href={localizedPath('contact', lang)} variant="on-accent" arrow>
-        {button}
-      </Button>
+      <div class="buttons">
+        {play && (
+          <Button href={play.url} variant="on-accent" external arrow>
+            {play.label}
+            <span class="sr-only">{t('link.newTab')}</span>
+          </Button>
+        )}
+        <Button
+          href={localizedPath('contact', lang)}
+          variant={play ? 'secondary' : 'on-accent'}
+          arrow
+        >
+          {button}
+        </Button>
+      </div>
     </div>
   </div>
 </section>
@@ -56,6 +72,12 @@ const { title, text, button, lang } = Astro.props
 
   .text {
     margin: 0 0 28px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
   }
 
   @media (max-width: 820px) {

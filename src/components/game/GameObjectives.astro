@@ -1,0 +1,120 @@
+---
+// "Objectives" of a game, on a light pink band: the skills developed, numbered, in two columns.
+// A single list reads top to bottom on wide screens; with groups, each group is a column with
+// its own heading, and the numbers run on from one group to the next.
+import SectionHeading from '../SectionHeading.astro'
+import type { GamePage } from '../../utils/games'
+
+type Props = GamePage['objectives']
+
+const { eyebrow, heading, items, groups } = Astro.props
+
+// Number of each group's first item.
+const starts = (groups ?? []).map((_, i, all) =>
+  all.slice(0, i).reduce((count, group) => count + group.items.length, 1),
+)
+const number = (n: number) => String(n).padStart(2, '0')
+---
+
+<section class="objectives" aria-labelledby="objectives-heading">
+  <div class="container inner">
+    <SectionHeading eyebrow={eyebrow} title={heading} id="objectives-heading" class="heading" />
+    {items && (
+      <ol class="list" style={{ '--rows': Math.ceil(items.length / 2) }}>
+        {items.map((item, i) => (
+          <li>
+            <span class="number t-value" aria-hidden="true">
+              {number(i + 1)}
+            </span>
+            <span class="t-body">{item}</span>
+          </li>
+        ))}
+      </ol>
+    )}
+    {groups && (
+      <div class="groups">
+        {groups.map((group, g) => (
+          <div>
+            <h3 class="t-label group-heading">{group.heading}</h3>
+            <ol class="group-list" start={starts[g]}>
+              {group.items.map((item, i) => (
+                <li>
+                  <span class="number t-value" aria-hidden="true">
+                    {number(starts[g] + i)}
+                  </span>
+                  <span class="t-body">{item}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .objectives {
+    background: var(--color-tint);
+  }
+
+  .inner {
+    padding-block: 64px 96px;
+  }
+
+  .heading {
+    margin-bottom: 32px;
+  }
+
+  .heading :global(.title) {
+    margin-top: 28px;
+  }
+
+  .list {
+    display: grid;
+    grid-template-rows: repeat(var(--rows), auto);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: column;
+    gap: 0 56px;
+  }
+
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 56px;
+    align-items: start;
+  }
+
+  .group-heading {
+    margin: 0 0 8px;
+  }
+
+  .list,
+  .group-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .list li,
+  .group-list li {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .number {
+    color: var(--color-primary-text);
+  }
+
+  @media (max-width: 820px) {
+    .list,
+    .groups {
+      grid-template-rows: none;
+      grid-template-columns: minmax(0, 1fr);
+      grid-auto-flow: row;
+    }
+  }
+</style>

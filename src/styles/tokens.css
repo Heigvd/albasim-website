@@ -12,6 +12,7 @@
   --color-accent-block: #e22118;
   --color-on-accent-line: rgb(255 255 255 / 35%);
   --color-tint: #fff2f1; /* light pink: flat backgrounds and row hovers */
+  --color-primary-dark: #b31a13; /* the red mixed with 30% black: overlay of the game heroes */
 
   /* Neutrals */
   --color-ink: #1a1c2b;

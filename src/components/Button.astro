@@ -13,8 +13,8 @@ interface Props {
   type?: 'button' | 'submit'
   variant?: 'primary' | 'on-accent' | 'on-tint' | 'secondary'
   tone?: 'light' | 'dark'
-  /** Shows the arrow that slides forward on hover. */
-  arrow?: boolean
+  /** Shows the arrow that slides forward on hover; `down` for a link to a section below. */
+  arrow?: boolean | 'down'
   /** Opens another site in a new tab, with a ↗ arrow. Add a screen reader mention in the label. */
   external?: boolean
   class?: string
@@ -45,6 +45,8 @@ const Tag = href ? 'a' : 'button'
   {arrow &&
     (external ? (
       <Icon name="external" width={18} strokeWidth={1.6} class="arrow external" />
+    ) : arrow === 'down' ? (
+      <Icon name="arrow-down" width={13} height={18} class="arrow down" />
     ) : (
       <Icon name="arrow-long" width={28} height={18} class="arrow" />
     ))}
@@ -72,6 +74,11 @@ const Tag = href ? 'a' : 'button'
   .button:hover .arrow,
   .button:focus-visible .arrow {
     transform: translateX(6px);
+  }
+
+  .button:hover .down,
+  .button:focus-visible .down {
+    transform: translateY(4px);
   }
 
   .button:hover .external,
