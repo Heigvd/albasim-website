@@ -51,6 +51,7 @@ Before every commit, run `npm run format`, then `npm run check` and `npm run bui
 | `src/assets/`           | Images used by pages and components, optimized by Astro                       |
 | `public/`               | Files served unchanged at the site root (favicon, `robots.txt`)               |
 | `design/`               | Design reference material. Never imported, built or published                 |
+| `relecture/`            | Text review files of the `/relecture` skill. Ignored by Git, never committed  |
 
 ## Conventions
 

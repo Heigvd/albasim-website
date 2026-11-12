@@ -23,3 +23,6 @@ npm-debug.log*
 
 # Claude Code personal settings
 .claude/settings.local.json
+
+# Text review files from the /relecture skill
+/relecture/
