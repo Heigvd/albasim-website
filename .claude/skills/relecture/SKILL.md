@@ -105,8 +105,8 @@ When the user says the file is ready:
 
 On the user's go-ahead, follow `CLAUDE.md`:
 
-- commit only the content files, with a message such as `Revise the research page texts in French
-and English`;
+- commit only the content files, with a message such as
+  `Revise the research page texts in French and English`;
 - push the branch and open a pull request into `dev`, describing the changes section by section and
   how to check them (the routes in both languages);
 - stop there: a human reviews and merges.
