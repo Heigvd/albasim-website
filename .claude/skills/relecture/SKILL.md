@@ -32,7 +32,13 @@ page` → `footer`). If it is missing or ambiguous, ask.
 3. Generate the review file from the **current** content (see the format below), copy it to
    `.<page>.orig.txt`, and check that every `FR :` and `EN :` text appears exactly in its source file.
 4. Send the file to the user with SendUserFile, give its full path, and explain briefly how to edit
-   it. Then stop and wait for "c'est prêt".
+   it.
+5. Start the dev server if it is not running (`npx astro dev --background`) and remind the user of
+   the local address of the page, so they can see it while they edit: the French route from
+   `src/i18n/ui.ts` on `http://localhost:4321` (for example `http://localhost:4321/fr/recherche`;
+   the French home page is `http://localhost:4321/fr/`). Offer to open the page in the browser pane
+   inside Claude, as a button in the wrap-up, and open it if they accept. Then stop and wait for
+   "c'est prêt".
 
 ## 2. File format
 
