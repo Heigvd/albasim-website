@@ -14,6 +14,7 @@ import Missions from './Missions.astro'
 import WegasSection from './WegasSection.astro'
 import { localizedPath, projectPath, useTranslations, type Lang } from '../../i18n/ui'
 import { publicationCardProps } from '../../utils/publications'
+import { newsAnchor, sortNews } from '../../utils/news'
 
 interface Props {
   lang: Lang
@@ -28,9 +29,10 @@ const { Content } = await render(home)
 const data = home.data
 
 // The three most recent news items in this language.
-const news = (await getCollection('news', ({ id }) => id.startsWith(`${lang}/`)))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3)
+const news = sortNews(await getCollection('news', ({ id }) => id.startsWith(`${lang}/`))).slice(
+  0,
+  3,
+)
 
 const projects = await Promise.all(
   data.projects.featured.map(async (id) => {
@@ -66,7 +68,7 @@ const publications = await Promise.all(
   >
     {news.map((item) => (
       <NewsCard
-        href={localizedPath('news', lang)}
+        href={`${localizedPath('news', lang)}#${newsAnchor(item)}`}
         title={item.data.title}
         date={item.data.date}
         image={item.data.image}

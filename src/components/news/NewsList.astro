@@ -1,0 +1,127 @@
+---
+// All the news, grouped by year (newest first). Long texts are cut to the height of their image
+// and open on demand; without JavaScript, they show in full.
+import type { CollectionEntry } from 'astro:content'
+import NewsItem from './NewsItem.astro'
+import type { Lang } from '../../i18n/ui'
+import { sortNews } from '../../utils/news'
+
+interface Props {
+  news: CollectionEntry<'news'>[]
+  lang: Lang
+}
+
+const { news, lang } = Astro.props
+const sorted = sortNews(news)
+const years = [...new Set(sorted.map((entry) => entry.data.date.getUTCFullYear()))].map((year) => ({
+  year,
+  entries: sorted.filter((entry) => entry.data.date.getUTCFullYear() === year),
+}))
+---
+
+<div class="container inner">
+  {years.map(({ year, entries }) => (
+    <section class="year-group" aria-labelledby={`year-${year}`}>
+      <h2 id={`year-${year}`} class="year">
+        {year}
+      </h2>
+      {entries.map((entry) => (
+        <NewsItem entry={entry} lang={lang} />
+      ))}
+    </section>
+  ))}
+</div>
+
+<style>
+  .inner {
+    padding-block: 32px 120px;
+  }
+
+  .year {
+    margin: 72px 0 28px;
+    padding-top: 16px;
+    border-top: 2px solid var(--color-ink);
+    font-size: clamp(30px, 3.6vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .year-group:first-child .year {
+    margin-top: 0;
+  }
+
+  /* The first item of a year sits closer to the year. */
+  .year-group :global(.news-item:nth-child(2)) {
+    padding-top: 4px;
+  }
+</style>
+
+<script>
+  // Cut each long text to the height of its image (6 lines when the image is above the text),
+  // and open or close it with its button or a click anywhere on the item.
+  const MIN_LINES = 2
+  const STACKED_LINES = 6
+
+  const items = [...document.querySelectorAll<HTMLElement>('.news-item')].flatMap((item) => {
+    const text = item.querySelector<HTMLElement>('[data-news-text]')
+    const toggle = item.querySelector<HTMLButtonElement>('[data-news-toggle]')
+    const media = item.querySelector<HTMLElement>('.media')
+    return text && toggle && media ? [{ item, text, toggle, media }] : []
+  })
+
+  const fit = () => {
+    for (const { item, text, toggle, media } of items) {
+      if (text.classList.contains('open')) continue
+      text.style.maxHeight = ''
+      const lineHeight = parseFloat(getComputedStyle(text).lineHeight) || 25.6
+      const sideBySide = getComputedStyle(item).flexDirection === 'row'
+      const lines = sideBySide
+        ? Math.max(
+            MIN_LINES,
+            Math.floor(
+              (media.getBoundingClientRect().bottom - text.getBoundingClientRect().top) /
+                lineHeight +
+                0.1,
+            ),
+          )
+        : STACKED_LINES
+      // Not worth cutting a text that is only a line or two longer.
+      const cut = text.scrollHeight > (lines + 1.5) * lineHeight
+      text.classList.toggle('clamped', cut)
+      text.style.maxHeight = cut ? `${lines * lineHeight}px` : ''
+      toggle.hidden = !cut
+    }
+  }
+
+  const setOpen = (entry: (typeof items)[number], open: boolean) => {
+    entry.text.classList.toggle('open', open)
+    entry.text.style.maxHeight = open ? '' : entry.text.style.maxHeight
+    entry.toggle.setAttribute('aria-expanded', String(open))
+    if (!open) fit()
+  }
+
+  for (const entry of items) {
+    entry.toggle.addEventListener('click', () => {
+      setOpen(entry, entry.toggle.getAttribute('aria-expanded') !== 'true')
+    })
+    entry.item.addEventListener('click', (event) => {
+      if (!entry.text.classList.contains('clamped')) return
+      if ((event.target as Element).closest('a, button')) return
+      // Leave text being selected alone.
+      if (window.getSelection()?.toString()) return
+      setOpen(entry, !entry.text.classList.contains('open'))
+    })
+  }
+
+  let frame = 0
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(frame)
+    frame = requestAnimationFrame(fit)
+  })
+  fit()
+  document.fonts?.ready.then(fit)
+  for (const img of document.querySelectorAll<HTMLImageElement>('.news-item img')) {
+    if (!img.complete) img.addEventListener('load', fit, { once: true })
+  }
+</script>
