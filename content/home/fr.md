@@ -74,6 +74,6 @@ collaborate:
   button: Contactez-nous
 ---
 
-Nous étudions comment les serious games et les simulations peuvent aider les apprenants à transformer leurs connaissances en capacité à **agir et décider** dans des situations complexes.
+Nous étudions comment les serious games et les simulations peuvent aider les apprenants à transformer leurs connaissances en capacité à **agir et décider** dans des situations pratiques complexes.
 
 AlbaSim est un groupe de recherche de la HEIG-VD.
