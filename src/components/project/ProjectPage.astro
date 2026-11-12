@@ -1,0 +1,103 @@
+---
+// The page of a research project, shared by all projects and both languages. Its content comes
+// from the `page` part of `content/projects/<lang>/<id>.md`; the Markdown body is the text of the
+// "Overview" section. Each project has its own illustration, listed in `illustrations` below.
+import { getEntry, render, type CollectionEntry } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Collaborate from '../Collaborate.astro'
+import ColabIllustration from './illustrations/ColabIllustration.astro'
+import EmergencyTriageIllustration from './illustrations/EmergencyTriageIllustration.astro'
+import InquiryPlatformIllustration from './illustrations/InquiryPlatformIllustration.astro'
+import MBenefitsIllustration from './illustrations/MBenefitsIllustration.astro'
+import MimmsIllustration from './illustrations/MimmsIllustration.astro'
+import PactIllustration from './illustrations/PactIllustration.astro'
+import PritsIllustration from './illustrations/PritsIllustration.astro'
+import SeriousGamesHigherEducationIllustration from './illustrations/SeriousGamesHigherEducationIllustration.astro'
+import ProjectApproach from './ProjectApproach.astro'
+import ProjectFindings from './ProjectFindings.astro'
+import ProjectGlance from './ProjectGlance.astro'
+import ProjectHero from './ProjectHero.astro'
+import ProjectOutcomes from './ProjectOutcomes.astro'
+import ProjectOverview from './ProjectOverview.astro'
+import ProjectPartners from './ProjectPartners.astro'
+import ProjectPractice from './ProjectPractice.astro'
+import ProjectResources from './ProjectResources.astro'
+import { projectPath, type Lang } from '../../i18n/ui'
+
+interface Props {
+  /** The project, with its `page`. */
+  project: CollectionEntry<'projects'>
+  lang: Lang
+}
+
+const { project, lang } = Astro.props
+const id = project.id.split('/').pop() ?? project.id
+const page = project.data.page
+if (!page) throw new Error(`The project ${project.id} has no page`)
+
+// The illustration of each project, by file name.
+const illustrations = {
+  colab: ColabIllustration,
+  'emergency-triage': EmergencyTriageIllustration,
+  'inquiry-platform': InquiryPlatformIllustration,
+  'm-benefits': MBenefitsIllustration,
+  mimms: MimmsIllustration,
+  pact: PactIllustration,
+  prits: PritsIllustration,
+  'serious-games-higher-education': SeriousGamesHigherEducationIllustration,
+}
+const Illustration = illustrations[id as keyof typeof illustrations]
+
+const { Content } = await render(project)
+const publications = await Promise.all(
+  page.resources.publications.map(async (publicationId) => {
+    const entry = await getEntry('publications', publicationId)
+    if (!entry) throw new Error(`Missing publication: content/publications/${publicationId}.md`)
+    return entry
+  }),
+)
+const alternates = { en: projectPath(id, 'en'), fr: projectPath(id, 'fr') }
+---
+
+<BaseLayout
+  title={`${project.data.title} | AlbaSim`}
+  description={project.data.summary}
+  alternates={alternates}
+>
+  <ProjectHero
+    title={project.data.title}
+    heading={page.heading}
+    lead={page.lead}
+    intro={page.intro}
+    button={page.button}
+    lang={lang}
+  >
+    {Illustration && (
+      <Illustration
+        slot="illustration"
+        label={page.illustration.alt}
+        labels={page.illustration.labels}
+      />
+    )}
+  </ProjectHero>
+
+  <ProjectGlance {...page.glance} />
+
+  <ProjectOverview {...page.overview}>
+    <Content />
+  </ProjectOverview>
+
+  <ProjectOutcomes {...page.outcomes} lang={lang} />
+
+  {page.approach && <ProjectApproach {...page.approach} />}
+
+  {page.practice && <ProjectPractice {...page.practice} lang={lang} />}
+
+  <ProjectFindings {...page.findings} lang={lang} />
+
+  <ProjectPartners {...page.partners} lang={lang} />
+
+  <ProjectResources {...page.resources} publications={publications} lang={lang} />
+
+  <Collaborate {...page.collaborate} lang={lang} />
+</BaseLayout>

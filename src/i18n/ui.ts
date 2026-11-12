@@ -51,6 +51,9 @@ export const ui = {
     'card.readMore': 'Lire la suite',
     'news.readLess': 'Réduire',
     'games.availableIn': 'Disponible en',
+    'breadcrumb.label': 'Fil d’Ariane',
+    'project.allProjects': 'Projets de recherche',
+    'project.readPaper': 'Lire l’article',
     'games.and': 'et',
     'language.en': 'anglais',
     'language.fr': 'français',
@@ -104,6 +107,9 @@ export const ui = {
     'card.readMore': 'Read more',
     'news.readLess': 'Read less',
     'games.availableIn': 'Available in',
+    'breadcrumb.label': 'Breadcrumb',
+    'project.allProjects': 'Research projects',
+    'project.readPaper': 'Read the paper',
     'games.and': 'and',
     'language.en': 'English',
     'language.fr': 'French',
@@ -149,9 +155,14 @@ export function localizedPath(key: RouteKey, lang: Lang): string {
   return routes[key][lang]
 }
 
-/** URL of a project page. The project pages themselves are not built yet. */
+/** URL of a project page. Only the projects with a `page` in their content have one. */
 export function projectPath(id: string, lang: Lang): string {
   return lang === 'fr' ? `/fr/projets/${id}` : `/projects/${id}`
+}
+
+/** URL of the page of a ready-to-use game, under the serious games page. */
+export function gamePath(id: string, lang: Lang): string {
+  return `${routes.games[lang]}/${id}`
 }
 
 function normalize(path: string): string {

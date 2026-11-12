@@ -276,6 +276,28 @@ a:hover {
   transform-origin: center bottom;
 }
 
+[data-illustration] .lift,
+[data-illustration] .land,
+[data-illustration] .drive,
+[data-illustration] .pop,
+[data-illustration] .gather {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+[data-illustration] .draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+[data-illustration] [data-links] {
+  transition: stroke 0.25s;
+}
+
+[data-illustration] .lift {
+  transition: transform 0.25s ease-out;
+}
+
 [data-illustration] .write {
   transform-box: fill-box;
   transform-origin: left center;
@@ -285,11 +307,11 @@ a:hover {
 }
 
 /* Before the first play, the shapes that appear stay hidden. */
-[data-illustration][data-ready]:not([data-played]) .rise {
+[data-illustration][data-ready]:not([data-played]) :is(.rise, .pop, .gather, .fade) {
   opacity: 0;
 }
 
-[data-illustration][data-ready]:not([data-played]) .write {
+[data-illustration][data-ready]:not([data-played]) :is(.write, .draw) {
   stroke-dashoffset: 1;
 }
 
@@ -305,12 +327,36 @@ a:hover {
   animation: illustration-wave 0.75s ease-in-out both;
 }
 
+[data-illustration][data-playing] .land {
+  animation: illustration-land 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+[data-illustration][data-playing] .drive {
+  animation: illustration-drive 1.32s cubic-bezier(0.25, 0.6, 0.25, 1) both;
+}
+
 [data-illustration][data-playing] .rise {
   animation: illustration-rise 0.5s ease-out both;
 }
 
 [data-illustration][data-playing] .write {
   animation: illustration-write 0.4s ease-out both;
+}
+
+[data-illustration][data-playing] .draw {
+  animation: illustration-write 0.9s ease-out both;
+}
+
+[data-illustration][data-playing] .pop {
+  animation: illustration-pop 0.8s var(--ease-out) both;
+}
+
+[data-illustration][data-playing] .gather {
+  animation: illustration-gather 1.2s cubic-bezier(0.25, 0.6, 0.25, 1) both;
+}
+
+[data-illustration][data-playing] .fade {
+  animation: illustration-rise 0.8s ease-out both;
 }
 
 @keyframes illustration-wave {
@@ -321,6 +367,66 @@ a:hover {
 
   50% {
     transform: translateY(-10px);
+  }
+}
+
+@keyframes illustration-land {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes illustration-drive {
+  0% {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes illustration-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes illustration-gather {
+  0% {
+    opacity: 0;
+    transform: translate(var(--dx, 0), var(--dy, 0));
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }
 
@@ -377,9 +483,15 @@ a:hover {
 @media (prefers-reduced-motion: reduce) {
   [data-illustration][data-playing] .wiggle,
   [data-illustration][data-playing] .wave,
+  [data-illustration][data-playing] .land,
+  [data-illustration][data-playing] .drive,
   [data-illustration][data-playing] .bar,
   [data-illustration][data-playing] .rise,
-  [data-illustration][data-playing] .write {
+  [data-illustration][data-playing] .write,
+  [data-illustration][data-playing] .draw,
+  [data-illustration][data-playing] .pop,
+  [data-illustration][data-playing] .gather,
+  [data-illustration][data-playing] .fade {
     animation: none;
   }
 }

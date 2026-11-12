@@ -5,7 +5,7 @@
 import { Image } from 'astro:assets'
 import type { CollectionEntry } from 'astro:content'
 import CardAction from '../CardAction.astro'
-import { localizedPath, useTranslations, type Lang } from '../../i18n/ui'
+import { gamePath, useTranslations, type Lang } from '../../i18n/ui'
 
 interface Props {
   game: CollectionEntry<'games'>
@@ -15,8 +15,7 @@ interface Props {
 const { game, lang } = Astro.props
 const t = useTranslations(lang)
 const data = game.data
-const slug = game.id.split('/').pop()
-const href = `${localizedPath('games', lang)}/${slug}`
+const href = gamePath(game.id.split('/').pop() ?? game.id, lang)
 const languageNames = data.languages.map((code) => t(`language.${code}`))
 const languagesLabel = `${t('games.availableIn')} ${languageNames.join(` ${t('games.and')} `)}`
 ---
