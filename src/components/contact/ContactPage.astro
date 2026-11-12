@@ -1,0 +1,52 @@
+---
+// The contact page, shared by both languages. Its text comes from `content/contact/<lang>.md`;
+// the address comes from the footer content, `content/footer/<lang>.md`.
+import { getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageHero from '../PageHero.astro'
+import ContactForm from './ContactForm.astro'
+import ContactIllustration from './ContactIllustration.astro'
+import ContactLocation from './ContactLocation.astro'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const page = await getEntry('contact', lang)
+if (!page) throw new Error(`Missing contact content: content/contact/${lang}.md`)
+const footer = await getEntry('footer', lang)
+if (!footer) throw new Error(`Missing footer content: content/footer/${lang}.md`)
+const { Content } = await render(page)
+const data = page.data
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <PageHero heading={data.heading}>
+    <Content />
+    <ContactIllustration slot="illustration" label={data.illustrationAlt} />
+  </PageHero>
+
+  <div class="container inner">
+    <ContactForm labels={data.form} />
+    <ContactLocation {...data.location} address={footer.data.address} lang={lang} />
+  </div>
+</BaseLayout>
+
+<style>
+  .inner {
+    display: grid;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: 72px;
+    align-items: start;
+    padding-block: 32px 112px;
+  }
+
+  @media (max-width: 820px) {
+    .inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

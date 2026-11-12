@@ -1,0 +1,159 @@
+---
+// Where to find us: the address, a simplified map and a link to Google Maps. The map opens
+// Google Maps too.
+import ArrowLink from '../ArrowLink.astro'
+import SectionHeading from '../SectionHeading.astro'
+import { useTranslations, type Lang } from '../../i18n/ui'
+
+interface Props {
+  heading: string
+  address: string[]
+  mapAlt: string
+  mapLink: string
+  mapUrl: string
+  lang: Lang
+}
+
+const { heading, address, mapAlt, mapLink, mapUrl, lang } = Astro.props
+const t = useTranslations(lang)
+const [name, ...lines] = address
+---
+
+<section aria-labelledby="location-heading">
+  <SectionHeading eyebrow={heading} id="location-heading" class="heading" />
+  <address class="address t-body">
+    <strong>{name}</strong>
+    {lines.map((line) => (
+      <>
+        <br />
+        {line}
+      </>
+    ))}
+  </address>
+
+  <a href={mapUrl} target="_blank" rel="noopener" class="map">
+    <svg viewBox="0 0 480 320" role="img" aria-label={mapAlt}>
+      <rect width="480" height="320" class="ground"></rect>
+      <g class="blocks">
+        <rect x="24" y="24" width="120" height="70" rx="4"></rect>
+        <rect x="24" y="214" width="150" height="82" rx="4"></rect>
+        <rect x="330" y="24" width="126" height="90" rx="4"></rect>
+        <rect x="350" y="214" width="106" height="82" rx="4"></rect>
+      </g>
+      <g class="roads">
+        <path d="M0 170 C 120 160, 300 175, 480 150" stroke-width="18"></path>
+        <path d="M200 0 L 230 320" stroke-width="12"></path>
+        <path d="M0 120 L 180 118" stroke-width="8"></path>
+        <path d="M300 320 C 310 250, 330 200, 480 190" stroke-width="8"></path>
+      </g>
+      <rect x="250" y="70" width="64" height="64" rx="6" class="building"></rect>
+      <g transform="translate(282 92)">
+        <path
+          d="M0 -38 C -14 -38 -22 -28 -22 -17 C -22 -2 0 14 0 14 C 0 14 22 -2 22 -17 C 22 -28 14 -38 0 -38 Z"
+          class="pin"
+        ></path>
+        <circle cx="0" cy="-18" r="7" class="pin-hole"></circle>
+      </g>
+      <text x="282" y="158" text-anchor="middle" class="place">
+        HEIG-VD
+      </text>
+      <text x="40" y="196" class="street">
+        AVENUE DES SPORTS
+      </text>
+    </svg>
+    <span class="sr-only">{t('link.newTab')}</span>
+  </a>
+
+  <ArrowLink href={mapUrl} kind="external" lang={lang} class="t-link map-link">
+    {mapLink}
+  </ArrowLink>
+</section>
+
+<style>
+  .heading {
+    margin-bottom: 20px;
+  }
+
+  .heading :global(.eyebrow) {
+    width: auto;
+  }
+
+  .address {
+    margin-bottom: 28px;
+    font-style: normal;
+  }
+
+  .map {
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-block);
+  }
+
+  .map svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: opacity var(--duration-fast) ease;
+  }
+
+  .map:hover svg {
+    opacity: 0.92;
+  }
+
+  .ground {
+    fill: var(--color-tint);
+  }
+
+  .blocks {
+    fill: var(--color-white);
+    opacity: 0.7;
+  }
+
+  .roads {
+    fill: none;
+    stroke: var(--color-white);
+    stroke-linecap: round;
+  }
+
+  .building {
+    fill: var(--color-ink);
+  }
+
+  .pin {
+    fill: var(--color-primary);
+    stroke: var(--color-white);
+    stroke-width: 2;
+  }
+
+  .pin-hole {
+    fill: var(--color-white);
+  }
+
+  .place,
+  .street {
+    font-family: var(--font-sans);
+    font-weight: 800;
+  }
+
+  .place {
+    font-size: 14px;
+    fill: var(--color-ink);
+  }
+
+  .street {
+    font-size: 11px;
+    letter-spacing: 1px;
+    fill: var(--color-text-muted);
+  }
+
+  .map-link {
+    margin-top: 16px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .map svg {
+      transition: none;
+    }
+  }
+</style>

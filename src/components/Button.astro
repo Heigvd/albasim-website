@@ -7,7 +7,10 @@
 import Icon from './Icon.astro'
 
 interface Props {
-  href: string
+  /** Without it, the component is a <button>. */
+  href?: string
+  /** Type of the <button>, when there is no `href`. */
+  type?: 'button' | 'submit'
   variant?: 'primary' | 'on-accent' | 'on-tint' | 'secondary'
   tone?: 'light' | 'dark'
   /** Shows the arrow that slides forward on hover. */
@@ -19,6 +22,7 @@ interface Props {
 
 const {
   href,
+  type = 'button',
   variant = 'primary',
   tone = 'light',
   arrow = variant !== 'on-accent',
@@ -26,11 +30,13 @@ const {
   class: className,
   ...attrs
 } = Astro.props
+const Tag = href ? 'a' : 'button'
 ---
 
-<a
+<Tag
   {...attrs}
   href={href}
+  type={href ? undefined : type}
   class:list={['button', 't-btn', variant, variant === 'secondary' && tone, className]}
   target={external ? '_blank' : undefined}
   rel={external ? 'noopener' : undefined}
@@ -42,7 +48,7 @@ const {
     ) : (
       <Icon name="arrow-long" width={28} height={18} class="arrow" />
     ))}
-</a>
+</Tag>
 
 <style>
   .button {
@@ -50,7 +56,10 @@ const {
     align-items: center;
     gap: 12px;
     padding: 14px 28px;
+    border: 0;
     border-radius: var(--radius-pill);
+    font-family: inherit;
+    cursor: pointer;
     transition:
       background-color var(--duration-fast) ease,
       color var(--duration-fast) ease;

@@ -297,6 +297,36 @@ const newsPage = defineCollection({
   }),
 })
 
+// The contact page, one file per language (`fr.md`, `en.md`). The body is the introduction under
+// the title. The address comes from the footer content.
+const contact = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/contact' }),
+  schema: z.object({
+    /** Title of the browser tab and of search results. */
+    title: z.string(),
+    /** Text shown by search engines under the page title. */
+    description: z.string(),
+    heading: z.string(),
+    /** Description of the illustration next to the title, for screen readers. */
+    illustrationAlt: z.string(),
+    /** Labels of the form fields and of its button. */
+    form: z.object({
+      name: z.string(),
+      email: z.string(),
+      subject: z.string(),
+      message: z.string(),
+      send: z.string(),
+    }),
+    location: z.object({
+      heading: z.string(),
+      /** Description of the map, for screen readers. */
+      mapAlt: z.string(),
+      mapLink: z.string(),
+      mapUrl: z.url(),
+    }),
+  }),
+})
+
 export const collections = {
   footer,
   home,
@@ -308,4 +338,5 @@ export const collections = {
   people,
   teamPage,
   newsPage,
+  contact,
 }
