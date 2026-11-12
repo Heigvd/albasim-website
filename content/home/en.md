@@ -73,6 +73,6 @@ collaborate:
   button: Contact us
 ---
 
-We study how serious games and simulations can support learning and develop the ability to **act and decide** in complex real-world situations.
+We study how serious games and simulations support learning and develop the ability to **act and decide** in complex real-world situations.
 
 AlbaSim is a research group at HEIG-VD.
