@@ -1,0 +1,144 @@
+---
+// Illustration of the team page hero: a co-creation table seen from above, with team members
+// around it and cards on the table. When it comes into view, the cards bob one after the other;
+// they rise under the mouse pointer, and the people near it change color. With reduced motion,
+// it stays still. The animation is shared: see src/scripts/illustrations.ts.
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  class?: string
+}
+
+const { label, class: className, ...attrs } = Astro.props
+
+// People around the table: [x, y of the head, fill].
+const people = [
+  [110, 66, 'ink'],
+  [160, 62, 'primary'],
+  [210, 66, 'outline'],
+  [30, 118, 'ink'],
+  [290, 118, 'outline'],
+  [125, 196, 'outline'],
+  [195, 196, 'ink'],
+] as const
+// Cards on the table, in the order they bob: [x, y, fill].
+const cards = [
+  [82, 108, 'primary'],
+  [104, 128, 'ink'],
+  [128, 106, 'outline'],
+  [152, 136, 'light'],
+  [176, 110, 'ink'],
+  [198, 132, 'primary'],
+  [222, 108, 'outline'],
+  [130, 150, 'ink'],
+] as const
+---
+
+<svg
+  {...attrs}
+  class:list={['team-illustration', className]}
+  viewBox="0 0 320 240"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-duration="1840"
+>
+  <!-- Hexagon in the corner -->
+  <polygon
+    points="297.3,208 280,218 262.7,208 262.7,188 280,178 297.3,188"
+    class="soft-line"
+  ></polygon>
+
+  <!-- People: a head and shoulders -->
+  {people.map(([x, y, fill]) => (
+    <g class:list={['person', fill]} data-x={x} data-y={y}>
+      <circle cx={x} cy={y} r="8"></circle>
+      <path
+        d={`M${x - 15} ${y + 26} Q${x - 15} ${y + 11} ${x} ${y + 11} Q${x + 15} ${y + 11} ${x + 15} ${y + 26} Z`}
+      ></path>
+    </g>
+  ))}
+
+  <!-- Table and cards -->
+  <rect x="60" y="92" width="200" height="82" rx="8" class="table"></rect>
+  {cards.map(([x, y, fill], i) => (
+    <rect
+      x={x}
+      y={y}
+      width="14"
+      height="14"
+      class:list={['square', 'wiggle', fill]}
+      style={`animation-delay: ${(i * 0.12).toFixed(2)}s`}
+    />
+  ))}
+</svg>
+
+<style>
+  .team-illustration {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin-left: auto;
+  }
+
+  .soft-line {
+    fill: none;
+    stroke: var(--color-primary-soft);
+    stroke-width: 0.8;
+  }
+
+  .ink {
+    fill: var(--color-ink);
+  }
+
+  .primary {
+    fill: var(--color-primary);
+  }
+
+  .light {
+    fill: var(--color-primary-light);
+  }
+
+  .outline {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+  }
+
+  .person.outline {
+    stroke-width: 1.2;
+  }
+
+  .table {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+    stroke-width: 1.5;
+  }
+
+  /* People near the pointer turn red; the red one turns white. */
+  .person {
+    transition: fill 0.3s ease;
+  }
+
+  .person[data-near] {
+    fill: var(--color-primary);
+  }
+
+  .person.primary[data-near] {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+    stroke-width: 1.2;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .person {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  import '../../scripts/illustrations'
+</script>

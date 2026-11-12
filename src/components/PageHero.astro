@@ -1,7 +1,8 @@
 ---
-// Top of an inner page (research, publications): the title, the introduction from the Markdown
-// body and an illustration, on the pink halo background. Put the introduction in the default
-// slot and the illustration in the `illustration` slot.
+// Top of an inner page (research, publications, team): the title, the introduction from the
+// Markdown body and an illustration, on the pink halo background. Put the introduction in the
+// default slot, the illustration in the `illustration` slot and, if needed, a link under the
+// introduction in the `after` slot.
 
 interface Props {
   heading: string
@@ -17,6 +18,11 @@ const { heading } = Astro.props
       <div class="intro t-lead">
         <slot />
       </div>
+      {Astro.slots.has('after') && (
+        <div class="after">
+          <slot name="after" />
+        </div>
+      )}
     </div>
     <slot name="illustration" />
   </div>
@@ -51,6 +57,10 @@ const { heading } = Astro.props
 
   .intro :global(p + p) {
     padding-top: 16px;
+  }
+
+  .after {
+    margin-top: 28px;
   }
 
   @media (max-width: 820px) {
