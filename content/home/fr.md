@@ -1,6 +1,6 @@
 ---
 title: AlbaSim, laboratoire de recherche en serious games et simulations
-description: AlbaSim étudie comment les serious games et les simulations soutiennent l’apprentissage et développent la capacité à agir et décider dans des situations pratiques complexes.
+description: AlbaSim étudie comment les serious games et simulations soutiennent l’apprentissage et développent la capacité à agir et décider dans des situations pratiques complexes.
 heading:
   - The Serious Games
   - and Simulations
@@ -9,7 +9,7 @@ headingLang: en
 missions:
   - audience: Pour les chercheurs et partenaires académiques
     title: Recherche
-    text: Nos recherches portent sur la conception de serious games et de simulations, sur les modalités pédagogiques qui les rendent efficaces et sur l’évaluation de leur impact sur l’apprentissage.
+    text: Nos recherches portent sur la conception de serious games et simulations, sur les modalités pédagogiques qui les rendent efficaces et sur l’évaluation de leur impact sur l’apprentissage.
     action: Découvrir notre recherche
     page: research
     image: ../../src/assets/home/research.jpg
@@ -74,6 +74,6 @@ collaborate:
   button: Contactez-nous
 ---
 
-Nous étudions comment les serious games et les simulations soutiennent l’apprentissage et développent la capacité à **agir et décider** dans des situations pratiques complexes.
+Nous étudions comment les serious games et simulations soutiennent l’apprentissage et développent la capacité à **agir et décider** dans des situations pratiques complexes.
 
 AlbaSim est un groupe de recherche de la HEIG-VD.

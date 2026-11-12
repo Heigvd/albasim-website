@@ -1,27 +1,27 @@
 ---
 title: Recherche | AlbaSim
-description: Comment les serious games et les simulations soutiennent l’apprentissage dans l’enseignement supérieur et la formation professionnelle. Nos questions de recherche, domaines d’application, projets et notre approche.
-heading: Comment les serious games et les simulations soutiennent-ils l’apprentissage ?
+description: Comment les serious games et simulations soutiennent l’apprentissage dans l’enseignement supérieur et la formation professionnelle. Nos questions de recherche, domaines d’application, projets et notre approche.
+heading: Comment les serious games et simulations soutiennent-ils l’apprentissage ?
 illustrationAlt: Un serious game sur un écran examiné à la loupe, avec des participants à la co-conception et des barres de mesure
 questions:
   heading: Les questions qui guident notre recherche
   items:
     - label: Conception
-      text: Comment les enseignants, les experts et les développeurs peuvent-ils co-concevoir des serious games et des simulations ?
+      text: Comment enseignants, experts et développeurs peuvent-ils co-concevoir des serious games et simulations ?
     - label: Utilisation
-      text: Comment intégrer efficacement les serious games et les simulations dans les cours ?
+      text: Comment intégrer efficacement les serious games et simulations dans les cours ?
     - label: Impact
       text: Comment mesurer leur impact sur l’apprentissage ?
 domains:
   eyebrow: Domaines d’application
   title: Nos domaines d’intervention
-  text: Quelques exemples de domaines dans lesquels nous avons conçu et étudié des serious games et des simulations.
+  text: Quelques domaines dans lesquels nous avons conçu et étudié des serious games et simulations.
   items:
     - title: Santé et soins d’urgence
       icon: cross
     - title: Gestion de projet
       icon: lines
-    - title: Enseignement de l’informatique
+    - title: Bases de la programmation
       icon: code
     - title: Durabilité et problèmes complexes
       icon: sprout
@@ -47,11 +47,11 @@ approach:
   imageAlt: Une équipe pluridisciplinaire collaborant autour d’une table
   items:
     - title: Recherche orientée conception
-      text: En nous appuyant sur des approches de Design-Based Research (DBR) et de Design Science Research (DSR), nous développons des serious games, des simulations et des plateformes en tant qu’artefacts de recherche, et nous les étudions en situation réelle.
+      text: En nous appuyant sur des approches de Design-Based Research (DBR) et de Design Science Research (DSR), nous développons des serious games, des simulations et des plateformes en tant qu’artefacts de recherche, puis nous les étudions en situation d’utilisation.
     - title: Collaborative
-      text: De la conception à l’évaluation, formateurs, experts du domaine et apprenants participent aux différentes étapes de nos projets.
+      text: De la conception à l’évaluation, formateurs, experts du domaine et apprenants participent activement à nos projets.
     - title: Méthodes mixtes
-      text: Nous évaluons nos artefacts en situation réelle, en combinant des données quantitatives, comme les traces d’utilisation, avec des données qualitatives issues d’observations, d’entretiens et de focus groups.
+      text: Nous évaluons nos artefacts en situation réelle, en combinant des données quantitatives, comme les traces d’utilisation, avec des données qualitatives issues d’observations, d’entretiens ou de focus groups.
   link: Voir nos publications
   process:
     heading: Notre processus de conception et de développement
@@ -63,11 +63,11 @@ approach:
       - title: Prototypage rapide
         text: Premières versions jouables, logiciel et contenu développés en parallèle.
       - title: Tests en situation réelle
-        text: Tests en contexte d’apprentissage réel pour affiner le contenu, les interfaces et l’approche pédagogique.
+        text: Tests en contexte d’apprentissage réel pour affiner les contenus, les interfaces et l’approche pédagogique.
 wegas:
   eyebrow: Notre infrastructure de recherche
-  title: Wegas, notre plateforme de recherche
-  text: Développée par notre équipe, Wegas (Web Game Authoring System) est la plateforme open source sur laquelle reposent nos serious games et nos simulations. Elle permet le prototypage rapide, l’utilisation des jeux développés et la collecte des données d’utilisation qui alimentent la partie quantitative de notre recherche.
+  title: Wegas, notre plateforme de recherche et développement
+  text: Développée par notre équipe, Wegas (Web Game Authoring System) est la plateforme open source sur laquelle reposent nos serious games et simulations. Wegas permet le prototypage rapide, l’utilisation des jeux développés et la collecte des données d’utilisation qui alimentent la partie quantitative de notre recherche.
   highlights:
     - Prototypage rapide
     - Open source
@@ -80,7 +80,7 @@ wegas:
     - Tester
     - Analyser
 funders:
-  heading: Quelques-uns de nos financeurs
+  heading: Des recherches soutenues notamment par
   items:
     - name: Fonds national suisse de la recherche scientifique
       url: https://www.snf.ch/fr
@@ -112,4 +112,4 @@ collaborate:
   button: Contactez-nous
 ---
 
-Nous étudions comment les serious games et les simulations soutiennent l’apprentissage dans l’enseignement supérieur et la formation professionnelle, en combinant les données d’utilisation avec des observations et les retours des enseignants et des apprenants.
+Nous étudions comment les serious games et simulations soutiennent l’apprentissage dans l’enseignement supérieur et la formation professionnelle, en combinant les données d’utilisation avec des observations et les retours des enseignants et des apprenants.

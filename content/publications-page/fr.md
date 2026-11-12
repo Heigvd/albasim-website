@@ -1,6 +1,6 @@
 ---
 title: Publications | AlbaSim
-description: Articles de revue, articles de conférence, chapitres de livre et présentations de l’équipe AlbaSim sur les serious games et les simulations.
+description: Articles de revue, articles de conférence, chapitres de livre et présentations de l’équipe AlbaSim sur les serious games et simulations.
 heading: Publications
 illustrationAlt: Un livre ouvert d’où s’élèvent des carrés de pixels
 collaborate:

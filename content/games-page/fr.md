@@ -133,6 +133,6 @@ collaborate:
   button: 'Contactez-nous'
 ---
 
-Utilisez nos serious games et nos simulations dans vos cours.
+Utilisez nos serious games et simulations dans vos cours.
 
 Développés et testés dans nos projets de recherche, ils sont disponibles sous licence ou gratuitement.
