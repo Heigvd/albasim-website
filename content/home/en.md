@@ -1,6 +1,6 @@
 ---
 title: AlbaSim, serious games and simulations research lab
-description: AlbaSim studies how serious games and simulations help learners turn knowledge into the ability to act and decide in complex situations.
+description: AlbaSim studies how serious games and simulations support learning and develop the ability to act and decide in complex real-world situations.
 heading:
   - The Serious Games
   - and Simulations
@@ -8,7 +8,7 @@ heading:
 missions:
   - audience: For researchers and academic partners
     title: Research
-    text: Our research covers the design of serious games and simulations, the teaching practices that make them effective, and the evaluation of their impact on learning.
+    text: Our research covers the design of serious games and simulations, the teaching approaches that make them effective, and the evaluation of their impact on learning.
     action: Explore our research
     page: research
     image: ../../src/assets/home/research.jpg
@@ -41,18 +41,18 @@ figures:
 wegas:
   eyebrow: Wegas
   title: The open-source platform behind our research and our games
-  text: Developed by our team, Wegas is used to prototype serious games in our research projects, run them in courses, and collect usage data for analysis.
+  text: Developed by our team, Wegas is used to create the serious games of our research projects, run them in courses, and collect usage data for analysis.
   columns:
     - title: For researchers
       items:
         - Rapid prototyping
-        - Collection of usage data for research
+        - Collection of usage data
         - Open source
     - title: For trainers
       items:
-        - A single environment to run all our games, with nothing to install
+        - A single environment for all our games, with nothing to install
         - In class or remotely
-        - Real-time monitoring of participants’ progress
+        - Real-time monitoring of participants’ activities
   modules:
     - name: Edit
       users: [Designers]
@@ -69,10 +69,10 @@ publications:
     - project-management-education
 collaborate:
   title: Collaborate with us
-  text: Interested in a research collaboration? We would be glad to discuss joint projects.
+  text: Interested in collaborating? We would be glad to discuss it with you.
   button: Contact us
 ---
 
-We study how serious games and simulations can help learners turn knowledge into the ability to **act and decide** in complex situations.
+We study how serious games and simulations can support learning and develop the ability to **act and decide** in complex real-world situations.
 
 AlbaSim is a research group at HEIG-VD.
