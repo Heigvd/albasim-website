@@ -301,12 +301,27 @@ a:hover {
   animation: illustration-stretch 1.25s ease-in-out both;
 }
 
+[data-illustration][data-playing] .wave {
+  animation: illustration-wave 0.75s ease-in-out both;
+}
+
 [data-illustration][data-playing] .rise {
   animation: illustration-rise 0.5s ease-out both;
 }
 
 [data-illustration][data-playing] .write {
   animation: illustration-write 0.4s ease-out both;
+}
+
+@keyframes illustration-wave {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes illustration-rise {
@@ -361,6 +376,7 @@ a:hover {
 
 @media (prefers-reduced-motion: reduce) {
   [data-illustration][data-playing] .wiggle,
+  [data-illustration][data-playing] .wave,
   [data-illustration][data-playing] .bar,
   [data-illustration][data-playing] .rise,
   [data-illustration][data-playing] .write {

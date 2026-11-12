@@ -1,0 +1,149 @@
+---
+// Illustration of the serious games page hero: a bridge of pixel squares linking a research
+// flask to a group of learners. When it comes into view, a wave runs along the bridge; the
+// squares also rise under the mouse pointer. With reduced motion, it stays still. The animation
+// is shared: see src/scripts/illustrations.ts.
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  /** Words under each side of the bridge. */
+  research: string
+  practice: string
+  class?: string
+}
+
+const { label, research, practice, class: className, ...attrs } = Astro.props
+
+// Squares of the bridge, from left to right: [x, y, fill].
+const bridge = [
+  [84, 132, 'primary'],
+  [101, 110.6, 'ink'],
+  [118, 92.4, 'outline'],
+  [135, 80.3, 'primary'],
+  [152, 76, 'ink'],
+  [169, 80.3, 'outline'],
+  [186, 92.4, 'primary'],
+  [203, 110.6, 'ink'],
+  [220, 132, 'outline'],
+] as const
+// Learners on the right: [x of the head, fill].
+const learners = [
+  [256, 'ink'],
+  [272, 'primary'],
+  [288, 'ink'],
+] as const
+---
+
+<svg
+  {...attrs}
+  class:list={['games-illustration', className]}
+  viewBox="0 0 320 220"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-duration="1550"
+>
+  <!-- Hexagon under the bridge -->
+  <polygon
+    points="177.3,198 160,208 142.7,198 142.7,178 160,168 177.3,178"
+    class="soft-line"
+  ></polygon>
+
+  <!-- The two banks -->
+  <rect x="20" y="140" width="60" height="40" class="ink"></rect>
+  <rect x="240" y="140" width="60" height="40" class="ink"></rect>
+
+  <!-- Research flask, half full -->
+  <path
+    d="M44 66 L44 92 L28 128 Q26 136 34 136 L66 136 Q74 136 72 128 L56 92 L56 66"
+    class="flask"
+  ></path>
+  <line x1="40" y1="66" x2="60" y2="66" class="flask"></line>
+  <path d="M35 114 L65 114 L72 128 Q74 136 66 136 L34 136 Q26 136 28 128 Z" class="primary"></path>
+
+  <!-- Bridge of squares -->
+  {bridge.map(([x, y, fill], i) => (
+    <rect
+      x={x}
+      y={y}
+      width="14"
+      height="14"
+      class:list={['square', 'wave', fill]}
+      style={`animation-delay: ${(i * 0.1).toFixed(1)}s`}
+    />
+  ))}
+
+  <!-- Learners -->
+  {learners.map(([x, fill]) => (
+    <g class={fill}>
+      <circle cx={x} cy="112" r="6"></circle>
+      <path d={`M${x - 8} 138 Q${x - 8} 122 ${x} 122 Q${x + 8} 122 ${x + 8} 138 Z`}></path>
+    </g>
+  ))}
+
+  <!-- Ground and labels -->
+  <line x1="8" y1="180" x2="312" y2="180" class="ground"></line>
+  <g class="labels">
+    <text x="50" y="200">
+      {research}
+    </text>
+    <text x="270" y="200">
+      {practice}
+    </text>
+  </g>
+</svg>
+
+<style>
+  .games-illustration {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    margin-left: auto;
+  }
+
+  .soft-line {
+    fill: none;
+    stroke: var(--color-primary-soft);
+    stroke-width: 0.8;
+  }
+
+  .ink {
+    fill: var(--color-ink);
+  }
+
+  .primary {
+    fill: var(--color-primary);
+  }
+
+  .outline {
+    fill: var(--color-white);
+    stroke: var(--color-ink);
+  }
+
+  .flask {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.6;
+  }
+
+  .ground {
+    stroke: var(--color-ink);
+    stroke-width: 1;
+  }
+
+  .labels {
+    fill: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-anchor: middle;
+  }
+</style>
+
+<script>
+  import '../../scripts/illustrations'
+</script>

@@ -1,11 +1,12 @@
-// Animation of the hero illustrations (research, publications and team pages), shared through the
-// `data-illustration` attribute on their <svg>. Each plays once when it comes into view: the
-// `.wiggle` shapes bob, the `.bar` shapes stretch, the `.rise` shapes fade in and the `.write`
-// lines draw themselves (see "Hero illustrations" in global.css). The last two stay hidden until
-// the first play: `data-ready` marks an illustration that will play, `data-played` one that has.
-// Then `.square`, `.bar` and `.write` shapes react to the mouse pointer, and `.person` groups near it get a
-// `data-near` attribute, which their component styles. Nothing moves with reduced motion.
-// `data-duration` gives the length of the longest animation, delay included, in milliseconds.
+// Animation of the hero illustrations of the inner pages, shared through the `data-illustration`
+// attribute on their <svg>. Each plays once when it comes into view: the `.wiggle` shapes bob, a
+// wave runs along the `.wave` shapes, the `.bar` shapes stretch, the `.rise` shapes fade in and
+// the `.write` lines draw themselves (see "Hero illustrations" in global.css). The last two stay
+// hidden until the first play: `data-ready` marks an illustration that will play, `data-played`
+// one that has. Then `.square`, `.bar` and `.write` shapes react to the mouse pointer, and
+// `.person` groups near it get a `data-near` attribute, which their component styles. Nothing
+// moves with reduced motion. `data-duration` gives the length of the longest animation, delay
+// included, in milliseconds.
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 

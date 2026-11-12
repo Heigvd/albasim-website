@@ -1,0 +1,80 @@
+---
+// The serious games page, shared by both languages. Its text comes from
+// `content/games-page/<lang>.md`; the games come from the `games` collection, in
+// `content/games/<lang>/`.
+import { getCollection, getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Collaborate from '../Collaborate.astro'
+import PageHero from '../PageHero.astro'
+import SectionHeading from '../SectionHeading.astro'
+import GameCard from './GameCard.astro'
+import GamesIllustration from './GamesIllustration.astro'
+import LogoCarousel from './LogoCarousel.astro'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const page = await getEntry('gamesPage', lang)
+if (!page) throw new Error(`Missing serious games content: content/games-page/${lang}.md`)
+const { Content } = await render(page)
+const data = page.data
+const games = (await getCollection('games', ({ id }) => id.startsWith(`${lang}/`))).sort(
+  (a, b) => a.data.order - b.data.order,
+)
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <PageHero heading={data.heading}>
+    <Content />
+    <GamesIllustration
+      slot="illustration"
+      label={data.illustration.alt}
+      research={data.illustration.research}
+      practice={data.illustration.practice}
+    />
+  </PageHero>
+
+  <section aria-labelledby="games-heading">
+    <div class="container games">
+      <SectionHeading eyebrow={data.gamesHeading} id="games-heading" class="heading" />
+      <ul class="list">
+        {games.map((game) => (
+          <li>
+            <GameCard game={game} lang={lang} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <LogoCarousel heading={data.users.heading} items={data.users.list} lang={lang} />
+
+  <Collaborate {...data.collaborate} lang={lang} />
+</BaseLayout>
+
+<style>
+  /* The two paragraphs of the introduction are closer than on the other pages. */
+  :global(.hero .intro p + p) {
+    padding-top: 6px;
+  }
+
+  .games {
+    padding-block: 32px 56px;
+  }
+
+  .heading {
+    margin-bottom: 32px;
+  }
+
+  .list {
+    display: grid;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+</style>
