@@ -222,6 +222,55 @@ const publicationsPage = defineCollection({
   }),
 })
 
+// The members of the team, one folder per language (`en/`, `fr/`), one file per person. The body
+// is the presentation; **bold** words open a paragraph, e.g. "**Research activities.**".
+const people = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './content/people' }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      /** Position in the team, e.g. "Research project manager". */
+      role: z.string(),
+      /** Degree or title shown under the name, e.g. "MSc in Computer Science (EPFL)". */
+      degree: z.string(),
+      /** Not shown by default: add it only for people who want their address on the site. */
+      email: z.email().optional(),
+      phone: z.string().optional(),
+      /** Profiles on other sites, e.g. ORCID or Google Scholar. */
+      links: z.array(z.object({ label: z.string(), url: z.url() })).default([]),
+      portrait: image(),
+      portraitAlt: z.string(),
+      /** Position in the list: the smallest number comes first. */
+      order: z.number(),
+      /** The head of the team, shown first and larger. */
+      lead: z.boolean().default(false),
+    }),
+})
+
+// The team page, one file per language (`fr.md`, `en.md`). The body is the introduction under
+// the title. The current members come from the `people` collection.
+const teamPage = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/team-page' }),
+  schema: z.object({
+    /** Title of the browser tab and of search results. */
+    title: z.string(),
+    /** Text shown by search engines under the page title. */
+    description: z.string(),
+    heading: z.string(),
+    /** Link under the introduction. */
+    link: z.object({ label: z.string(), url: z.url() }),
+    /** Description of the illustration next to the title, for screen readers. */
+    illustrationAlt: z.string(),
+    /** Heading of the list of members. */
+    members: z.string(),
+    former: z.object({
+      heading: z.string(),
+      list: z.array(z.object({ name: z.string(), role: z.string() })),
+    }),
+    collaborate: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+  }),
+})
+
 export const collections = {
   footer,
   home,
@@ -230,4 +279,6 @@ export const collections = {
   projects,
   publications,
   publicationsPage,
+  people,
+  teamPage,
 }

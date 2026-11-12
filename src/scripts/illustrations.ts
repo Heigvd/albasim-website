@@ -1,7 +1,8 @@
-// Animation of the hero illustrations (research and publications pages), shared through the
+// Animation of the hero illustrations (research, publications and team pages), shared through the
 // `data-illustration` attribute on their <svg>. Each plays once when it comes into view: the
 // `.wiggle` shapes bob and the `.bar` shapes stretch (see "Hero illustrations" in global.css).
-// Then `.square` and `.bar` shapes react to the mouse pointer. Nothing moves with reduced motion.
+// Then `.square` and `.bar` shapes react to the mouse pointer, and `.person` groups near it get a
+// `data-near` attribute, which their component styles. Nothing moves with reduced motion.
 // `data-duration` gives the length of the longest animation, delay included, in milliseconds.
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -38,6 +39,8 @@ for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustratio
   // Squares near the pointer rise and bars stretch a little.
   const squares = [...svg.querySelectorAll<SVGRectElement>('.square')]
   const bars = [...svg.querySelectorAll<SVGRectElement>('.bar')]
+  // People: the position of their head, given by `data-x` and `data-y`.
+  const people = [...svg.querySelectorAll<SVGGElement>('.person')]
   let frame = 0
 
   const update = (point: DOMPoint | null) => {
@@ -57,6 +60,11 @@ for (const svg of document.querySelectorAll<SVGSVGElement>('svg[data-illustratio
         k = Math.max(0, 1 - Math.hypot(x + w / 2 - point.x, dy) / 30)
       }
       el.style.transform = k > 0.01 ? `scaleY(${1 + 0.1 * k})` : ''
+    }
+    for (const el of people) {
+      const near =
+        point && Math.hypot(Number(el.dataset.x) - point.x, Number(el.dataset.y) - point.y) < 34
+      el.toggleAttribute('data-near', Boolean(near))
     }
   }
 
