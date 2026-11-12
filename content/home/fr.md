@@ -74,6 +74,6 @@ collaborate:
   button: Contactez-nous
 ---
 
-Nous étudions comment les serious games et les simulations peuvent soutenir l’apprentissage et développer la capacité à **agir et décider** dans des situations pratiques complexes.
+Nous étudions comment les serious games et les simulations soutiennent l’apprentissage et développent la capacité à **agir et décider** dans des situations pratiques complexes.
 
 AlbaSim est un groupe de recherche de la HEIG-VD.
