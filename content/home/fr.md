@@ -1,6 +1,6 @@
 ---
 title: AlbaSim, laboratoire de recherche en serious games et simulations
-description: AlbaSim étudie comment les serious games et les simulations aident les apprenants à transformer leurs connaissances en capacité à agir et décider dans des situations complexes.
+description: AlbaSim étudie comment les serious games et les simulations soutiennent l’apprentissage et développent la capacité à agir et décider dans des situations pratiques complexes.
 heading:
   - The Serious Games
   - and Simulations
@@ -9,7 +9,7 @@ headingLang: en
 missions:
   - audience: Pour les chercheurs et partenaires académiques
     title: Recherche
-    text: Nos recherches portent sur la conception de serious games et de simulations, sur les pratiques pédagogiques qui les rendent efficaces et sur l’évaluation de leur impact sur l’apprentissage.
+    text: Nos recherches portent sur la conception de serious games et de simulations, sur les modalités pédagogiques qui les rendent efficaces et sur l’évaluation de leur impact sur l’apprentissage.
     action: Découvrir notre recherche
     page: research
     image: ../../src/assets/home/research.jpg
@@ -42,18 +42,18 @@ figures:
 wegas:
   eyebrow: Wegas
   title: La plateforme open source au cœur de notre recherche et de nos jeux
-  text: Développée par notre équipe, Wegas sert à prototyper des serious games dans nos projets de recherche, à les utiliser en cours et à collecter des données d’usage pour l’analyse.
+  text: Développé par notre équipe, Wegas permet de concevoir les serious games de nos projets de recherche, de les utiliser en cours et de collecter des données d’usage pour l’analyse.
   columns:
     - title: Pour les chercheurs
       items:
         - Prototypage rapide
-        - Collecte de données d’usage pour la recherche
+        - Collecte de données d’usage
         - Open source
     - title: Pour les formateurs
       items:
-        - Un environnement unique pour utiliser tous nos jeux, sans installation
+        - Un seul environnement pour tous nos jeux, sans installation
         - En classe ou à distance
-        - Suivi en temps réel de la progression des participants
+        - Suivi en temps réel des activités des participants
   modules:
     - name: Éditer
       users: [Concepteurs]
@@ -69,11 +69,11 @@ publications:
     - human-patient-model
     - project-management-education
 collaborate:
-  title: Collaborons
-  text: Une collaboration de recherche vous intéresse ? Nous serions heureux d’en discuter.
+  title: Collaborer avec nous
+  text: Une collaboration vous intéresse ? Nous serions heureux d’en discuter.
   button: Contactez-nous
 ---
 
-Nous étudions comment les serious games et les simulations peuvent aider les apprenants à transformer leurs connaissances en capacité à **agir et décider** dans des situations pratiques complexes.
+Nous étudions comment les serious games et les simulations peuvent soutenir l’apprentissage et développer la capacité à **agir et décider** dans des situations pratiques complexes.
 
 AlbaSim est un groupe de recherche de la HEIG-VD.
