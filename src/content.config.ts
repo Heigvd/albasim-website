@@ -93,6 +93,12 @@ export const contentIcons = [
   'chart',
   'search',
   'layers',
+  'lightbulb',
+  'heart-handshake',
+  'landmark',
+  'bus',
+  'flame',
+  'tag',
 ] as const
 
 // The research page, one file per language (`fr.md`, `en.md`). The body is the introduction
@@ -543,6 +549,147 @@ const games = defineCollection({
       imageAlt: z.string(),
       /** Position in the list: the smallest number comes first. */
       order: z.number(),
+      /**
+       * The game's own page, at /serious-games/<id>. Games without it have no page yet. Sections
+       * marked optional below only show when they are given.
+       */
+      page: z
+        .object({
+          /** Link to play the game online, in the hero and the call to action (optional). */
+          play: z.object({ label: z.string(), url: z.url() }).optional(),
+          /** Top of the page, on the photo of the game (`image`). */
+          hero: z.object({
+            lead: z.string(),
+            /** Main button, to the contact page; an outline one when the game has `play`. */
+            contactButton: z.string(),
+            /** Button down to the trainer resources, when there are some. */
+            resourcesButton: z.string().optional(),
+            /** Button to the research project the game comes from (its id in `content/projects/`). */
+            researchButton: z.object({ label: z.string(), project: z.string() }).optional(),
+          }),
+          intro: z.object({ heading: z.string(), paragraphs: z.array(z.string()) }),
+          game: z.object({
+            eyebrow: z.string(),
+            heading: z.string(),
+            paragraphs: z.array(z.string()),
+            image: image(),
+            imageAlt: z.string(),
+            /** Steps of a game session, shown as a timeline (optional). */
+            phases: z
+              .object({ label: z.string(), phase: z.string(), items: z.array(z.string()) })
+              .optional(),
+          }),
+          /** The skills, numbered: either one list (`items`) or one column per group (`groups`). */
+          objectives: z
+            .object({
+              eyebrow: z.string(),
+              heading: z.string(),
+              items: z.array(z.string()).optional(),
+              groups: z
+                .array(z.object({ heading: z.string(), items: z.array(z.string()) }))
+                .optional(),
+            })
+            .refine((value) => Boolean(value.items) !== Boolean(value.groups), {
+              message: 'Give either `items` or `groups`',
+            }),
+          /** Teaching concept: text next to a diagram (optional). */
+          concept: z
+            .object({
+              heading: z.string(),
+              text: z.string(),
+              diagram: z.discriminatedUnion('type', [
+                /** The game in the center, linked to three parts around it. */
+                z.object({
+                  type: z.literal('hub'),
+                  alt: z.string(),
+                  /** Lines of the center label. */
+                  center: z.array(z.string()),
+                  /** Three parts, each as a list of lines. */
+                  parts: z.array(z.array(z.string())),
+                }),
+                /** Three steps in a row, the middle one larger (e.g. briefing, simulation, debriefing). */
+                z.object({
+                  type: z.literal('sequence'),
+                  alt: z.string(),
+                  steps: z.array(z.string()),
+                }),
+              ]),
+            })
+            .optional(),
+          /** Ready-to-use scenarios, then a card about creating one's own (optional). */
+          scenarios: z
+            .object({
+              eyebrow: z.string(),
+              heading: z.string(),
+              cards: z.array(
+                z.object({
+                  icon: z.enum(contentIcons),
+                  title: z.string(),
+                  /** Languages the scenario exists in, shown as tags (optional). */
+                  languages: z.array(z.enum(['en', 'fr'])).optional(),
+                  text: z.string(),
+                }),
+              ),
+              /** Last card, on a dark background: creating one's own scenarios (optional). */
+              custom: z.object({ title: z.string(), text: z.string() }).optional(),
+            })
+            .optional(),
+          /** Screenshots in a horizontal scroller (optional). */
+          screenshots: z
+            .object({
+              eyebrow: z.string(),
+              items: z.array(
+                z.object({ image: image(), alt: z.string(), title: z.string(), text: z.string() }),
+              ),
+            })
+            .optional(),
+          /**
+           * Text sections after the screenshots (optional), e.g. "For teachers": a heading on the
+           * left, paragraphs and an optional link to a research project on the right.
+           */
+          sections: z
+            .array(
+              z.object({
+                eyebrow: z.string(),
+                heading: z.string(),
+                paragraphs: z.array(z.string()),
+                link: z.object({ label: z.string(), project: z.string() }).optional(),
+              }),
+            )
+            .optional(),
+          /** Documents for trainers, one tab per language (optional). */
+          resources: z
+            .object({
+              eyebrow: z.string(),
+              summary: z.string(),
+              tabsLabel: z.string(),
+              languages: z.array(
+                z.object({
+                  lang: z.enum(['en', 'fr']),
+                  /** Name of the language, in that language: "English", "Français". */
+                  label: z.string(),
+                  groups: z.array(
+                    z.object({
+                      heading: z.string(),
+                      documents: z.array(
+                        z.object({ label: z.string(), url: z.url(), format: z.string() }),
+                      ),
+                    }),
+                  ),
+                }),
+              ),
+            })
+            .optional(),
+          /** Logos of the organizations using the game (optional). */
+          users: z
+            .object({
+              heading: z.string(),
+              list: z.array(z.object({ name: z.string(), logo: image(), height: z.number() })),
+            })
+            .optional(),
+          callToAction: z.object({ title: z.string(), text: z.string(), button: z.string() }),
+        })
+        .optional(),
     }),
 })
 

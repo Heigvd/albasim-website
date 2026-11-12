@@ -1,0 +1,196 @@
+---
+// Teaching concept of a game, on the same light pink band as the objectives: the text next to a
+// diagram. Two diagrams exist: a hub, where the game is linked to its three parts (e.g.
+// simulation, teamwork, role plays), and a sequence of three steps (e.g. briefing, simulation,
+// debriefing).
+import type { GamePage } from '../../utils/games'
+
+type Props = NonNullable<GamePage['concept']>
+
+const { heading, text, diagram } = Astro.props
+
+/** Baselines of lines of text centered on `y`, `step` apart. */
+const lines = (texts: string[], y: number, step: number) =>
+  texts.map((line, j) => ({ line, y: y + 4 - ((texts.length - 1) * step) / 2 + j * step }))
+
+// Hub: centers of the three parts (above, bottom left, bottom right).
+const positions = [
+  [150, 50],
+  [63, 200],
+  [237, 200],
+]
+const parts =
+  diagram.type === 'hub'
+    ? diagram.parts.slice(0, 3).map((part, i) => ({
+        x: positions[i][0],
+        y: positions[i][1],
+        lines: lines(part, positions[i][1], 13),
+      }))
+    : []
+const center = diagram.type === 'hub' ? lines(diagram.center, 150, 13) : []
+
+// Sequence: three circles in a row, the middle one larger.
+const steps =
+  diagram.type === 'sequence'
+    ? diagram.steps.slice(0, 3).map((step, i) => ({ step, x: [48, 160, 272][i], main: i === 1 }))
+    : []
+---
+
+<section class="concept" aria-labelledby="concept-heading">
+  <div class="container inner">
+    <div>
+      <h2 id="concept-heading" class="t-h2 heading">
+        {heading}
+      </h2>
+      <p class="t-lead text">{text}</p>
+    </div>
+    {diagram.type === 'hub' && (
+      <svg viewBox="0 0 300 250" role="img" aria-label={diagram.alt} class="diagram">
+        <g class="links">
+          {parts.map((part) => (
+            <line x1="150" y1="150" x2={part.x} y2={part.y} />
+          ))}
+        </g>
+        {parts.map((part) => (
+          <g>
+            <circle cx={part.x} cy={part.y} r="42" class="part" />
+            {part.lines.map((row) => (
+              <text x={part.x} y={row.y} text-anchor="middle" class="part-text">
+                {row.line}
+              </text>
+            ))}
+          </g>
+        ))}
+        <circle cx="150" cy="150" r="48" class="center" />
+        {center.map((row) => (
+          <text
+            x="150"
+            y={center.length === 1 ? 155 : row.y}
+            text-anchor="middle"
+            class:list={['center-text', center.length > 1 && 'small']}
+          >
+            {row.line}
+          </text>
+        ))}
+      </svg>
+    )}
+    {diagram.type === 'sequence' && (
+      <svg viewBox="0 0 320 150" role="img" aria-label={diagram.alt} class="diagram sequence">
+        <defs>
+          <marker
+            id="concept-arrow"
+            orient="auto"
+            markerWidth="8"
+            markerHeight="8"
+            refX="6"
+            refY="4"
+          >
+            <path d="M0 0 L8 4 L0 8 Z" class="arrow-head" />
+          </marker>
+        </defs>
+        <g class="links">
+          <line x1="86" y1="75" x2="104" y2="75" marker-end="url(#concept-arrow)" />
+          <line x1="216" y1="75" x2="234" y2="75" marker-end="url(#concept-arrow)" />
+        </g>
+        {steps.map((step) => (
+          <g>
+            <circle
+              cx={step.x}
+              cy="75"
+              r={step.main ? 50 : 38}
+              class={step.main ? 'center' : 'part'}
+            />
+            <text
+              x={step.x}
+              y="79"
+              text-anchor="middle"
+              class:list={['part-text', step.main && 'main']}
+            >
+              {step.step}
+            </text>
+          </g>
+        ))}
+      </svg>
+    )}
+  </div>
+</section>
+
+<style>
+  .concept {
+    background: var(--color-tint);
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 72px;
+    align-items: center;
+    padding-block: 0 68px;
+  }
+
+  .heading {
+    margin: 0 0 20px;
+  }
+
+  .text {
+    margin: 0;
+  }
+
+  .diagram {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin: 0 auto;
+    font-family: var(--font-sans);
+  }
+
+  .diagram.sequence {
+    max-width: 480px;
+  }
+
+  .links {
+    stroke: var(--color-ink);
+    stroke-width: 1.6;
+  }
+
+  .arrow-head {
+    fill: var(--color-ink);
+  }
+
+  /* The darker red keeps the small white text at 4.5:1. */
+  .part {
+    fill: var(--color-accent-block);
+  }
+
+  .part-text {
+    fill: var(--color-white);
+    font-size: 9.5px;
+    font-weight: 800;
+  }
+
+  .part-text.main {
+    font-size: 11px;
+  }
+
+  .center {
+    fill: var(--color-ink);
+  }
+
+  .center-text {
+    fill: var(--color-white);
+    font-size: 15px;
+    font-weight: 800;
+  }
+
+  .center-text.small {
+    font-size: 11px;
+  }
+
+  @media (max-width: 820px) {
+    .inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 40px;
+    }
+  }
+</style>

@@ -80,6 +80,11 @@ export const ui = {
     'publications.shown': '{count} publications affichées',
     'wegas.modules': 'Les trois modules de Wegas :',
     'wegas.researchSteps': 'La recherche avec Wegas :',
+    'game.enlarge': 'Agrandir la capture d’écran : {title}',
+    'game.close': 'Fermer',
+    'game.previous': 'Capture précédente',
+    'game.next': 'Capture suivante',
+    'game.position': '{index} sur {count}',
   },
   en: {
     'nav.label': 'Main navigation',
@@ -136,6 +141,11 @@ export const ui = {
     'publications.shown': '{count} publications shown',
     'wegas.modules': 'The three Wegas modules:',
     'wegas.researchSteps': 'Research with Wegas:',
+    'game.enlarge': 'Enlarge screenshot: {title}',
+    'game.close': 'Close',
+    'game.previous': 'Previous screenshot',
+    'game.next': 'Next screenshot',
+    'game.position': '{index} of {count}',
   },
 } as const satisfies Record<Lang, Record<string, string>>
 

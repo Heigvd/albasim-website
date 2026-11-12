@@ -1,0 +1,263 @@
+---
+// "Trainer resources" of a game: a box that unfolds to show the documents for trainers, in
+// groups (manuals, teaching materials, scenarios), with one tab per language. The tab of the
+// page's language opens first. Without JavaScript, the tabs stay hidden and every language
+// shows. The hero button "Trainer resources" opens the box (see the script below).
+import { useTranslations, type Lang } from '../../i18n/ui'
+import type { GamePage } from '../../utils/games'
+import Icon from '../Icon.astro'
+
+type Props = NonNullable<GamePage['resources']> & { lang: Lang }
+
+const { eyebrow, summary, tabsLabel, languages, lang } = Astro.props
+const t = useTranslations(lang)
+const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]?.lang
+---
+
+<section id="trainer-resources" aria-labelledby="resources-heading" data-resources>
+  <div class="container inner">
+    <h2 id="resources-heading" class="t-eyebrow eyebrow">
+      {eyebrow}
+    </h2>
+    <details class="box" data-resources-box>
+      <summary class="summary">
+        <span class="summary-text">{summary}</span>
+        <Icon name="chevron" width={22} strokeWidth={2} class="chevron" />
+      </summary>
+      <div class="body">
+        <div class="tabs" role="group" aria-label={tabsLabel} hidden data-tabs>
+          {languages.map((item) => (
+            <button
+              type="button"
+              class="tab"
+              lang={item.lang}
+              aria-pressed={item.lang === first ? 'true' : 'false'}
+              data-tab={item.lang}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+        {languages.map((item) => (
+          <div class="panel" lang={item.lang} data-panel={item.lang}>
+            <h3 class="sr-only">{item.label}</h3>
+            {item.groups.map((group) => (
+              <div>
+                <h4 class="group-heading">{group.heading}</h4>
+                <ul class="documents">
+                  {group.documents.map((document) => (
+                    <li>
+                      <a href={document.url} target="_blank" rel="noopener" class="document">
+                        <span class="document-label">
+                          {document.label}
+                          <span class="sr-only">{t('link.newTab')}</span>
+                        </span>
+                        <span class="format">{document.format}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </details>
+  </div>
+</section>
+
+<style>
+  .inner {
+    padding-block: 40px 96px;
+  }
+
+  .eyebrow {
+    width: 50%;
+    margin: 0 0 28px;
+    padding-top: 14px;
+    border-top: 3px solid var(--color-primary-text);
+    color: var(--color-primary-text);
+    text-transform: uppercase;
+  }
+
+  .box {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-block);
+    background: var(--color-white);
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 20px;
+    align-items: center;
+    padding: 26px 28px;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .summary-text {
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .summary:hover .summary-text {
+    color: var(--color-primary-text);
+  }
+
+  .summary :global(.chevron) {
+    transition: transform 0.2s;
+  }
+
+  .box[open] .summary :global(.chevron) {
+    transform: rotate(180deg);
+  }
+
+  .body {
+    padding: 0 28px 28px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  .tabs {
+    display: inline-flex;
+    gap: 4px;
+    margin: 24px 0 8px;
+    padding: 4px;
+    border-radius: var(--radius-pill);
+    background: var(--color-tint);
+  }
+
+  .tabs[hidden] {
+    display: none;
+  }
+
+  .tab {
+    padding: 6px 18px;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .tab[aria-pressed='true'] {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px 40px;
+  }
+
+  .panel[hidden] {
+    display: none;
+  }
+
+  .group-heading {
+    margin: 20px 0 6px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .documents {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .document {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-line);
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .document:hover {
+    color: var(--color-ink);
+  }
+
+  .document:hover .document-label {
+    color: var(--color-primary-text);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .format {
+    flex: 0 0 auto;
+    padding: 2px 8px;
+    border: 1px solid var(--color-separator);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 680px) {
+    .summary,
+    .body {
+      padding-inline: 20px;
+    }
+
+    .panel {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .summary :global(.chevron) {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-resources]')) {
+    const box = root.querySelector<HTMLDetailsElement>('[data-resources-box]')
+    const tabs = root.querySelector<HTMLElement>('[data-tabs]')
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')]
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')]
+
+    // Language tabs
+    const select = (language: string) => {
+      for (const button of buttons) {
+        button.setAttribute('aria-pressed', String(button.dataset.tab === language))
+      }
+      for (const panel of panels) panel.hidden = panel.dataset.panel !== language
+    }
+    for (const button of buttons) {
+      button.addEventListener('click', () => select(button.dataset.tab ?? ''))
+    }
+    const pressed = buttons.find((button) => button.getAttribute('aria-pressed') === 'true')
+    if (tabs && pressed) {
+      tabs.hidden = false
+      select(pressed.dataset.tab ?? '')
+    }
+
+    // The links to the section open the box.
+    const openBox = () => {
+      if (box) box.open = true
+    }
+    if (window.location.hash === `#${root.id}`) openBox()
+    window.addEventListener('hashchange', () => {
+      if (window.location.hash === `#${root.id}`) openBox()
+    })
+    for (const link of document.querySelectorAll(`a[href="#${root.id}"]`)) {
+      link.addEventListener('click', openBox)
+    }
+  }
+</script>

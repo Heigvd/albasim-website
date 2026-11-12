@@ -1,0 +1,55 @@
+---
+// The page of a ready-to-use game, shared by all games and both languages. Its content comes
+// from the `page` part of `content/games/<lang>/<id>.md`; the hero shows the game's `image`.
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Collaborate from '../Collaborate.astro'
+import LogoCarousel from '../games/LogoCarousel.astro'
+import GameConcept from './GameConcept.astro'
+import GameHero from './GameHero.astro'
+import GameIntro from './GameIntro.astro'
+import GameObjectives from './GameObjectives.astro'
+import GameOverview from './GameOverview.astro'
+import GameResources from './GameResources.astro'
+import GameScenarios from './GameScenarios.astro'
+import GameScreenshots from './GameScreenshots.astro'
+import GameSection from './GameSection.astro'
+import { gamePath, type Lang } from '../../i18n/ui'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  /** The game, with its `page`. */
+  game: CollectionEntry<'games'>
+  lang: Lang
+}
+
+const { game, lang } = Astro.props
+const id = game.id.split('/').pop() ?? game.id
+const data = game.data
+const page = data.page
+if (!page) throw new Error(`The game ${game.id} has no page`)
+
+const alternates = { en: gamePath(id, 'en'), fr: gamePath(id, 'fr') }
+---
+
+<BaseLayout title={`${data.name} | AlbaSim`} description={data.summary} alternates={alternates}>
+  <GameHero
+    {...page.hero}
+    play={page.play}
+    name={data.name}
+    image={data.image}
+    imageAlt={data.imageAlt}
+    lang={lang}
+  />
+  <GameIntro {...page.intro} />
+  <GameOverview {...page.game} />
+  <GameObjectives {...page.objectives} />
+  {page.concept && <GameConcept {...page.concept} />}
+  {page.scenarios && <GameScenarios {...page.scenarios} lang={lang} />}
+  {page.screenshots && <GameScreenshots {...page.screenshots} lang={lang} />}
+  {page.sections?.map((section, i) => (
+    <GameSection {...section} id={`section-${i + 1}-heading`} lang={lang} />
+  ))}
+  {page.resources && <GameResources {...page.resources} lang={lang} />}
+  {page.users && <LogoCarousel heading={page.users.heading} items={page.users.list} lang={lang} />}
+  <Collaborate {...page.callToAction} play={page.play} lang={lang} />
+</BaseLayout>

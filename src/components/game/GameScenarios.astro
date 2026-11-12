@@ -1,0 +1,121 @@
+---
+// "Scenarios" of a game: one card per ready-to-use scenario, with its icon, its title, the
+// languages it exists in (when given) and a description, then an ink card about creating one's
+// own scenarios. Three cards sit in one row; other counts in rows of two.
+import Icon from '../Icon.astro'
+import SectionHeading from '../SectionHeading.astro'
+import type { Lang } from '../../i18n/ui'
+import { languagesLabel, type GamePage } from '../../utils/games'
+
+type Props = NonNullable<GamePage['scenarios']> & { lang: Lang }
+
+const { eyebrow, heading, cards, custom, lang } = Astro.props
+const count = cards.length + (custom ? 1 : 0)
+---
+
+<section aria-labelledby="scenarios-heading">
+  <div class="container inner">
+    <SectionHeading eyebrow={eyebrow} title={heading} id="scenarios-heading" class="heading" />
+    <ul class:list={['cards', count === 3 && 'three']}>
+      {cards.map((card) => (
+        <li class="card">
+          <Icon name={card.icon} width={36} strokeWidth={1.6} class="icon" />
+          <h3 class="t-card title">{card.title}</h3>
+          {card.languages && (
+            <p class="languages">
+              <span class="sr-only">{languagesLabel(card.languages, lang)}</span>
+              {card.languages.map((code) => (
+                <span class="language t-tag" aria-hidden="true">
+                  {code.toUpperCase()}
+                </span>
+              ))}
+            </p>
+          )}
+          <p class="t-body text">{card.text}</p>
+        </li>
+      ))}
+      {custom && (
+        <li class="card custom">
+          <span class="plus t-num" aria-hidden="true">
+            +
+          </span>
+          <h3 class="t-card title">{custom.title}</h3>
+          <p class="t-body text">{custom.text}</p>
+        </li>
+      )}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .inner {
+    padding-block: 68px 96px;
+  }
+
+  .heading {
+    margin-bottom: 40px;
+  }
+
+  .heading :global(.title) {
+    max-width: 820px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cards.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-block);
+    background: var(--color-white);
+  }
+
+  .card :global(.icon) {
+    height: 40px;
+    color: var(--color-primary-text);
+  }
+
+  .title,
+  .text {
+    margin: 0;
+  }
+
+  .languages {
+    display: flex;
+    gap: 4px;
+    margin: 0;
+  }
+
+  .language {
+    padding: 1px 7px;
+    border: 1px solid var(--color-separator);
+    border-radius: var(--radius-pill);
+    color: var(--color-text-muted);
+  }
+
+  .custom {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  @media (max-width: 820px) {
+    .cards,
+    .cards.three {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>
