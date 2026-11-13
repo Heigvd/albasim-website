@@ -9,4 +9,4 @@ collaborate:
   button: Contactez-nous
 ---
 
-Articles de revue, articles de conférence, chapitres de livre et présentations de l’équipe AlbaSim.
+Articles de revue, articles de conférence, chapitres de livre, présentations et autres contributions.
