@@ -9,4 +9,4 @@ collaborate:
   button: Contact us
 ---
 
-Journal articles, conference papers, book chapters and talks by the AlbaSim team.
+Journal articles, conference papers, book chapters, talks and other contributions.

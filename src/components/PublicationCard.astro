@@ -101,7 +101,12 @@ const otherLang = titleLang && titleLang !== lang ? titleLang : undefined
     white-space: nowrap;
   }
 
-  /* Type of publication, in the color used for it across the site */
+  /* Type of publication, in the color used for it across the site. Pushed to the bottom, so
+     that it sits just above the footer whatever the length of the title. */
+  .publication-card > .type {
+    margin-top: auto;
+  }
+
   .type {
     align-self: flex-start;
     padding: 4px 12px;
@@ -122,14 +127,18 @@ const otherLang = titleLang && titleLang !== lang ? titleLang : undefined
   }
 
   .footer {
-    margin-top: auto;
     padding-top: 20px;
   }
 
   /* The rule stays without a link, so that all cards end the same way. */
   .access {
-    min-height: 20px;
     padding-top: 12px;
     border-top: 1px solid var(--color-ink);
+  }
+
+  /* Without a link, the empty line keeps the height of the "Access" line, so that the type
+     badges of cards side by side stay aligned. */
+  div.access {
+    min-height: 34px;
   }
 </style>
