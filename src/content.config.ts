@@ -259,8 +259,8 @@ const projects = defineCollection({
           /** First sentence of the introduction, slightly larger. */
           lead: z.string(),
           intro: z.array(z.string()),
-          /** Button under the introduction, to the game born from the project. */
-          button: gameLink.optional(),
+          /** Buttons under the introduction, to the games born from the project. */
+          buttons: z.array(gameLink).default([]),
           /** Description of the illustration and the words written in it. */
           illustration: z.object({
             alt: z.string(),
