@@ -1,18 +1,20 @@
 ---
 title: MIMMS
 funders: HUG · Innosuisse
-summary: A simulation for training in the medical management of major incidents.
+summary: Simulations for training in the medical management of major incidents.
 image: ../../../src/assets/projects/mimms.jpg
 imageAlt: A rescue helicopter in flight
 page:
   heading: Major Incident Medical Management Simulation
   lead: Major incidents involving many casualties require a specific approach to on-site medical management.
   intro:
-    - This four-year project has led to the development of software simulations designed to train healthcare professionals to manage these stressful situations. This research project led to MIMMSim, a simulation now available for training.
+    - 'This four-year project led to the development of software simulations designed to train healthcare professionals to manage these stressful situations. It resulted in two simulations now available for training: MIMMSim, for the overall management of the incident, and Mass Casualties Triage, for pre-triage.'
     - Funded by Innosuisse, in collaboration with the Geneva University Hospitals.
-  button:
-    label: Use MIMMSim in your courses
-    game: mimmsim
+  buttons:
+    - label: Use MIMMSim
+      game: mimmsim
+    - label: Use Mass Casualties Triage
+      game: mass-casualties-triage
   illustration:
     alt: Top view of an incident site with victims sorted into priority groups, an advanced medical post, an ambulance park, a helicopter landing area and a hospital
     labels:
@@ -59,7 +61,7 @@ page:
       innovations: [Flexible training modes, Scenario authoring, Analysis of participants’ actions]
   outcomes:
     eyebrow: Outcomes
-    heading: Operational simulations and tools for future research
+    heading: Simulations and tools for training and research
     cards:
       - icon: monitor
         title: Two simulations
@@ -76,8 +78,8 @@ page:
     eyebrow: From research to practice
     heading: 'Beyond the project: a simulation now part of emergency training'
     paragraphs:
-      - The simulations are used to train students and professionals at organisations such as the Geneva University Hospitals, the Geneva School of Paramedics (ESAMB), CERN, the MEDI ambulance school in Bern and several Geneva emergency services. They also enable new research on triage algorithms.
-      - Research and development on both simulations continues beyond the project.
+      - The simulations developed in this project are already used to train students and professionals at organisations such as the Geneva University Hospitals, the Geneva School of Paramedics (ESAMB), CERN, the MEDI ambulance school in Bern and several Geneva emergency services. They also enable new research on triage algorithms.
+      - Development of both simulations continues beyond the project.
     links:
       - label: MIMMSim
         game: mimmsim
@@ -89,11 +91,11 @@ page:
     eyebrow: Key findings
     heading: What our research shows
     items:
-      - text: A simplified physiological model can simulate the real-time evolution of several trauma patients in a way experienced clinicians judge clinically realistic.
+      - text: A simplified physiological model can simulate the real-time evolution of hundreds of trauma patients in a way experienced clinicians judge clinically realistic.
         source: Development and validation study, 15 prehospital professionals · Laurent et al., *JMIR Formative Research*, 2025
         url: https://formative.jmir.org/2025/1/e66201
       - text: In a simulated mass-casualty incident, the simpler Sieve algorithm slightly outperformed the more complex SwissPre in identifying critically injured patients, with no difference in triage time.
-        source: Randomized open-label study, 67 participants, 30 simulated patients each · Stuby et al., *Prehospital and Disaster Medicine*, 2025
+        source: Randomized open-label study, 67 participants, 30 simulated patients · Stuby et al., *Prehospital and Disaster Medicine*, 2025
         url: https://doi.org/10.1017/S1049023X25101568
       - text: Simulations with evolving virtual patients make it possible to compare triage protocols under controlled, reproducible conditions, which is hard to achieve in real incidents or live exercises.
         source: Methodological contribution of the two studies above
@@ -101,7 +103,7 @@ page:
     eyebrow: Partners
     heading: A close collaboration between emergency medicine, computer science and simulation-based learning
     paragraphs:
-      - The project was carried out by the AlbaSim team of the Media Engineering Institute (MEI) at HEIG-VD (HES-SO), led by Prof. Dominique Jaccard, and by the Emergency Department of the Geneva University Hospitals (HUG), led for the project by Dr Laurent Suppan, PD, Head of the Prehospital Emergency and Resuscitation Unit (UPHR).
+      - The project was co-directed by Prof. Dominique Jaccard of the AlbaSim team (Media Engineering Institute, HEIG-VD, HES-SO) and Dr Laurent Suppan, PD, Head of the Prehospital Emergency and Resuscitation Unit (UPHR) of the Emergency Department of the Geneva University Hospitals (HUG).
       - Emergency physicians, paramedics, trainers and computer scientists worked together throughout the project, combining expertise in major incident management, medical education and simulation development.
     logos:
       - name: AlbaSim
@@ -120,7 +122,7 @@ page:
           height: 144
   resources:
     eyebrow: Resources
-    heading: Everything you need to dive deeper into the project
+    heading: Learn more
     publications: [sieve-swisspre-triage, human-patient-model]
   collaborate:
     title: Collaborate with us
@@ -128,18 +130,19 @@ page:
     button: Contact us
 ---
 
-In a major incident, such as a train accident or a building fire, emergency teams must shift from individual to collective medicine, and some professionals take on coordination roles they never perform in their daily work. Training them for these roles is essential.
+In a major incident, such as a train accident or a building fire, emergency teams must shift from individual to collective medicine. Some health professionals take on coordination roles they do not perform in their daily work. Regular training for these roles is essential.
 
 ### The gap
 
-Two types of simulation are used for this training, each with its limits. Full-scale exercises are realistic, but costly and complex to organise: many participants are mobilised to train only a few people in key roles, and debriefings are difficult. As a result, training needs cannot be fully met.
+Two types of simulation are used for training in major incident management, each with its limits:
 
-Existing software simulations focus on specific tasks, mainly triage. They do not address coordination between professions, and offer little flexibility in scenarios, training modes and analysis of participants’ decisions.
+- **Full-scale exercises** are realistic, but costly and complex to organise: many participants are mobilised to train only a few people in key roles. They therefore cannot meet the need for regular training.
+- **Existing software simulations** allow repeated training, but focus on specific tasks, do not address coordination between professions and offer little flexibility in scenarios, training modes and analysis of participants’ decisions.
 
 ### Project objectives
 
 The project aimed to develop a new type of software simulation, built around three innovations:
 
 1. **Flexible training modes:** individual or group training, on site or remotely.
-2. **Scenario authoring system** enabling trainers without programming skills to create their own scenarios.
-3. **Analysis of participants’ actions,** to support debriefing and research on the management of major incidents.
+2. **Scenario authoring system:** enable trainers without programming skills to create their own scenarios.
+3. **Analysis of participants’ actions:** support debriefing and research on the management of major incidents.
