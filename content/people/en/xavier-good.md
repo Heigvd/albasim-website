@@ -7,4 +7,4 @@ portraitAlt: Portrait of Xavier Good
 order: 2
 ---
 
-With a master’s degree in computer science from EPFL and a master’s degree in saxophone from EJMA, Xavier brings creativity and technical skills to the team. His teaching experience supports the development of educational serious games.
+With a master’s degree in computer science from EPFL and a master’s degree in saxophone from EJMA, Xavier brings technical skills and creativity to the team. His teaching experience supports the design and development of our serious games.

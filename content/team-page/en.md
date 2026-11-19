@@ -1,6 +1,6 @@
 ---
 title: Team | AlbaSim
-description: The AlbaSim team, serious games and simulations research group of the Media Engineering Institute at HEIG-VD.
+description: The AlbaSim team, “Serious games and simulations” research group of the Media Engineering Institute at HEIG-VD.
 heading: Team
 link:
   label: AlbaSim on LinkedIn
@@ -32,4 +32,4 @@ collaborate:
   button: Contact us
 ---
 
-AlbaSim is the serious games and simulations research group of the Media Engineering Institute (MEI) at the School of Business and Engineering Vaud (HEIG-VD), part of the University of Applied Sciences and Arts Western Switzerland (HES-SO).
+AlbaSim is the “Serious games and simulations” research group of the Media Engineering Institute (MEI) at the School of Business and Engineering Vaud (HEIG-VD), part of the University of Applied Sciences and Arts Western Switzerland (HES-SO).

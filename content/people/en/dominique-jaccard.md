@@ -13,6 +13,8 @@ order: 1
 lead: true
 ---
 
-**Research activities.** For more than 15 years, Dominique has been conducting research into the use of serious games and simulations in higher education and vocational training: the co-creation of serious games, the pedagogical approaches to their use, and the assessment of their impact. He has launched and led projects such as PM-Game and the Wegas platform, as well as serious games in the fields of healthcare, crime scene investigations and energy management.
+**Research activities.** For more than 15 years, Dominique has been conducting research into the use of serious games and simulations in higher education and vocational training. His research covers the design and development of serious games and simulations, the teaching approaches to their use and the assessment of their impact.
 
-**Teaching activities.** Bachelor, master and postgraduate courses in project management, serious games, complexity and systems thinking.
+He has extensive experience in research projects (Swiss National Science Foundation, Innosuisse, Horizon 2020) and has led the development of serious games in fields such as major incident medical management, emergency triage, project management (PM-Game), crime scene investigation and energy management.
+
+**Teaching activities.** Bachelor, master and postgraduate courses in project management, serious games, complexity and systems approach.
