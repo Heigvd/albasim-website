@@ -47,7 +47,8 @@ const home = defineCollection({
           imageAlt: z.string(),
         }),
       ),
-      news: z.object({ heading: z.string() }),
+      /** Ids of the news items to feature, in this order: their file names in `content/news/<lang>/`. */
+      news: z.object({ heading: z.string(), featured: z.array(z.string()) }),
       /** Ids of the projects to feature: their file names in `content/projects/<lang>/`. */
       projects: z.object({ heading: z.string(), featured: z.array(z.string()) }),
       figures: z.array(

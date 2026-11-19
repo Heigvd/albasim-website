@@ -22,6 +22,10 @@ missions:
     imageAlt: Students playing a serious game in a classroom
 news:
   heading: Latest news
+  featured:
+    - x-human-project-real-time
+    - pnr77-synthesis-report
+    - pm-game-monash
 projects:
   heading: Featured research projects
   featured:
