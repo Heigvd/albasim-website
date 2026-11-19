@@ -25,7 +25,7 @@ page:
     heading: Project at a glance
     focus:
       label: Focus
-      items: [Learning game design, Development, Use, Evaluation]
+      items: [Serious games, Design, Development, Use, Evaluation]
     period:
       label: Period
       value: 2020–2024
@@ -45,7 +45,7 @@ page:
     heading: Bridging the gap between teachers, game developers and researchers
     diagram:
       type: communities
-      alt: Teachers need games matching their learning objectives, game developers need to meet teachers’ expectations and integrate educational sciences, researchers need games providing data; co.LAB, a framework and a digital platform, bridges the gap
+      alt: Teachers need games matching their learning objectives, game developers need to meet teachers’ expectations, researchers need data to evaluate games; co.LAB, a design framework and a digital platform, bridges the gap
       communities:
         - name: [Teachers]
           need: [Need games that, match their, learning, objectives]
@@ -62,10 +62,10 @@ page:
     heading: New methods and tools for serious game design
     cards:
       - icon: layers
-        title: co.LAB Serious Game Design Framework
+        title: The co.LAB Serious Game Design Framework
         text: A methodological framework, with guidelines and recommendations for the co-design, co-development and co-evaluation of learning games and simulations.
       - icon: globe
-        title: co.LAB Digital Platform
+        title: The co.LAB Digital Platform
         text: A collaborative digital platform that supports multidisciplinary teams throughout the design of serious games. The platform integrates the design framework and guidelines.
         links:
           - label: co.LAB project website
@@ -80,7 +80,7 @@ page:
     eyebrow: Key findings
     heading: What our research shows
     items:
-      - text: Existing serious game design methods can be unified into a single generic framework of 23 building blocks.
+      - text: 'Existing serious game design methods can be unified into a single generic framework: the co.LAB Serious Game Design Framework.'
         source: Review of 10 existing design frameworks · Jaccard et al., *JMIR Serious Games*, 2021
         url: https://games.jmir.org/2021/3/e28674
       - text: A shared design framework improves collaboration within multidisciplinary game design teams.
@@ -94,7 +94,7 @@ page:
     heading: A collaboration between engineering and educational sciences
     paragraphs:
       - The co.LAB project was conducted by the AlbaSim team of the Media Engineering Institute (MEI) at HEIG-VD (HES-SO), and by the Laboratory of Pedagogical Innovation (LIP) / TECFA at the University of Geneva.
-      - The project was led by Prof. Dominique Jaccard (HEIG-VD) and Prof. Eric Sanchez (University of Geneva), combining expertise in game development and in educational sciences.
+      - The project was co-led by Prof. Dominique Jaccard (HEIG-VD) and Prof. Eric Sanchez (University of Geneva), combining expertise in game development and in educational sciences.
     logos:
       - name: AlbaSim
         logo: ../../../src/assets/logos/albasim.png
@@ -140,12 +140,12 @@ page:
     button: Contact us
 ---
 
-Digital learning games are increasingly used at all levels of education and are recognised as effective tools to support learner-centred teaching. Yet their design, development and use remain difficult.
+Serious games are increasingly used at all levels of education and are recognised as effective tools to support learner-centred teaching. Yet their design, development and use remain difficult.
 
 ### The problem
 
-Teachers struggle to find games that match their learning objectives. Game developers look for ways to meet teachers’ expectations and to integrate knowledge from the educational sciences. Researchers lack games that provide appropriate data to evaluate their effectiveness.
+Teachers struggle to find games that match their learning objectives. Game developers look for ways to meet teachers’ expectations. Researchers lack appropriate data to evaluate the effectiveness of serious games.
 
 ### Project objectives
 
-The co.LAB project aimed to improve the design, development and use of digital learning games by bringing these three communities together.
+The co.LAB project aimed to improve the design, development and use of serious games by bringing these three communities together.

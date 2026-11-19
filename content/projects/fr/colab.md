@@ -25,7 +25,7 @@ page:
     heading: Le projet en bref
     focus:
       label: Domaines
-      items: [Conception de jeux d’apprentissage, Développement, Utilisation, Évaluation]
+      items: [Serious games, Conception, Développement, Utilisation, Évaluation]
     period:
       label: Période
       value: 2020–2024
@@ -45,7 +45,7 @@ page:
     heading: Rapprocher enseignants, développeurs de jeux et chercheurs
     diagram:
       type: communities
-      alt: 'Les enseignants ont besoin de jeux adaptés à leurs objectifs d’apprentissage, les développeurs de jeux doivent répondre aux attentes des enseignants et intégrer les sciences de l’éducation, les chercheurs ont besoin de jeux qui fournissent des données ; co.LAB, un cadre de conception et une plateforme numérique, comble ce fossé'
+      alt: 'Les enseignants ont besoin de jeux adaptés à leurs objectifs d’apprentissage, les développeurs de jeux doivent répondre aux attentes des enseignants, les chercheurs ont besoin de données pour évaluer les jeux ; co.LAB, un cadre de conception et une plateforme numérique, comble ce fossé'
       communities:
         - name: [Enseignants]
           need: [Ont besoin de, jeux adaptés à, leurs objectifs, d’apprentissage]
@@ -80,7 +80,7 @@ page:
     eyebrow: Résultats clés
     heading: Ce que montrent nos recherches
     items:
-      - text: Les méthodes existantes de conception de serious games peuvent être réunies dans un seul cadre générique de 23 composantes.
+      - text: 'Les méthodes existantes de conception de serious games peuvent être réunies dans un seul cadre générique : le cadre de conception de serious games co.LAB.'
         source: Revue de 10 cadres de conception existants · Jaccard et al., *JMIR Serious Games*, 2021
         url: https://games.jmir.org/2021/3/e28674
       - text: Un cadre de conception partagé améliore la collaboration au sein des équipes pluridisciplinaires de conception de jeux.
@@ -94,7 +94,7 @@ page:
     heading: Une collaboration entre ingénierie et sciences de l’éducation
     paragraphs:
       - Le projet co.LAB a été mené par l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO) et par le Laboratoire d’innovation pédagogique (LIP) / TECFA de l’Université de Genève.
-      - Le projet était dirigé par le Prof. Dominique Jaccard (HEIG-VD) et le Prof. Eric Sanchez (Université de Genève), qui ont réuni leurs compétences en développement de jeux et en sciences de l’éducation.
+      - Le projet était codirigé par le Prof. Dominique Jaccard (HEIG-VD) et le Prof. Eric Sanchez (Université de Genève), qui ont réuni leurs compétences en développement de jeux et en sciences de l’éducation.
     logos:
       - name: AlbaSim
         logo: ../../../src/assets/logos/albasim.png
@@ -140,12 +140,12 @@ page:
     button: Contactez-nous
 ---
 
-Les jeux d’apprentissage numériques sont de plus en plus utilisés à tous les niveaux d’enseignement et sont reconnus comme des outils efficaces pour soutenir un enseignement centré sur l’apprenant. Pourtant, leur conception, leur développement et leur utilisation restent difficiles.
+Les serious games sont de plus en plus utilisés à tous les niveaux d’enseignement et sont reconnus comme des outils efficaces pour soutenir un enseignement centré sur l’apprenant. Pourtant, leur conception, leur développement et leur utilisation restent difficiles.
 
 ### Le problème
 
-Les enseignants peinent à trouver des jeux adaptés à leurs objectifs d’apprentissage. Les développeurs de jeux cherchent comment répondre aux attentes des enseignants et intégrer les connaissances des sciences de l’éducation. Les chercheurs manquent de jeux qui fournissent des données adaptées pour évaluer leur efficacité.
+Les enseignants peinent à trouver des jeux adaptés à leurs objectifs d’apprentissage. Les développeurs de jeux cherchent comment répondre aux attentes des enseignants. Les chercheurs manquent de données adaptées pour évaluer l’efficacité des serious games.
 
 ### Objectifs du projet
 
-Le projet co.LAB visait à améliorer la conception, le développement et l’utilisation des jeux d’apprentissage numériques en réunissant ces trois communautés.
+Le projet co.LAB visait à améliorer la conception, le développement et l’utilisation des serious games en réunissant ces trois communautés.
