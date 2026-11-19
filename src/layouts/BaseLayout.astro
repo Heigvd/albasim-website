@@ -29,6 +29,11 @@ const langs = Object.keys(languages) as Lang[]
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    <!-- The AlbaSim mark: ink on light tabs, white on dark ones (favicon.svg); favicon.ico for
+         browsers without SVG favicons; a white tile for the home screen of Apple devices. -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex" />}
