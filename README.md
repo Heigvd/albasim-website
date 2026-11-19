@@ -54,15 +54,20 @@ Work happens on a short-lived branch, merged by pull request:
 2. Open a pull request into `dev`. Once merged, the changes are visible on dev.albasim.ch.
 3. When dev.albasim.ch is ready to go live, open a pull request from `dev` into `main`.
 
-Every pull request into `dev` or `main` runs the [CI](.github/workflows/ci.yml): format check, type check and build. A pull request can only be merged once the CI passes.
+Every pull request into `dev` or `main` runs the [CI](.github/workflows/ci.yml): format check, type check and build. The branch rules require this check (`Verify`): a pull request can only be merged once the CI passes.
 
 [Dependabot](.github/dependabot.yml) opens a pull request into `dev` every month when dependencies have updates.
 
 ## Deployment
 
-The site is hosted by Infomaniak. Every push to `dev` runs the [deploy workflow](.github/workflows/deploy.yml): it builds the site and uploads `dist/` over FTPS to dev.albasim.ch, which is password-protected.
+The site is hosted by Infomaniak. Every push to `dev` or `main` runs the [deploy workflow](.github/workflows/deploy.yml): it builds the site and uploads `dist/` over FTPS to the matching site.
 
-The workflow uses the repository variables `FTP_HOST` and `FTP_DEV_USER`, and the secret `FTP_DEV_PASSWORD`. The FTP account can only access the folder of dev.albasim.ch.
+| Branch | Site                               | FTP variable    | FTP secret          |
+| ------ | ---------------------------------- | --------------- | ------------------- |
+| `dev`  | dev.albasim.ch, password-protected | `FTP_DEV_USER`  | `FTP_DEV_PASSWORD`  |
+| `main` | albasim.ch                         | `FTP_PROD_USER` | `FTP_PROD_PASSWORD` |
+
+Both use the repository variable `FTP_HOST`. Each FTP account can only access the folder of its own site.
 
 The `.htaccess`, `.htdigest` and `.user.ini` files on the server are managed in the Infomaniak Manager (password protection, compression, PHP settings). The deploy never uploads or deletes them, so don't add them to `public/`.
 

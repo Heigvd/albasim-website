@@ -1,22 +1,28 @@
 name: Deploy
 
+# `dev` deploys to dev.albasim.ch, `main` to albasim.ch.
 on:
   push:
-    branches: [dev]
+    branches: [dev, main]
 
 permissions:
   contents: read
 
-# Never cancel a deploy halfway through an upload: queue the next one instead.
+# One deploy at a time per branch. Never cancel a deploy halfway through an upload: queue the
+# next one instead.
 concurrency:
-  group: deploy-dev
+  group: deploy-${{ github.ref_name }}
   cancel-in-progress: false
 
 jobs:
-  deploy-dev:
-    name: Deploy to dev.albasim.ch
+  deploy:
+    name: Deploy to ${{ github.ref_name == 'main' && 'albasim.ch' || 'dev.albasim.ch' }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      # Picks the FTP account of the target: FTP_DEV_USER / FTP_DEV_PASSWORD on `dev`,
+      # FTP_PROD_USER / FTP_PROD_PASSWORD on `main`.
+      TARGET: ${{ github.ref_name == 'main' && 'PROD' || 'DEV' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -37,10 +43,14 @@ jobs:
       # compression, PHP settings, maintenance page): they are never uploaded or deleted.
       - name: Upload dist/ to the server
         env:
-          LFTP_PASSWORD: ${{ secrets.FTP_DEV_PASSWORD }}
-          FTP_USER: ${{ vars.FTP_DEV_USER }}
+          LFTP_PASSWORD: ${{ secrets[format('FTP_{0}_PASSWORD', env.TARGET)] }}
+          FTP_USER: ${{ vars[format('FTP_{0}_USER', env.TARGET)] }}
           FTP_HOST: ${{ vars.FTP_HOST }}
         run: |
+          if [ -z "$FTP_USER" ] || [ -z "$LFTP_PASSWORD" ]; then
+            echo "::error::Set the FTP_${TARGET}_USER variable and the FTP_${TARGET}_PASSWORD secret."
+            exit 1
+          fi
           lftp --env-password -u "$FTP_USER" "$FTP_HOST" -e "
             set ftp:ssl-force true;
             set ftp:ssl-protect-data true;
