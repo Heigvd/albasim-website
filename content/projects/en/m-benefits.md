@@ -1,14 +1,14 @@
 ---
 title: M-Benefits
 funders: Horizon 2020
-summary: Serious games to train energy managers to assess the multiple benefits of energy-efficiency measures.
+summary: A serious game to train energy managers to assess the multiple benefits of energy-efficiency measures.
 image: ../../../src/assets/projects/m-benefits.jpg
 imageAlt: Participants working on laptops during the M-Benefits training trial
 page:
   heading: 'M-Benefits: energy efficiency'
-  lead: Energy-efficiency measures bring much more than energy savings, but these multiple benefits are rarely taken into account in investment decisions.
+  lead: Energy-efficiency measures bring more than energy savings, but these multiple benefits are rarely taken into account in investment decisions.
   intro:
-    - Funded by the European Commission’s Horizon 2020 programme, the M-Benefits project trained energy managers to identify, value and communicate the multiple benefits of energy-efficiency measures. AlbaSim led the development of the project’s serious game.
+    - Funded by the European Commission’s Horizon 2020 programme, the M-Benefits project made it possible to train energy managers to identify, value and communicate the multiple benefits of energy-efficiency measures. AlbaSim led the development of the project’s serious game.
     - A three-year European project with partner universities across Europe.
   illustration:
     alt: 'A company building with an energy-efficiency measure, surrounded by its multiple benefits: savings, comfort, productivity and image'
@@ -34,14 +34,14 @@ page:
     heading: Showing the full value of energy efficiency
     diagram:
       type: path
-      alt: Energy-efficiency projects judged on energy savings alone lead to a serious game for energy managers, in which they manage a virtual company, value the multiple benefits and communicate them to decision-makers, with the goal of better-informed investment decisions
+      alt: Energy-efficiency projects judged on energy savings alone lead to a serious game for energy managers, which teaches them to make energy projects strategic, value the multiple benefits and convince decision-makers, with the goal of better-informed investment decisions
       currentLabel: IN COMPANIES
       current: Energy-efficiency projects
       limitsLabel: LIMITS
       limits: [Judged on energy savings alone, Other benefits often ignored]
       projectLabel: THE PROJECT
       projectTitle: A serious game for energy managers
-      steps: [A virtual company to manage, Value the multiple benefits, Convince decision-makers]
+      steps: [Make energy projects strategic, Value the multiple benefits, Convince decision-makers]
       goalLabel: GOAL
       goal: Better-informed investment decisions
   outcomes:
@@ -49,20 +49,20 @@ page:
     heading: A serious game used across Europe
     cards:
       - icon: monitor
-        title: A serious game for energy managers
-        text: A serious game for energy management training, placing players in a virtual company to value and communicate the multiple benefits of energy efficiency.
+        title: One serious game
+        text: A serious game for energy management training, placing players in a virtual company.
       - icon: globe
         title: Eight languages
-        text: After testing in English by trainers from eight countries, the game was translated into seven further languages.
+        text: French, English, German, Portuguese, Italian, Polish, Greek and Spanish.
       - icon: users
-        title: Training in more than ten countries
+        title: More than ten countries
         text: Professional energy managers were trained with the game in more than ten European countries.
   practice:
     eyebrow: From research to practice
     heading: From a first prototype to training across Europe
     paragraphs:
-      - The project started in Brussels in 2018. A first version of the game was presented at the National Technical University of Athens a few months later, and a first training trial with 20 participants from the energy management community confirmed its utility and usability.
-      - In 2019, trainers from eight countries tested the English version in Frankfurt before its translation. The game was then presented at a public workshop in Berlin, and the training of energy managers started across Europe.
+      - The project was launched in Brussels in 2018. An initial version of the game was tested at the National Technical University of Athens with 20 participants from the energy management sector, who confirmed its usefulness.
+      - In 2019, trainers from eight countries tested the English version in Frankfurt. The game was then presented at a public workshop in Berlin, and the training of energy managers started across Europe.
     image: ../../../src/assets/projects/m-benefits-practice.jpg
     imageAlt: Participants working on laptops during the M-Benefits training trial
   findings:
@@ -77,7 +77,7 @@ page:
     heading: A European project on the multiple benefits of energy efficiency
     paragraphs:
       - The project brought together partner universities from several European countries. Within the consortium, the AlbaSim team of the Media Engineering Institute (MEI) at HEIG-VD (HES-SO), led by Prof. Dominique Jaccard, led the development of the serious game.
-      - Energy-efficiency experts, trainers and developers worked together on the game content, its translation and its use in training sessions.
+      - We warmly thank all the energy-efficiency experts, trainers and developers who worked together on the game content, its translation and its use in training sessions.
     logos:
       - name: AlbaSim
         logo: ../../../src/assets/logos/albasim.png
@@ -92,7 +92,7 @@ page:
           height: 45
   resources:
     eyebrow: Resources
-    heading: Everything you need to dive deeper into the project
+    heading: Learn more
     links:
       heading: Links
       items:
@@ -109,12 +109,12 @@ Better comfort, higher productivity, lower maintenance costs, a stronger image: 
 
 ### The gap
 
-In companies, these projects are usually assessed on energy savings alone. Energy managers lack the methods and the arguments to value the other benefits and to convince decision-makers to invest.
+In companies, these projects are usually assessed on energy savings alone. Energy managers lack the methods and the arguments to value the other benefits and to convince decision-makers to invest in energy efficiency.
 
-### Project objectives
+### Serious game objectives
 
-Within the European project, the serious game had three aims:
+Within the project, the serious game had three aims:
 
 1. **Practise:** place energy managers in a virtual company where they assess energy-efficiency measures.
-2. **Value:** help them identify and quantify the multiple benefits of these measures.
-3. **Communicate:** train them to present these benefits to decision-makers in their own organisation.
+2. **Value:** help identify and quantify the multiple benefits of these measures.
+3. **Communicate:** teach how to present these benefits to decision-makers in their own organisation.
