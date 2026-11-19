@@ -2,6 +2,7 @@
 // Key figures on a red band ("15 years of expertise"). The numbers count up from zero each time
 // the band scrolls into view, unless reduced motion is requested. The final value is in the
 // HTML, so it shows without JavaScript and is what screen readers read.
+import type { Lang } from '../../i18n/ui'
 
 interface Figure {
   value: number
@@ -12,26 +13,30 @@ interface Figure {
 
 interface Props {
   figures: Figure[]
+  lang: Lang
 }
 
-const { figures } = Astro.props
-// Thousands separator of the design ("30,000+"), the same in both languages.
-const format = new Intl.NumberFormat('en-US')
+const { figures, lang } = Astro.props
+// Thousands separator: a comma in English ("30,000+"), the Swiss apostrophe in French ("30’000+").
+const separators: Record<Lang, string> = { en: ',', fr: '’' }
+const separator = separators[lang]
+const format = (value: number) =>
+  Math.round(value).toLocaleString('en-US').replaceAll(',', separator)
 ---
 
-<section class="key-figures">
+<section class="key-figures" data-separator={separator}>
   <ul class="container grid">
     {figures.map((figure) => (
       <li class="figure">
         <p class="number t-stat">
           <span class="sr-only">
-            {format.format(figure.value)}
+            {format(figure.value)}
             {figure.suffix}
             {figure.unit && ` ${figure.unit}`} {figure.label}
           </span>
           <span aria-hidden="true">
             <span class="count" data-value={figure.value}>
-              {format.format(figure.value)}
+              {format(figure.value)}
             </span>
             {figure.suffix}
             {figure.unit && <span class="t-stat-unit"> {figure.unit}</span>}
@@ -103,16 +108,17 @@ const format = new Intl.NumberFormat('en-US')
 
 <script>
   const DURATION = 1600
-  const format = new Intl.NumberFormat('en-US')
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
 
   document.querySelectorAll<HTMLElement>('.key-figures').forEach((band) => {
     const counts = [...band.querySelectorAll<HTMLElement>('.count')]
+    const separator = band.dataset.separator ?? ','
+    const format = (value: number) => value.toLocaleString('en-US').replaceAll(',', separator)
     const show = (progress: number) => {
       // Ease out: fast at first, slowing down near the final value.
       const eased = 1 - Math.pow(1 - progress, 3)
       counts.forEach((el) => {
-        el.textContent = format.format(Math.round(Number(el.dataset.value) * eased))
+        el.textContent = format(Math.round(Number(el.dataset.value) * eased))
       })
     }
 
