@@ -37,14 +37,14 @@ const { kind = 'page', size = 'small', class: className, ...attrs } = Astro.prop
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: var(--space-4);
     color: var(--color-ink);
-    transition: color 0.3s ease;
+    transition: color var(--duration-medium) ease;
   }
 
   .arrow {
     flex: 0 0 auto;
-    transition: transform 0.3s var(--ease-out);
+    transition: transform var(--duration-medium) var(--ease-out);
   }
 
   /* A rule drawn by the card with `currentColor` turns red with the text. */

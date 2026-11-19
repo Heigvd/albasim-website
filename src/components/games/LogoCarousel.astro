@@ -50,24 +50,24 @@ const t = useTranslations(lang)
 
 <style>
   .inner {
-    padding-block: 32px 88px;
+    padding-block: var(--space-8) var(--section-space);
   }
 
   .heading {
-    margin: 0 0 32px;
+    margin: 0 0 var(--space-8);
   }
 
   .carousel {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: var(--space-5);
   }
 
   .track {
     display: flex;
     flex: 1;
     align-items: center;
-    gap: 56px;
+    gap: var(--space-14);
     min-width: 0;
     margin: 0;
     padding: 0 22% 0 0;
@@ -117,7 +117,7 @@ const t = useTranslations(lang)
 
   @media (max-width: 680px) {
     .carousel {
-      gap: 12px;
+      gap: var(--space-3);
     }
 
     .control {

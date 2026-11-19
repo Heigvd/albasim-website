@@ -1,7 +1,7 @@
 ---
 // The home page, shared by both languages. Its text comes from `content/home/<lang>.md`;
 // the news, projects and publications come from their own collections.
-import { getCollection, getEntry, render } from 'astro:content'
+import { getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import NewsCard from '../NewsCard.astro'
 import ProjectCard from '../ProjectCard.astro'
@@ -14,7 +14,7 @@ import Missions from './Missions.astro'
 import WegasSection from './WegasSection.astro'
 import { localizedPath, projectPath, useTranslations, type Lang } from '../../i18n/ui'
 import { publicationCardProps } from '../../utils/publications'
-import { newsAnchor, sortNews } from '../../utils/news'
+import { newsAnchor } from '../../utils/news'
 
 interface Props {
   lang: Lang
@@ -28,10 +28,13 @@ if (!home) throw new Error(`Missing home content: content/home/${lang}.md`)
 const { Content } = await render(home)
 const data = home.data
 
-// The three most recent news items in this language.
-const news = sortNews(await getCollection('news', ({ id }) => id.startsWith(`${lang}/`))).slice(
-  0,
-  3,
+// The news items chosen in the home content, in the order given there.
+const news = await Promise.all(
+  data.news.featured.map(async (id) => {
+    const item = await getEntry('news', `${lang}/${id}`)
+    if (!item) throw new Error(`Missing news item: content/news/${lang}/${id}.md`)
+    return item
+  }),
 )
 
 const projects = await Promise.all(
@@ -89,7 +92,7 @@ const publications = await Promise.all(
     ))}
   </CardSection>
 
-  <KeyFigures figures={data.figures} />
+  <KeyFigures figures={data.figures} lang={lang} />
 
   <WegasSection {...data.wegas} lang={lang} />
 

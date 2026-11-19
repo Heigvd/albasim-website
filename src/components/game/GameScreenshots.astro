@@ -83,18 +83,18 @@ const large = await Promise.all(
 
 <style>
   .inner {
-    padding-block: 40px 56px;
+    padding-block: var(--space-10) var(--section-space-s);
   }
 
   .heading {
-    margin-bottom: 12px;
+    margin-bottom: var(--space-3);
   }
 
   .shots {
     display: flex;
-    gap: 24px;
+    gap: var(--space-6);
     margin: 0;
-    padding: 16px 0 4px;
+    padding: var(--space-4) 0 var(--space-1);
     overflow-x: auto;
     list-style: none;
     scroll-snap-type: x mandatory;
@@ -141,7 +141,7 @@ const large = await Promise.all(
     display: flex;
     flex-direction: column;
     gap: 2px;
-    margin-top: 12px;
+    margin-top: var(--space-3);
   }
 
   .caption-text {
@@ -152,7 +152,7 @@ const large = await Promise.all(
   .bar {
     position: relative;
     height: 16px;
-    margin: 6px 0 4px;
+    margin: 6px 0 var(--space-1);
     cursor: pointer;
     touch-action: none;
   }
@@ -181,9 +181,9 @@ const large = await Promise.all(
     border-radius: 2px;
     background: var(--color-ink);
     transition:
-      background-color 0.3s ease,
-      height 0.2s ease,
-      top 0.2s ease;
+      background-color var(--duration-medium) ease,
+      height var(--duration-quick) ease,
+      top var(--duration-quick) ease;
   }
 
   .scroller:hover .thumb {
@@ -202,7 +202,7 @@ const large = await Promise.all(
     height: 100vh;
     max-height: none;
     margin: 0;
-    padding: 56px 80px;
+    padding: var(--space-14) var(--space-20);
     border: 0;
     background: rgb(14 15 22 / 92%);
     color: var(--color-white);
@@ -263,7 +263,7 @@ const large = await Promise.all(
     font-size: 28px;
     line-height: 1;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color var(--duration-quick);
   }
 
   .lightbox-button:hover {
@@ -295,7 +295,7 @@ const large = await Promise.all(
 
   @media (max-width: 640px) {
     .lightbox {
-      padding: 72px 12px;
+      padding: var(--space-18) var(--space-3);
     }
 
     .previous,

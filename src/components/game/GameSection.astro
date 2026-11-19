@@ -13,7 +13,7 @@ const { eyebrow, heading, paragraphs, link, id, lang } = Astro.props
 <section class="text-section" aria-labelledby={id}>
   <div class="container inner">
     <p class="t-eyebrow eyebrow">{eyebrow}</p>
-    <div class="columns">
+    <div class="columns split">
       <h2 id={id} class="t-h2 heading">
         {heading}
       </h2>
@@ -29,27 +29,19 @@ const { eyebrow, heading, paragraphs, link, id, lang } = Astro.props
 
 <style>
   .inner {
-    padding-block: 96px;
+    padding-block: var(--section-space);
   }
 
   .text-section + .text-section .inner {
     padding-top: 0;
   }
 
-  /* Same look as the eyebrow of SectionHeading, above a title that sits in the first column */
   .eyebrow {
-    width: 50%;
-    margin: 0 0 28px;
-    padding-top: 14px;
-    border-top: 3px solid var(--color-primary-text);
-    color: var(--color-primary-text);
-    text-transform: uppercase;
+    margin-bottom: var(--space-7);
   }
 
   .columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 72px;
+    gap: var(--space-18);
     align-items: start;
   }
 
@@ -58,11 +50,11 @@ const { eyebrow, heading, paragraphs, link, id, lang } = Astro.props
   }
 
   .text {
-    margin: 0 0 16px;
+    margin: 0 0 var(--space-4);
   }
 
   .text:last-of-type {
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
   }
 
   .text:last-child {
@@ -71,8 +63,7 @@ const { eyebrow, heading, paragraphs, link, id, lang } = Astro.props
 
   @media (max-width: 820px) {
     .columns {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 24px;
+      gap: var(--space-6);
     }
   }
 </style>

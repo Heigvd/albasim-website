@@ -1,0 +1,116 @@
+---
+// The error page, shared by both languages. Its text comes from `content/error-404/<lang>.md`.
+//
+// A static host returns a single page for unknown addresses: `404.html`, in English. For French
+// visitors to get `fr/404`, the server needs these lines in its `.htaccess`, which is managed in
+// the Infomaniak Manager and not in this repository:
+//
+//   ErrorDocument 404 /404.html
+//   <If "%{REQUEST_URI} =~ m#^/fr(/|$)#">
+//     ErrorDocument 404 /fr/404/index.html
+//   </If>
+//
+// All the links are absolute, since the page is shown at whatever address was not found.
+import { getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ArrowLink from '../ArrowLink.astro'
+import Button from '../Button.astro'
+import ErrorIllustration from './ErrorIllustration.astro'
+import { localizedPath, type Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const page = await getEntry('error404', lang)
+if (!page) throw new Error(`Missing error page content: content/error-404/${lang}.md`)
+const { Content } = await render(page)
+const data = page.data
+---
+
+<BaseLayout title={data.title} noindex>
+  <section class="error">
+    <div class="container inner split">
+      <div>
+        <p class="eyebrow t-eyebrow">{data.eyebrow}</p>
+        <h1 class="t-h1">{data.heading}</h1>
+        <div class="intro t-lead">
+          <Content />
+        </div>
+        <Button href={localizedPath('home', lang)}>{data.button}</Button>
+        <nav aria-labelledby="error-links-label">
+          <p id="error-links-label" class="links-label t-label">
+            {data.linksLabel}
+          </p>
+          <ul class="links">
+            {data.links.map((link) => (
+              <li>
+                <ArrowLink href={localizedPath(link.page, lang)}>{link.label}</ArrowLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <ErrorIllustration label={data.illustrationAlt} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* On large screens the section fills the window under the header, so the footer stays below
+     the fold, as in the design. */
+  .error {
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - var(--header-height));
+    background: var(--gradient-hero);
+  }
+
+  .inner {
+    gap: var(--space-14);
+    align-items: center;
+    width: 100%;
+    padding-block: var(--space-10);
+  }
+
+  .eyebrow {
+    margin-bottom: var(--space-7);
+  }
+
+  h1 {
+    margin: 0 0 var(--space-5);
+    text-wrap: balance;
+  }
+
+  .intro {
+    max-width: 32em;
+    margin-bottom: var(--space-8);
+    text-wrap: pretty;
+  }
+
+  .intro :global(p) {
+    margin: 0;
+  }
+
+  .links-label {
+    margin: var(--space-10) 0 var(--space-3);
+    color: var(--color-text-muted);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px var(--space-7);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 820px) {
+    .error {
+      min-height: 0;
+    }
+  }
+</style>

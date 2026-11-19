@@ -12,7 +12,7 @@ const { heading } = Astro.props
 ---
 
 <section class="hero">
-  <div class="container inner">
+  <div class="container inner split">
     <div>
       <h1 class="t-h1">{heading}</h1>
       <div class="intro t-lead">
@@ -34,15 +34,13 @@ const { heading } = Astro.props
   }
 
   .inner {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 56px;
+    gap: var(--space-14);
     align-items: center;
-    padding-block: 80px 64px;
+    padding-block: var(--section-space-m) var(--section-space-m);
   }
 
   h1 {
-    margin: 0 0 24px;
+    margin: 0 0 var(--space-6);
     text-wrap: balance;
   }
 
@@ -56,16 +54,10 @@ const { heading } = Astro.props
   }
 
   .intro :global(p + p) {
-    padding-top: 16px;
+    padding-top: var(--space-4);
   }
 
   .after {
-    margin-top: 28px;
-  }
-
-  @media (max-width: 820px) {
-    .inner {
-      grid-template-columns: minmax(0, 1fr);
-    }
+    margin-top: var(--space-7);
   }
 </style>

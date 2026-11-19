@@ -23,6 +23,10 @@ missions:
     imageAlt: Des étudiants jouant à un serious game en classe
 news:
   heading: Dernières actualités
+  featured:
+    - x-human-project-real-time
+    - pnr77-synthesis-report
+    - pm-game-monash
 projects:
   heading: Projets de recherche à la une
   featured:

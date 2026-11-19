@@ -43,7 +43,7 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
             <h3 class="sr-only">{item.label}</h3>
             {item.groups.map((group) => (
               <div>
-                <h4 class="group-heading">{group.heading}</h4>
+                <h4 class="group-heading t-label-lg">{group.heading}</h4>
                 <ul class="documents">
                   {group.documents.map((document) => (
                     <li>
@@ -68,16 +68,11 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
 
 <style>
   .inner {
-    padding-block: 40px 96px;
+    padding-block: var(--space-10) var(--section-space);
   }
 
   .eyebrow {
-    width: 50%;
-    margin: 0 0 28px;
-    padding-top: 14px;
-    border-top: 3px solid var(--color-primary-text);
-    color: var(--color-primary-text);
-    text-transform: uppercase;
+    margin-bottom: var(--space-7);
   }
 
   .box {
@@ -89,9 +84,9 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
   .summary {
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 6px 20px;
+    gap: 6px var(--space-5);
     align-items: center;
-    padding: 26px 28px;
+    padding: var(--space-7) var(--space-7);
     list-style: none;
     cursor: pointer;
   }
@@ -111,7 +106,7 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
   }
 
   .summary :global(.chevron) {
-    transition: transform 0.2s;
+    transition: transform var(--duration-quick);
   }
 
   .box[open] .summary :global(.chevron) {
@@ -119,15 +114,15 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
   }
 
   .body {
-    padding: 0 28px 28px;
+    padding: 0 var(--space-7) var(--space-7);
     border-top: 1px solid var(--color-line);
   }
 
   .tabs {
     display: inline-flex;
-    gap: 4px;
-    margin: 24px 0 8px;
-    padding: 4px;
+    gap: var(--space-1);
+    margin: var(--space-6) 0 var(--space-2);
+    padding: var(--space-1);
     border-radius: var(--radius-pill);
     background: var(--color-tint);
   }
@@ -137,7 +132,7 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
   }
 
   .tab {
-    padding: 6px 18px;
+    padding: 6px var(--space-4);
     border: 0;
     border-radius: var(--radius-pill);
     background: transparent;
@@ -154,7 +149,7 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
   .panel {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px 40px;
+    gap: var(--space-3) var(--space-10);
   }
 
   .panel[hidden] {
@@ -162,11 +157,7 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
   }
 
   .group-heading {
-    margin: 20px 0 6px;
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    margin: var(--space-5) 0 6px;
   }
 
   .documents {
@@ -177,10 +168,10 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
 
   .document {
     display: flex;
-    gap: 12px;
+    gap: var(--space-3);
     align-items: baseline;
     justify-content: space-between;
-    padding: 12px 0;
+    padding: var(--space-3) 0;
     border-top: 1px solid var(--color-line);
     font-size: 16px;
     line-height: 1.45;
@@ -198,7 +189,7 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
 
   .format {
     flex: 0 0 auto;
-    padding: 2px 8px;
+    padding: 2px var(--space-2);
     border: 1px solid var(--color-separator);
     border-radius: var(--radius-pill);
     color: var(--color-text-muted);
@@ -210,7 +201,7 @@ const first = languages.find((item) => item.lang === lang)?.lang ?? languages[0]
   @media (max-width: 680px) {
     .summary,
     .body {
-      padding-inline: 20px;
+      padding-inline: var(--space-5);
     }
 
     .panel {

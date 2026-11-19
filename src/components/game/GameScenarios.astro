@@ -49,11 +49,11 @@ const count = cards.length + (custom ? 1 : 0)
 
 <style>
   .inner {
-    padding-block: 68px 96px;
+    padding-block: var(--section-space-m) var(--section-space);
   }
 
   .heading {
-    margin-bottom: 40px;
+    margin-bottom: var(--space-10);
   }
 
   .heading :global(.title) {
@@ -63,7 +63,7 @@ const count = cards.length + (custom ? 1 : 0)
   .cards {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    gap: var(--space-6);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -76,8 +76,8 @@ const count = cards.length + (custom ? 1 : 0)
   .card {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    padding: 28px;
+    gap: var(--space-3);
+    padding: var(--space-7);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-block);
     background: var(--color-white);
@@ -95,7 +95,7 @@ const count = cards.length + (custom ? 1 : 0)
 
   .languages {
     display: flex;
-    gap: 4px;
+    gap: var(--space-1);
     margin: 0;
   }
 

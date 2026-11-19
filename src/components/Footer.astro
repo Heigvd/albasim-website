@@ -64,7 +64,7 @@ const explore: { key: RouteKey; label: string }[] = [
 
       <div class="column">
         <h2 class="t-label heading">{t('footer.contact')}</h2>
-        <address class="address">
+        <address class="address t-body-s">
           {address.map((line, i) => (
             <>
               {i > 0 && <br />}
@@ -107,7 +107,7 @@ const explore: { key: RouteKey; label: string }[] = [
   }
 
   .inner {
-    padding-block: 72px 40px;
+    padding-block: var(--section-space-m) var(--space-10);
   }
 
   .site-footer a {
@@ -127,8 +127,8 @@ const explore: { key: RouteKey; label: string }[] = [
   .grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 48px;
-    padding-bottom: 34px;
+    gap: var(--space-12);
+    padding-bottom: var(--space-8);
     border-bottom: 1px solid var(--color-footer-line);
   }
 
@@ -136,8 +136,8 @@ const explore: { key: RouteKey; label: string }[] = [
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-    gap: 16px 20px;
-    margin-bottom: 24px;
+    gap: var(--space-4) var(--space-5);
+    margin-bottom: var(--space-6);
   }
 
   /* The HEIG-VD logo is black: turn it white on the dark footer */
@@ -167,7 +167,7 @@ const explore: { key: RouteKey; label: string }[] = [
   }
 
   .heading {
-    margin: 0 0 16px;
+    margin: 0 0 var(--space-4);
     color: var(--color-white);
   }
 
@@ -183,15 +183,13 @@ const explore: { key: RouteKey; label: string }[] = [
 
   .address {
     font-style: normal;
-    font-size: 16px;
-    line-height: 1.6;
     color: var(--color-footer-text-muted);
   }
 
   .external {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
   }
 
   .bottom {
@@ -199,15 +197,15 @@ const explore: { key: RouteKey; label: string }[] = [
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
-    padding-top: 28px;
+    gap: var(--space-5);
+    padding-top: var(--space-7);
     font-size: 14px;
   }
 
   .note {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: var(--space-3);
     max-width: 760px;
   }
 

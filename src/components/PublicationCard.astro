@@ -73,7 +73,7 @@ const otherLang = titleLang && titleLang !== lang ? titleLang : undefined
 
 <style>
   .publication-card {
-    padding: 26px 24px 20px;
+    padding: var(--space-7) var(--space-6) var(--space-5);
   }
 
   .publication-card > p,
@@ -82,7 +82,7 @@ const otherLang = titleLang && titleLang !== lang ? titleLang : undefined
   }
 
   .year {
-    margin-bottom: 8px;
+    margin-bottom: var(--space-2);
   }
 
   .venue {
@@ -109,7 +109,7 @@ const otherLang = titleLang && titleLang !== lang ? titleLang : undefined
 
   .type {
     align-self: flex-start;
-    padding: 4px 12px;
+    padding: var(--space-1) var(--space-3);
     border-radius: var(--radius-pill);
     background: var(--color-sage);
   }
@@ -127,12 +127,12 @@ const otherLang = titleLang && titleLang !== lang ? titleLang : undefined
   }
 
   .footer {
-    padding-top: 20px;
+    padding-top: var(--space-5);
   }
 
   /* The rule stays without a link, so that all cards end the same way. */
   .access {
-    padding-top: 12px;
+    padding-top: var(--space-3);
     border-top: 1px solid var(--color-ink);
   }
 

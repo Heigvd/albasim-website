@@ -63,16 +63,16 @@ const games = (await getCollection('games', ({ id }) => id.startsWith(`${lang}/`
   }
 
   .games {
-    padding-block: 32px 56px;
+    padding-block: var(--space-8) var(--section-space-s);
   }
 
   .heading {
-    margin-bottom: 32px;
+    margin-bottom: var(--space-8);
   }
 
   .list {
     display: grid;
-    gap: 32px;
+    gap: var(--space-8);
     margin: 0;
     padding: 0;
     list-style: none;

@@ -29,7 +29,7 @@ const boxes = [1, 118, 235]
 ---
 
 <section class="wegas" id="wegas" aria-labelledby="wegas-heading">
-  <div class="container inner">
+  <div class="container inner split">
     <div>
       <SectionHeading eyebrow={eyebrow} title={title} id="wegas-heading" class="heading" />
       <p class="t-body text">{text}</p>
@@ -90,11 +90,9 @@ const boxes = [1, 118, 235]
 
 <style>
   .inner {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 56px;
+    gap: var(--space-14);
     align-items: stretch;
-    padding-block: var(--section-space) 100px;
+    padding-block: var(--section-space) var(--section-space);
   }
 
   .heading :global(.eyebrow) {
@@ -102,7 +100,7 @@ const boxes = [1, 118, 235]
   }
 
   .heading :global(.title) {
-    margin: 32px 0 24px;
+    margin: var(--space-8) 0 var(--space-6);
   }
 
   .text {
@@ -110,7 +108,7 @@ const boxes = [1, 118, 235]
   }
 
   .highlights {
-    margin: 28px 0 32px;
+    margin: var(--space-7) 0 var(--space-8);
     padding: 0;
     list-style: none;
     border-top: 1px solid var(--color-line);
@@ -151,7 +149,7 @@ const boxes = [1, 118, 235]
     display: block;
     width: 100%;
     height: auto;
-    margin-top: 20px;
+    margin-top: var(--space-5);
     font-family: var(--font-sans);
   }
 
@@ -172,11 +170,5 @@ const boxes = [1, 118, 235]
 
   .arrow-head {
     fill: var(--color-ink);
-  }
-
-  @media (max-width: 820px) {
-    .inner {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 </style>

@@ -18,7 +18,7 @@ const steps = [
 ---
 
 <section aria-labelledby="approach-heading">
-  <div class="container inner">
+  <div class="container inner split">
     <div>
       <SectionHeading eyebrow={eyebrow} title={heading} id="approach-heading" class="heading" />
       {paragraphs.map((paragraph) => (
@@ -94,15 +94,13 @@ const steps = [
 
 <style>
   .inner {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 72px;
+    gap: var(--space-18);
     align-items: center;
-    padding-block: 96px;
+    padding-block: var(--section-space);
   }
 
   .heading {
-    margin-bottom: 24px;
+    margin-bottom: var(--space-6);
   }
 
   .heading :global(.eyebrow) {
@@ -110,7 +108,7 @@ const steps = [
   }
 
   .paragraph {
-    margin: 0 0 16px;
+    margin: 0 0 var(--space-4);
   }
 
   .paragraph:last-child {
@@ -136,7 +134,7 @@ const steps = [
     display: flex;
     flex-direction: column;
     gap: 6px;
-    padding: 20px;
+    padding: var(--space-5);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-block);
     background: var(--color-white);
@@ -157,7 +155,7 @@ const steps = [
   }
 
   .cycle {
-    padding: 18px 22px 40px;
+    padding: var(--space-4) var(--space-6) var(--space-10);
     border: 1.5px dashed var(--color-ink);
     border-radius: 20px;
     background: var(--color-white);
@@ -207,17 +205,11 @@ const steps = [
   }
 
   .cycle-label {
-    margin: 8px 0 4px;
+    margin: var(--space-2) 0 var(--space-1);
   }
 
   .cycle-text {
     margin: 0;
-  }
-
-  @media (max-width: 820px) {
-    .inner {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 
   @media (max-width: 480px) {

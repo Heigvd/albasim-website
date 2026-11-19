@@ -50,7 +50,7 @@ const mediaStyle = {
     {text && (
       <>
         <div class="text-wrap">
-          <div class="text" id={`${id}-text`} data-news-text set:html={text} />
+          <div class="text t-body-s" id={`${id}-text`} data-news-text set:html={text} />
         </div>
         <button
           type="button"
@@ -85,8 +85,8 @@ const mediaStyle = {
   .news-item {
     display: flex;
     align-items: flex-start;
-    gap: 40px;
-    padding: 36px 0;
+    gap: var(--space-10);
+    padding: var(--space-10) 0;
     border-bottom: 1px solid var(--color-line);
   }
 
@@ -129,11 +129,6 @@ const mediaStyle = {
     letter-spacing: -0.01em;
   }
 
-  .text {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
   .text :global(p) {
     margin: 0;
   }
@@ -171,7 +166,7 @@ const mediaStyle = {
     font-size: 16px;
     line-height: 1.6;
     pointer-events: none;
-    transition: color 0.2s ease;
+    transition: color var(--duration-quick) ease;
   }
 
   .news-item:hover .text-wrap::after {
@@ -194,7 +189,7 @@ const mediaStyle = {
     display: inline-flex;
     align-self: flex-start;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
     padding: 0;
     border: 0;
     background: none;
@@ -232,16 +227,16 @@ const mediaStyle = {
   .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 24px;
+    gap: var(--space-2) var(--space-6);
     margin: 0;
-    padding: 4px 0 0;
+    padding: var(--space-1) 0 0;
     list-style: none;
   }
 
   @media (max-width: 760px) {
     .news-item {
       flex-direction: column;
-      gap: 18px;
+      gap: var(--space-4);
     }
 
     .media {

@@ -32,7 +32,7 @@ const t = useTranslations(lang)
     fetchpriority="high"
     class="photo"
   />
-  <nav class="container breadcrumb" aria-label={t('breadcrumb.label')}>
+  <nav class="container breadcrumb t-breadcrumb" aria-label={t('breadcrumb.label')}>
     <ol>
       <li>
         <a href={localizedPath('games', lang)}>{t('nav.games')}</a>
@@ -110,9 +110,7 @@ const t = useTranslations(lang)
   }
 
   .breadcrumb {
-    padding-top: 28px;
-    font-size: 14px;
-    line-height: 21px;
+    padding-top: var(--space-7);
   }
 
   .breadcrumb ol {
@@ -147,7 +145,7 @@ const t = useTranslations(lang)
     display: flex;
     flex: 1;
     align-items: center;
-    padding-block: 32px 81px;
+    padding-block: var(--space-8) var(--section-space-m);
   }
 
   .text {
@@ -155,15 +153,15 @@ const t = useTranslations(lang)
   }
 
   .title {
-    margin: 0 0 24px;
+    margin: 0 0 var(--space-6);
   }
 
   .buttons {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 24px;
-    margin-top: 32px;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
   }
 
   @media (max-width: 680px) {
@@ -172,7 +170,7 @@ const t = useTranslations(lang)
     }
 
     .inner {
-      padding-block: 40px 56px;
+      padding-block: var(--space-10) var(--section-space-s);
     }
   }
 </style>
