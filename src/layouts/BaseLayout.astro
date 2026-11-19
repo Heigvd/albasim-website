@@ -10,9 +10,16 @@ interface Props {
   description?: string
   /** URL of this page in each language. Defaults to the matching fixed route. */
   alternates?: Record<Lang, string>
+  /** Keeps the page out of search engines, e.g. the error page. */
+  noindex?: boolean
 }
 
-const { title, description, alternates = alternatesFor(Astro.url.pathname) } = Astro.props
+const {
+  title,
+  description,
+  alternates = alternatesFor(Astro.url.pathname),
+  noindex = false,
+} = Astro.props
 const lang: Lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang
 const langs = Object.keys(languages) as Lang[]
 ---
@@ -24,9 +31,11 @@ const langs = Object.keys(languages) as Lang[]
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    {langs.map((code) => (
-      <link rel="alternate" hreflang={code} href={new URL(alternates[code], Astro.site)} />
-    ))}
+    {noindex && <meta name="robots" content="noindex" />}
+    {!noindex &&
+      langs.map((code) => (
+        <link rel="alternate" hreflang={code} href={new URL(alternates[code], Astro.site)} />
+      ))}
     <Font cssVariable="--font-inter-tight" preload />
   </head>
   <body>

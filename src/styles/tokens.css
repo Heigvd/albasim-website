@@ -52,6 +52,7 @@
   --container-max: 1240px;
   --gutter: 40px;
   --section-space: 96px;
+  --header-height: 123px; /* height of the sticky header at the top of the page */
   --header-offset: 90px; /* room left above anchored headings by the sticky header */
   --header-compact-height: 61px; /* height of the sticky header once the page has scrolled */
 

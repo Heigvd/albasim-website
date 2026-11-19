@@ -529,6 +529,27 @@ const contact = defineCollection({
   }),
 })
 
+// The error page shown for unknown addresses, one file per language (`fr.md`, `en.md`). The
+// body is the paragraph under the title.
+const error404 = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/error-404' }),
+  schema: z.object({
+    /** Title of the browser tab. */
+    title: z.string(),
+    /** Small red label above the title. */
+    eyebrow: z.string(),
+    heading: z.string(),
+    /** Label of the button to the home page. */
+    button: z.string(),
+    /** Label above the other links. */
+    linksLabel: z.string(),
+    /** Other pages to go to. `page` is one of the routes of `src/i18n/ui.ts`. */
+    links: z.array(z.object({ label: z.string(), page: z.enum(routeKeys) })),
+    /** Description of the illustration, for screen readers. */
+    illustrationAlt: z.string(),
+  }),
+})
+
 // The ready-to-use serious games, one folder per language (`en/`, `fr/`), one file per game.
 // The file name is the address of the game's page, e.g. `/serious-games/pm-game`.
 const games = defineCollection({
@@ -735,6 +756,7 @@ export const collections = {
   teamPage,
   newsPage,
   contact,
+  error404,
   games,
   gamesPage,
 }
