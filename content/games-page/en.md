@@ -8,7 +8,7 @@ illustration:
   practice: PRACTICE
 gamesHeading: 'Available games'
 users:
-  heading: 'Universities and training organisations using our games'
+  heading: 'Some universities and training organisations using our games'
   list:
     - name: 'Monash University'
       logo: ../../src/assets/users/monash-university.png

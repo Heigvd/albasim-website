@@ -2,10 +2,10 @@
 name: Mass Casualties Triage
 domain: 'Emergency medicine'
 languages: [en, fr]
-summary: 'Train your triage reflexes: examine victims, select the relevant clinical parameters and assign priorities as you would in a real mass-casualty incident.'
+summary: 'Train your triage reflexes: examine victims, assess their clinical parameters and assign priorities as you would in a real mass-casualty incident.'
 highlights:
   - title: 'Core triage skills'
-    text: 'Apply a triage algorithm, assess parameters, decide on treatments.'
+    text: 'Apply a triage algorithm, assess relevant parameters, decide on first treatments.'
   - title: 'Tailored training sessions'
     text: 'Trainers generate their own sets of casualties and urgency levels.'
 access: 'Available under licence.'
@@ -19,13 +19,13 @@ page:
   intro:
     heading: Practise triage until it becomes a reflex
     paragraphs:
-      - Effective pre-triage requires both solid knowledge of the triage algorithm and the ability to apply it quickly under pressure. Mass Casualties Triage offers a simple way to train this skill as often as needed, individually or in class.
+      - Effective pre-triage requires both solid knowledge of the triage algorithm and the ability to apply it in stressful situations. Mass Casualties Triage offers a way to train this skill as often as needed, individually or in class.
   game:
     eyebrow: The game
-    heading: Take on the role of a pre-triage officer in a mass casualty incident
+    heading: Take charge of pre-triage in a mass casualty incident
     paragraphs:
-      - Mass Casualties Triage trains first responders to assess victims and set the emergency priorities.
-      - For each casualty, take clinical measurements and assign a triage category. Every action takes time, just as in reality.
+      - Mass Casualties Triage trains first responders to assess the degree of urgency of each casualty.
+      - For each casualty, take clinical measurements and assign a triage category. As in real situations, every action takes time.
       - Compare your decisions with the expected answers to understand your mistakes.
     image: ../../../src/assets/games/mass-casualties-triage/responders.jpg
     imageAlt: Responders treating a casualty on a stretcher with an Urgent pre-triage tag
@@ -36,10 +36,10 @@ page:
       - Apply pre-triage algorithms
       - Select the relevant clinical parameters
       - Identify the immediate life-saving measures
-      - Analyse your decisions and use feedback to learn from mistakes
+      - Analyse your decisions and learn from mistakes
   concept:
     heading: A complete teaching and learning concept
-    text: Use Mass Casualties Triage in the classroom, individually or in teams, followed by a debriefing, or on your own for personal training throughout the year, as part of lifelong learning.
+    text: Use Mass Casualties Triage in the classroom or on your own for your personal continuing education.
     diagram:
       type: hub
       alt: Mass Casualties Triage at the centre, connected to classroom use individually, classroom use in teams, and personal training
@@ -50,14 +50,14 @@ page:
         - [PERSONAL, TRAINING]
   scenarios:
     eyebrow: Casualty sets
-    heading: One ready-to-use casualty set, or create your own
+    heading: Use a ready-to-use casualty set or create your own
     cards:
       - icon: tag
         title: Basic casualty set
         text: A ready-to-use set of casualties to start training straight away.
     custom:
       title: Create your own casualty sets
-      text: Trainers can create as many casualty sets as they wish, choosing how many casualties learners will face, which pathologies they encounter and how urgent each case is.
+      text: Trainers can create as many casualty sets as they wish, choosing the number of casualties, their pathologies and their degree of urgency.
   screenshots:
     eyebrow: Screenshots
     items:
@@ -71,8 +71,8 @@ page:
         text: Select the level of urgency
       - image: ../../../src/assets/games/mass-casualties-triage/results.png
         alt: 'Mass Casualties Triage screen: Results'
-        title: Results
-        text: Summary of results
+        title: Learn from mistakes
+        text: Analysis of mistakes for each casualty
       - image: ../../../src/assets/games/mass-casualties-triage/casualty-set-pathologies.png
         alt: 'Mass Casualties Triage screen: defining a casualty set, selecting pathologies'
         title: As a trainer, define your own sets of casualties

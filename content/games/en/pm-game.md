@@ -2,29 +2,29 @@
 name: PM-Game
 domain: 'Project management'
 languages: [en, fr]
-summary: 'Step into the role of a project manager and lead a virtual project from the initial idea to implementation and lessons learned, facing the decisions, risks and trade-offs of a real project.'
+summary: 'Lead a virtual project from the initial idea to implementation and lessons learned. Face decisions, risks and trade-offs just like those of a real project.'
 highlights:
   - title: 'A complete teaching concept'
     text: 'Simulation, teamwork and role-play in one experience.'
   - title: 'Used worldwide'
-    text: 'Thousands of students, from Switzerland to India and Australia.'
+    text: 'Thousands of students in Switzerland, France, India and Australia.'
 access: 'Available under licence.'
 image: ../../../src/assets/games/pm-game.jpg
 imageAlt: 'A team joining fists over project charts and reports'
 order: 1
 page:
   hero:
-    lead: Step into the role of a project manager and lead a virtual project, facing the decisions, risks and trade-offs of a real project.
+    lead: Lead a virtual project and face the decisions, risks and trade-offs of a real project.
     contactButton: Contact us for a demo
     resourcesButton: Trainer resources
   intro:
-    heading: Fail in the game, not in real projects
+    heading: Fail in the simulation, not in real projects
     paragraphs:
       - Real competence comes from experience.
-      - 'The PM-Game puts learning by doing at the heart of project management training: participants lead a virtual project from the initial idea to implementation, without any real-world cost.'
+      - 'The PM-Game puts learning by doing at the heart of project management training: participants lead a virtual project from the initial idea to implementation.'
   game:
     eyebrow: The game
-    heading: Take on the role of a project manager and lead a virtual project
+    heading: Take charge of a virtual project
     paragraphs:
       - Define the project, plan activities, allocate resources and track progress. Deal with stakeholders, handle unexpected events and balance quality, costs and deadlines.
     image: ../../../src/assets/games/pm-game/team.jpg
@@ -40,13 +40,13 @@ page:
       - Identify the problem
       - Define project objectives
       - Identify stakeholders
-      - Identify and assess project risks
-      - Estimate project costs and benefits
+      - Assess risks
+      - Present the project to decision-makers
+      - Estimate costs and benefits
       - Make trade-offs between scope, time, cost and quality
-      - Present a project proposal to decision-makers
   concept:
-    heading: A complete teaching and learning concept
-    text: The PM-Game combines the software simulation with role plays beyond the screen, such as running a steering committee, and experience sharing within the team.
+    heading: An integrated learning concept
+    text: The PM-Game combines the software simulation with role plays, such as running a steering committee, and experience sharing within the team.
     diagram:
       type: hub
       alt: PM-Game at the centre, connected to software simulation, teamwork and role plays
@@ -57,46 +57,46 @@ page:
         - [ROLE PLAYS]
   scenarios:
     eyebrow: Scenarios
-    heading: 'Choose the project that best fits your audience: three ready-to-use scenarios are available'
+    heading: 'Choose the project that fits your audience: three scenarios are available'
     cards:
       - icon: lightbulb
         title: 'Artos Inc.: Product innovation'
         languages: [fr, en]
-        text: You work at Artos Inc., an international manufacturer of machine tools. It’s up to you to transform an innovative idea into a concrete realization. You will have to define objectives, estimate benefits, plan and master the execution.
+        text: You work at Artos Inc., an international manufacturer of machine tools. It’s up to you to transform an innovative idea into a concrete realization. You will have to define objectives, estimate benefits, convince decision-makers, plan and master the execution.
       - icon: heart-handshake
         title: Non-profit organization
         languages: [fr, en]
-        text: Your foundation responds to a tender call with an awareness campaign on computer addiction. You will have to build the project proposal, get the participants on board, plan the campaign and monitor its implementation.
+        text: Your foundation is responding to a call for tenders by proposing an awareness campaign on video game addiction. You will have to build the project, get the participants on board, plan the campaign and monitor its implementation.
       - icon: landmark
         title: 'Belleville: Project management in the public sector'
         languages: [fr]
-        text: You are given the mandate to create a new medical facility open 24 hours a day. You will have to convince all stakeholders, plan the project and monitor its delivery, within the specific constraints of the public sector.
+        text: You are given the mandate to create a new medical center open 24 hours a day. You will have to convince stakeholders, plan the project and monitor its delivery, within the specific constraints of the public sector.
     custom:
       title: Create your own scenarios
-      text: With the scenario editor, create your own scenarios, with project context, activities, resources and events. We are available to help.
+      text: With the scenario editor, create your own scenarios, with your own context, activities, resources and events.
   screenshots:
     eyebrow: Screenshots
     items:
       - image: ../../../src/assets/games/pm-game/weekly-decisions.jpg
         alt: 'PM-Game screen: Weekly decisions'
         title: Weekly decisions
-        text: Questions to answer each week, with their consequences
+        text: Make decisions each week and see their consequences
       - image: ../../../src/assets/games/pm-game/mailbox.jpg
         alt: 'PM-Game screen: Mailbox'
         title: Mailbox
-        text: Messages from stakeholders throughout the project
+        text: Receive emails from stakeholders throughout the project
       - image: ../../../src/assets/games/pm-game/planning.jpg
         alt: 'PM-Game screen: Planning'
         title: Planning
-        text: Activities scheduled in the Gantt chart
+        text: Schedule activities in the Gantt chart
       - image: ../../../src/assets/games/pm-game/resources.jpg
         alt: 'PM-Game screen: Resources'
         title: Resources
-        text: Team members, wages and assignments
+        text: Assign activities to resources
       - image: ../../../src/assets/games/pm-game/execution.jpg
         alt: 'PM-Game screen: Execution'
         title: Execution
-        text: Progress tracked week by week against the plan
+        text: Monitor project progress
       - image: ../../../src/assets/games/pm-game/trainer-dashboard.jpg
         alt: 'PM-Game screen: Trainer dashboard'
         title: Trainer dashboard
@@ -200,7 +200,7 @@ page:
                 url: https://www.albasim.ch/wp-content/uploads/Sandelman_EtatSituation_v3_fr.pdf
                 format: PDF
   users:
-    heading: Universities and training organisations using the PM-Game
+    heading: Some organisations using the PM-Game
     list:
       - name: Monash University
         logo: ../../../src/assets/users/monash-university.png
