@@ -8,7 +8,7 @@ const { heading, paragraphs } = Astro.props
 ---
 
 <section aria-labelledby="intro-heading">
-  <div class="container inner">
+  <div class="container inner split">
     <h2 id="intro-heading" class="t-h2 heading">
       {heading}
     </h2>
@@ -22,11 +22,9 @@ const { heading, paragraphs } = Astro.props
 
 <style>
   .inner {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 72px;
+    gap: var(--space-18);
     align-items: start;
-    padding-block: 96px 64px;
+    padding-block: var(--section-space) var(--section-space-m);
   }
 
   .heading {
@@ -43,9 +41,8 @@ const { heading, paragraphs } = Astro.props
 
   @media (max-width: 820px) {
     .inner {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 24px;
-      padding-top: 72px;
+      gap: var(--space-6);
+      padding-top: var(--space-18);
     }
   }
 </style>

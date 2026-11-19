@@ -60,12 +60,12 @@ const format = (value: number) =>
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-block: 0;
-    padding-block: 80px;
+    padding-block: var(--section-space-m);
     list-style: none;
   }
 
   .figure {
-    padding: 8px 20px;
+    padding: var(--space-2) var(--space-5);
     text-align: center;
   }
 
@@ -84,22 +84,22 @@ const format = (value: number) =>
     display: block;
     width: 64px;
     height: 3px;
-    margin: 22px auto 0;
+    margin: var(--space-6) auto 0;
     background: var(--color-white);
   }
 
   .label {
-    margin: 18px 0 0;
+    margin: var(--space-4) 0 0;
   }
 
   @media (max-width: 820px) {
     .grid {
       grid-template-columns: minmax(0, 1fr);
-      gap: 32px;
+      gap: var(--space-8);
     }
 
     .figure + .figure {
-      padding-top: 40px;
+      padding-top: var(--space-10);
       border-left: 0;
       border-top: 1px solid var(--color-on-accent-line);
     }

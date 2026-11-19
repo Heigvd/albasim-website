@@ -51,7 +51,31 @@
   /* Layout */
   --container-max: 1240px;
   --gutter: 40px;
+
+  /* Vertical space inside sections (padding-block), from small to large */
+  --section-space-s: 48px;
+  --section-space-m: 72px;
   --section-space: 96px;
+  --section-space-l: 120px; /* before the footer, under long lists */
+
+  /* Spacing scale for margins, paddings and gaps: --space-N is N × 4px. Values under 16px that
+     are off this grid (6px, 10px, 14px) are fine adjustments and stay in the components. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-18: 72px;
+  --space-20: 80px;
+  --space-24: 96px;
+
   --header-height: 123px; /* height of the sticky header at the top of the page */
   --header-offset: 90px; /* room left above anchored headings by the sticky header */
   --header-compact-height: 61px; /* height of the sticky header once the page has scrolled */
@@ -63,8 +87,11 @@
 
   /* Motion */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration-quick: 0.2s; /* color changes on hover */
   --duration-fast: 0.25s;
+  --duration-medium: 0.3s; /* arrows, header resizing */
   --duration-base: 0.45s;
+  --duration-slow: 0.6s; /* image zoom, text appearing */
 }
 
 @media (max-width: 680px) {

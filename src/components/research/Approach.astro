@@ -23,7 +23,7 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
 
 <section class="approach" aria-labelledby="approach-heading">
   <div class="container inner">
-    <div class="columns top">
+    <div class="columns top split">
       <SectionHeading eyebrow={eyebrow} title={title} id="approach-heading" class="heading" />
       <Image
         src={image}
@@ -34,7 +34,7 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
       />
     </div>
 
-    <div class="columns">
+    <div class="columns split">
       <div>
         {items.map((item) => (
           <div class="principle">
@@ -71,18 +71,16 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
   }
 
   .inner {
-    padding-block: var(--section-space) 100px;
+    padding-block: var(--section-space) var(--section-space);
   }
 
   .columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 72px;
+    gap: var(--space-18);
     align-items: start;
   }
 
   .top {
-    margin-bottom: 72px;
+    margin-bottom: var(--space-18);
   }
 
   /* The eyebrow spans its whole column here, not half of it. */
@@ -100,11 +98,11 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
   }
 
   .principle {
-    margin-bottom: 28px;
+    margin-bottom: var(--space-7);
   }
 
   .principle h3 {
-    margin: 0 0 8px;
+    margin: 0 0 var(--space-2);
   }
 
   .principle p {
@@ -112,18 +110,18 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
   }
 
   .more {
-    margin-top: 8px;
+    margin-top: var(--space-2);
   }
 
   .process-heading {
-    margin: 0 0 28px;
+    margin: 0 0 var(--space-7);
   }
 
   /* Timeline: a red rail with a numbered disc on each step */
   .timeline {
     position: relative;
     margin: 0;
-    padding: 0 0 0 70px;
+    padding: 0 0 0 var(--space-18);
     list-style: none;
   }
 
@@ -142,7 +140,7 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
   }
 
   .step + .step {
-    margin-top: 40px;
+    margin-top: var(--space-10);
   }
 
   .number {
@@ -163,8 +161,8 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
   }
 
   .step h4 {
-    margin: 0 0 8px;
-    padding-top: 12px;
+    margin: 0 0 var(--space-2);
+    padding-top: var(--space-3);
   }
 
   .step p {
@@ -173,12 +171,11 @@ const { eyebrow, title, image, imageAlt, items, link, process, lang } = Astro.pr
 
   @media (max-width: 820px) {
     .columns {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 56px;
+      gap: var(--space-14);
     }
 
     .top {
-      margin-bottom: 56px;
+      margin-bottom: var(--space-14);
     }
   }
 </style>

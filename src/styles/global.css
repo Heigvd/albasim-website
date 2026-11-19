@@ -83,6 +83,19 @@ a:hover {
   padding-inline: var(--gutter);
 }
 
+/* Two equal columns, stacked into one below 820px. The component sets the gap, the alignment
+   and anything else the layout needs. */
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 820px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -128,6 +141,17 @@ a:hover {
   font-size: 17px;
   font-weight: 800;
   letter-spacing: 0.07em;
+}
+
+/* Eyebrow of a section, with .t-eyebrow: red capitals under a thick red rule, over half the
+   column. Components set its margin (and SectionHeading its white variant). */
+.eyebrow {
+  width: 50%;
+  margin: 0;
+  padding-top: 14px;
+  border-top: 3px solid var(--color-primary-text);
+  color: var(--color-primary-text);
+  text-transform: uppercase;
 }
 
 .t-card {
@@ -186,6 +210,33 @@ a:hover {
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+/* Larger label: phases of a game, groups of resources */
+.t-label-lg {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Year headings of the news and publications lists */
+.t-year-heading {
+  font-size: clamp(30px, 3.6vw, 40px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Body text one step smaller: news items, footer address */
+.t-body-s {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.t-breadcrumb {
+  font-size: 14px;
+  line-height: 21px;
 }
 
 .t-tag {
@@ -264,12 +315,88 @@ a:hover {
   }
 }
 
+/* Palette of the illustrations and diagrams, for the shapes of any inline SVG. A component
+   only adds what is its own: line widths, sizes, other colors. */
+:where(svg) .ink {
+  fill: var(--color-ink);
+}
+
+:where(svg) .white {
+  fill: var(--color-white);
+}
+
+:where(svg) .primary {
+  fill: var(--color-primary);
+}
+
+:where(svg) .light {
+  fill: var(--color-primary-light);
+}
+
+:where(svg) .soft {
+  fill: var(--color-primary-soft);
+}
+
+:where(svg) .line-fill {
+  fill: var(--color-line);
+}
+
+:where(svg) .lavender {
+  fill: var(--color-lavender);
+}
+
+:where(svg) .lavender-strong {
+  fill: var(--color-lavender-strong);
+}
+
+:where(svg) .peach {
+  fill: var(--color-peach);
+}
+
+:where(svg) .peach-strong {
+  fill: var(--color-peach-strong);
+}
+
+:where(svg) .turquoise {
+  fill: var(--color-turquoise);
+}
+
+:where(svg) .turquoise-strong {
+  fill: var(--color-turquoise-strong);
+}
+
+/* White shape with an ink outline; the component sets the width of the outline. */
+:where(svg) .outline {
+  fill: var(--color-white);
+  stroke: var(--color-ink);
+}
+
+/* Thin pink line of the background decor (the hexagon in a corner). */
+:where(svg) .soft-line {
+  fill: none;
+  stroke: var(--color-primary-soft);
+  stroke-width: 0.8;
+}
+
+/* Stops of the red gradient of the squares */
+:where(svg) .stop-light {
+  stop-color: var(--color-primary-light);
+}
+
+:where(svg) .stop-mid {
+  stop-color: var(--color-primary-mid);
+}
+
+:where(svg) .stop-primary {
+  stop-color: var(--color-primary);
+}
+
 /* Hero illustrations: shapes animated by src/scripts/illustrations.ts */
 [data-illustration] .square,
 [data-illustration] .bar {
   transform-box: fill-box;
   transform-origin: center;
-  transition: transform 0.25s ease-out;
+  transition: transform var(--duration-fast) ease-out;
 }
 
 [data-illustration] .bar {
@@ -291,17 +418,17 @@ a:hover {
 }
 
 [data-illustration] [data-links] {
-  transition: stroke 0.25s;
+  transition: stroke var(--duration-fast);
 }
 
 [data-illustration] .lift {
-  transition: transform 0.25s ease-out;
+  transition: transform var(--duration-fast) ease-out;
 }
 
 [data-illustration] .write {
   transform-box: fill-box;
   transform-origin: left center;
-  transition: transform 0.25s ease-out;
+  transition: transform var(--duration-fast) ease-out;
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
 }
@@ -328,7 +455,7 @@ a:hover {
 }
 
 [data-illustration][data-playing] .land {
-  animation: illustration-land 1.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation: illustration-land 1.2s var(--ease-out) both;
 }
 
 [data-illustration][data-playing] .drive {

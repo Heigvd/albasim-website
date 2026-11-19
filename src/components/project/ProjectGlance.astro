@@ -60,23 +60,23 @@ const { eyebrow, heading, focus, period, funding, people } = Astro.props
   }
 
   .inner {
-    padding-block: 72px;
+    padding-block: var(--section-space-m);
   }
 
   .heading {
-    margin-bottom: 40px;
+    margin-bottom: var(--space-10);
   }
 
   .cards {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    gap: var(--space-5);
     margin: 0;
     color: var(--color-ink);
   }
 
   .card {
-    padding: 30px 26px 32px;
+    padding: var(--space-8) var(--space-7) var(--space-8);
     border: 1px solid var(--color-line);
     border-radius: 14px;
     background: var(--color-white);
@@ -94,7 +94,7 @@ const { eyebrow, heading, focus, period, funding, people } = Astro.props
   .pills {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: var(--space-2);
   }
 
   .pill {
@@ -107,7 +107,7 @@ const { eyebrow, heading, focus, period, funding, people } = Astro.props
 
   /* A second group of people, e.g. the co-lead after the lead */
   .person + .label {
-    margin-top: 22px;
+    margin-top: var(--space-6);
   }
 
   .person {

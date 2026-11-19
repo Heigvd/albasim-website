@@ -84,29 +84,6 @@ const cards = [
     margin-left: auto;
   }
 
-  .soft-line {
-    fill: none;
-    stroke: var(--color-primary-soft);
-    stroke-width: 0.8;
-  }
-
-  .ink {
-    fill: var(--color-ink);
-  }
-
-  .primary {
-    fill: var(--color-primary);
-  }
-
-  .light {
-    fill: var(--color-primary-light);
-  }
-
-  .outline {
-    fill: var(--color-white);
-    stroke: var(--color-ink);
-  }
-
   .person.outline {
     stroke-width: 1.2;
   }
@@ -119,7 +96,7 @@ const cards = [
 
   /* People near the pointer turn red; the red one turns white. */
   .person {
-    transition: fill 0.3s ease;
+    transition: fill var(--duration-medium) ease;
   }
 
   .person[data-near] {

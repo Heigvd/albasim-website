@@ -41,17 +41,8 @@ const hasAction = Astro.slots.has('action')
 </div>
 
 <style>
-  .eyebrow {
-    width: 50%;
-    margin: 0;
-    padding-top: 14px;
-    border-top: 3px solid var(--color-primary-text);
-    color: var(--color-primary-text);
-    text-transform: uppercase;
-  }
-
   .title {
-    margin: 28px 0 0;
+    margin: var(--space-7) 0 0;
   }
 
   .inverted .eyebrow {
@@ -67,7 +58,7 @@ const hasAction = Astro.slots.has('action')
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 24px;
+    gap: var(--space-6);
   }
 
   .with-action .eyebrow {

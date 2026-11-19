@@ -159,26 +159,6 @@ const zoomedSquares = [
     margin-left: auto;
   }
 
-  .stop-light {
-    stop-color: var(--color-primary-light);
-  }
-
-  .stop-mid {
-    stop-color: var(--color-primary-mid);
-  }
-
-  .stop-primary {
-    stop-color: var(--color-primary);
-  }
-
-  .ink {
-    fill: var(--color-ink);
-  }
-
-  .primary {
-    fill: var(--color-primary);
-  }
-
   .gradient {
     fill: url(#research-gradient);
   }
@@ -187,6 +167,11 @@ const zoomedSquares = [
     fill: none;
     stroke: var(--color-ink);
     stroke-width: 1.4;
+  }
+
+  /* White node of the network, outlined in ink */
+  .ink-line.white {
+    fill: var(--color-white);
   }
 
   .ink-line.thin {
@@ -205,13 +190,7 @@ const zoomedSquares = [
     stroke-dasharray: 3 3;
   }
 
-  .white {
-    fill: var(--color-white);
-  }
-
   .soft-line {
-    fill: none;
-    stroke: var(--color-primary-soft);
     stroke-width: 0.9;
   }
 

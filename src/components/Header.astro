@@ -134,7 +134,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     overflow: hidden;
     max-height: 41px;
     transition:
-      max-height 0.3s ease,
+      max-height var(--duration-medium) ease,
       opacity var(--duration-fast) ease;
   }
 
@@ -149,7 +149,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: var(--space-4);
   }
 
   .heig img {
@@ -160,17 +160,17 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
   .utility-end {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: var(--space-5);
   }
 
   .wegas {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
     font-size: 14px;
     font-weight: 700;
     color: var(--color-ink);
-    transition: color 0.2s ease;
+    transition: color var(--duration-quick) ease;
   }
 
   .wegas:hover,
@@ -183,19 +183,19 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 20px 28px;
-    padding-block: 18px;
-    transition: padding-block 0.3s ease;
+    gap: var(--space-5) var(--space-7);
+    padding-block: var(--space-4);
+    transition: padding-block var(--duration-medium) ease;
   }
 
   [data-compact] .bar {
-    padding-block: 8px;
+    padding-block: var(--space-2);
   }
 
   .logo img {
     height: 28px;
     width: auto;
-    transition: height 0.3s ease;
+    transition: height var(--duration-medium) ease;
   }
 
   [data-compact] .logo img {
@@ -209,7 +209,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
   .nav-list {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: var(--space-7);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -237,7 +237,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
   .games {
     display: inline-flex !important;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
   }
 
   .games::before {
@@ -260,7 +260,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
   .more summary {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--space-2);
     padding: 6px 0;
     list-style: none;
     cursor: pointer;
@@ -292,7 +292,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     flex-direction: column;
     min-width: 170px;
     margin: 0;
-    padding: 8px;
+    padding: var(--space-2);
     list-style: none;
     background: var(--color-white);
     border: 1px solid var(--color-line);
@@ -302,7 +302,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
 
   .more-panel a {
     display: block;
-    padding: 10px 12px;
+    padding: 10px var(--space-3);
     border-radius: 6px;
   }
 
@@ -420,7 +420,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
       flex-direction: column;
       align-items: flex-start;
       gap: 0;
-      padding-bottom: 12px;
+      padding-bottom: var(--space-3);
       font-size: 16px;
     }
 
@@ -435,7 +435,7 @@ const ariaCurrent = (key: RouteKey) => (key === current ? 'page' : undefined)
     .separator {
       width: 100%;
       height: 1px;
-      margin: 4px 0;
+      margin: var(--space-1) 0;
     }
   }
 </style>

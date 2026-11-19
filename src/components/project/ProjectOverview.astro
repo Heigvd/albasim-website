@@ -14,7 +14,7 @@ const { eyebrow, heading, diagram, image, imageAlt } = Astro.props
 ---
 
 <section aria-labelledby="overview-heading">
-  <div class="container inner">
+  <div class="container inner split">
     <div>
       <SectionHeading eyebrow={eyebrow} title={heading} id="overview-heading" class="heading" />
       <div class="text t-body">
@@ -38,15 +38,13 @@ const { eyebrow, heading, diagram, image, imageAlt } = Astro.props
 
 <style>
   .inner {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 72px;
+    gap: var(--space-18);
     align-items: center;
-    padding-block: 88px 110px;
+    padding-block: var(--section-space) var(--section-space-l);
   }
 
   .heading {
-    margin-bottom: 32px;
+    margin-bottom: var(--space-8);
   }
 
   .heading :global(.eyebrow) {
@@ -54,11 +52,11 @@ const { eyebrow, heading, diagram, image, imageAlt } = Astro.props
   }
 
   .text :global(p) {
-    margin: 0 0 16px;
+    margin: 0 0 var(--space-4);
   }
 
   .text :global(h3) {
-    margin: 36px 0 6px;
+    margin: var(--space-10) 0 6px;
     font-size: 18px;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -72,7 +70,7 @@ const { eyebrow, heading, diagram, image, imageAlt } = Astro.props
 
   .text :global(ol) {
     margin: 0;
-    padding-left: 22px;
+    padding-left: var(--space-6);
   }
 
   .text :global(li + li) {
@@ -85,11 +83,5 @@ const { eyebrow, heading, diagram, image, imageAlt } = Astro.props
     aspect-ratio: 16 / 10;
     object-fit: cover;
     border-radius: 0 96px;
-  }
-
-  @media (max-width: 820px) {
-    .inner {
-      grid-template-columns: minmax(0, 1fr);
-    }
   }
 </style>
