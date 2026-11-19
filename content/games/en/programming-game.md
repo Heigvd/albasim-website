@@ -2,12 +2,12 @@
 name: Programming Game
 domain: 'Computing education'
 languages: [fr]
-summary: 'Learn the basics of JavaScript by programming an avatar: complete missions of increasing difficulty and see your code executed step by step.'
+summary: 'Learn the basics of programming by controlling an avatar with code: complete missions of increasing difficulty and follow your code as it runs step by step.'
 highlights:
-  - title: 'Learn step by step'
+  - title: 'Step-by-step learning'
     text: 'Step-by-step execution, error feedback and built-in theory.'
   - title: 'For teachers'
-    text: 'Trainer accounts are available on request to follow students’ work in real time.'
+    text: 'Trainer accounts are available on request. They let you follow students’ work in real time.'
 access: 'Free access.'
 image: ../../../src/assets/games/programming-game.jpg
 imageAlt: 'Code displayed on a computer screen'
@@ -17,12 +17,12 @@ page:
     label: Play the game
     url: https://wegas.albasim.ch/#/play/programming-oo
   hero:
-    lead: Learn the basics of JavaScript by programming an avatar.
+    lead: Learn the basics of programming by controlling an avatar with code.
     contactButton: Contact us
   intro:
     heading: Make programming accessible and motivating
     paragraphs:
-      - With computing now compulsory in Swiss secondary schools, teachers need resources that make programming accessible and motivating for every student. The Programming Game was designed for this purpose, together with secondary school teachers, computer scientists, game designers and education researchers.
+      - Developing digital skills is part of the curriculum in Swiss secondary schools. Teachers need resources that make programming accessible and motivating. The Programming Game was designed for this purpose, in collaboration with secondary school teachers, computer scientists, game designers and education researchers.
   game:
     eyebrow: The game
     heading: Program an avatar to complete missions
@@ -47,11 +47,11 @@ page:
       - image: ../../../src/assets/games/programming-game/mission-briefing.png
         alt: 'Programming Game screen: mission briefing asking the player to help their character reach a goal'
         title: Mission briefing
-        text: Each mission starts with a goal to reach
+        text: Each mission starts with a goal
       - image: ../../../src/assets/games/programming-game/levels-map.png
         alt: 'Programming Game screen: map of the four levels and their stages'
         title: Levels map
-        text: Four levels, from sequences of instructions to iterations
+        text: 'Four levels: from sequences of instructions to iterations'
       - image: ../../../src/assets/games/programming-game/feedback.png
         alt: 'Programming Game screen: the log shows the result of running the player’s code'
         title: Feedback
@@ -60,7 +60,7 @@ page:
     - eyebrow: For teachers
       heading: Follow your students’ work in real time
       paragraphs:
-        - Trainer accounts are available on request. They give access to a dashboard to follow students’ work in real time.
+        - Trainer accounts are available on request. They give access to a dashboard to follow students’ work.
         - The acceptability, usefulness and usability of this dashboard were evaluated with teachers and presented at the EIAH 2019 conference in Paris.
         - The game is used by several secondary schools in French-speaking Switzerland.
     - eyebrow: From research to practice
