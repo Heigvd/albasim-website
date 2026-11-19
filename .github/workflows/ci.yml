@@ -30,3 +30,9 @@ jobs:
       - run: npm run format:check
       - run: npm run check
       - run: npm run build
+
+      # The contact form's PHP can't run locally: at least check its syntax.
+      - name: Check the PHP syntax
+        run: |
+          php -l public/contact.php
+          php -l server/contact-config.example.php

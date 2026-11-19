@@ -1,0 +1,33 @@
+---
+// Page shown after sending the contact form without JavaScript: public/contact.php redirects
+// to it. Its text comes from `sentPage` or `errorPage` in `content/contact/<lang>.md`. Search
+// engines are asked not to index it.
+import { getEntry } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageHero from '../PageHero.astro'
+import Button from '../Button.astro'
+import ContactIllustration from './ContactIllustration.astro'
+import { localizedPath, type Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+  result: 'sent' | 'error'
+}
+
+const { lang, result } = Astro.props
+
+const page = await getEntry('contact', lang)
+if (!page) throw new Error(`Missing contact content: content/contact/${lang}.md`)
+const data = result === 'sent' ? page.data.sentPage : page.data.errorPage
+const link = localizedPath(result === 'sent' ? 'home' : 'contact', lang)
+---
+
+<BaseLayout title={data.title} noindex>
+  <PageHero heading={data.heading}>
+    <p>{data.text}</p>
+    <Button slot="after" href={link}>
+      {data.link}
+    </Button>
+    <ContactIllustration slot="illustration" label={page.data.illustrationAlt} />
+  </PageHero>
+</BaseLayout>
