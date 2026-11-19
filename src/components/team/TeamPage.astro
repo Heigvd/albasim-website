@@ -1,0 +1,38 @@
+---
+// The team page, shared by both languages. Its text comes from `content/team-page/<lang>.md`;
+// the members come from the `people` collection, in `content/people/<lang>/`.
+import { getCollection, getEntry, render } from 'astro:content'
+import ArrowLink from '../ArrowLink.astro'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Collaborate from '../Collaborate.astro'
+import PageHero from '../PageHero.astro'
+import TeamIllustration from './TeamIllustration.astro'
+import TeamMembers from './TeamMembers.astro'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const page = await getEntry('teamPage', lang)
+if (!page) throw new Error(`Missing team content: content/team-page/${lang}.md`)
+const { Content } = await render(page)
+const data = page.data
+const people = await getCollection('people', (entry) => entry.id.startsWith(`${lang}/`))
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <PageHero heading={data.heading}>
+    <Content />
+    <ArrowLink slot="after" href={data.link.url} kind="external" lang={lang}>
+      {data.link.label}
+    </ArrowLink>
+    <TeamIllustration slot="illustration" label={data.illustrationAlt} />
+  </PageHero>
+
+  <TeamMembers heading={data.members} people={people} former={data.former} lang={lang} />
+
+  <Collaborate {...data.collaborate} lang={lang} />
+</BaseLayout>

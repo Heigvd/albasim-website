@@ -1,0 +1,160 @@
+---
+// The numbered research questions, as an ordered list of cards joined by chevrons. The cards rise into place one
+// after the other when the section comes into view.
+import Icon from '../Icon.astro'
+import SectionHeading from '../SectionHeading.astro'
+
+interface Props {
+  heading: string
+  items: { label: string; text: string }[]
+}
+
+const { heading, items } = Astro.props
+---
+
+<section aria-labelledby="questions-heading">
+  <div class="container inner">
+    <SectionHeading eyebrow={heading} id="questions-heading" class="heading" />
+    <ol class="steps" data-reveal>
+      {items.map((item, i) => (
+        <li class="step" style={`--delay: ${i * 0.4}s`}>
+          {i > 0 && <Icon name="chevron-right" width={32} class="chevron" />}
+          <span class="number" aria-hidden="true">
+            {i + 1}
+          </span>
+          <h3 class="label t-label">{item.label}</h3>
+          <p class="t-body">{item.text}</p>
+        </li>
+      ))}
+    </ol>
+    <script is:inline>
+      // Hide the cards before the first paint, so that they rise into place even when the list is
+      // already in view when the page opens. Without JavaScript, they simply stay visible.
+      if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        for (const step of document.currentScript.previousElementSibling.children) {
+          step.classList.add('is-hidden')
+        }
+      }
+    </script>
+  </div>
+</section>
+
+<style>
+  .inner {
+    padding-block: var(--space-8) var(--section-space);
+  }
+
+  .heading {
+    margin-bottom: var(--space-10);
+  }
+
+  /* The 64 px gap leaves room for the chevron between two cards. */
+  .steps {
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-16);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: var(--space-8) var(--space-7) var(--space-10);
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-block);
+  }
+
+  .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: var(--space-6);
+    border-radius: 50%;
+    background: var(--color-ink);
+    color: var(--color-white);
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  .label {
+    margin: 0 0 var(--space-2);
+    color: var(--color-primary-text);
+  }
+
+  .step p {
+    margin: 0;
+  }
+
+  .chevron {
+    position: absolute;
+    top: 50%;
+    left: -48px;
+    margin-top: -16px;
+    color: var(--color-ink);
+  }
+
+  /* Reveal: the script hides each card until it comes into view. Side by side, the cards come
+     into view together and rise one after the other. */
+  .step {
+    transition:
+      opacity var(--duration-slow) ease var(--delay),
+      transform var(--duration-slow) ease var(--delay);
+  }
+
+  .step.is-hidden {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: none;
+  }
+
+  @media (max-width: 680px) {
+    .steps {
+      flex-direction: column;
+    }
+
+    .chevron {
+      top: -48px;
+      left: 50%;
+      margin: 0 0 0 -16px;
+      transform: rotate(90deg);
+    }
+
+    /* Stacked, each card comes into view on its own: no need to wait for the previous one. */
+    .step {
+      --delay: 0s !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+  if (!reducedMotion.matches) {
+    // Each card starts hidden (see the inline script above) and shows once it comes into view,
+    // right away if it already is. It hides again when it goes back below the fold, so the effect
+    // replays. Watching each card, not the whole list, matters on small screens, where the cards
+    // are stacked and come into view one at a time.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) entry.target.classList.remove('is-hidden')
+          else if (entry.boundingClientRect.top > 0) entry.target.classList.add('is-hidden')
+        }
+      },
+      { rootMargin: '0px 0px -15% 0px' },
+    )
+    for (const step of document.querySelectorAll('[data-reveal] > .step')) observer.observe(step)
+  }
+</script>

@@ -1,0 +1,31 @@
+---
+// The news page, shared by both languages. Its text comes from `content/news-page/<lang>.md`;
+// the news come from the `news` collection, in `content/news/<lang>/`.
+import { getCollection, getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageHero from '../PageHero.astro'
+import NewsIllustration from './NewsIllustration.astro'
+import NewsList from './NewsList.astro'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const page = await getEntry('newsPage', lang)
+if (!page) throw new Error(`Missing news content: content/news-page/${lang}.md`)
+const { Content } = await render(page)
+const data = page.data
+const news = await getCollection('news', ({ id }) => id.startsWith(`${lang}/`))
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <PageHero heading={data.heading}>
+    <Content />
+    <NewsIllustration slot="illustration" label={data.illustrationAlt} />
+  </PageHero>
+
+  <NewsList news={news} lang={lang} />
+</BaseLayout>

@@ -1,0 +1,20 @@
+---
+// Game pages in English, one per game with a `page` in content/games/en/.
+import { getCollection } from 'astro:content'
+import GamePage from '../../components/game/GamePage.astro'
+
+export async function getStaticPaths() {
+  const games = await getCollection(
+    'games',
+    ({ id, data }) => id.startsWith('en/') && data.page !== undefined,
+  )
+  return games.map((game) => ({
+    params: { id: game.id.split('/').pop() },
+    props: { game },
+  }))
+}
+
+const { game } = Astro.props
+---
+
+<GamePage game={game} lang="en" />

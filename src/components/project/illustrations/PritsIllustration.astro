@@ -1,0 +1,94 @@
+---
+// Illustration of the PRITS project: a health professional and a patient in dialogue, with a
+// balance for patients' rights between them. The speech bubbles rise under the mouse pointer.
+// The animation is shared: see src/scripts/illustrations.ts.
+import './illustration.css'
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  /** Words written in the illustration (none here). */
+  labels?: Record<string, string>
+  class?: string
+}
+
+const { label, labels: _labels, class: className, ...attrs } = Astro.props
+---
+
+<svg
+  {...attrs}
+  class:list={['project-illustration', className]}
+  viewBox="0 0 420 300"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-lift-radius="63"
+>
+  <defs>
+    <linearGradient id="prits-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-light"></stop>
+      <stop offset="0.5" class="stop-mid"></stop>
+      <stop offset="1" class="stop-primary"></stop>
+    </linearGradient>
+  </defs>
+
+  <polygon points="405,22 392,14.5 379,22 379,37 392,44.5 405,37" class="soft-line"></polygon>
+
+  <!-- Health professional, with a cross -->
+  <circle cx="78" cy="132" r="22" class="ink"></circle>
+  <path d="M38 228 C 38 186, 58 166, 78 166 C 98 166, 118 186, 118 228 Z" class="ink"></path>
+  <rect x="72" y="182" width="12" height="4" rx="1" fill="url(#prits-gradient)"></rect>
+  <rect x="76" y="178" width="4" height="12" rx="1" fill="url(#prits-gradient)"></rect>
+
+  <!-- Patient -->
+  <circle cx="342" cy="132" r="22" class="outline"></circle>
+  <path
+    d="M302 228 C 302 186, 322 166, 342 166 C 362 166, 382 186, 382 228 Z"
+    class="lavender-strong"
+  ></path>
+
+  <!-- Speech bubbles -->
+  <g class="lift">
+    <rect x="128" y="58" width="132" height="58" rx="14" class="ink"></rect>
+    <path d="M146 116 L136 132 L162 116 Z" class="ink"></path>
+    <rect x="146" y="76" width="96" height="6" rx="3" class="white" opacity="0.9"></rect>
+    <rect x="146" y="91" width="70" height="6" rx="3" class="white" opacity="0.5"></rect>
+  </g>
+  <g class="lift">
+    <rect x="166" y="130" width="126" height="54" rx="14" class="outline"></rect>
+    <path d="M272 184 L290 198 L280 183" class="outline"></path>
+    <rect x="268" y="182" width="16" height="3" class="white"></rect>
+    <text x="229" y="163" text-anchor="middle" class="question">
+      ?
+    </text>
+  </g>
+
+  <!-- Balance of patients' rights -->
+  <g transform="translate(210,236)">
+    <circle r="34" fill="url(#prits-gradient)"></circle>
+    <path d="M0 -20 L0 16 M-12 16 L12 16 M-20 -12 L20 -12" class="stroke beam"></path>
+    <path d="M-20 -12 L-27 4 L-13 4 Z M20 -12 L13 4 L27 4 Z" class="stroke pans"></path>
+    <circle cy="-22" r="3" class="ink"></circle>
+  </g>
+  <path d="M118 236 L172 236 M248 236 L302 236" class="dashed"></path>
+</svg>
+
+<style>
+  .question {
+    fill: var(--color-ink);
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  .beam {
+    stroke-width: 2.2;
+  }
+
+  .pans {
+    stroke-width: 1.8;
+  }
+</style>
+
+<script>
+  import '../../../scripts/illustrations'
+</script>

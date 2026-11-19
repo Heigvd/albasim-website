@@ -1,0 +1,35 @@
+/* Shapes and colors shared by the illustrations of the project pages. Imported by each of them,
+   so these rules are global: they all start with .project-illustration. */
+
+.project-illustration {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin: 0 auto;
+  font-family: var(--font-sans);
+}
+
+/* Stops of the red gradient */
+/* Hexagon in the corner */
+/* Fills */
+/* White shape with an ink outline */
+.project-illustration .outline {
+  stroke-width: 1.4;
+}
+
+/* Lines */
+.project-illustration .stroke {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project-illustration .dashed {
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+}

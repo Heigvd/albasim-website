@@ -1,0 +1,80 @@
+---
+// Call to action at the bottom of most pages, on a red band, with a button to
+// the contact page. With `play`, a white button to play a game online comes first and the
+// contact button becomes an outline one.
+import Button from './Button.astro'
+import { localizedPath, useTranslations, type Lang } from '../i18n/ui'
+
+interface Props {
+  title: string
+  text: string
+  button: string
+  /** Link to play a game online, opened in a new tab. */
+  play?: { label: string; url: string }
+  lang: Lang
+}
+
+const { title, text, button, play, lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<section class="collaborate">
+  <div class="container inner split">
+    <h2 class="title t-h2">{title}</h2>
+    <div>
+      <p class="text t-lead">{text}</p>
+      <div class="buttons">
+        {play && (
+          <Button href={play.url} variant="on-accent" external arrow>
+            {play.label}
+            <span class="sr-only">{t('link.newTab')}</span>
+          </Button>
+        )}
+        <Button
+          href={localizedPath('contact', lang)}
+          variant={play ? 'secondary' : 'on-accent'}
+          arrow
+        >
+          {button}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .collaborate {
+    background: var(--color-accent-block);
+    color: var(--color-white);
+  }
+
+  .inner {
+    gap: var(--space-14);
+    align-items: start;
+    padding-block: var(--section-space);
+  }
+
+  /* Short white rule above the title */
+  .title {
+    margin: 0;
+  }
+
+  .title::before {
+    content: '';
+    display: block;
+    width: 140px;
+    height: 3px;
+    margin: 7px 0 var(--space-6);
+    background: var(--color-white);
+  }
+
+  .text {
+    margin: 0 0 var(--space-7);
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+</style>

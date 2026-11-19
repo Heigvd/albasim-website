@@ -1,0 +1,66 @@
+name: Deploy
+
+# `dev` deploys to dev.albasim.ch, `main` to albasim.ch.
+on:
+  push:
+    branches: [dev, main]
+
+permissions:
+  contents: read
+
+# One deploy at a time per branch. Never cancel a deploy halfway through an upload: queue the
+# next one instead.
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to ${{ github.ref_name == 'main' && 'albasim.ch' || 'dev.albasim.ch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Picks the FTP account of the target: FTP_DEV_USER / FTP_DEV_PASSWORD on `dev`,
+      # FTP_PROD_USER / FTP_PROD_PASSWORD on `main`.
+      TARGET: ${{ github.ref_name == 'main' && 'PROD' || 'DEV' }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 26
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - run: sudo apt-get update && sudo apt-get install --yes lftp
+
+      # Uploads dist/ over FTPS and deletes remote files that are no longer in dist/.
+      # The excluded files are managed in the Infomaniak Manager (password protection,
+      # compression, PHP settings, maintenance page): they are never uploaded or deleted.
+      - name: Upload dist/ to the server
+        env:
+          LFTP_PASSWORD: ${{ secrets[format('FTP_{0}_PASSWORD', env.TARGET)] }}
+          FTP_USER: ${{ vars[format('FTP_{0}_USER', env.TARGET)] }}
+          FTP_HOST: ${{ vars.FTP_HOST }}
+        run: |
+          if [ -z "$FTP_USER" ] || [ -z "$LFTP_PASSWORD" ]; then
+            echo "::error::Set the FTP_${TARGET}_USER variable and the FTP_${TARGET}_PASSWORD secret."
+            exit 1
+          fi
+          lftp --env-password -u "$FTP_USER" "$FTP_HOST" -e "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate true;
+            set net:max-retries 2;
+            mirror --reverse --delete --verbose --parallel=4 \
+              --exclude-glob .htaccess* \
+              --exclude-glob .htdigest \
+              --exclude-glob .user.ini \
+              --exclude-glob .infomaniak-maintenance.html \
+              dist/ ./;
+            bye
+          "

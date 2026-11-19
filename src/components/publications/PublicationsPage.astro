@@ -1,0 +1,34 @@
+---
+// The publications page, shared by both languages. Its text comes from
+// `content/publications-page/<lang>.md`; the list comes from the `publications` collection.
+import { getCollection, getEntry, render } from 'astro:content'
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Collaborate from '../Collaborate.astro'
+import PageHero from '../PageHero.astro'
+import PublicationsIllustration from './PublicationsIllustration.astro'
+import PublicationsList from './PublicationsList.astro'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+}
+
+const { lang } = Astro.props
+
+const page = await getEntry('publicationsPage', lang)
+if (!page) throw new Error(`Missing publications content: content/publications-page/${lang}.md`)
+const { Content } = await render(page)
+const data = page.data
+const publications = await getCollection('publications')
+---
+
+<BaseLayout title={data.title} description={data.description}>
+  <PageHero heading={data.heading}>
+    <Content />
+    <PublicationsIllustration slot="illustration" label={data.illustrationAlt} />
+  </PageHero>
+
+  <PublicationsList publications={publications} lang={lang} />
+
+  <Collaborate {...data.collaborate} lang={lang} />
+</BaseLayout>

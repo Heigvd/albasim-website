@@ -1,0 +1,248 @@
+---
+// Illustration of the co.LAB project: three clouds for researchers, teachers and game
+// developers, around a dark circle where co-design, co-development and co-evaluation follow each
+// other around co.LAB. When it comes into view, the clouds and the circle grow in, then the
+// arrows of the cycle draw themselves; the clouds rise under the mouse pointer. With reduced
+// motion, it stays still. The animation is shared: see src/scripts/illustrations.ts.
+import './illustration.css'
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  /** Words written in the illustration. */
+  labels: Record<string, string>
+  class?: string
+}
+
+const { label, labels, class: className, ...attrs } = Astro.props
+
+// Circles of each cloud: [cx, cy, r].
+const clouds = [
+  {
+    gradient: 'colab-lavender',
+    delay: 0,
+    circles: [
+      [170, 285, 90],
+      [250, 215, 82],
+      [160, 185, 62],
+      [105, 260, 60],
+      [255, 300, 72],
+    ],
+  },
+  {
+    gradient: 'colab-peach',
+    delay: 0.24,
+    circles: [
+      [430, 285, 90],
+      [350, 215, 82],
+      [440, 185, 62],
+      [495, 260, 60],
+      [345, 300, 72],
+    ],
+  },
+  {
+    gradient: 'colab-turquoise',
+    delay: 0.48,
+    circles: [
+      [300, 450, 95],
+      [222, 455, 72],
+      [378, 455, 72],
+      [300, 505, 62],
+    ],
+  },
+]
+
+// Arrows of the cycle, drawn one after the other.
+const arrows = [
+  'M321.9 180.9 A126 126 0 0 1 409.1 368.0',
+  'M396.5 386.0 A126 126 0 0 1 190.9 368.0',
+  'M181.6 348.1 A126 126 0 0 1 300.0 179.0',
+]
+---
+
+<svg
+  {...attrs}
+  class:list={['project-illustration', className]}
+  viewBox="0 0 600 600"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-duration="2700"
+  data-lift-radius="90"
+>
+  <defs>
+    <linearGradient id="colab-lavender" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" class="stop-lavender"></stop>
+      <stop offset="1" class="stop-lavender-strong"></stop>
+    </linearGradient>
+    <linearGradient id="colab-peach" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-peach"></stop>
+      <stop offset="1" class="stop-peach-strong"></stop>
+    </linearGradient>
+    <linearGradient id="colab-turquoise" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-turquoise"></stop>
+      <stop offset="1" class="stop-turquoise-strong"></stop>
+    </linearGradient>
+    <marker id="colab-arrow" orient="auto" markerWidth="8" markerHeight="8" refX="5" refY="4">
+      <path d="M0 0 L8 4 L0 8 Z" class="primary"></path>
+    </marker>
+    <!-- Paths that the words of the cycle follow -->
+    <path id="colab-design-path" d="M317.0 208.5 A98 98 0 0 1 384.9 354.0"></path>
+    <path id="colab-evaluation-path" d="M202.4 296.5 A98 98 0 0 1 333.5 212.9"></path>
+    <path id="colab-development-path" d="M214.2 377.0 A112 112 0 0 0 385.8 377.0"></path>
+  </defs>
+
+  <!-- Clouds of the three communities -->
+  {clouds.map((cloud) => (
+    <g class="lift pop" style={`animation-delay: ${cloud.delay}s`}>
+      <g fill={`url(#${cloud.gradient})`} opacity="0.9">
+        {cloud.circles.map(([cx, cy, r]) => (
+          <circle cx={cx} cy={cy} r={r} />
+        ))}
+      </g>
+    </g>
+  ))}
+
+  <!-- Cycle around co.LAB -->
+  <g class="pop" style="animation-delay: 0.72s">
+    <circle cx="300" cy="305" r="138" class="ink"></circle>
+    {arrows.map((d, i) => (
+      <path
+        d={d}
+        pathLength="1"
+        class="draw arrow"
+        marker-end="url(#colab-arrow)"
+        style={`animation-delay: ${1.28 + i * 0.24}s`}
+      />
+    ))}
+    <g class="cycle-words">
+      <text>
+        <textPath href="#colab-design-path" startOffset="50%" text-anchor="middle">
+          {labels.coDesign}
+        </textPath>
+      </text>
+      <text>
+        <textPath href="#colab-evaluation-path" startOffset="50%" text-anchor="middle">
+          {labels.coEvaluation}
+        </textPath>
+      </text>
+      <text>
+        <textPath href="#colab-development-path" startOffset="50%" text-anchor="middle">
+          {labels.coDevelopment}
+        </textPath>
+      </text>
+    </g>
+    <circle cx="300" cy="305" r="54" class="white"></circle>
+    <circle cx="300" cy="305" r="48" class="ring"></circle>
+    <circle cx="300" cy="305" r="43" class="ring"></circle>
+    <text x="300" y="313" text-anchor="middle" class="name">
+      {labels.center}
+    </text>
+  </g>
+
+  <!-- Callouts to the three communities -->
+  <path d="M115 75 L115 140 L160 165" class="callout"></path>
+  <path d="M300 560 L300 535" class="callout"></path>
+  <path d="M485 75 L485 140 L440 165" class="callout red"></path>
+  <circle cx="115" cy="75" r="8" class="outline"></circle>
+  <circle cx="485" cy="75" r="8" class="outline red-outline"></circle>
+  <polygon
+    points="168,165 160,170 152,165 152,156 160,151 168,156"
+    class="ink"
+    transform="translate(0,4)"
+  ></polygon>
+  <polygon
+    points="448,165 440,170 432,165 432,156 440,151 448,156"
+    class="primary"
+    transform="translate(0,4)"
+  ></polygon>
+  <polygon points="308,530 300,535 292,530 292,521 300,516 308,521" class="ink"></polygon>
+  <g class="community">
+    <text x="132" y="62">
+      {labels.researchers}
+    </text>
+    <text x="468" y="62" text-anchor="end">
+      {labels.teachers}
+    </text>
+    <text x="318" y="580">
+      {labels.developers}
+    </text>
+  </g>
+</svg>
+
+<style>
+  .stop-lavender {
+    stop-color: var(--color-lavender);
+  }
+
+  .stop-lavender-strong {
+    stop-color: var(--color-lavender-strong);
+  }
+
+  .stop-peach {
+    stop-color: var(--color-peach);
+  }
+
+  .stop-peach-strong {
+    stop-color: var(--color-peach-strong);
+  }
+
+  .stop-turquoise {
+    stop-color: var(--color-turquoise);
+  }
+
+  .stop-turquoise-strong {
+    stop-color: var(--color-turquoise-strong);
+  }
+
+  .arrow {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 2.6;
+    stroke-linecap: round;
+  }
+
+  .cycle-words {
+    fill: var(--color-white);
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+  }
+
+  .ring {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 1.5;
+  }
+
+  .name {
+    fill: var(--color-ink);
+    font-size: 22px;
+    font-weight: 800;
+  }
+
+  .callout {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 1.4;
+  }
+
+  .callout.red {
+    stroke: var(--color-primary);
+  }
+
+  .outline.red-outline {
+    stroke: var(--color-primary);
+  }
+
+  .community {
+    fill: var(--color-ink);
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+</style>
+
+<script>
+  import '../../../scripts/illustrations'
+</script>

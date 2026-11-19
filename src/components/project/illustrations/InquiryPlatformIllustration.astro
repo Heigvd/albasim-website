@@ -1,0 +1,185 @@
+---
+// Illustration of the digital inquiry platform project: visual inquiry tools, sustainability and
+// digitalization at the core, surrounded by planet, people and profit, then by stakeholders,
+// climate, resources, negotiation and risks, linked to each other. When it comes into view, the
+// circles gather towards the center and the links fade in. Under the mouse pointer, the circles
+// rise and light up their links. With reduced motion, it stays still. The animation is shared:
+// see src/scripts/illustrations.ts.
+import './illustration.css'
+
+interface Props {
+  /** Description for screen readers. */
+  label: string
+  /** Words written in the illustration. Each line of a core circle has its own key. */
+  labels: Record<string, string>
+  class?: string
+}
+
+const { label, labels, class: className, ...attrs } = Astro.props
+
+// Circles around the core: name, center, radius, color, offset they gather from.
+const nodes = [
+  { name: 'planet', x: 240, y: 48, r: 30, fill: 'turquoise-strong', dx: 0, dy: -33 },
+  { name: 'people', x: 127, y: 242, r: 30, fill: 'peach-strong', dx: -28, dy: 16 },
+  { name: 'profit', x: 353, y: 242, r: 30, fill: 'lavender-strong', dx: 28, dy: 16 },
+  { name: 'stakeholders', x: 55, y: 75, r: 34, fill: 'outline', dx: -42, dy: -34 },
+  { name: 'climate', x: 425, y: 75, r: 34, fill: 'outline', dx: 42, dy: -34 },
+  { name: 'resources', x: 55, y: 285, r: 34, fill: 'outline', dx: -38, dy: 44 },
+  { name: 'negotiation', x: 240, y: 312, r: 34, fill: 'outline', dx: 0, dy: 53 },
+  { name: 'risks', x: 425, y: 285, r: 34, fill: 'outline', dx: 38, dy: 44 },
+]
+
+// Links between two circles: names, path.
+const links = [
+  ['stakeholders planet', 'M55 75 Q150 35 240 48'],
+  ['stakeholders people', 'M55 75 Q70 180 127 242'],
+  ['climate planet', 'M425 75 Q330 35 240 48'],
+  ['climate profit', 'M425 75 Q410 180 353 242'],
+  ['resources people', 'M55 285 Q85 258 127 242'],
+  ['resources negotiation', 'M55 285 Q130 335 240 312'],
+  ['risks profit', 'M425 285 Q395 258 353 242'],
+  ['risks negotiation', 'M425 285 Q350 335 240 312'],
+  ['negotiation people', 'M240 312 Q165 300 127 242'],
+  ['negotiation profit', 'M240 312 Q315 300 353 242'],
+]
+
+// The three circles of the core: center and lines of text.
+const core = [
+  { x: 240, y: 125, lines: [labels.tools1, labels.tools2] },
+  { x: 192, y: 207, lines: [labels.sustainability] },
+  { x: 288, y: 207, lines: [labels.digitalization] },
+]
+---
+
+<svg
+  {...attrs}
+  class:list={['project-illustration', className]}
+  viewBox="0 0 480 360"
+  role="img"
+  aria-label={label}
+  data-illustration
+  data-duration="2300"
+  data-lift-radius="72"
+>
+  <defs>
+    <linearGradient id="inquiry-gradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" class="stop-light"></stop>
+      <stop offset="0.5" class="stop-mid"></stop>
+      <stop offset="1" class="stop-primary"></stop>
+    </linearGradient>
+  </defs>
+
+  <circle cx="240" cy="180" r="132" class="orbit"></circle>
+
+  <!-- Links between the outer circles -->
+  <g class="links">
+    {links.map(([names, d], i) => (
+      <path d={d} data-links={names} class="fade" style={`animation-delay: ${1 + i * 0.05}s`} />
+    ))}
+  </g>
+
+  <!-- Ticks and triangle of the core -->
+  <g class="ticks">
+    <line x1="240" y1="78" x2="240" y2="87"></line>
+    <line x1="153" y1="228" x2="159" y2="225"></line>
+    <line x1="327" y1="228" x2="321" y2="225"></line>
+  </g>
+  <g class="triangle">
+    <line x1="240" y1="125" x2="192" y2="207"></line>
+    <line x1="240" y1="125" x2="288" y2="207"></line>
+    <line x1="192" y1="207" x2="288" y2="207" class="base"></line>
+  </g>
+
+  <!-- Outer circles -->
+  {nodes.map((node, i) => (
+    <g
+      class="lift gather"
+      data-node={node.name}
+      style={`animation-delay: ${i * 0.12}s; --dx: ${node.dx}px; --dy: ${node.dy}px`}
+    >
+      <circle cx={node.x} cy={node.y} r={node.r} class={node.fill} />
+      <text
+        x={node.x}
+        y={node.y + (node.r === 30 ? 4 : 3)}
+        text-anchor="middle"
+        class:list={['node-text', { small: node.r !== 30 }]}
+      >
+        {labels[node.name]}
+      </text>
+    </g>
+  ))}
+
+  <!-- Core -->
+  {core.map((circle) => (
+    <g class="lift">
+      <circle cx={circle.x} cy={circle.y} r="38" class="ink" />
+      {circle.lines.map((line, i) => (
+        <text
+          x={circle.x}
+          y={circle.y + 4 - ((circle.lines.length - 1) * 12) / 2 + i * 12}
+          text-anchor="middle"
+          class="core-text"
+        >
+          {line}
+        </text>
+      ))}
+    </g>
+  ))}
+</svg>
+
+<style>
+  .orbit {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 1.2;
+    stroke-dasharray: 5 5;
+  }
+
+  .links {
+    fill: none;
+    stroke: var(--color-primary-soft);
+    stroke-width: 1.4;
+  }
+
+  .links [data-active] {
+    stroke: var(--color-primary);
+  }
+
+  .ticks {
+    stroke: var(--color-ink);
+    stroke-width: 1;
+  }
+
+  .triangle {
+    stroke: url(#inquiry-gradient);
+    stroke-width: 3;
+  }
+
+  .triangle .base {
+    stroke: var(--color-primary);
+  }
+
+  circle.outline {
+    stroke-width: 1;
+  }
+
+  .node-text {
+    fill: var(--color-ink);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .node-text.small {
+    font-size: 9px;
+  }
+
+  .core-text {
+    fill: var(--color-white);
+    font-size: 10px;
+    font-weight: 800;
+  }
+</style>
+
+<script>
+  import '../../../scripts/illustrations'
+</script>

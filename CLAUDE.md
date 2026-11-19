@@ -16,7 +16,7 @@ Neither is a Git specialist: handle the Git and GitHub steps for them (see [Git 
 Languages:
 
 - **Talk to them in French**, the language they use with you.
-- **Write the repository in English**: code, comments, documentation, commit messages and pull request descriptions.
+- **Write the repository in English**: code, comments, documentation, commit messages and pull request descriptions. Use American spelling (`color`, `center`, `optimize`), as CSS and JavaScript do.
 - **The site's content** is written in the language of the page it belongs to, not necessarily English.
 
 ## Commands
@@ -36,18 +36,22 @@ Before every commit, run `npm run format`, then `npm run check` and `npm run bui
 
 ## Where things go
 
-| Path                    | Contents                                                                     |
-| ----------------------- | ---------------------------------------------------------------------------- |
-| `content/`              | All the Markdown content. One folder per content type (e.g. `content/news/`) |
-| `src/content.config.ts` | One content collection per type, with a schema for its frontmatter           |
-| `src/pages/`            | One file per page or route                                                   |
-| `src/layouts/`          | Page templates; `BaseLayout.astro` holds the `<html>` skeleton               |
-| `src/components/`       | Reusable components                                                          |
-| `src/styles/tokens.css` | Design tokens: colours, fonts, spacing, as CSS custom properties             |
-| `src/styles/global.css` | Global styles (reset, base typography)                                       |
-| `src/assets/`           | Images used by pages and components, optimised by Astro                      |
-| `public/`               | Files served unchanged at the site root (favicon, `robots.txt`)              |
-| `design/`               | Design reference material. Never imported, built or published                |
+| Path                    | Contents                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| `content/`              | All the Markdown content. One folder per content type (e.g. `content/news/`)  |
+| `src/content.config.ts` | One content collection per type, with a schema for its frontmatter            |
+| `src/pages/`            | One file per page or route. English at the root, French under `src/pages/fr/` |
+| `src/i18n/ui.ts`        | Interface strings (navigation, labels) and the URL of each page per language  |
+| `src/layouts/`          | Page templates; `BaseLayout.astro` holds the `<html>` skeleton                |
+| `src/components/`       | Reusable components                                                           |
+| `src/scripts/`          | Client-side scripts shared by several components                              |
+| `src/utils/`            | TypeScript helpers shared by pages and components                             |
+| `src/styles/tokens.css` | Design tokens: colors, fonts, spacing, as CSS custom properties               |
+| `src/styles/global.css` | Global styles (reset, base typography)                                        |
+| `src/assets/`           | Images used by pages and components, optimized by Astro                       |
+| `public/`               | Files served unchanged at the site root (favicon, `robots.txt`)               |
+| `design/`               | Design reference material. Never imported, built or published                 |
+| `relecture/`            | Text review files of the `/relecture` skill. Ignored by Git, never committed  |
 
 ## Conventions
 
@@ -56,7 +60,7 @@ Before every commit, run `npm run format`, then `npm run check` and `npm run bui
 - **Content stays out of components.** Text the head of the lab may want to edit goes in Markdown under `content/`, not hard-coded in `.astro` files. When adding a new type of content, add its collection and schema in `src/content.config.ts`.
 - **Styles:** use the tokens from `tokens.css` instead of hard-coded values, and the scoped `<style>` block of each component for component styles. The styling approach is not final: don't add Tailwind or another CSS framework without asking.
 - **Dependencies:** don't add an npm package without asking first. Most needs are covered by Astro itself.
-- **Images:** put them in `src/assets/` and render them with Astro's `<Image />` component, so they are resized and optimised.
+- **Images:** put them in `src/assets/` and render them with Astro's `<Image />` component, so they are resized and optimized.
 
 ### Accessibility
 
@@ -73,7 +77,7 @@ Every change must keep the site usable with a keyboard, a screen reader and at h
 
 The designs were made with Claude as artifacts. They reach you pasted in the conversation or saved in `design/`.
 
-- Treat them as a visual and structural reference, not as code to copy. Rebuild them as Astro layouts and components, with the repeated values (colours, fonts, spacing) moved to `tokens.css`.
+- Treat them as a visual and structural reference, not as code to copy. Rebuild them as Astro layouts and components, with the repeated values (colors, fonts, spacing) moved to `tokens.css`.
 - Move the text from the design into Markdown content when it is content, not interface.
 - Check the result in the dev server, at desktop and mobile widths, and compare it with the design.
 - When the design leaves a choice open (a missing state, a mobile layout), ask rather than invent.
@@ -110,4 +114,4 @@ Check the Astro docs before working on a related task:
 - [Content collections](https://docs.astro.build/en/guides/content-collections/)
 - [Styling](https://docs.astro.build/en/guides/styling/)
 - [Images](https://docs.astro.build/en/guides/images/)
-- [Internationalisation](https://docs.astro.build/en/guides/internationalization/)
+- [Internationalization](https://docs.astro.build/en/guides/internationalization/)

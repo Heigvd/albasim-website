@@ -14,8 +14,15 @@ npm-debug.log*
 .env
 .env.production
 
+# IDE confs
+.idea
+*.iml
+
 # macOS
 .DS_Store
 
 # Claude Code personal settings
 .claude/settings.local.json
+
+# Text review files from the /relecture skill
+/relecture/

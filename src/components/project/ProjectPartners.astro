@@ -1,0 +1,185 @@
+---
+// "Partners" of a project: who carried it out, with their logos, and the acknowledgements to
+// the funders, whose logos link to their websites. It may end with a call for participants.
+import { Image } from 'astro:assets'
+import Button from '../Button.astro'
+import SectionHeading from '../SectionHeading.astro'
+import { localizedPath, useTranslations, type Lang } from '../../i18n/ui'
+import type { ProjectPage } from '../../utils/projects'
+import { withLinks } from '../../utils/text'
+
+type Props = ProjectPage['partners'] & { lang: Lang }
+
+const { eyebrow, heading, paragraphs, logos, acknowledgements, getInvolved, lang } = Astro.props
+const t = useTranslations(lang)
+---
+
+<section aria-labelledby="partners-heading">
+  <div class="container inner">
+    <SectionHeading eyebrow={eyebrow} title={heading} id="partners-heading" class="heading" />
+    <div class="columns split">
+      <div>
+        {paragraphs.map((paragraph) => (
+          <p class="t-body paragraph" set:html={withLinks(paragraph, t('link.newTab'))} />
+        ))}
+        <ul class="logos">
+          {logos.map((item) => (
+            <li class="logo-box">
+              <Image
+                src={item.logo}
+                alt={item.name}
+                height={item.height}
+                densities={[1, 2]}
+                class="logo"
+                style={{ height: `${item.height}px` }}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="t-h3 acknowledgements">{acknowledgements.heading}</h3>
+        <p class="t-body thanks">{acknowledgements.text}</p>
+        <ul class="logos">
+          {acknowledgements.funders.map((item) => (
+            <li class="funder-box">
+              <a href={item.url} target="_blank" rel="noopener" class="funder">
+                <Image
+                  src={item.logo}
+                  alt={item.name}
+                  height={item.height}
+                  densities={[1, 2]}
+                  class="logo"
+                  style={{ height: `${item.height}px` }}
+                />
+                <span class="sr-only">{t('link.newTab')}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    {getInvolved && (
+      <div class="involved split">
+        <div>
+          <span class="involved-rule" aria-hidden="true"></span>
+          <h2 class="t-h2">{getInvolved.heading}</h2>
+        </div>
+        <div>
+          <p class="t-lead involved-text">{getInvolved.text}</p>
+          <Button href={localizedPath('contact', lang)} variant="on-tint">
+            {getInvolved.button}
+          </Button>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .inner {
+    padding-block: var(--section-space) var(--section-space-s);
+  }
+
+  .heading {
+    margin-bottom: var(--space-8);
+  }
+
+  .heading :global(.title) {
+    max-width: 820px;
+  }
+
+  .columns {
+    gap: var(--space-18);
+    align-items: start;
+  }
+
+  .paragraph {
+    margin: 0 0 var(--space-4);
+  }
+
+  .paragraph :global(a) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .paragraph:last-of-type {
+    margin-bottom: var(--space-8);
+  }
+
+  .logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .logo-box,
+  .funder-box {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+  }
+
+  .logo-box {
+    height: 64px;
+    padding: 0 var(--space-6);
+  }
+
+  .funder-box {
+    padding: var(--space-4) var(--space-6);
+  }
+
+  .funder {
+    display: block;
+  }
+
+  .logo {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .acknowledgements {
+    margin: 0 0 var(--space-2);
+  }
+
+  .thanks {
+    margin: 0 0 var(--space-10);
+  }
+
+  /* Call for participants */
+  .involved {
+    gap: var(--space-14);
+    align-items: start;
+    margin-top: var(--space-18);
+    padding: var(--space-14) var(--space-12) var(--space-16);
+    border-radius: 14px;
+    background: var(--color-tint);
+  }
+
+  .involved-rule {
+    display: block;
+    width: 140px;
+    height: 3px;
+    margin: 7px 0 var(--space-6);
+    background: var(--color-ink);
+  }
+
+  .involved-text {
+    margin: 0 0 var(--space-7);
+  }
+
+  @media (max-width: 820px) {
+    .involved {
+      gap: var(--space-6);
+      padding: var(--space-10) var(--space-6);
+    }
+  }
+</style>

@@ -1,0 +1,152 @@
+---
+// Pill buttons from the design system (#ds-links). Each variant is meant for one background:
+// - primary: red, on white. Main call to action of the game pages.
+// - on-accent: white, on a red block.
+// - on-tint: ink, on a light pink block.
+// - secondary: outline, white on dark headers; `tone="dark"` for an ink outline on light backgrounds.
+import Icon from './Icon.astro'
+
+interface Props {
+  /** Without it, the component is a <button>. */
+  href?: string
+  /** Type of the <button>, when there is no `href`. */
+  type?: 'button' | 'submit'
+  variant?: 'primary' | 'on-accent' | 'on-tint' | 'secondary'
+  tone?: 'light' | 'dark'
+  /** Shows the arrow that slides forward on hover; `down` for a link to a section below. */
+  arrow?: boolean | 'down'
+  /** Opens another site in a new tab, with a ↗ arrow. Add a screen reader mention in the label. */
+  external?: boolean
+  class?: string
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'primary',
+  tone = 'light',
+  arrow = variant !== 'on-accent',
+  external = false,
+  class: className,
+  ...attrs
+} = Astro.props
+const Tag = href ? 'a' : 'button'
+---
+
+<Tag
+  {...attrs}
+  href={href}
+  type={href ? undefined : type}
+  class:list={['button', 't-btn', variant, variant === 'secondary' && tone, className]}
+  target={external ? '_blank' : undefined}
+  rel={external ? 'noopener' : undefined}
+>
+  <slot />
+  {arrow &&
+    (external ? (
+      <Icon name="external" width={18} strokeWidth={1.6} class="arrow external" />
+    ) : arrow === 'down' ? (
+      <Icon name="arrow-down" width={13} height={18} class="arrow down" />
+    ) : (
+      <Icon name="arrow-long" width={28} height={18} class="arrow" />
+    ))}
+</Tag>
+
+<style>
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 14px var(--space-7);
+    border: 0;
+    border-radius: var(--radius-pill);
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .arrow {
+    transition: transform var(--duration-fast) ease;
+  }
+
+  .button:hover .arrow,
+  .button:focus-visible .arrow {
+    transform: translateX(6px);
+  }
+
+  .button:hover .down,
+  .button:focus-visible .down {
+    transform: translateY(4px);
+  }
+
+  .button:hover .external,
+  .button:focus-visible .external {
+    transform: translate(2px, -2px);
+  }
+
+  .primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .on-accent {
+    background: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  .primary:hover,
+  .primary:focus-visible,
+  .on-accent:hover,
+  .on-accent:focus-visible {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .on-accent:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .on-tint {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+
+  .on-tint:hover,
+  .on-tint:focus-visible {
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .secondary {
+    padding: 12.5px 26.5px;
+    border: 1.5px solid currentColor;
+    background: transparent;
+  }
+
+  .secondary.light {
+    color: var(--color-white);
+  }
+
+  .secondary.light:hover,
+  .secondary.light:focus-visible {
+    background: var(--color-white);
+    color: var(--color-ink);
+  }
+
+  .secondary.light:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  .secondary.dark {
+    color: var(--color-ink);
+  }
+
+  .secondary.dark:hover,
+  .secondary.dark:focus-visible {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+    color: var(--color-white);
+  }
+</style>

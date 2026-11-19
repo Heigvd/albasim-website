@@ -1,0 +1,20 @@
+---
+// Project pages in English, one per project with a `page` in content/projects/en/.
+import { getCollection } from 'astro:content'
+import ProjectPage from '../../components/project/ProjectPage.astro'
+
+export async function getStaticPaths() {
+  const projects = await getCollection(
+    'projects',
+    ({ id, data }) => id.startsWith('en/') && data.page !== undefined,
+  )
+  return projects.map((project) => ({
+    params: { id: project.id.split('/').pop() },
+    props: { project },
+  }))
+}
+
+const { project } = Astro.props
+---
+
+<ProjectPage project={project} lang="en" />
