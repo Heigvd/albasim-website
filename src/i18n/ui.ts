@@ -19,6 +19,10 @@ export const routes = {
   team: { en: '/team', fr: '/fr/equipe' },
   news: { en: '/news', fr: '/fr/actualites' },
   contact: { en: '/contact', fr: '/fr/contact' },
+  // Pages shown after sending the contact form without JavaScript. public/contact.php
+  // redirects to them: keep its list of addresses in sync.
+  contactSent: { en: '/contact/thanks', fr: '/fr/contact/merci' },
+  contactError: { en: '/contact/error', fr: '/fr/contact/erreur' },
   games: { en: '/serious-games', fr: '/fr/serious-games' },
 } satisfies Record<string, Record<Lang, string>>
 
@@ -85,6 +89,7 @@ export const ui = {
     'game.previous': 'Capture précédente',
     'game.next': 'Capture suivante',
     'game.position': '{index} sur {count}',
+    'contact.honeypot': 'Laissez ce champ vide',
   },
   en: {
     'nav.label': 'Main navigation',
@@ -146,6 +151,7 @@ export const ui = {
     'game.previous': 'Previous screenshot',
     'game.next': 'Next screenshot',
     'game.position': '{index} of {count}',
+    'contact.honeypot': 'Leave this field empty',
   },
 } as const satisfies Record<Lang, Record<string, string>>
 

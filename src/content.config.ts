@@ -500,6 +500,16 @@ const newsPage = defineCollection({
   }),
 })
 
+// A page shown after sending the contact form: a title, a short text and a link.
+const resultPage = z.object({
+  /** Title of the browser tab. */
+  title: z.string(),
+  heading: z.string(),
+  text: z.string(),
+  /** Label of the link under the text: home page after a success, contact form after an error. */
+  link: z.string(),
+})
+
 // The contact page, one file per language (`fr.md`, `en.md`). The body is the introduction under
 // the title. The address comes from the footer content.
 const contact = defineCollection({
@@ -512,14 +522,26 @@ const contact = defineCollection({
     heading: z.string(),
     /** Description of the illustration next to the title, for screen readers. */
     illustrationAlt: z.string(),
-    /** Labels of the form fields and of its button. */
+    /** Labels of the form fields and of its button, and the messages shown under the button. */
     form: z.object({
       name: z.string(),
       email: z.string(),
       subject: z.string(),
       message: z.string(),
       send: z.string(),
+      /** While the message is being sent. */
+      sending: z.string(),
+      /** Once the message has been sent. */
+      sent: z.string(),
+      /** When the server rejects the fields (empty or too long). */
+      invalid: z.string(),
+      /** When the message could not be sent. */
+      failed: z.string(),
     }),
+    /** Pages shown after sending the form when JavaScript is off: `/contact/thanks` and
+     *  `/contact/error` (`/fr/contact/merci` and `/fr/contact/erreur` in French). */
+    sentPage: resultPage,
+    errorPage: resultPage,
     location: z.object({
       heading: z.string(),
       /** Description of the map, for screen readers. */

@@ -10,7 +10,7 @@ interface Props {
   description?: string
   /** URL of this page in each language. Defaults to the matching fixed route. */
   alternates?: Record<Lang, string>
-  /** Keeps the page out of search engines, e.g. the error page. */
+  /** Asks search engines not to index the page. */
   noindex?: boolean
 }
 

@@ -30,7 +30,7 @@ const data = page.data
   </PageHero>
 
   <div class="container inner">
-    <ContactForm labels={data.form} />
+    <ContactForm lang={lang} labels={data.form} />
     <ContactLocation {...data.location} address={footer.data.address} lang={lang} />
   </div>
 </BaseLayout>

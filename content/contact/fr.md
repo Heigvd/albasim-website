@@ -9,6 +9,20 @@ form:
   subject: Objet
   message: Message
   send: Envoyer le message
+  sending: Envoi de votre message…
+  sent: Merci, votre message a bien été envoyé. Nous vous répondrons rapidement.
+  invalid: Certains champs sont vides ou trop longs. Vérifiez le formulaire et réessayez.
+  failed: Votre message n’a pas pu être envoyé. Veuillez réessayer plus tard.
+sentPage:
+  title: Message envoyé | AlbaSim
+  heading: Merci
+  text: Votre message a bien été envoyé. Nous vous répondrons rapidement.
+  link: Retour à l’accueil
+errorPage:
+  title: Message non envoyé | AlbaSim
+  heading: Message non envoyé
+  text: Un problème est survenu et votre message n’a pas pu être envoyé. Revenez au formulaire avec le bouton Précédent de votre navigateur pour retrouver votre message, puis réessayez plus tard.
+  link: Retour au formulaire de contact
 location:
   heading: Où nous trouver
   mapAlt: Plan simplifié montrant l’emplacement de la HEIG-VD à l’avenue des Sports, à Yverdon-les-Bains
