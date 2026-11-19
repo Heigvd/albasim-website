@@ -9,8 +9,8 @@ headingLang: en
 missions:
   - audience: Pour les chercheurs et partenaires académiques
     title: Recherche
-    text: Nos recherches portent sur la conception de serious games et simulations, sur les modalités pédagogiques qui les rendent efficaces et sur l’évaluation de leur impact sur l’apprentissage.
-    action: Découvrir notre recherche
+    text: Nos recherches portent sur la conception de serious games et simulations, sur les modalités pédagogiques de leur utilisation et sur l’évaluation de leur impact sur l’apprentissage.
+    action: Découvrir nos recherches
     page: research
     image: ../../src/assets/home/research.jpg
     imageAlt: Trois chercheurs travaillant ensemble autour d’une table
@@ -73,8 +73,8 @@ publications:
     - human-patient-model
     - project-management-education
 collaborate:
-  title: Collaborer avec nous
-  text: Une collaboration vous intéresse ? Nous serions heureux d’en discuter.
+  title: Collaborons
+  text: Une collaboration vous intéresse ? Nous en parlerons avec plaisir.
   button: Contactez-nous
 ---
 

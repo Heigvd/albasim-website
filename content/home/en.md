@@ -8,7 +8,7 @@ heading:
 missions:
   - audience: For researchers and academic partners
     title: Research
-    text: Our research covers the design of serious games and simulations, the teaching approaches that make them effective, and the evaluation of their impact on learning.
+    text: Our research covers the design of serious games and simulations, the teaching approaches for using them, and the evaluation of their impact on learning.
     action: Explore our research
     page: research
     image: ../../src/assets/home/research.jpg
@@ -73,7 +73,7 @@ publications:
     - project-management-education
 collaborate:
   title: Collaborate with us
-  text: Interested in collaborating? We would be glad to discuss it with you.
+  text: Interested in collaborating? We’ll be glad to talk about it.
   button: Contact us
 ---
 
