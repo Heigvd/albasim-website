@@ -1,14 +1,14 @@
 ---
 title: A digital inquiry platform for wicked problems
 funders: SNSF
-summary: A platform combining paper and digital visual inquiry tools for complex problems.
+summary: A digital platform for a collective approach to wicked problems.
 image: ../../../src/assets/projects/inquiry-platform.jpg
 imageAlt: Abstract network of connected spheres
 page:
   heading: A digital inquiry platform for wicked problems
-  lead: 'Climate, sustainability, social change: today’s most pressing challenges have no simple answer. In this project, we explore how new forms of digital tools can help teams tackle those problems.'
+  lead: 'Climate, sustainability, social change, artificial intelligence: the major challenges of our time have no simple answer. In this project, we explore how new forms of digital tools can support a multidisciplinary approach to these wicked problems.'
   intro:
-    - This four-year research project (2025–2029) aims to develop a digital platform combining visual inquiry tools and systems thinking to support multidisciplinary teams facing wicked problems. Its first use case focuses on sustainable project management.
+    - This four-year research project (2025–2029) aims to develop a digital platform combining visual inquiry tools and systems thinking to support multidisciplinary teams in approaching wicked problems. A first use case focuses on sustainable project management.
     - Funded by the SNSF, in collaboration with the University of Lausanne.
   illustration:
     alt: Visual inquiry tools, sustainability and digitalisation at the core, surrounded by planet, people and profit, and by stakeholders, climate, resources, negotiation and risks
@@ -46,28 +46,28 @@ page:
             affiliation: University of Lausanne
   overview:
     eyebrow: Overview
-    heading: Helping teams grasp problems that defy conventional solutions
+    heading: Helping teams grasp problems that defy conventional approaches
     image: ../../../src/assets/projects/inquiry-platform-team.jpg
     imageAlt: A multidisciplinary team collaborating around a table
   outcomes:
     eyebrow: Expected contribution
-    heading: Tools and knowledge to grasp, address and teach wicked problems
+    heading: Tools and knowledge for tackling wicked problems, in practice and in education
     cards:
       - icon: search
-        title: A digital inquiry platform
-        text: Combining visual inquiry tools and systems thinking to help multidisciplinary teams explore wicked problems, first applied to sustainable project management.
+        title: A digital platform
+        text: A platform integrating visual inquiry tools and systems thinking to help multidisciplinary teams explore wicked problems.
       - icon: graduation-cap
         title: Tools for practice and education
-        text: Co-developed tools to integrate sustainability into project management, and teaching resources for the next generation of decision-makers.
+        text: Tools co-developed with practitioners, and teaching resources for the next generation of decision-makers.
       - icon: chart
-        title: Evidence and design principles
-        text: Evidence of the platform’s effectiveness in professional and educational settings, and general design principles for digital inquiry tools.
+        title: Evaluation and design principles
+        text: An evaluation of the platform’s effectiveness in professional and educational settings, and general design principles for digital inquiry tools.
   approach:
     eyebrow: Research approach
     heading: A collaborative research process, open to organisations and practitioners
     paragraphs:
-      - 'We follow a design science research approach: understand real needs, build on existing knowledge, then design and test the platform in iterative cycles.'
-      - 'The platform is co-designed with organisations and tested in both professional and educational settings, with each version evaluated through mixed methods, from usage data to observations and focus groups. The goal: a useful platform, and general design principles for tackling wicked problems.'
+      - 'We follow a design science research approach: understand real needs, build on existing knowledge, design and test the platform in iterative cycles.'
+      - 'The platform is designed and tested in both professional and educational settings, with each version evaluated through mixed methods, from usage data to observations and focus groups.'
     inputs:
       - label: Relevance
         text: Understand real needs
@@ -88,10 +88,10 @@ page:
     eyebrow: Early findings
     heading: What our research shows so far
     items:
-      - text: 'Paper-based visual inquiry tools fall short for wicked problems: they lack a view that is both holistic and detailed, do not account for evolving information, and limit collaboration between dispersed stakeholders.'
+      - text: 'Paper-based visual inquiry tools fall short for some wicked problems: they lack a view that is both holistic and detailed, do not account for evolving information, and limit collaboration between dispersed stakeholders.'
         source: Design science research · Roschnik, Jaccard, Monnier & Missonier, *ICIS 2024 Proceedings*
         url: https://aisel.aisnet.org/icis2024/general_is/general_is/7
-      - text: Integrating systems thinking into visual inquiry tools through digitalisation is a promising way to support teams facing wicked problems, leading to the proposal of a digital inquiry platform.
+      - text: Integrating systems thinking into visual inquiry tools through digitalisation is a promising way to support teams facing wicked problems.
         source: Design science research · Roschnik, Jaccard, Monnier & Missonier, *ICIS 2024 Proceedings*
         url: https://aisel.aisnet.org/icis2024/general_is/general_is/7
   partners:
@@ -129,12 +129,12 @@ page:
     button: Contact us
 ---
 
-Many of today’s major challenges are wicked problems: hard to define, without a single solution, involving stakeholders with contrasting views, and solutions tend to create new ones. Teams need support to address them.
+Many of today’s major challenges are wicked problems. Hard to define and without a single solution, they involve stakeholders with contrasting views, and every attempt to solve them tends to create new problems.
 
 ### The gap
 
-Visual inquiry tools (VIT) and systems thinking help teams explore them collectively, but how to combine physical and digital VIT remains largely unexplored.
+Visual inquiry tools (VIT) and systems thinking are known to help multidisciplinary teams approach wicked problems. However, how to combine physical and digital VIT remains largely unexplored.
 
 ### Project objectives
 
-The project explores how to combine physical artefacts with a digital inquiry platform, first applied to sustainable project management. It brings together management sciences and computer science, drawing on design science research, sustainable business models, systems thinking, web technologies and user experience.
+The project explores how a digital VIT, combined with physical artefacts, changes the way teams approach wicked problems. A first use case is sustainable project management. The project brings together management sciences and computer science, drawing on a design science research approach, systems thinking and web technologies.

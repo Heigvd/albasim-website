@@ -1,14 +1,14 @@
 ---
 title: A digital inquiry platform for wicked problems
 funders: FNS
-summary: Une plateforme qui combine des outils d’investigation visuelle papier et numériques pour les problèmes complexes.
+summary: Une plateforme numérique pour une approche collective des problèmes complexes.
 image: ../../../src/assets/projects/inquiry-platform.jpg
 imageAlt: Réseau abstrait de sphères connectées
 page:
-  heading: Une plateforme d’investigation numérique pour les problèmes complexes
-  lead: 'Climat, durabilité, changement social : les défis les plus pressants d’aujourd’hui n’ont pas de réponse simple. Dans ce projet, nous explorons comment de nouvelles formes d’outils numériques peuvent aider les équipes à s’y attaquer.'
+  heading: A digital inquiry platform for wicked problems
+  lead: 'Climat, durabilité, changement social, intelligence artificielle : les défis majeurs de notre temps n’ont pas de réponse simple. Dans ce projet, nous explorons comment de nouvelles formes d’outils numériques peuvent soutenir une approche pluridisciplinaire de ces problèmes complexes.'
   intro:
-    - Ce projet de recherche de quatre ans (2025–2029) vise à développer une plateforme numérique qui combine des outils d’investigation visuelle et la pensée systémique pour soutenir les équipes pluridisciplinaires face aux problèmes complexes. Son premier cas d’usage porte sur la gestion de projet durable.
+    - Ce projet de recherche de quatre ans (2025–2029) vise à développer une plateforme numérique qui combine des outils d’investigation visuelle et la pensée systémique pour soutenir les équipes pluridisciplinaires dans leur approche des problèmes complexes. Un premier cas d’usage porte sur la gestion de projet durable.
     - Financé par le FNS, en collaboration avec l’Université de Lausanne.
   illustration:
     alt: Les outils d’investigation visuelle, la durabilité et la numérisation au centre, entourés de la planète, des personnes et du profit, puis des parties prenantes, du climat, des ressources, de la négociation et des risques
@@ -46,28 +46,28 @@ page:
             affiliation: Université de Lausanne
   overview:
     eyebrow: Présentation
-    heading: Aider les équipes à saisir des problèmes qui échappent aux solutions classiques
+    heading: Aider les équipes à appréhender des problèmes qui résistent aux approches classiques
     image: ../../../src/assets/projects/inquiry-platform-team.jpg
     imageAlt: Une équipe pluridisciplinaire qui travaille autour d’une table
   outcomes:
     eyebrow: Contribution attendue
-    heading: Des outils et des connaissances pour comprendre, traiter et enseigner les problèmes complexes
+    heading: Des outils et des connaissances pour aborder les problèmes complexes, dans la pratique comme dans la formation
     cards:
       - icon: search
-        title: Une plateforme d’investigation numérique
-        text: Elle combine des outils d’investigation visuelle et la pensée systémique pour aider les équipes pluridisciplinaires à explorer les problèmes complexes, en commençant par la gestion de projet durable.
+        title: Une plateforme numérique
+        text: Une plateforme qui intègre des outils d’investigation visuelle et la pensée systémique pour aider les équipes pluridisciplinaires à explorer les problèmes complexes.
       - icon: graduation-cap
         title: Des outils pour la pratique et l’enseignement
-        text: Des outils développés avec les praticiens pour intégrer la durabilité dans la gestion de projet, et des ressources pédagogiques pour la prochaine génération de décideurs.
+        text: Des outils développés avec les praticiens, et des ressources pédagogiques pour la prochaine génération de décideurs.
       - icon: chart
-        title: Des preuves et des principes de conception
-        text: Des preuves de l’efficacité de la plateforme dans des contextes professionnels et pédagogiques, et des principes de conception généraux pour les outils d’investigation numériques.
+        title: Évaluation et principes de conception
+        text: Une évaluation de l’efficacité de la plateforme dans des contextes professionnels et pédagogiques, et des principes de conception généraux pour les outils d’investigation numériques.
   approach:
     eyebrow: Démarche de recherche
     heading: Un processus de recherche collaboratif, ouvert aux organisations et aux praticiens
     paragraphs:
-      - 'Nous suivons une démarche de design science research : comprendre les besoins réels, s’appuyer sur les connaissances existantes, puis concevoir et tester la plateforme par cycles itératifs.'
-      - 'La plateforme est conçue avec des organisations et testée dans des contextes professionnels et pédagogiques ; chaque version est évaluée par des méthodes mixtes, des données d’utilisation aux observations et aux focus groups. Le but : une plateforme utile et des principes de conception généraux pour traiter les problèmes complexes.'
+      - 'Nous suivons une démarche de type design science research : comprendre les besoins réels, s’appuyer sur les connaissances existantes, concevoir et tester la plateforme par cycles itératifs.'
+      - 'La plateforme est conçue et testée dans des contextes professionnels et pédagogiques ; chaque version est évaluée par des méthodes mixtes, des données d’utilisation aux observations et aux focus groups.'
     inputs:
       - label: Pertinence
         text: Comprendre les besoins réels
@@ -88,10 +88,10 @@ page:
     eyebrow: Premiers résultats
     heading: Ce que montrent nos recherches jusqu’ici
     items:
-      - text: 'Les outils d’investigation visuelle sur papier atteignent leurs limites face aux problèmes complexes : ils n’offrent pas une vue à la fois globale et détaillée, ne tiennent pas compte de l’évolution des informations et limitent la collaboration entre parties prenantes dispersées.'
+      - text: 'Les outils d’investigation visuelle sur papier atteignent leurs limites face à certains problèmes complexes : ils n’offrent pas une vue à la fois globale et détaillée, ne tiennent pas compte de l’évolution des informations et limitent la collaboration entre parties prenantes dispersées.'
         source: Design science research · Roschnik, Jaccard, Monnier & Missonier, *ICIS 2024 Proceedings*
         url: https://aisel.aisnet.org/icis2024/general_is/general_is/7
-      - text: Intégrer la pensée systémique dans les outils d’investigation visuelle grâce au numérique est une piste prometteuse pour soutenir les équipes face aux problèmes complexes, d’où la proposition d’une plateforme d’investigation numérique.
+      - text: Intégrer la pensée systémique dans les outils d’investigation visuelle grâce au numérique est une piste prometteuse pour soutenir les équipes confrontées à des problèmes complexes.
         source: Design science research · Roschnik, Jaccard, Monnier & Missonier, *ICIS 2024 Proceedings*
         url: https://aisel.aisnet.org/icis2024/general_is/general_is/7
   partners:
@@ -129,12 +129,12 @@ page:
     button: Contactez-nous
 ---
 
-Beaucoup des grands défis actuels sont des problèmes complexes (wicked problems) : difficiles à définir, sans solution unique, ils impliquent des parties prenantes aux points de vue opposés, et leurs solutions tendent à en créer de nouveaux. Les équipes ont besoin de soutien pour s’y attaquer.
+Beaucoup des grands défis actuels sont des problèmes complexes (wicked problems). Difficiles à définir et sans solution unique, ils impliquent des parties prenantes aux points de vue opposés, et chaque tentative de résolution tend à créer de nouveaux problèmes.
 
 ### Le manque
 
-Les outils d’investigation visuelle (VIT) et la pensée systémique aident les équipes à explorer ces problèmes ensemble, mais la manière de combiner VIT physiques et numériques reste largement inexplorée.
+Les outils d’investigation visuelle (VIT) et la pensée systémique sont reconnus pour faciliter l’approche pluridisciplinaire des problèmes complexes. Toutefois, la manière de combiner VIT physiques et numériques reste largement inexplorée.
 
 ### Objectifs du projet
 
-Le projet explore comment combiner des supports physiques avec une plateforme d’investigation numérique, d’abord appliquée à la gestion de projet durable. Il réunit sciences de gestion et informatique, en s’appuyant sur la design science research, les modèles d’affaires durables, la pensée systémique, les technologies web et l’expérience utilisateur.
+Le projet explore comment un VIT numérique, combiné à des supports physiques, modifie l’approche des problèmes complexes. Un premier cas d’application porte sur la gestion de projet durable. Le projet réunit sciences de gestion et informatique. Il s’appuie sur une approche de type design science research, la pensée systémique et les technologies web.
