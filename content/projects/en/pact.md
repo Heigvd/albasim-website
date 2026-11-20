@@ -35,11 +35,11 @@ page:
     heading: A programming game designed with and for teachers
     diagram:
       type: path
-      alt: Compulsory computing education, a new subject that can feel abstract, leads to a programming game for the classroom, co-designed with teachers, with game-based tasks and a teacher dashboard, with the goal of computational thinking for all students
+      alt: Compulsory computing education, a subject that can feel abstract, leads to a programming game for the classroom, co-designed with teachers, with game-based tasks and a teacher dashboard, with the goal of computational thinking for all students
       currentLabel: CURRENT TEACHING
       current: Compulsory computing education
       limitsLabel: LIMITS
-      limits: [A new subject for many teachers, Programming can feel abstract]
+      limits: [A lack of suitable resources, Programming can feel abstract]
       projectLabel: THE PROJECT
       projectTitle: A programming game for the classroom
       steps: [Co-designed with teachers, Game-based programming tasks, A dashboard for teachers]
@@ -62,7 +62,7 @@ page:
     eyebrow: From research to practice
     heading: From the first class to wide adoption
     paragraphs:
-      - The project started in 2018 with the University of Fribourg and gymnasium teachers. In February 2019, 22 students of the Gymnase intercantonal de la Broye tested the game in class and confirmed that it was fun and motivating. The game was then adopted by other gymnasiums in French-speaking Switzerland.
+      - The project started in 2018 with the University of Fribourg and gymnasium teachers. In February 2019, 22 students of the Gymnase intercantonal de la Broye tested the game in class and confirmed that it was fun and motivating.
       - The game and its teacher dashboard were then presented at the EIAH conference in Paris and at Ludovia#CH. The game is now used by several secondary schools in French-speaking Switzerland.
     image: ../../../src/assets/projects/pact-practice.jpg
     imageAlt: Students playing PACT in a computer classroom

@@ -35,11 +35,11 @@ page:
     heading: Un jeu de programmation conçu avec et pour les enseignants
     diagram:
       type: path
-      alt: L’enseignement obligatoire de l’informatique, une nouvelle discipline qui peut sembler abstraite, mène à un jeu de programmation pour la classe, conçu avec les enseignants, avec des tâches ludiques et un tableau de bord pour les enseignants, dans le but de développer la pensée informatique de tous les élèves
+      alt: L’enseignement obligatoire de l’informatique, une discipline qui peut sembler abstraite, mène à un jeu de programmation pour la classe, conçu avec les enseignants, avec des tâches ludiques et un tableau de bord pour les enseignants, dans le but de développer la pensée informatique de tous les élèves
       currentLabel: ENSEIGNEMENT ACTUEL
       current: L’informatique obligatoire
       limitsLabel: LIMITES
-      limits: [Une discipline nouvelle pour beaucoup, La programmation peut sembler abstraite]
+      limits: [Un manque de ressources adaptées, La programmation peut sembler abstraite]
       projectLabel: LE PROJET
       projectTitle: Un jeu de programmation pour la classe
       steps:
@@ -67,7 +67,7 @@ page:
     eyebrow: De la recherche à la pratique
     heading: De la première classe à une large diffusion
     paragraphs:
-      - Le projet a démarré en 2018 avec l’Université de Fribourg et des enseignants de gymnase. En février 2019, 22 élèves du Gymnase intercantonal de la Broye ont testé le jeu en classe et confirmé qu’il était amusant et motivant. Le jeu s’est ensuite diffusé dans d’autres gymnases de Suisse romande.
+      - Le projet a démarré en 2018 avec l’Université de Fribourg et des enseignants de gymnase. En février 2019, 22 élèves du Gymnase intercantonal de la Broye ont testé le jeu en classe et confirmé qu’il était amusant et motivant.
       - Le jeu et son tableau de bord pour les enseignants ont ensuite été présentés à la conférence EIAH à Paris et à Ludovia#CH. Le jeu est aujourd’hui utilisé par plusieurs écoles secondaires de Suisse romande.
     image: ../../../src/assets/projects/pact-practice.jpg
     imageAlt: Des élèves jouant à PACT dans une salle d’informatique
