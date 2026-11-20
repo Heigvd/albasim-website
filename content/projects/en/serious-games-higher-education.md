@@ -1,14 +1,14 @@
 ---
 title: Serious games in higher education
 funders: University of Agder · Diku
-summary: A project using serious games to strengthen students’ learning in higher education, with the University of Agder.
+summary: A study on the potential uses of serious games as educational tools in university education in Norway.
 image: ../../../src/assets/projects/serious-games-higher-education.jpg
 imageAlt: Colourful wooden houses along a river in Norway
 page:
   heading: Serious games in higher education
-  lead: Project management is learned by doing, yet university students rarely get the chance to manage a real project.
+  lead: Practical skills are developed through practice, in particular when it comes to project management. However, university students do not always have the opportunity to manage a real project.
   intro:
-    - Led by the University of Agder in Norway, the project explored how serious games can strengthen students’ learning in higher education. After testing the PM-Game, the university involved AlbaSim as its main partner and external expert.
+    - Led by the University of Agder in Norway, the project explored how serious games can strengthen students’ learning in higher education. After testing the PM-Game, the university involved AlbaSim as a main partner and external expert.
     - Funded by the Norwegian Agency for International Cooperation and Quality Enhancement in Higher Education (Diku).
   illustration:
     alt: Students around a game board on a table, linked to a university building and a project timeline
@@ -63,7 +63,7 @@ page:
     heading: A lasting collaboration with the University of Agder
     paragraphs:
       - The collaboration started in 2018, when Prof. Dominique Jaccard spent a week as visiting professor at the University of Agder, introducing the PM-Game in three programmes.
-      - 'It has continued well beyond the project: joint publications, a presentation at the Edulearn conference and, in 2025, a chapter in a Norwegian book on practice-oriented learning and a keynote by Xavier Good at the university’s “Games and Gaming in Education” conference.'
+      - 'It has continued well beyond the project: joint publications, a chapter in a Norwegian book on practice-oriented learning and a keynote by Xavier Good at the Agder university’s “Games and Gaming in Education” conference.'
     links:
       - label: PM-Game
         game: pm-game

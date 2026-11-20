@@ -1,14 +1,14 @@
 ---
 title: Serious games dans l’enseignement supérieur
 funders: Université d’Agder · Diku
-summary: Un projet qui utilise les serious games pour renforcer l’apprentissage des étudiants dans l’enseignement supérieur, avec l’Université d’Agder.
+summary: Une recherche sur les possibilités d’utilisation des serious games en tant que leviers pédagogiques dans l’enseignement universitaire en Norvège.
 image: ../../../src/assets/projects/serious-games-higher-education.jpg
 imageAlt: Des maisons en bois colorées au bord d’une rivière en Norvège
 page:
   heading: Serious games dans l’enseignement supérieur
-  lead: La gestion de projet s’apprend en pratiquant, mais les étudiants universitaires ont rarement l’occasion de gérer un vrai projet.
+  lead: Les compétences pratiques se développent en pratiquant, notamment pour la gestion de projet. Mais les étudiants universitaires n’ont pas toujours l’occasion de gérer un vrai projet.
   intro:
-    - Mené par l’Université d’Agder, en Norvège, le projet a exploré comment les serious games peuvent renforcer l’apprentissage des étudiants dans l’enseignement supérieur. Après avoir testé le PM-Game, l’université a fait d’AlbaSim son principal partenaire et expert externe.
+    - Mené par l’Université d’Agder, en Norvège, le projet a exploré comment les serious games peuvent renforcer l’apprentissage des étudiants dans l’enseignement supérieur. Le PM-Game a été utilisé comme cas d’utilisation. Après avoir testé le PM-Game, l’université a fait d’AlbaSim un partenaire du projet et expert externe.
     - Financé par l’Agence norvégienne pour la coopération internationale et l’amélioration de la qualité dans l’enseignement supérieur (Diku).
   illustration:
     alt: Des étudiants autour d’un plateau de jeu posé sur une table, reliés à un bâtiment universitaire et à une ligne de temps de projet
@@ -68,7 +68,7 @@ page:
     heading: Une collaboration durable avec l’Université d’Agder
     paragraphs:
       - La collaboration a commencé en 2018, lorsque le Prof. Dominique Jaccard a passé une semaine comme professeur invité à l’Université d’Agder pour introduire le PM-Game dans trois programmes.
-      - 'Elle s’est poursuivie bien au-delà du projet : publications communes, présentation à la conférence Edulearn et, en 2025, un chapitre dans un livre norvégien sur l’apprentissage orienté vers la pratique et une keynote de Xavier Good à la conférence « Games and Gaming in Education » de l’université.'
+      - 'La collaboration s’est ensuite poursuivie : publications et conférences, un chapitre dans un livre norvégien sur l’apprentissage orienté vers la pratique et une keynote de Xavier Good à la conférence « Games and Gaming in Education » de l’université d’Agder.'
     links:
       - label: PM-Game
         game: pm-game
