@@ -38,19 +38,16 @@ const height = goalTop + 70
     {currentLabel}
   </text>
   <rect x="60" y="34" width="400" height={currentHeight} rx="12" class="box"></rect>
-  <text x="84" y="72" class="current">
+  <text x="260" y="72" text-anchor="middle" class="current">
     {current}
   </text>
-  <text x="84" y="104" class="label">
+  <text x="260" y="104" text-anchor="middle" class="label">
     {limitsLabel}
   </text>
   {limits.map((limit, i) => (
-    <g>
-      <circle cx="89" cy={134 + i * 30} r="3.5" class="bullet" />
-      <text x="102" y={140 + i * 30} class="limit">
-        {limit}
-      </text>
-    </g>
+    <text x="260" y={140 + i * 30} text-anchor="middle" class="limit">
+      <tspan class="bullet-mark">•</tspan> {limit}
+    </text>
   ))}
 
   <path
@@ -131,6 +128,10 @@ const height = goalTop + 70
   }
 
   .bullet {
+    fill: var(--color-primary);
+  }
+
+  .bullet-mark {
     fill: var(--color-primary);
   }
 
