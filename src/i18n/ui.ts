@@ -11,19 +11,23 @@ export type Lang = keyof typeof languages
 
 export const defaultLang: Lang = 'en'
 
-/** URL of each page in each language. English is served at the root, French under /fr/. */
+/**
+ * URL of each page in each language. English is served at the root, French under /fr/.
+ * Every URL ends with a slash: each page is built as a folder with an index.html, and the server
+ * redirects the address without a slash to the one with it.
+ */
 export const routes = {
   home: { en: '/', fr: '/fr/' },
-  research: { en: '/research', fr: '/fr/recherche' },
-  publications: { en: '/publications', fr: '/fr/publications' },
-  team: { en: '/team', fr: '/fr/equipe' },
-  news: { en: '/news', fr: '/fr/actualites' },
-  contact: { en: '/contact', fr: '/fr/contact' },
+  research: { en: '/research/', fr: '/fr/recherche/' },
+  publications: { en: '/publications/', fr: '/fr/publications/' },
+  team: { en: '/team/', fr: '/fr/equipe/' },
+  news: { en: '/news/', fr: '/fr/actualites/' },
+  contact: { en: '/contact/', fr: '/fr/contact/' },
   // Pages shown after sending the contact form without JavaScript. public/contact.php
   // redirects to them: keep its list of addresses in sync.
-  contactSent: { en: '/contact/thanks', fr: '/fr/contact/merci' },
-  contactError: { en: '/contact/error', fr: '/fr/contact/erreur' },
-  games: { en: '/serious-games', fr: '/fr/serious-games' },
+  contactSent: { en: '/contact/thanks/', fr: '/fr/contact/merci/' },
+  contactError: { en: '/contact/error/', fr: '/fr/contact/erreur/' },
+  games: { en: '/serious-games/', fr: '/fr/serious-games/' },
 } satisfies Record<string, Record<Lang, string>>
 
 export type RouteKey = keyof typeof routes
@@ -173,12 +177,12 @@ export function localizedPath(key: RouteKey, lang: Lang): string {
 
 /** URL of a project page. Only the projects with a `page` in their content have one. */
 export function projectPath(id: string, lang: Lang): string {
-  return lang === 'fr' ? `/fr/projets/${id}` : `/projects/${id}`
+  return lang === 'fr' ? `/fr/projets/${id}/` : `/projects/${id}/`
 }
 
 /** URL of the page of a ready-to-use game, under the serious games page. */
 export function gamePath(id: string, lang: Lang): string {
-  return `${routes.games[lang]}/${id}`
+  return `${routes.games[lang]}${id}/`
 }
 
 function normalize(path: string): string {

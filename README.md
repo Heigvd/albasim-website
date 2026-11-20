@@ -73,7 +73,7 @@ The `.htaccess`, `.htdigest` and `.user.ini` files on the server are managed in 
 
 ## Contact form
 
-The [contact form](src/components/contact/ContactForm.astro) posts to [`public/contact.php`](public/contact.php), which emails the message with PHP's `mail()`. A hidden field (a honeypot) catches spam bots. With JavaScript, the result shows under the button; without it, `contact.php` redirects to `/contact/thanks` or `/contact/error`.
+The [contact form](src/components/contact/ContactForm.astro) posts to [`public/contact.php`](public/contact.php), which emails the message with PHP's `mail()`. A hidden field (a honeypot) catches spam bots. With JavaScript, the result shows under the button; without it, `contact.php` redirects to `/contact/thanks/` or `/contact/error/`.
 
 `npm run dev` doesn't run PHP: locally, sending always ends with the error message. The real test happens on dev.albasim.ch. The CI checks the PHP syntax.
 

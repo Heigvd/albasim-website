@@ -538,8 +538,8 @@ const contact = defineCollection({
       /** When the message could not be sent. */
       failed: z.string(),
     }),
-    /** Pages shown after sending the form when JavaScript is off: `/contact/thanks` and
-     *  `/contact/error` (`/fr/contact/merci` and `/fr/contact/erreur` in French). */
+    /** Pages shown after sending the form when JavaScript is off: `/contact/thanks/` and
+     *  `/contact/error/` (`/fr/contact/merci/` and `/fr/contact/erreur/` in French). */
     sentPage: resultPage,
     errorPage: resultPage,
     location: z.object({
@@ -574,7 +574,7 @@ const error404 = defineCollection({
 })
 
 // The ready-to-use serious games, one folder per language (`en/`, `fr/`), one file per game.
-// The file name is the address of the game's page, e.g. `/serious-games/pm-game`.
+// The file name is the address of the game's page, e.g. `/serious-games/pm-game/`.
 const games = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './content/games' }),
   schema: ({ image }) =>
