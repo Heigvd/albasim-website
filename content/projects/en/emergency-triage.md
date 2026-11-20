@@ -6,9 +6,9 @@ image: ../../../src/assets/projects/emergency-triage.jpg
 imageAlt: A clinician in surgical gown and mask treating a patient
 page:
   heading: Emergency Triage
-  lead: In the emergency department, triage nurses must decide quickly who needs care first, often amid noise and constant interruptions.
+  lead: In the emergency department, triage nurses must decide quickly who needs care first, often amid noise and frequent task interruptions.
   intro:
-    - The Emergency Triage project developed a serious game that reproduces the emergency department, in order to study how distractors such as noise and task interruptions affect the quality of nurses’ triage decisions.
+    - The Emergency Triage project developed a serious game that reproduces an emergency department. It made it possible to study how distractors, such as noise and task interruptions, affect the quality of triage decisions.
     - Supported by the HES-SO, with the Institut et Haute Ecole de la Santé La Source and the Geneva University Hospitals (HUG).
   illustration:
     alt: A triage nurse at a desk with patient tags, surrounded by sources of distraction such as a ringing phone and alarms
@@ -51,7 +51,7 @@ page:
     cards:
       - icon: monitor
         title: A simulated emergency department
-        text: A serious game reproducing the emergency department, in which nurses triage patients while exposed to noise and task interruptions.
+        text: A serious game reproducing the emergency department, in which players can triage patients while exposed to noise and task interruptions.
       - icon: chart
         title: A tool for randomised trials
         text: The study showed that the serious game can be used to carry out randomised controlled trials (RCTs) on triage decisions.
@@ -60,12 +60,12 @@ page:
         text: No distractor effect was found, which raises questions about the frequency and intensity of distraction needed to affect triage performance.
   practice:
     eyebrow: From research to practice
-    heading: From a first prototype to a published trial
+    heading: From a first prototype to an award-winning study
     paragraphs:
-      - In 2019, a panel of triage experts evaluated the usability and realism of the game, developed with La Source. The game was then used in a pilot randomised controlled trial with 70 emergency nurses.
-      - A study carried out with the game received the Silver U Award at the French Society of Emergency Medicine conference in 2021, and the results were published in International Emergency Nursing in 2024.
+      - In 2019, a panel of triage experts evaluated the usability and realism of the simulation. The simulation was then used in a pilot randomised controlled trial with 70 emergency nurses.
+      - A study carried out with the simulation received the Silver U Award at the French Society of Emergency Medicine conference in 2021, and the results were published in International Emergency Nursing in 2024.
     image: ../../../src/assets/projects/emergency-triage-practice.jpg
-    imageAlt: A panel of triage experts testing the Emergency Triage game
+    imageAlt: A panel of triage experts testing the Emergency Triage simulation
   findings:
     eyebrow: Key finding
     heading: What our research shows
@@ -109,15 +109,15 @@ page:
     button: Contact us
 ---
 
-Triage determines how quickly each patient is seen. A wrong priority can delay care for a critically ill patient or overload the department.
+Triage determines the order in which patients are seen. A wrong priority can delay care for a critically ill patient or overload the department.
 
 ### The gap
 
-Noise, phone calls and interruptions are part of everyday work in the emergency department, but their effect on triage accuracy is hard to measure in real conditions, where every situation is different and patients cannot be put at risk.
+Noise, phone calls and interruptions are part of everyday work in the emergency department, but their effect on triage accuracy is hard to measure in real conditions, where situations are not reproducible and patients cannot be put at risk.
 
 ### Project objectives
 
 The project brought together nursing, emergency medicine and engineering around one aim:
 
-1. **Simulate:** develop a serious game that reproduces a working environment containing sources of distraction.
-2. **Measure:** use the game to study the impact of these distractors on the quality of triage in emergency departments.
+1. **Simulate:** develop a serious game that reproduces a working environment containing distractors such as noise and task interruptions.
+2. **Measure:** use the simulation to study the impact of these distractors on the quality of triage in emergency departments.
