@@ -89,7 +89,7 @@ page:
     eyebrow: Partenaires
     heading: Une collaboration norvégo-suisse sur l’enseignement de la gestion de projet
     paragraphs:
-      - Le projet était dirigé par l’Université d’Agder (Norvège). L’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO), dirigée par le Prof. Dominique Jaccard, y a participé comme principal partenaire et expert externe.
+      - Le projet était dirigé par l’Université d’Agder (Norvège). L’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO), dirigée par le Prof. Dominique Jaccard, y a participé comme principal partenaire et expert externe.
       - Enseignants et chercheurs des deux pays ont travaillé ensemble sur l’utilisation des serious games dans leurs cours et sur l’analyse des résultats.
     logos:
       - name: AlbaSim
