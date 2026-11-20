@@ -1,7 +1,7 @@
 ---
 title: Serious games dans l’enseignement supérieur
 funders: Université d’Agder · Diku
-summary: Une recherche sur les possibilités d’utilisation des serious games en tant que leviers pédagogiques dans l’enseignement universitaire en Norvège
+summary: Une recherche sur les possibilités d’utilisation des serious games en tant que leviers pédagogiques dans l’enseignement universitaire en Norvège.
 image: ../../../src/assets/projects/serious-games-higher-education.jpg
 imageAlt: Des maisons en bois colorées au bord d’une rivière en Norvège
 page:
