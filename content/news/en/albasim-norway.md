@@ -1,7 +1,7 @@
 ---
-title: 'AlbaSim in Norway'
+title: 'AlbaSim in Norway (code owners test)'
 date: 2018-08-01
-image: ../../../src/assets/news/albasim-norway.jpg
+image: ../../../src/assets/news/albasim-norway-test.jpg
 imageAlt: 'The University of Agder campus under a sunny sky'
 imagePosition: '55% center'
 ---
