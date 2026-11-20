@@ -78,7 +78,7 @@ page:
     eyebrow: Partenaires
     heading: Une collaboration entre soins infirmiers, médecine d’urgence et ingénierie
     paragraphs:
-      - Le projet a été mené par l’Institut et Haute Ecole de la Santé La Source, les Hôpitaux universitaires de Genève (HUG) et l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO), dirigée par le Prof. Dominique Jaccard.
+      - Le projet a été mené par l’Institut et Haute Ecole de la Santé La Source, les Hôpitaux universitaires de Genève (HUG) et l’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO), dirigée par le Prof. Dominique Jaccard.
       - Infirmières et infirmiers, médecins urgentistes, chercheurs et développeurs ont travaillé ensemble sur les cas de triage, l’environnement simulé et le protocole de l’étude.
     logos:
       - name: AlbaSim

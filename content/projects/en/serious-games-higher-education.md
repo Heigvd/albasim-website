@@ -84,7 +84,7 @@ page:
     eyebrow: Partners
     heading: A Norwegian–Swiss collaboration on project management education
     paragraphs:
-      - The project was led by the University of Agder (Norway). The AlbaSim team of the Media Engineering Institute (MEI) at HEIG-VD (HES-SO), led by Prof. Dominique Jaccard, took part as main partner and external expert.
+      - The project was led by the University of Agder (Norway). The AlbaSim team (Media Engineering Institute, HEIG-VD, HES-SO), led by Prof. Dominique Jaccard, took part as main partner and external expert.
       - Teachers and researchers from both countries worked together on the use of serious games in their courses and on the analysis of the results.
     logos:
       - name: AlbaSim

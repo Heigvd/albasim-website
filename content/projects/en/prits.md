@@ -1,14 +1,14 @@
 ---
 title: PRITS
 funders: HESAV · HES-SO
-summary: A serious game for teaching patients’ rights through dialogues with virtual patients.
+summary: A serious game for learning about patients’ rights through dialogues with virtual patients.
 image: ../../../src/assets/projects/prits.jpg
 imageAlt: A nurse and a doctor talking with a patient in a hospital bed
 page:
   heading: Patients’ Rights & Innovative Teaching Strategy
-  lead: Knowing and applying patients’ rights is central to the work of health professionals, yet these legal concepts often remain abstract for students.
+  lead: Respecting patients’ rights is essential to the work of health professionals. This legal skill can seem abstract to students; simulated situations help them develop it.
   intro:
-    - The PRITS project developed a serious game in which students apply patients’ rights in dialogues with virtual patients and their relatives. The game is part of health law teaching at the School of Health Sciences (HESAV).
+    - The PRITS project developed a serious game in which students apply patients’ rights in dialogues with virtual patients and their relatives. The game is now part of health law teaching at the School of Health Sciences (HESAV).
     - Supported by the HES-SO, in collaboration with HESAV.
   illustration:
     alt: A health professional and a virtual patient in dialogue, with a balance symbolising patients’ rights
@@ -44,7 +44,7 @@ page:
       limitsLabel: LIMITS
       limits: [Legal concepts feel abstract, Little link with daily practice]
       projectLabel: THE PROJECT
-      projectTitle: A serious game with virtual patients
+      projectTitle: Serious game “Virtual patients”
       steps:
         - Dialogues with patients and relatives
         - Resources and consolidation exercises
@@ -57,10 +57,10 @@ page:
     cards:
       - icon: messages
         title: Dialogues with virtual patients
-        text: Students face simulated professional situations, in dialogue with a patient, their relatives or their family, and must apply patients’ rights to respond.
+        text: Students face simulated, challenging professional situations in dialogue with patients, their relatives or their family, and must apply patients’ rights in them.
       - icon: book-open
         title: Resources and exercises
-        text: Interactive narratives, consolidation exercises and resources, including links to official cantonal and federal websites, support students throughout the game.
+        text: Consolidation exercises and resources support students throughout the game.
       - icon: users
         title: Co-designed with Wegas and co.LAB
         text: Legal and health experts authored the content directly in the Wegas platform while developers built the game, following the co.LAB design framework.
@@ -79,7 +79,7 @@ page:
       - text: 'Students rated the game positively for both its usability and its experience: pragmatic quality 1.04 and hedonic quality 0.85 on a scale from −3 to +3.'
         source: AttrakDiff questionnaire, 276 of 297 students · Correia de Oliveira, Yavavli, Jaccard, Bielser & Bonnard, *IPTIC*, 2023
         url: https://arodes.hes-so.ch/record/12779/files/Jaccard_2023_PRITS.pdf
-      - text: Average pass results of the module improved after the course was redesigned around the game, an encouraging trend that further studies should confirm.
+      - text: Average pass results of the module improved after the course was redesigned around the game, a trend that further studies should confirm.
         source: Observation of module results · Correia de Oliveira et al., *IPTIC*, 2023
         url: https://arodes.hes-so.ch/record/12779/files/Jaccard_2023_PRITS.pdf
       - text: Embedding legal knowledge in dialogues with virtual patients helps move students from “quality of care only” to “quality of care and respect of patients’ rights”.
@@ -89,7 +89,7 @@ page:
     eyebrow: Partners
     heading: A collaboration between health, law, pedagogy and engineering
     paragraphs:
-      - The project was carried out jointly by the School of Health Sciences (HESAV, HES-SO) and the AlbaSim team of the Media Engineering Institute (MEI) at HEIG-VD (HES-SO). It was led by Dominique Correia de Oliveira and co-led by Prof. Dominique Jaccard, with Songül Yavavli, Félicia Bielser and Delphine Bonnard (HESAV), and Pierre-Benjamin Monaco, Audrey Huguenin and Sandra Monnier (AlbaSim).
+      - The project was carried out jointly by the School of Health Sciences (HESAV, HES-SO) and the AlbaSim team (Media Engineering Institute, HEIG-VD, HES-SO). It was led by Dominique Correia de Oliveira and co-led by Prof. Dominique Jaccard, with Songül Yavavli, Félicia Bielser and Delphine Bonnard (HESAV), and Pierre-Benjamin Monaco, Audrey Huguenin and Sandra Monnier (AlbaSim).
       - Health and legal experts, teachers, developers and designers worked together throughout the project, from the design of the scenarios to their use in class.
     logos:
       - name: AlbaSim
@@ -128,5 +128,5 @@ Taught in lecture-based courses, these legal concepts often remain theoretical: 
 Developed by a team spanning health, law, pedagogy and engineering, the project had three aims:
 
 1. **Support learning:** help students acquire new knowledge and practical skills through active learning.
-2. **Test digital teaching:** assess whether a digital tool can support active and socio-constructivist teaching.
-3. **Use simulation data:** explore whether data from the game can inform educational and professional research.
+2. **Test digital teaching:** assess how a digital simulation can support active teaching methods and socio-constructivist approaches.
+3. **Use simulation data:** draw on data produced in the game to support educational and professional research.

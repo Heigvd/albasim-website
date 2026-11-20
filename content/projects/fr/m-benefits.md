@@ -81,7 +81,7 @@ page:
     eyebrow: Partenaires
     heading: Un projet européen sur les bénéfices multiples de l’efficacité énergétique
     paragraphs:
-      - Le projet a réuni des universités partenaires de plusieurs pays européens. Au sein du consortium, l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO), dirigée par le Prof. Dominique Jaccard, a dirigé le développement du serious game.
+      - Le projet a réuni des universités partenaires de plusieurs pays européens. Au sein du consortium, l’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO), dirigée par le Prof. Dominique Jaccard, a dirigé le développement du serious game.
       - Nous remercions chaleureusement tous les spécialistes de l’efficacité énergétique, formateurs et développeurs qui ont travaillé ensemble sur le contenu du jeu, sa traduction et son utilisation lors des formations.
     logos:
       - name: AlbaSim

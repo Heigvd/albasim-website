@@ -77,7 +77,7 @@ page:
     eyebrow: Partners
     heading: A collaboration between nursing, emergency medicine and engineering
     paragraphs:
-      - The project was carried out by the Institut et Haute Ecole de la Santé La Source, the Geneva University Hospitals (HUG) and the AlbaSim team of the Media Engineering Institute (MEI) at HEIG-VD (HES-SO), led by Prof. Dominique Jaccard.
+      - The project was carried out by the Institut et Haute Ecole de la Santé La Source, the Geneva University Hospitals (HUG) and the AlbaSim team (Media Engineering Institute, HEIG-VD, HES-SO), led by Prof. Dominique Jaccard.
       - Nurses, emergency physicians, researchers and developers worked together on the triage cases, the simulated environment and the study design.
     logos:
       - name: AlbaSim

@@ -82,7 +82,7 @@ page:
     eyebrow: Partenaires
     heading: Une collaboration entre recherche en éducation, écoles et ingénierie
     paragraphs:
-      - Le projet a été mené par l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO), dirigée par le Prof. Dominique Jaccard, et par le Laboratoire d’innovation pédagogique (LIP) de l’Université de Fribourg, avec des enseignants de gymnase.
+      - Le projet a été mené par l’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO), dirigée par le Prof. Dominique Jaccard, et par le Laboratoire d’innovation pédagogique (LIP) de l’Université de Fribourg, avec des enseignants de gymnase.
       - Enseignants, informaticiens, game designers et chercheurs en éducation ont travaillé ensemble tout au long du projet, de la conception du jeu à son utilisation en classe.
     logos:
       - name: AlbaSim

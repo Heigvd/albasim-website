@@ -98,7 +98,7 @@ page:
     eyebrow: Partenaires
     heading: Un projet commun de la HEIG-VD et de l’Université de Lausanne
     paragraphs:
-      - Le projet est mené par le [Visual Collaboration Lab](https://wp.unil.ch/vcl/) de la Faculté des hautes études commerciales (HEC) de l’Université de Lausanne, dirigé par la Prof. Stéphanie Missonier, et par l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO), dirigée par le Prof. Dominique Jaccard.
+      - Le projet est mené par le [Visual Collaboration Lab](https://wp.unil.ch/vcl/) de la Faculté des hautes études commerciales (HEC) de l’Université de Lausanne, dirigé par la Prof. Stéphanie Missonier, et par l’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO), dirigée par le Prof. Dominique Jaccard.
     logos:
       - name: AlbaSim
         logo: ../../../src/assets/logos/albasim.png
