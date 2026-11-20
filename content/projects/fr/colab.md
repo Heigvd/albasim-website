@@ -93,7 +93,7 @@ page:
     eyebrow: Partenaires
     heading: Une collaboration entre ingénierie et sciences de l’éducation
     paragraphs:
-      - Le projet co.LAB a été mené par l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO) et par le Laboratoire d’innovation pédagogique (LIP) / TECFA de l’Université de Genève.
+      - Le projet co.LAB a été mené par l’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO) et par le Laboratoire d’innovation pédagogique (LIP) / TECFA de l’Université de Genève.
       - Le projet était codirigé par le Prof. Dominique Jaccard (HEIG-VD) et le Prof. Eric Sanchez (Université de Genève), qui ont réuni leurs compétences en développement de jeux et en sciences de l’éducation.
     logos:
       - name: AlbaSim

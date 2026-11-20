@@ -6,9 +6,9 @@ image: ../../../src/assets/projects/emergency-triage.jpg
 imageAlt: Un soignant en blouse chirurgicale et masque traitant un patient
 page:
   heading: Triage aux urgences
-  lead: Aux urgences, le personnel infirmier de triage doit décider rapidement qui doit être soigné en premier, souvent dans le bruit et sous des interruptions constantes.
+  lead: Aux urgences, le personnel infirmier de triage doit rapidement décider du degré d’urgence des patients, souvent dans le bruit et avec de fréquentes interruptions de tâches.
   intro:
-    - Le projet Emergency Triage a développé un serious game qui reproduit un service d’urgences, afin d’étudier comment des distracteurs comme le bruit et les interruptions de tâches influencent la qualité des décisions de triage du personnel infirmier.
+    - Le projet Emergency Triage a abouti au développement d’un serious game qui reproduit un service d’urgences. Il a permis d’étudier l’impact des distracteurs, comme le bruit et les interruptions de tâches, sur la qualité des décisions de triage.
     - Soutenu par la HES-SO, avec l’Institut et Haute Ecole de la Santé La Source et les Hôpitaux universitaires de Genève (HUG).
   illustration:
     alt: Un membre du personnel infirmier de triage à son bureau, avec des étiquettes de patients, entourée de sources de distraction comme un téléphone qui sonne et des alarmes
@@ -37,7 +37,7 @@ page:
       type: path
       alt: Le triage sous pression aux urgences, avec le bruit et les interruptions de tâches, mène à un service d’urgences simulé avec des cas réalistes, des distracteurs contrôlés et des essais randomisés, dans le but de mesurer l’effet sur la justesse du triage
       currentLabel: AUX URGENCES
-      current: Le triage sous pression
+      current: Triage sous pression
       limitsLabel: DISTRACTEURS
       limits: [Bruit et alarmes, Interruptions de tâches]
       projectLabel: LE PROJET
@@ -52,7 +52,7 @@ page:
     cards:
       - icon: monitor
         title: Un service d’urgences simulé
-        text: Un serious game qui reproduit le service des urgences, dans lequel le personnel infirmier trie des patients tout en étant exposé au bruit et aux interruptions de tâches.
+        text: Un serious game qui reproduit le service des urgences, dans lequel on peut trier des patients tout en étant exposé au bruit et aux interruptions de tâches.
       - icon: chart
         title: Un outil pour des essais randomisés
         text: L’étude a montré que le serious game peut servir à mener des essais contrôlés randomisés (ECR) sur les décisions de triage.
@@ -61,12 +61,12 @@ page:
         text: Aucun effet des distracteurs n’a été observé, ce qui soulève des questions sur la fréquence et l’intensité de distraction nécessaires pour influencer la performance de triage.
   practice:
     eyebrow: De la recherche à la pratique
-    heading: D’un premier prototype à un essai publié
+    heading: D’un premier prototype à une étude récompensée
     paragraphs:
-      - En 2019, un panel d’experts du triage a évalué la facilité d’utilisation et le réalisme du jeu, développé avec La Source. Le jeu a ensuite servi à un essai contrôlé randomisé pilote avec 70 infirmières et infirmiers des urgences.
-      - Une étude menée avec le jeu a reçu le Silver U Award au congrès de la Société française de médecine d’urgence en 2021, et les résultats ont été publiés dans International Emergency Nursing en 2024.
+      - En 2019, un panel d’experts du triage a évalué la facilité d’utilisation et le réalisme de la simulation. La simulation a ensuite servi à un essai contrôlé randomisé pilote avec 70 infirmières et infirmiers des urgences.
+      - Une étude menée avec la simulation a reçu le Silver U Award au congrès de la Société française de médecine d’urgence en 2021, et les résultats ont été publiés dans International Emergency Nursing en 2024.
     image: ../../../src/assets/projects/emergency-triage-practice.jpg
-    imageAlt: Un panel d’experts du triage testant le jeu Emergency Triage
+    imageAlt: Un panel d’experts du triage testant la simulation Emergency Triage
   findings:
     eyebrow: Résultat clé
     heading: Ce que montrent nos recherches
@@ -78,7 +78,7 @@ page:
     eyebrow: Partenaires
     heading: Une collaboration entre soins infirmiers, médecine d’urgence et ingénierie
     paragraphs:
-      - Le projet a été mené par l’Institut et Haute Ecole de la Santé La Source, les Hôpitaux universitaires de Genève (HUG) et l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO), dirigée par le Prof. Dominique Jaccard.
+      - Le projet a été mené par l’Institut et Haute Ecole de la Santé La Source, les Hôpitaux universitaires de Genève (HUG) et l’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO), dirigée par le Prof. Dominique Jaccard.
       - Infirmières et infirmiers, médecins urgentistes, chercheurs et développeurs ont travaillé ensemble sur les cas de triage, l’environnement simulé et le protocole de l’étude.
     logos:
       - name: AlbaSim
@@ -110,15 +110,15 @@ page:
     button: Contactez-nous
 ---
 
-Le triage détermine la rapidité avec laquelle chaque patient est pris en charge. Une mauvaise priorité peut retarder les soins d’un patient gravement atteint ou surcharger le service.
+Le triage détermine l’ordre dans lequel les patients seront pris en charge. Une mauvaise priorité peut retarder les soins d’un patient gravement atteint ou surcharger le service.
 
 ### Le manque
 
-Le bruit, les appels téléphoniques et les interruptions font partie du quotidien des urgences, mais leur effet sur la justesse du triage est difficile à mesurer en conditions réelles, où chaque situation est différente et où les patients ne peuvent pas être mis en danger.
+Le bruit, les appels téléphoniques et les interruptions font partie du quotidien des urgences, mais leur effet sur la justesse du triage est difficile à mesurer en conditions réelles, où les situations ne sont pas reproductibles et les patients ne peuvent pas être mis en danger.
 
 ### Objectifs du projet
 
 Le projet a réuni soins infirmiers, médecine d’urgence et ingénierie autour d’un même but :
 
-1. **Simuler :** développer un serious game qui reproduit un environnement de travail comportant des sources de distraction.
-2. **Mesurer :** utiliser le jeu pour étudier l’effet de ces distracteurs sur la qualité du triage aux urgences.
+1. **Simuler :** développer un serious game qui reproduit un environnement de travail comportant des distracteurs, comme le bruit et les interruptions de tâches.
+2. **Mesurer :** utiliser la simulation pour étudier l’effet de ces distracteurs sur la qualité du triage aux urgences.

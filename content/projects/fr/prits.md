@@ -1,14 +1,14 @@
 ---
 title: PRITS
 funders: HESAV · HES-SO
-summary: Un serious game pour enseigner les droits des patients au travers de dialogues avec des patients virtuels.
+summary: Un serious game pour se former aux droits des patients au travers de dialogues avec des patients virtuels.
 image: ../../../src/assets/projects/prits.jpg
 imageAlt: Une infirmière et un médecin discutant avec un patient alité à l’hôpital
 page:
   heading: Patients’ Rights & Innovative Teaching Strategy
-  lead: Connaître et appliquer les droits des patients est essentiel au travail des professionnels de la santé, mais ces notions juridiques restent souvent abstraites pour les étudiants.
+  lead: Respecter les droits des patients est essentiel au travail des professionnels de la santé. Cette compétence juridique peut sembler abstraite aux étudiants ; des mises en situation les aident à la développer.
   intro:
-    - Le projet PRITS a développé un serious game dans lequel les étudiants appliquent les droits des patients lors de dialogues avec des patients virtuels et leurs proches. Le jeu fait partie de l’enseignement du droit de la santé à la Haute École de Santé Vaud (HESAV).
+    - Le projet PRITS a permis de développer un serious game dans lequel les étudiants appliquent les droits des patients au cours de dialogues avec des patients virtuels et leurs proches. Le jeu fait maintenant partie de l’enseignement du droit de la santé à la Haute École de Santé Vaud (HESAV).
     - Soutenu par la HES-SO, en collaboration avec HESAV.
   illustration:
     alt: Un professionnel de la santé et un patient virtuel en dialogue, avec une balance qui symbolise les droits des patients
@@ -38,13 +38,13 @@ page:
     heading: Rendre les droits des patients concrets pour les futurs professionnels de la santé
     diagram:
       type: path
-      alt: 'L’enseignement des droits des patients en cours magistraux et ses limites mènent à un serious game en trois volets : dialogues avec des patients virtuels, ressources et exercices, briefing et débriefing ; le but est de passer de la seule qualité des soins à la qualité des soins dans le respect des droits des patients'
+      alt: 'L’enseignement des droits des patients en cours magistraux et ses limites mènent à un serious game en trois volets : dialogues avec des patients virtuels, ressources et exercices, briefing et débriefing ; le but est de passer de la qualité des soins uniquement à la qualité des soins dans le respect des droits des patients'
       currentLabel: ENSEIGNEMENT ACTUEL
       current: Cours magistraux
       limitsLabel: LIMITES
       limits: [Des notions juridiques abstraites, Peu de lien avec la pratique]
       projectLabel: LE PROJET
-      projectTitle: Un serious game avec des patients virtuels
+      projectTitle: Serious game « Patients virtuels »
       steps:
         - Dialogues avec patients et proches
         - Ressources et exercices de consolidation
@@ -57,10 +57,10 @@ page:
     cards:
       - icon: messages
         title: Des dialogues avec des patients virtuels
-        text: Les étudiants sont confrontés à des situations professionnelles simulées, en dialogue avec un patient, ses proches ou sa famille, et doivent appliquer les droits des patients pour y répondre.
+        text: Les étudiants sont confrontés à des simulations de situations professionnelles difficiles, en dialogue avec des patients, leurs proches ou leur famille, et doivent y appliquer les droits des patients.
       - icon: book-open
         title: Ressources et exercices
-        text: Des récits interactifs, des exercices de consolidation et des ressources, dont des liens vers les sites officiels cantonaux et fédéraux, accompagnent les étudiants tout au long du jeu.
+        text: Des exercices de consolidation et des ressources accompagnent les étudiants tout au long du jeu.
       - icon: users
         title: Conçu avec Wegas et co.LAB
         text: Des spécialistes du droit et de la santé ont rédigé le contenu directement dans la plateforme Wegas pendant que les développeurs construisaient le jeu, selon le cadre de conception co.LAB.
@@ -76,20 +76,20 @@ page:
     eyebrow: Résultats clés
     heading: Ce que montrent nos recherches
     items:
-      - text: 'Les étudiants ont bien évalué le jeu, tant pour sa facilité d’utilisation que pour l’expérience qu’il offre : qualité pragmatique de 1,04 et qualité hédonique de 0,85 sur une échelle de −3 à +3.'
+      - text: 'Les étudiants ont évalué le jeu positivement, tant pour sa facilité d’utilisation que pour l’expérience qu’il offre : qualité pragmatique de 1,04 et qualité hédonique de 0,85 sur une échelle de −3 à +3.'
         source: Questionnaire AttrakDiff, 276 étudiants sur 297 · Correia de Oliveira, Yavavli, Jaccard, Bielser & Bonnard, *IPTIC*, 2023
         url: https://arodes.hes-so.ch/record/12779/files/Jaccard_2023_PRITS.pdf
-      - text: Le taux de réussite moyen du module s’est amélioré après la refonte du cours autour du jeu, une tendance encourageante que d’autres études devront confirmer.
+      - text: Le taux de réussite moyen du module s’est amélioré après la refonte du cours autour du jeu, une tendance à confirmer par d’autres études.
         source: Observation des résultats du module · Correia de Oliveira et al., *IPTIC*, 2023
         url: https://arodes.hes-so.ch/record/12779/files/Jaccard_2023_PRITS.pdf
-      - text: Intégrer les connaissances juridiques dans des dialogues avec des patients virtuels aide les étudiants à passer de « la seule qualité des soins » à « la qualité des soins dans le respect des droits des patients ».
+      - text: Intégrer les connaissances juridiques dans des dialogues avec des patients virtuels aide les étudiants à passer de « la qualité des soins uniquement » à « la qualité des soins dans le respect des droits des patients ».
         source: Étude de conception · Correia de Oliveira, Bielser, Bonnard, Yavavli & Jaccard, *IEEE SeGAH*, 2021
         url: https://ieeexplore.ieee.org/abstract/document/9551898
   partners:
     eyebrow: Partenaires
     heading: Une collaboration entre santé, droit, pédagogie et ingénierie
     paragraphs:
-      - Le projet a été mené conjointement par la Haute École de Santé Vaud (HESAV, HES-SO) et l’équipe AlbaSim de l’Institut Media Engineering (MEI) de la HEIG-VD (HES-SO). Il était dirigé par Dominique Correia de Oliveira et codirigé par le Prof. Dominique Jaccard, avec Songül Yavavli, Félicia Bielser et Delphine Bonnard (HESAV), ainsi que Pierre-Benjamin Monaco, Audrey Huguenin et Sandra Monnier (AlbaSim).
+      - Le projet a été mené conjointement par la Haute École de Santé Vaud (HESAV, HES-SO) et l’équipe AlbaSim (Media Engineering Institute, HEIG-VD, HES-SO). Il était dirigé par Dominique Correia de Oliveira et codirigé par le Prof. Dominique Jaccard, avec Songül Yavavli, Félicia Bielser et Delphine Bonnard (HESAV), ainsi que Pierre-Benjamin Monaco, Audrey Huguenin et Sandra Monnier (AlbaSim).
       - Spécialistes de la santé et du droit, enseignants, développeurs et designers ont travaillé ensemble tout au long du projet, de la conception des scénarios à leur utilisation en classe.
     logos:
       - name: AlbaSim
@@ -128,5 +128,5 @@ Enseignées en cours magistraux, ces notions juridiques restent souvent théoriq
 Mené par une équipe réunissant santé, droit, pédagogie et ingénierie, le projet poursuivait trois objectifs :
 
 1. **Soutenir l’apprentissage :** aider les étudiants à acquérir de nouvelles connaissances et des compétences pratiques grâce à l’apprentissage actif.
-2. **Tester l’enseignement numérique :** évaluer si un outil numérique peut soutenir un enseignement actif et socioconstructiviste.
-3. **Exploiter les données de simulation :** explorer si les données du jeu peuvent nourrir la recherche pédagogique et professionnelle.
+2. **Tester l’enseignement numérique :** évaluer comment une simulation numérique peut soutenir des pédagogies actives et des approches socioconstructivistes.
+3. **Exploiter les données de simulation :** utiliser les données produites dans le jeu pour nourrir la recherche pédagogique et professionnelle.
