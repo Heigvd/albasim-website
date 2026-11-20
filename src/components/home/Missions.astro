@@ -72,7 +72,8 @@ const { missions, lang } = Astro.props
     margin: 0;
   }
 
-  .title {
+  /* `.body >` so this wins over the margin reset above */
+  .body > .title {
     margin: 6px 0 14px;
   }
 
