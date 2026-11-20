@@ -1,0 +1,10 @@
+# Code owners: who must approve a pull request into `dev`, depending on the files it changes.
+# The `dev` ruleset enforces it ("Require review from Code Owners").
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Every change outside the content needs an approval from a maintainer.
+*              @Heigvd/albasim-website-maintainers
+
+# Texts and images have no owner: they can be merged without a review.
+/content/
+/src/assets/

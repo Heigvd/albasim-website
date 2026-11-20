@@ -69,6 +69,10 @@ The site is hosted by Infomaniak. Every push to `dev` or `main` runs the [deploy
 
 Both use the repository variable `FTP_HOST`. Each FTP account can only access the folder of its own site.
 
+A push that only changes files the site doesn't use (README, `CLAUDE.md`, `.claude/`, `design/`, `server/`, Dependabot and code owners settings) doesn't deploy.
+
+To deploy by hand, open the **Actions** tab, select **Deploy**, then **Run workflow** and pick a branch. `main` goes to albasim.ch; any other branch goes to dev.albasim.ch, which is a way to try a feature branch there before merging it. The next deploy of `dev` replaces it.
+
 The `.htaccess`, `.htdigest` and `.user.ini` files on the server are managed in the Infomaniak Manager (password protection, compression, PHP settings). The deploy never uploads or deletes them, so don't add them to `public/`.
 
 ## Contact form
