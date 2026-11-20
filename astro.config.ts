@@ -3,6 +3,9 @@ import { defineConfig, fontProviders } from 'astro/config'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://albasim.ch',
+  // Every page is built as a folder with an index.html, so its URL ends with a slash. The dev
+  // server enforces it, to catch links that would cost a redirect on the live site.
+  trailingSlash: 'always',
   // English is served at the root (/research), French under /fr/ (/fr/recherche).
   i18n: {
     defaultLocale: 'en',

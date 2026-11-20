@@ -16,8 +16,8 @@ ini_set('display_errors', '0');
 
 /** Pages to redirect to without JavaScript. Keep in sync with `routes` in src/i18n/ui.ts. */
 const PAGES = [
-    'en' => ['sent' => '/contact/thanks', 'error' => '/contact/error'],
-    'fr' => ['sent' => '/fr/contact/merci', 'error' => '/fr/contact/erreur'],
+    'en' => ['sent' => '/contact/thanks/', 'error' => '/contact/error/'],
+    'fr' => ['sent' => '/fr/contact/merci/', 'error' => '/fr/contact/erreur/'],
 ];
 
 /** Maximum lengths, in characters. Keep in sync with the `maxlength` of the form fields. */
