@@ -6,9 +6,9 @@ image: ../../../src/assets/projects/pact.jpg
 imageAlt: Digital illustration of a human head and brain over circuit lines
 page:
   heading: 'PACT: Playing & computational thinking'
-  lead: With computing now compulsory in secondary school, teachers need resources that make programming accessible and motivating for every student.
+  lead: Computing is now part of the secondary school curriculum. Teachers need resources that make programming accessible and, ideally, motivating.
   intro:
-    - The PACT project developed a game for teaching the basics of computer programming, designed together with secondary school teachers, computer scientists, game designers and education researchers.
+    - The PACT project led to the development of a game for teaching the basics of computer programming, designed together with secondary school teachers, computer scientists, game designers and education researchers.
     - Funded by the Hasler Foundation, in collaboration with the LIP of the University of Fribourg.
   illustration:
     alt: A laptop showing code brackets, with a character moving along a path of programming blocks
@@ -35,11 +35,11 @@ page:
     heading: A programming game designed with and for teachers
     diagram:
       type: path
-      alt: Compulsory computing education, a new subject that can feel abstract, leads to a programming game for the classroom, co-designed with teachers, with game-based tasks and a teacher dashboard, with the goal of computational thinking for all students
+      alt: Compulsory computing education, a subject that can feel abstract, leads to a programming game for the classroom, co-designed with teachers, with game-based tasks and a teacher dashboard, with the goal of computational thinking for all students
       currentLabel: CURRENT TEACHING
       current: Compulsory computing education
       limitsLabel: LIMITS
-      limits: [A new subject for many teachers, Programming can feel abstract]
+      limits: [A lack of suitable resources, Programming can feel abstract]
       projectLabel: THE PROJECT
       projectTitle: A programming game for the classroom
       steps: [Co-designed with teachers, Game-based programming tasks, A dashboard for teachers]
@@ -47,7 +47,7 @@ page:
       goal: Computational thinking for all students
   outcomes:
     eyebrow: Outcomes
-    heading: A programming game used in secondary schools
+    heading: A programming game used in secondary schools and gymnasiums
     cards:
       - icon: code
         title: A programming game
@@ -57,12 +57,12 @@ page:
         text: Teachers, computer scientists, game designers and education researchers designed the game together, through a design-based research process.
       - icon: graduation-cap
         title: Used in secondary schools
-        text: The game is used by several secondary schools in French-speaking Switzerland.
+        text: The game is used by several secondary schools and gymnasiums in French-speaking Switzerland.
   practice:
     eyebrow: From research to practice
-    heading: From the first class to several schools
+    heading: From the first class to wide adoption
     paragraphs:
-      - The project started in 2018 with the University of Fribourg and gymnasium teachers. In February 2019, 22 students of the Gymnase intercantonal de la Broye tested the game in class and confirmed that it was fun and motivating; improvements were quickly made.
+      - The project started in 2018 with the University of Fribourg and gymnasium teachers. In February 2019, 22 students of the Gymnase intercantonal de la Broye tested the game in class and confirmed that it was fun and motivating.
       - The game and its teacher dashboard were then presented at the EIAH conference in Paris and at Ludovia#CH. The game is now used by several secondary schools in French-speaking Switzerland.
     image: ../../../src/assets/projects/pact-practice.jpg
     imageAlt: Students playing PACT in a computer classroom
@@ -70,7 +70,7 @@ page:
     eyebrow: Key contribution
     heading: What our research shows
     items:
-      - text: A design-based research process involving teachers, computer scientists, game designers and education researchers produced a programming game that matches teachers’ needs for compulsory computing education.
+      - text: A design-based research process involving teachers, computer scientists, game designers and education researchers made it possible to produce a programming game that matches teachers’ needs for compulsory computing education.
         source: Design-based research · Plumettaz-Sieber, Hulaas, Sanchez & Jaccard, *GSGS’19*, 2019
         url: https://www.albasim.ch/wp-content/uploads/PACT-GSGS19.pdf
   partners:
@@ -104,16 +104,16 @@ page:
     button: Contact us
 ---
 
-Computing has become a compulsory subject in Swiss secondary schools. Students must learn not only to use digital tools, but also to think like programmers.
+Computing is a compulsory subject in Swiss secondary schools. Students must learn not only to use digital tools, but also to develop basic algorithmic skills.
 
 ### The gap
 
-For many students, programming feels abstract, and many teachers are new to the subject. Classes need resources that are motivating, easy to use and in line with the curriculum.
+For many students, programming feels abstract. Teachers need resources that are motivating, easy to use and in line with the curriculum.
 
 ### Project objectives
 
 Through a design-based research process, the project had three aims:
 
-1. **Co-design:** develop the game together with teachers, so that it matches their needs for compulsory computing education.
+1. **Co-design:** develop the game together with teachers, so that it matches their needs.
 2. **Teach:** introduce the basics of programming in a fun and motivating way.
-3. **Support teachers:** give teachers a dashboard to follow their students’ progress.
+3. **Support teachers:** develop a teacher dashboard to follow students’ progress.
