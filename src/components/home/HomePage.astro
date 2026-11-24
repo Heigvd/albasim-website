@@ -3,6 +3,7 @@
 // the news, projects and publications come from their own collections.
 import { getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import previewImage from '../../assets/og/home.png'
 import NewsCard from '../NewsCard.astro'
 import ProjectCard from '../ProjectCard.astro'
 import PublicationCard from '../PublicationCard.astro'
@@ -54,7 +55,7 @@ const publications = await Promise.all(
 )
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout title={data.title} description={data.description} image={previewImage}>
   <Hero heading={data.heading} headingLang={data.headingLang}>
     <Content />
   </Hero>

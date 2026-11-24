@@ -1,5 +1,5 @@
 ---
-import { Font } from 'astro:assets'
+import { Font, getImage } from 'astro:assets'
 import '../styles/global.css'
 import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
@@ -12,6 +12,10 @@ interface Props {
   alternates?: Record<Lang, string>
   /** Asks search engines not to index the page. */
   noindex?: boolean
+  /** Image of the preview shown when the page is shared, cropped to 1200 × 630 at most. */
+  image?: ImageMetadata
+  /** What the preview image shows. */
+  imageAlt?: string
 }
 
 const {
@@ -19,9 +23,32 @@ const {
   description,
   alternates = alternatesFor(Astro.url.pathname),
   noindex = false,
+  image,
+  imageAlt = '',
 } = Astro.props
 const lang: Lang = isLang(Astro.currentLocale) ? Astro.currentLocale : defaultLang
 const langs = Object.keys(languages) as Lang[]
+
+// The one address of this page that search engines should keep, on albasim.ch.
+const canonical = new URL(Astro.url.pathname, Astro.site).href
+const locales: Record<Lang, string> = { en: 'en_US', fr: 'fr_CH' }
+
+// Preview for social networks and messaging apps (Open Graph): the image cropped to their
+// 1.91:1 frame, 1200 × 630 at most. Astro never enlarges an image, so a smaller one gives a
+// smaller preview.
+const previewWidth = image
+  ? Math.min(1200, image.width, Math.floor((image.height * 1200) / 630))
+  : 0
+const previewHeight = Math.round((previewWidth * 630) / 1200)
+const preview = image
+  ? await getImage({
+      src: image,
+      width: previewWidth,
+      height: previewHeight,
+      fit: 'cover',
+      format: 'jpg',
+    })
+  : undefined
 ---
 
 <html lang={lang}>
@@ -37,10 +64,38 @@ const langs = Object.keys(languages) as Lang[]
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {noindex && <meta name="robots" content="noindex" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
     {!noindex &&
       langs.map((code) => (
         <link rel="alternate" hreflang={code} href={new URL(alternates[code], Astro.site)} />
       ))}
+    {!noindex && (
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={new URL(alternates[defaultLang], Astro.site)}
+      />
+    )}
+    <meta property="og:site_name" content="AlbaSim" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locales[lang]} />
+    {langs
+      .filter((code) => code !== lang)
+      .map((code) => (
+        <meta property="og:locale:alternate" content={locales[code]} />
+      ))}
+    {preview && (
+      <>
+        <meta property="og:image" content={new URL(preview.src, Astro.site)} />
+        <meta property="og:image:width" content={String(previewWidth)} />
+        <meta property="og:image:height" content={String(previewHeight)} />
+        {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
+      </>
+    )}
+    <meta name="twitter:card" content={preview ? 'summary_large_image' : 'summary'} />
     <Font cssVariable="--font-inter-tight" preload />
   </head>
   <body>

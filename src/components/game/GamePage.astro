@@ -31,7 +31,13 @@ if (!page) throw new Error(`The game ${game.id} has no page`)
 const alternates = { en: gamePath(id, 'en'), fr: gamePath(id, 'fr') }
 ---
 
-<BaseLayout title={`${data.name} | AlbaSim`} description={data.summary} alternates={alternates}>
+<BaseLayout
+  title={`${data.name} | AlbaSim`}
+  description={data.summary}
+  alternates={alternates}
+  image={data.image}
+  imageAlt={data.imageAlt}
+>
   <GameHero
     {...page.hero}
     play={page.play}
