@@ -2,6 +2,7 @@
 title: 'Notre modèle physiologique est publié dans JMIR Formative Research'
 date: 2025-03-01
 image: ../../../src/assets/news/physiological-model-published-jmir-formative.jpg
+imageAlt: 'Au bloc opératoire, un membre de l’équipe chirurgicale consulte une tablette pendant que ses collègues opèrent'
 links:
   - label: 'Accéder'
     url: 'https://formative.jmir.org/2025/1/e66201'

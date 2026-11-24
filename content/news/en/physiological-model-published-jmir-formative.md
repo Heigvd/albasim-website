@@ -2,6 +2,7 @@
 title: 'Our physiological model is published in JMIR Formative Research'
 date: 2025-03-01
 image: ../../../src/assets/news/physiological-model-published-jmir-formative.jpg
+imageAlt: 'A surgeon in an operating room looking at a tablet while colleagues operate'
 links:
   - label: 'Access'
     url: 'https://formative.jmir.org/2025/1/e66201'

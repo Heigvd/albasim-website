@@ -2,6 +2,7 @@
 title: 'Our PM-Game is featured in a Norwegian educational book'
 date: 2025-03-01
 image: ../../../src/assets/news/pm-game-featured-norwegian-educational.jpg
+imageAlt: 'Cover of the Norwegian book “Praksisorientert og studentaktiv læring”, showing a broken red seesaw in a playground'
 links:
   - label: 'Open access book'
     url: 'https://cdforskning.no/cdf/catalog/book/244'

@@ -2,6 +2,7 @@
 title: 'New study on pre-triage of victims in the event of major incidents'
 date: 2026-02-01
 image: ../../../src/assets/news/study-pre-triage-victims-event.jpg
+imageAlt: 'Drawing of rescuers attaching triage tags to victims lying on the ground, an ambulance in the background'
 links:
   - label: 'Swiss Rescue article'
     url: 'https://www.swissrescue.ch/article.php?id=1062'
