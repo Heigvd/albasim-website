@@ -2,6 +2,7 @@
 title: 'Nouvelle étude sur le pré-triage des victimes lors d’événements majeurs'
 date: 2026-02-01
 image: ../../../src/assets/news/study-pre-triage-victims-event.jpg
+imageAlt: 'Dessin de secouristes attachant des fiches de triage aux victimes allongées au sol, une ambulance à l’arrière-plan'
 links:
   - label: 'Article de Swiss Rescue'
     url: 'https://www.swissrescue.ch/article.php?id=1062'

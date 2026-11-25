@@ -1,5 +1,6 @@
 ---
 title: Triage aux urgences
+metaTitle: 'Triage aux urgences : bruit et interruptions'
 funders: La Source · HUG · HES-SO
 summary: Un serious game pour étudier l’effet du bruit et des interruptions de tâches sur les décisions de triage du personnel infirmier aux urgences.
 image: ../../../src/assets/projects/emergency-triage.jpg

@@ -1,5 +1,6 @@
 ---
 title: M-Benefits
+metaTitle: 'M-Benefits: training in energy efficiency'
 funders: Horizon 2020
 summary: A serious game to train energy managers to assess the multiple benefits of energy-efficiency measures.
 image: ../../../src/assets/projects/m-benefits.jpg

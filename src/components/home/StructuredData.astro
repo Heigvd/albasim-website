@@ -1,0 +1,77 @@
+---
+// Structured data (JSON-LD) of the home page: tells search engines what AlbaSim is (a research
+// organization of HEIG-VD, itself part of HES-SO), its logo, address and profiles, and the name
+// of the site. Invisible to visitors. The address and the LinkedIn profile come from the footer
+// content, `content/footer/<lang>.md`.
+// Check the result with https://search.google.com/test/rich-results or https://validator.schema.org.
+import { getImage } from 'astro:assets'
+import { getEntry } from 'astro:content'
+import albasimLogo from '../../assets/logos/albasim.png'
+import type { Lang } from '../../i18n/ui'
+
+interface Props {
+  lang: Lang
+  description: string
+}
+
+const { lang, description } = Astro.props
+const footer = await getEntry('footer', lang)
+if (!footer) throw new Error(`Missing footer content: content/footer/${lang}.md`)
+
+const site = new URL('/', Astro.site).href
+const logo = await getImage({ src: albasimLogo, format: 'png' })
+
+// The footer address, one line each: name, street, "postal code + town", country.
+const [, street, town] = footer.data.address
+const [, postalCode, locality] = town?.match(/^(\d{4})\s+(.+)$/) ?? []
+
+const data = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site}#website`,
+      name: 'AlbaSim',
+      url: site,
+      inLanguage: lang,
+      publisher: { '@id': `${site}#organization` },
+    },
+    {
+      '@type': 'ResearchOrganization',
+      '@id': `${site}#organization`,
+      name: 'AlbaSim',
+      url: site,
+      logo: new URL(logo.src, Astro.site).href,
+      description,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: street,
+        postalCode,
+        addressLocality: locality,
+        addressCountry: 'CH',
+      },
+      sameAs: footer.data.links
+        .map((link) => link.url)
+        .filter((url) => new URL(url).hostname.endsWith('linkedin.com')),
+      parentOrganization: {
+        '@type': 'CollegeOrUniversity',
+        name: 'HEIG-VD',
+        alternateName: 'Haute École d’Ingénierie et de Gestion du Canton de Vaud',
+        url: 'https://heig-vd.ch/',
+        parentOrganization: {
+          '@type': 'CollegeOrUniversity',
+          name: 'HES-SO',
+          alternateName: 'Haute école spécialisée de Suisse occidentale',
+          url: 'https://www.hes-so.ch/',
+        },
+      },
+    },
+  ],
+}
+---
+
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify(data).replaceAll('<', '\\u003c')}
+/>

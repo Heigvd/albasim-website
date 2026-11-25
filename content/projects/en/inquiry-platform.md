@@ -1,5 +1,6 @@
 ---
 title: A digital inquiry platform for wicked problems
+metaTitle: 'Digital inquiry platform for wicked problems'
 funders: SNSF
 summary: A digital platform for a collective approach to wicked problems.
 image: ../../../src/assets/projects/inquiry-platform.jpg

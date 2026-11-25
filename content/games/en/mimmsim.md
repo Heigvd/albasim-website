@@ -1,8 +1,9 @@
 ---
 name: MIMMSim
+metaTitle: 'MIMMSim: major incident medical simulation'
 domain: 'Emergency medicine'
 languages: [en, fr]
-summary: 'You are responsible for the medical management of a major incident. Coordinate rescue operations from the first minutes to the evacuation of victims to hospitals.'
+summary: 'You lead the medical management of a major incident: coordinate the rescue, from the first minutes to the evacuation of victims to hospitals.'
 highlights:
   - title: 'Customizable scenarios'
     text: 'Accidents, fires or attacks, adapted to your local context.'

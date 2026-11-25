@@ -1,5 +1,6 @@
 ---
 title: Emergency Triage
+metaTitle: 'Emergency Triage: noise and interruptions'
 funders: La Source · HUG · HES-SO
 summary: A serious game for studying how noise and task interruptions affect nurses’ emergency triage decisions.
 image: ../../../src/assets/projects/emergency-triage.jpg

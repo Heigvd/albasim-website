@@ -3,6 +3,7 @@
 // `content/publications-page/<lang>.md`; the list comes from the `publications` collection.
 import { getCollection, getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import previewImage from '../../assets/og/publications.png'
 import Collaborate from '../Collaborate.astro'
 import PageHero from '../PageHero.astro'
 import PublicationsIllustration from './PublicationsIllustration.astro'
@@ -22,7 +23,12 @@ const data = page.data
 const publications = await getCollection('publications')
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={previewImage}
+  imageAlt={data.illustrationAlt}
+>
   <PageHero heading={data.heading}>
     <Content />
     <PublicationsIllustration slot="illustration" label={data.illustrationAlt} />

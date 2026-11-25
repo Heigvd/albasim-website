@@ -3,6 +3,7 @@
 // the projects come from their own collection, in the order listed in that file.
 import { getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import previewImage from '../../assets/og/research.png'
 import Collaborate from '../Collaborate.astro'
 import PageHero from '../PageHero.astro'
 import ProjectCard from '../ProjectCard.astro'
@@ -35,7 +36,12 @@ const projects = await Promise.all(
 )
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={previewImage}
+  imageAlt={data.illustrationAlt}
+>
   <PageHero heading={data.heading}>
     <Content />
     <ResearchIllustration slot="illustration" label={data.illustrationAlt} />

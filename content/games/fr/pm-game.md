@@ -1,8 +1,9 @@
 ---
 name: PM-Game
+metaTitle: 'PM-Game : serious game de gestion de projet'
 domain: 'Gestion de projet'
 languages: [en, fr]
-summary: 'Prenez la tête d’un projet virtuel, de l’idée initiale à la mise en œuvre et au retour d’expérience. Confrontez-vous à des décisions, des risques et des arbitrages semblables à ceux d’un vrai projet.'
+summary: 'Prenez la tête d’un projet virtuel, de l’idée à la mise en œuvre, et affrontez des décisions, risques et arbitrages semblables à ceux d’un vrai projet.'
 highlights:
   - title: 'Un concept pédagogique complet'
     text: 'Simulation, travail d’équipe et jeu de rôle en une seule expérience.'

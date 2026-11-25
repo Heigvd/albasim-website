@@ -1,5 +1,6 @@
 ---
 name: Programming Game
+metaTitle: 'Programming Game: learn to code by playing'
 domain: 'Computing education'
 languages: [fr]
 summary: 'Learn the basics of programming by controlling an avatar with code: complete missions of increasing difficulty and follow your code as it runs step by step.'
@@ -15,7 +16,7 @@ order: 4
 page:
   play:
     label: Play the game
-    url: https://wegas.albasim.ch/#/play/programming-oo
+    url: https://wegas.albasim.ch/#/play/programming-gi
   hero:
     lead: Learn the basics of programming by controlling an avatar with code.
     contactButton: Contact us

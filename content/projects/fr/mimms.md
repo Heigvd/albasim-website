@@ -1,5 +1,6 @@
 ---
 title: MIMMS
+metaTitle: 'MIMMS : gestion médicale des événements majeurs'
 funders: HUG · Innosuisse
 summary: Des simulations pour la formation à la gestion médicale des événements majeurs.
 image: ../../../src/assets/projects/mimms.jpg

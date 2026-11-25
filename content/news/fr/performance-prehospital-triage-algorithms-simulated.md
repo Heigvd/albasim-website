@@ -2,6 +2,7 @@
 title: 'Performance des algorithmes de triage préhospitalier lors d’un afflux massif de victimes simulé'
 date: 2026-01-01
 image: ../../../src/assets/news/performance-prehospital-triage-algorithms-simulated.jpg
+imageAlt: 'Illustration de l’étude de simulation : des secouristes trient des victimes allongées sur des brancards, à côté d’un simulateur physiologique en ligne'
 links:
   - label: 'Libre accès'
     url: 'https://doi.org/10.1017/S1049023X25101568'
