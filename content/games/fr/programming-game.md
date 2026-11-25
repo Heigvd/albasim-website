@@ -1,8 +1,9 @@
 ---
 name: Programming Game
+metaTitle: 'Programming Game : apprendre à coder en jouant'
 domain: 'Enseignement de l’informatique'
 languages: [fr]
-summary: 'Apprenez les bases de la programmation en pilotant un avatar avec du code : accomplissez des missions de difficulté croissante et suivez l’exécution de votre code pas à pas.'
+summary: 'Apprenez les bases de la programmation en pilotant un avatar avec du code : des missions de difficulté croissante, et votre code exécuté pas à pas.'
 highlights:
   - title: 'Apprentissage progressif'
     text: 'Exécution pas à pas, retours sur les erreurs et théorie intégrée.'
@@ -15,7 +16,7 @@ order: 4
 page:
   play:
     label: Jouer au jeu
-    url: https://wegas.albasim.ch/#/play/programming-oo
+    url: https://wegas.albasim.ch/#/play/programming-gi
   hero:
     lead: Apprenez les bases de la programmation en pilotant un avatar avec du code.
     contactButton: Contactez-nous

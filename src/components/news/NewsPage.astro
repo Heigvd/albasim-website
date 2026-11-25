@@ -3,6 +3,7 @@
 // the news come from the `news` collection, in `content/news/<lang>/`.
 import { getCollection, getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import previewImage from '../../assets/og/news.png'
 import PageHero from '../PageHero.astro'
 import NewsIllustration from './NewsIllustration.astro'
 import NewsList from './NewsList.astro'
@@ -21,7 +22,12 @@ const data = page.data
 const news = await getCollection('news', ({ id }) => id.startsWith(`${lang}/`))
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={previewImage}
+  imageAlt={data.illustrationAlt}
+>
   <PageHero heading={data.heading}>
     <Content />
     <NewsIllustration slot="illustration" label={data.illustrationAlt} />

@@ -1,6 +1,6 @@
 ---
 title: AlbaSim, laboratoire de recherche en serious games et simulations
-description: AlbaSim étudie comment les serious games et simulations soutiennent l’apprentissage et développent la capacité à agir et décider dans des situations pratiques complexes.
+description: AlbaSim étudie comment concevoir, utiliser et évaluer les serious games et simulations.
 heading:
   - The Serious Games
   - and Simulations

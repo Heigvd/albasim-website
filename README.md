@@ -93,6 +93,18 @@ The email addresses are not in the repository. On each site, `contact.php` reads
 
 If the config file is missing or invalid, `contact.php` sends nothing, answers with an error and logs it in the PHP error log.
 
+## Search engines and link previews
+
+Every indexable page declares its canonical URL, its version in the other language and an Open Graph preview (title, description, image) in [`BaseLayout.astro`](src/layouts/BaseLayout.astro). The site also builds [`/sitemap.xml`](src/pages/sitemap.xml.ts) and [`/robots.txt`](src/pages/robots.txt.ts).
+
+Project and game pages use their photo as preview image. The main pages use their hero illustration, exported as PNG in `src/assets/og/`. After changing one of these illustrations, export them again with the dev server running:
+
+```bash
+node scripts/export-preview-images.mjs
+```
+
+The home page also describes AlbaSim to search engines as structured data (JSON-LD): a research organization of HEIG-VD and HES-SO, with its logo, address and LinkedIn profile. See [`StructuredData.astro`](src/components/home/StructuredData.astro); its address and profile come from the footer content.
+
 ## Copyright
 
 © AlbaSim. All rights reserved.

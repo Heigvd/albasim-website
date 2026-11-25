@@ -1,5 +1,6 @@
 ---
 title: PRITS
+metaTitle: 'PRITS : se former aux droits des patients'
 funders: HESAV · HES-SO
 summary: Un serious game pour se former aux droits des patients au travers de dialogues avec des patients virtuels.
 image: ../../../src/assets/projects/prits.jpg

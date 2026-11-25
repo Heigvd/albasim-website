@@ -1,5 +1,6 @@
 ---
 title: MIMMS
+metaTitle: 'MIMMS: medical management of major incidents'
 funders: HUG · Innosuisse
 summary: Simulations for training in the medical management of major incidents.
 image: ../../../src/assets/projects/mimms.jpg

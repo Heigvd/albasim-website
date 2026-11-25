@@ -3,6 +3,7 @@
 // the address comes from the footer content, `content/footer/<lang>.md`.
 import { getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import previewImage from '../../assets/og/contact.png'
 import PageHero from '../PageHero.astro'
 import ContactForm from './ContactForm.astro'
 import ContactIllustration from './ContactIllustration.astro'
@@ -23,7 +24,12 @@ const { Content } = await render(page)
 const data = page.data
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={previewImage}
+  imageAlt={data.illustrationAlt}
+>
   <PageHero heading={data.heading}>
     <Content />
     <ContactIllustration slot="illustration" label={data.illustrationAlt} />

@@ -4,6 +4,8 @@
 // `content/games/<lang>/`.
 import { getCollection, getEntry, render } from 'astro:content'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import gamesPreviewEn from '../../assets/og/games-en.png'
+import gamesPreviewFr from '../../assets/og/games-fr.png'
 import Collaborate from '../Collaborate.astro'
 import PageHero from '../PageHero.astro'
 import SectionHeading from '../SectionHeading.astro'
@@ -27,7 +29,12 @@ const games = (await getCollection('games', ({ id }) => id.startsWith(`${lang}/`
 )
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={lang === 'fr' ? gamesPreviewFr : gamesPreviewEn}
+  imageAlt={data.illustration.alt}
+>
   <PageHero heading={data.heading}>
     <Content />
     <GamesIllustration

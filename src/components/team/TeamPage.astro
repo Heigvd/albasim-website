@@ -4,6 +4,7 @@
 import { getCollection, getEntry, render } from 'astro:content'
 import ArrowLink from '../ArrowLink.astro'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import previewImage from '../../assets/og/team.png'
 import Collaborate from '../Collaborate.astro'
 import PageHero from '../PageHero.astro'
 import TeamIllustration from './TeamIllustration.astro'
@@ -23,7 +24,12 @@ const data = page.data
 const people = await getCollection('people', (entry) => entry.id.startsWith(`${lang}/`))
 ---
 
-<BaseLayout title={data.title} description={data.description}>
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={previewImage}
+  imageAlt={data.illustrationAlt}
+>
   <PageHero heading={data.heading}>
     <Content />
     <ArrowLink slot="after" href={data.link.url} kind="external" lang={lang}>
