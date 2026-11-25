@@ -103,6 +103,8 @@ Project and game pages use their photo as preview image. The main pages use thei
 node scripts/export-preview-images.mjs
 ```
 
+The home page also describes AlbaSim to search engines as structured data (JSON-LD): a research organization of HEIG-VD and HES-SO, with its logo, address and LinkedIn profile. See [`StructuredData.astro`](src/components/home/StructuredData.astro); its address and profile come from the footer content.
+
 ## Copyright
 
 © AlbaSim. All rights reserved.

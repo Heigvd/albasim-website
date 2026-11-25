@@ -10,6 +10,7 @@ import PublicationCard from '../PublicationCard.astro'
 import CardSection from './CardSection.astro'
 import Collaborate from '../Collaborate.astro'
 import Hero from './Hero.astro'
+import StructuredData from './StructuredData.astro'
 import KeyFigures from './KeyFigures.astro'
 import Missions from './Missions.astro'
 import WegasSection from './WegasSection.astro'
@@ -56,6 +57,7 @@ const publications = await Promise.all(
 ---
 
 <BaseLayout title={data.title} description={data.description} image={previewImage}>
+  <StructuredData slot="head" lang={lang} description={data.description} />
   <Hero heading={data.heading} headingLang={data.headingLang}>
     <Content />
   </Hero>

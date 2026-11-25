@@ -1,5 +1,6 @@
 ---
 title: A digital inquiry platform for wicked problems
+metaTitle: 'Plateforme numérique pour les problèmes complexes'
 funders: FNS
 summary: Une plateforme numérique pour une approche collective des problèmes complexes.
 image: ../../../src/assets/projects/inquiry-platform.jpg

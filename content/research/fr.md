@@ -1,6 +1,6 @@
 ---
 title: Recherche | AlbaSim
-description: Comment les serious games et simulations soutiennent l’apprentissage dans l’enseignement supérieur et la formation professionnelle. Nos questions de recherche, domaines d’application, projets et notre approche.
+description: Nos recherches sur les serious games et simulations pour l’apprentissage dans l’enseignement supérieur et la formation professionnelle.
 heading: Comment les serious games et simulations soutiennent-ils l’apprentissage ?
 illustrationAlt: Un serious game sur un écran examiné à la loupe, avec des participants à la co-conception et des barres de mesure
 questions:

@@ -1,5 +1,6 @@
 ---
 name: PM-Game
+metaTitle: 'PM-Game: a project management serious game'
 domain: 'Project management'
 languages: [en, fr]
 summary: 'Lead a virtual project from the initial idea to implementation and lessons learned. Face decisions, risks and trade-offs just like those of a real project.'

@@ -244,6 +244,12 @@ const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      /**
+       * Title of the browser tab and of search results, before " | AlbaSim", when it should say
+       * more than the title. Keep the whole title within about 60 characters, or search engines
+       * cut it.
+       */
+      metaTitle: z.string().optional(),
       /** Funders and main partners, e.g. "HUG · Innosuisse". */
       funders: z.string(),
       summary: z.string(),
@@ -580,6 +586,12 @@ const games = defineCollection({
   schema: ({ image }) =>
     z.object({
       name: z.string(),
+      /**
+       * Title of the browser tab and of search results, before " | AlbaSim", when it should say
+       * more than the name. Keep the whole title within about 60 characters, or search engines
+       * cut it.
+       */
+      metaTitle: z.string().optional(),
       /** Field of the game, e.g. "Project management". */
       domain: z.string(),
       /** Languages the game is available in. */

@@ -96,6 +96,8 @@ const preview = image
       </>
     )}
     <meta name="twitter:card" content={preview ? 'summary_large_image' : 'summary'} />
+    <!-- Extra head elements of a page, such as its structured data. -->
+    <slot name="head" />
     <Font cssVariable="--font-inter-tight" preload />
   </head>
   <body>

@@ -32,7 +32,7 @@ const alternates = { en: gamePath(id, 'en'), fr: gamePath(id, 'fr') }
 ---
 
 <BaseLayout
-  title={`${data.name} | AlbaSim`}
+  title={`${data.metaTitle ?? data.name} | AlbaSim`}
   description={data.summary}
   alternates={alternates}
   image={data.image}

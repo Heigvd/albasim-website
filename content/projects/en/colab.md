@@ -1,5 +1,6 @@
 ---
 title: co.LAB
+metaTitle: 'co.LAB: designing serious games together'
 funders: SNSF · NRP 77
 summary: A collaborative platform for the design, development and evaluation of serious games.
 image: ../../../src/assets/projects/colab.jpg

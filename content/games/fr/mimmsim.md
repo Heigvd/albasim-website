@@ -1,8 +1,9 @@
 ---
 name: MIMMSim
+metaTitle: 'MIMMSim : gestion médicale d’un événement majeur'
 domain: 'Médecine d’urgence'
 languages: [en, fr]
-summary: 'Vous avez la responsabilité de la gestion médicale d’un événement majeur. Coordonnez les opérations de secours, des premières minutes jusqu’à l’évacuation des victimes vers les hôpitaux.'
+summary: 'Vous dirigez la gestion médicale d’un événement majeur : coordonnez les secours, des premières minutes à l’évacuation des victimes vers les hôpitaux.'
 highlights:
   - title: 'Des scénarios personnalisables'
     text: 'Accidents, incendies ou attentats, adaptés à votre contexte local.'

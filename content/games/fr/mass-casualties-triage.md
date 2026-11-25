@@ -1,8 +1,9 @@
 ---
 name: Mass Casualties Triage
+metaTitle: 'Mass Casualties Triage : s’entraîner au triage'
 domain: 'Médecine d’urgence'
 languages: [en, fr]
-summary: 'Entraînez vos réflexes de triage : examinez les victimes, évaluez leurs paramètres cliniques et attribuez les priorités comme lors d’une véritable situation multi-victimes.'
+summary: 'Entraînez vos réflexes de triage : examinez les victimes, évaluez leurs paramètres et attribuez les priorités comme lors d’une situation multi-victimes.'
 highlights:
   - title: 'Les compétences clés du triage'
     text: 'Appliquer un algorithme de triage, évaluer les paramètres pertinents, décider des premiers traitements.'

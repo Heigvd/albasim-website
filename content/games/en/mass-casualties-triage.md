@@ -1,5 +1,6 @@
 ---
 name: Mass Casualties Triage
+metaTitle: 'Mass Casualties Triage: triage training game'
 domain: 'Emergency medicine'
 languages: [en, fr]
 summary: 'Train your triage reflexes: examine victims, assess their clinical parameters and assign priorities as you would in a real mass-casualty incident.'

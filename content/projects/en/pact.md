@@ -1,5 +1,6 @@
 ---
 title: PACT
+metaTitle: 'PACT: teaching programming through play'
 funders: University of Fribourg · Hasler Foundation
 summary: Game-based resources for teaching computer programming, developed with the University of Fribourg and secondary school teachers.
 image: ../../../src/assets/projects/pact.jpg
